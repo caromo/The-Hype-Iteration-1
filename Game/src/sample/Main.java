@@ -20,7 +20,7 @@ public class Main extends Application {
     @Override
     public void start(Stage theStage)
     {
-        theStage.setTitle( "Timeline Example" );
+        theStage.setTitle( "The H Y P E" );
 
         Group root = new Group();
         Scene theScene = new Scene( root );
