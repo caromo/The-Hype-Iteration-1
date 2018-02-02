@@ -16,6 +16,8 @@ Every Class:
   Comment Reason for existence
   Comment Reason for every operation
   Comment Members Responsible
+  Naming Convention: CamelCase
+  Follow UML naming conventions for attributes
   
 ## Member Responsibilities
   Lyle and Jorge - View, Controller, Game
