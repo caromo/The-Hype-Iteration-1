@@ -6,7 +6,7 @@ public class tile extends GameObject{
     private boolean passable;
     private Holding contents;
     private TilePane tile;
-    protected int decal;
+    protected int displayID;
     public void createTile(){
         this.tile = new TilePane();
     }
@@ -14,9 +14,9 @@ public class tile extends GameObject{
         return passable;
     }
 
-    public int getDecal()
+    public int getdisplayID()
     {
-        return super.getDecal();
+        return super.getdisplayID();
     }
 
 
