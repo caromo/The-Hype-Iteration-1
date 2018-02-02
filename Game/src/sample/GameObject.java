@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 public abstract class GameObject {
     private int x; //x coordinate location on the map
     private int y; //y coordinate location on the map
-    private Image img;
+    protected static int decal;
     protected class position {
         int x = getX();
         int y = getY();
@@ -31,9 +31,9 @@ public abstract class GameObject {
         return pos;
     }
 
-    public Image getDecal()
+    public int getDecal()
     {
-        return img;
+        return decal;
     }
 
 
