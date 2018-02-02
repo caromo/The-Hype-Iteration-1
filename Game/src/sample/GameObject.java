@@ -11,24 +11,31 @@ public abstract class GameObject {
     private int x; //x coordinate location on the map
     private int y; //y coordinate location on the map
     private Image img;
-//    private class position {
-//        int x = getX();
-//        int y = getY();
-//    }
+    protected class position {
+        int x = getX();
+        int y = getY();
 
-    public int  getX(){ //get x coordinate
+        int  getX(){ //get x coordinate
         return x;
-    }
-    public int getY(){
+            }
+
+        int getY(){
         return y;
-    } //get y coordinate
+        } //get y coordinate
+    }
+    private position pos;
+
+
+
+    public position getPosition(){
+        return pos;
+    }
 
     public Image getDecal()
     {
         return img;
     }
 
-//    public getPosition(){
-//        return position;
-//    }
+
+
 }
