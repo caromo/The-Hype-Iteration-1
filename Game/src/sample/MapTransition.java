@@ -4,12 +4,11 @@
 package sample;
 
 public class MapTransition extends tileObject{
-	private int scenarioNumber;
 	private String path;
 	
 	//Sets Default values for the global variables
 	public MapTransition(String path) {
-		scenarioNumber = 5;
+		super(5);
 		this.path = path; 
 	}
 	

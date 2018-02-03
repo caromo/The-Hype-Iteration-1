@@ -4,13 +4,12 @@
 package sample;
 
 public class AreaEffect extends tileObject{
-  private int scenarioNumber;
   private float duration;
 
   //Sets the default values for the global variables
-  public AreaEffect(int scenarioNumber){
+  public AreaEffect(int scenario){
     duration = 10f;
-    this.scenarioNumber = scenarioNumber;
+    super(scenario);
   }
 
   //Allows for us to use durationin other classes while keeping it private
