@@ -9,7 +9,7 @@ public class MapTransition extends tileObject{
 	
 	//Sets Default values for the global variables
 	public MapTransition(String path) {
-		scenarioNumber = 0;
+		scenarioNumber = 5;
 		this.path = path; 
 	}
 	
