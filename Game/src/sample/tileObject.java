@@ -1,8 +1,12 @@
 package sample;
 
-public interface tileObject {
-    AreaEffect eff = new AreaEffect();
-    int Scenario = eff.getScenarioNumber();
-
-
+public abstract class tileObject {
+    private int scenarioNumber;
+    public Holding holding;
+    public tileObject(int scenarioNumber) {
+        this.scenarioNumber = scenarioNumber;
+    }
+    public int getScenario() {
+        return scenarioNumber;
+    }
 }

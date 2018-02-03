@@ -5,6 +5,7 @@ public class Player extends GameObject {
     private int Experince;
     private Inventory inventory;
     private position pos;
+    protected Occupy occupy;
 
     public int getHealth() {
         return Health;
