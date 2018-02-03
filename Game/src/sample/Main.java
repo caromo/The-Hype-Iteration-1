@@ -13,7 +13,10 @@ import javafx.scene.image.Image;
 public class Main extends Application {
     private View view;
     private KeyHandler keyHandler;
+    private Player player;
+    private Map map;
     public static void main(String[] args) {
+
         launch(args);
     }
 
@@ -30,6 +33,8 @@ public class Main extends Application {
         root.getChildren().add( canvas );
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
+        map = new Map();
+        player = new Player();
         view = new View(gc, canvas);
         keyHandler = new KeyHandler();
         canvas.setFocusTraversable(true);
@@ -40,12 +45,11 @@ public class Main extends Application {
 
             public void handle(long currentNanoTime)
             {
-                double t = (currentNanoTime - startNanoTime) / 1000000000.0;
+                //double t = (currentNanoTime - startNanoTime) / 1000000000.0;
 
-                double x = 232 + 128 * Math.cos(t);
-                double y = 232 + 128 * Math.sin(t);
 
-                view.render(keyHandler.x, keyHandler.y);
+                view.setX(keyHandler.x); view.setY(keyHandler.y);
+                view.render(map.getMap(), player);
                 
 
             }

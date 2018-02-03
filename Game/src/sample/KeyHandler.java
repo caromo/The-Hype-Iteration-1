@@ -11,23 +11,18 @@ public class KeyHandler implements EventHandler<KeyEvent>
     }
     public void handle(KeyEvent event)
     {
-        System.out.println("KeyPressed");
         switch(event.getCode()) {
             case UP:
-                y = -1;
-                x = 0;
+                y--;
                 break;
             case RIGHT:
-                x = 1;
-                y = 0;
+                x++;
                 break;
             case DOWN:
-                y = 1;
-                x = 0;
+                y++;
                 break;
             case LEFT:
-                x = -1;
-                y = 0;
+                x--;
                 break;
         }
         //do stuff
