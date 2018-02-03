@@ -33,7 +33,7 @@ public abstract class GameObject {
 
     public int getdisplayID()
     {
-        return decal;
+        return displayID;
     } //get decal
 
 

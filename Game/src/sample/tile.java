@@ -2,11 +2,15 @@ package sample;
 import javafx.scene.layout.TilePane;
 
 
-public class tile extends GameObject{
+public class tile extends GameObject implements tileObject{
     private boolean passable;
     private Holding contents;
     private TilePane tile;
     protected int displayID;
+    private float x, y, wid, hei;
+
+
+
     public void createTile(){
         this.tile = new TilePane();
     }
@@ -20,6 +24,7 @@ public class tile extends GameObject{
     }
 
 
+//apply effect
 
 
 }
