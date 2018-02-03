@@ -11,7 +11,7 @@ public class KeyHandler implements EventHandler<KeyEvent>
     }
     public void handle(KeyEvent event)
     {
-        System.out.println("KeyPressed");
+        //System.out.println("KeyPressed");
         switch(event.getCode()) {
             case UP:
                 y = -1;

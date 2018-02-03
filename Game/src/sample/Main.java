@@ -14,6 +14,15 @@ public class Main extends Application {
     private View view;
     private KeyHandler keyHandler;
     public static void main(String[] args) {
+        Player p = new Player();
+        tileObject item = new Item(5);
+        tile t = new tile(item);
+        p.occupy = new Occupy(p, t);
+        t.holding = new Holding(t, item);
+
+        t.applyEffect();
+        p.getInventory().printInventory();
+
         launch(args);
     }
 
