@@ -9,8 +9,6 @@ public class Item extends tileObject{
 
     }
 
-
-
     //Places this item in the player's inventory
     public void giveItem() {
         //Accesses the player inventory through holding->tile->occupy->getInventory.addItem()
@@ -19,7 +17,9 @@ public class Item extends tileObject{
         holding.remove();
     }
 
+    public void useItem() {
 
+    }
 
     public int getID() {
         return itemID;
