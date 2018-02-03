@@ -1,7 +1,7 @@
 package sample;
 
 public class Map {
-    tile[][] tileSet = new tile[10][10];
+    tile[][] tileSet = new tile[20][20];
     public Map() {
         for(int i = 0; i < tileSet.length; i++) {
             for(int j = 0; j < tileSet.length; j++) {

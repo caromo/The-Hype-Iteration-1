@@ -29,14 +29,14 @@ public class Main extends Application {
         Scene theScene = new Scene( root );
         theStage.setScene( theScene );
 
-        Canvas canvas = new Canvas( 512, 512 );
+        Canvas canvas = new Canvas( 1000, 1000 );
         root.getChildren().add( canvas );
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         map = new Map();
         player = new Player();
         view = new View(gc, canvas);
-        keyHandler = new KeyHandler();
+        keyHandler = new KeyHandler(view);
         canvas.setFocusTraversable(true);
         canvas.setOnKeyPressed(keyHandler);
         final long startNanoTime = System.nanoTime();
@@ -48,7 +48,7 @@ public class Main extends Application {
                 //double t = (currentNanoTime - startNanoTime) / 1000000000.0;
 
 
-                view.setX(keyHandler.x); view.setY(keyHandler.y);
+
                 view.render(map.getMap(), player);
                 
 

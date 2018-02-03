@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 public class View {
     private GraphicsContext gc;
     private Canvas canvas;
-    private int x, y;
+    private int cameraX, cameraY;
     private String workingDir;
     Color[] items;
     Image[] itemSprites;
@@ -21,7 +21,7 @@ public class View {
 
         this.gc = gc;
         this.canvas = canvas;
-        x = 2; y = 2;
+        cameraX = 0; cameraY = 0;
         tileSize = 50;
 
         workingDir = System.getProperty("user.dir");
@@ -36,10 +36,9 @@ public class View {
     }
 
     public void render(tile[][] map, Player p) {
-        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        //gc.setFill(Color.BLUE);
-        //gc.fillRect(this.x+x, this.y+y, 50, 50);
-        
+        //gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
+
 
         renderMap(map, p);
         renderGrid(map);
@@ -56,7 +55,7 @@ public class View {
                 int tileID = map[i][j].getScenario();
                 if(tileID == 0) {//Empty
                     //gc.setFill(Color.WHITE);
-                    gc.drawImage(getImage(workingDir + "\\src\\sample\\sprites\\grass.png"), (i*tileSize), (j*tileSize), tileSize, tileSize);
+                    gc.drawImage(getImage(workingDir + "\\src\\sample\\sprites\\grass.png"), (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
                 } else if(tileID == 1) {//AEHealing
                     gc.setFill(Color.GREEN);
                     gc.fillRect((i*tileSize)+5, (j*tileSize)+5, tileSize-5, tileSize-5);
@@ -70,13 +69,12 @@ public class View {
                     gc.fillRect((i*tileSize)+5, (j*tileSize)+5, tileSize-5, tileSize-5);
 
                 } else if(tileID == 4) {//Item
-                    gc.drawImage(getImage(workingDir + "\\src\\sample\\sprites\\grass.png"), (i*tileSize), (j*tileSize));
-                    gc.drawImage(itemSprites[((Item)map[i][j].holding.object).getID()], (i*tileSize)+5, (j*tileSize)+5, tileSize, tileSize);
+                    gc.drawImage(getImage(workingDir + "\\src\\sample\\sprites\\grass.png"), (i*tileSize)+cameraX, (j*tileSize)+cameraY);
+                    gc.drawImage(itemSprites[((Item)map[i][j].holding.object).getID()], (i*tileSize)+5+cameraX, (j*tileSize)+5+cameraY, tileSize, tileSize);
                 }
             }
         }
 
-        gc.drawImage(getImage(workingDir + "\\src\\sample\\sprites\\pikachu.png"), (x*tileSize), (y*tileSize), tileSize, tileSize);
 
         //Draw player
 
@@ -92,15 +90,21 @@ public class View {
         gc.setFill(Color.BLACK);
         gc.setLineWidth(5);
         for(int i = 0; i < map.length+1; i++) {
-            gc.strokeLine(0, i*tileSize, canvas.getWidth(), i*tileSize);
-            gc.strokeLine(i*tileSize, 0, i*tileSize, canvas.getHeight());
+            gc.strokeLine(0, i*tileSize+cameraY, canvas.getWidth(), i*tileSize+cameraY);
+            gc.strokeLine(i*tileSize+cameraX, 0, i*tileSize+cameraX, canvas.getHeight());
         }
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public void moveCameraUp() {
+        cameraY+=3;
     }
-    public void setY(int y) {
-        this.y = y;
+    public void moveCameraDown() {
+        cameraY-=3;
+    }
+    public void moveCameraLeft() {
+        cameraX+=3;
+    }
+    public void moveCameraRight() {
+        cameraX-=3;
     }
 }
