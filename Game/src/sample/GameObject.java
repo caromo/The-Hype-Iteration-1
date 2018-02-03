@@ -22,6 +22,15 @@ public abstract class GameObject {
         int getY(){
         return y;
         } //get y coordinate
+
+        void setX(int x)
+        {
+            this.x = x;
+        }
+        void setY(int y)
+        {
+            this.y = y;
+        }
     }
     private position pos;
 
@@ -29,6 +38,11 @@ public abstract class GameObject {
 
     public position getPosition(){
         return pos;
+    }
+
+    public void setPos(int x, int y) {
+        this.pos.setX(x);
+        this.pos.setY(y);
     }
 
     public int getdisplayID()

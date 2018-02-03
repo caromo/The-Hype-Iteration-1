@@ -1,4 +1,7 @@
 package sample;
 
-public class MapTransition {
+public class MapTransition extends tileObject{
+    public MapTransition() {
+        super(5);
+    }
 }

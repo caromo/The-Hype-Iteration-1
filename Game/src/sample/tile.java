@@ -5,14 +5,24 @@ import javafx.scene.layout.TilePane;
 public class tile extends GameObject{
     private boolean passable;
     protected Holding holding;
-    private TilePane tile;
     protected int displayID;
     private float x, y, wid, hei;
     private int Scenario;
     protected Occupy occupy;
+    protected position pos;
+
+    public GameObject.position getPosition()
+    {
+        return super.getPosition();
+    }
 
     public tile(tileObject objType) {
         holding = new Holding(this, objType);
+       if(getPosition() == occupy.player.getPosition())
+       {
+           occupy = new Occupy(occupy.player, this);
+       }
+
     }
 
     public boolean getPassable(){
@@ -24,17 +34,28 @@ public class tile extends GameObject{
         return super.getdisplayID();
     }
 
+    public int getScenario() {
+        return Scenario;
+    }
+
     //Performs the action associated with the tileObject
     public void applyEffect() {
         if(holding == null) {//Empty tile
 
         }
         int scenario = holding.object.getScenario();
-        if(scenario == 0)  {//Area effect
-
+        if(scenario == 0 && occupy.tile == this)  {//Area effect
+            for(int i = 0; i < 10; i++) {
+                occupy.player.setHealth(occupy.player.getHealth() - 1);
+                System.out.format("%d", occupy.player.getHealth());
+            }
         } else if(scenario == 1) {//Item
             ((Item) holding.object).giveItem();
         }
+    }
+    public void setPosition(int x, int y)
+    {
+        super.setPos(x,y);
     }
 
 

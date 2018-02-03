@@ -25,10 +25,12 @@ public class Main extends Application {
         Group root = new Group();
         Scene theScene = new Scene( root );
         theStage.setScene( theScene );
-
         Canvas canvas = new Canvas( 512, 512 );
         root.getChildren().add( canvas );
-
+        tile t = new tile(new MapTransition());
+        Player player = new Player(100, 0);
+        player.setPosition(0,0);
+        t.setPosition(0,0);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         view = new View(gc, canvas);
         keyHandler = new KeyHandler();
