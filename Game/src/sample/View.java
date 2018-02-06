@@ -9,6 +9,14 @@ import javafx.scene.shape.Path;
 import java.io.File;
 import java.nio.file.Paths;
 
+/*Decals needed for view:
+Grass, Water, Mountains
+Player, Enemy
+Potion, Sword, ...
+Healing, Damage, XP AreaEffect
+MapTransition
+ */
+
 public class View {
     private GraphicsContext gc;
     private Canvas canvas;
@@ -26,7 +34,8 @@ public class View {
 
         workingDir = System.getProperty("user.dir");
         itemSprites = new Image[100];
-        itemSprites[0] = getImage(workingDir + "\\src\\sample\\sprites\\healthPotion.png");
+        itemSprites[0] = getImage(workingDir + "\\src\\sample\\sprites\\potion2.png");
+        itemSprites[1] = getImage(workingDir + "\\src\\sample\\sprites\\sword.png");
 
         items = new Color[10];
         items[0] = Color.BLUE;
@@ -45,6 +54,7 @@ public class View {
         gc = canvas.getGraphicsContext2D();
     }
 
+    //Render Order: GroundType -> tileObeject -> player/enemy
     private void renderMap(tile[][] map, Player p) {
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -52,9 +62,11 @@ public class View {
         //Iterate through map, setting appropriate color for each tile, then draw rect
         for(int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[0].length; j++) {
+
+                gc.drawImage(itemSprites[1], (3*tileSize)+5+cameraX, (3*tileSize)+5+cameraY, tileSize, tileSize);
+
                 int tileID = map[i][j].getScenario();
                 if(tileID == 0) {//Empty
-                    //gc.setFill(Color.WHITE);
                     gc.drawImage(getImage(workingDir + "\\src\\sample\\sprites\\grass.png"), (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
                 } else if(tileID == 1) {//AEHealing
                     gc.setFill(Color.GREEN);
@@ -71,6 +83,8 @@ public class View {
                 } else if(tileID == 4) {//Item
                     gc.drawImage(getImage(workingDir + "\\src\\sample\\sprites\\grass.png"), (i*tileSize)+cameraX, (j*tileSize)+cameraY);
                     gc.drawImage(itemSprites[((Item)map[i][j].holding.object).getID()], (i*tileSize)+5+cameraX, (j*tileSize)+5+cameraY, tileSize, tileSize);
+                } else {//MapTransition
+
                 }
             }
         }
@@ -80,6 +94,8 @@ public class View {
 
     }
 
+
+
     private Image getImage(String fp) {
         File file = new File(fp);
         Image image = new Image(file.toURI().toString());
@@ -87,8 +103,8 @@ public class View {
     }
 
     private void renderGrid(tile[][] map) {
-        gc.setFill(Color.BLACK);
-        gc.setLineWidth(5);
+        gc.setStroke(Color.BLACK);
+        gc.setLineWidth(4);
         for(int i = 0; i < map.length+1; i++) {
             gc.strokeLine(0, i*tileSize+cameraY, canvas.getWidth(), i*tileSize+cameraY);
             gc.strokeLine(i*tileSize+cameraX, 0, i*tileSize+cameraX, canvas.getHeight());
@@ -96,15 +112,15 @@ public class View {
     }
 
     public void moveCameraUp() {
-        cameraY+=3;
+        cameraY+=tileSize;
     }
     public void moveCameraDown() {
-        cameraY-=3;
+        cameraY-=tileSize;
     }
     public void moveCameraLeft() {
-        cameraX+=3;
+        cameraX+=tileSize;
     }
     public void moveCameraRight() {
-        cameraX-=3;
+        cameraX-=tileSize;
     }
 }

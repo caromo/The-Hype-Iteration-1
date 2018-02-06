@@ -10,6 +10,9 @@ public class Item extends tileObject{
     }
 
 
+    public void printID() {
+        System.out.println(itemID);
+    }
 
     //Places this item in the player's inventory
     public void giveItem() {
