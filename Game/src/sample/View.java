@@ -23,7 +23,8 @@ public class View {
     private int cameraX, cameraY;
     private String workingDir;
     Color[] items;
-    Image[] itemSprites;
+    private Image[] itemSprites;
+    private Image[] terrainSprites;
     private int tileSize;
     public View(GraphicsContext gc, Canvas canvas) {
 
@@ -36,6 +37,10 @@ public class View {
         itemSprites = new Image[100];
         itemSprites[0] = getImage(workingDir + "\\src\\sample\\sprites\\potion2.png");
         itemSprites[1] = getImage(workingDir + "\\src\\sample\\sprites\\sword.png");
+
+        terrainSprites = new Image[3];
+        terrainSprites[0] = getImage(workingDir + "\\src\\sample\\sprites\\grass.png");
+        terrainSprites[1] = getImage(workingDir + "\\src\\sample\\sprites\\water.png");
 
         items = new Color[10];
         items[0] = Color.BLUE;
@@ -67,7 +72,7 @@ public class View {
 
                 int tileID = map[i][j].getScenario();
                 if(tileID == 0) {//Empty
-                    gc.drawImage(getImage(workingDir + "\\src\\sample\\sprites\\grass.png"), (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
+                    gc.drawImage(terrainSprites[((Terrain) map[i][j].holding.object).getTerrainType()], (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
                 } else if(tileID == 1) {//AEHealing
                     gc.setFill(Color.GREEN);
                     gc.fillRect((i*tileSize)+5, (j*tileSize)+5, tileSize-5, tileSize-5);
