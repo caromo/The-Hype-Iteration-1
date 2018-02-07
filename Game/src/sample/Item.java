@@ -20,7 +20,7 @@ public class Item extends tileObject{
     public void giveItem() {
         //Accesses the player inventory through holding->tile->occupy->getInventory.addItem()
 
-        holding.tile.occupy.player.getInventory().addItem(itemID);
+        holding.tile.occupy.player.getInventory().addItem(this);
         holding.remove();
     }
 

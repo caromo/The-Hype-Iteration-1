@@ -44,7 +44,7 @@ public class Main extends Application {
         menuView = new MenuView(player, gc, canvas);
 
         for(int i = 0; i < 15; i++) {
-            player.getInventory().addItem(i);
+            player.getInventory().addItembyID(i);
         }
 
 
