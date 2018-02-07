@@ -25,6 +25,8 @@ public class View {
     Color[] items;
     private Image[] itemSprites;
     private Image[] terrainSprites;
+    private Image playerImg;
+
     private int mapWidth, mapHeight;
     private int tileSize;
     public View(GraphicsContext gc, Canvas canvas) {
@@ -33,28 +35,31 @@ public class View {
         this.canvas = canvas;
         cameraX = 0; cameraY = 0;
         mapWidth = 100; mapHeight = 100;
-        tileSize = 50;
+        tileSize = 50; //width/height of tiles in pixels
 
+        //Get working directory to load textures from
         workingDir = System.getProperty("user.dir");
+
+        initializeSprites();
+
+    }
+
+    //Load image arrays with sprite assets
+    private void initializeSprites() {
+        //Load item textures
         itemSprites = new Image[100];
         itemSprites[0] = getImage(workingDir + "\\src\\sample\\sprites\\potion2.png");
         itemSprites[1] = getImage(workingDir + "\\src\\sample\\sprites\\sword.png");
 
+        //Load terrain textures
         terrainSprites = new Image[3];
         terrainSprites[0] = getImage(workingDir + "\\src\\sample\\sprites\\grass.png");
         terrainSprites[1] = getImage(workingDir + "\\src\\sample\\sprites\\water.png");
-
-        items = new Color[10];
-        items[0] = Color.BLUE;
-        items[1] = Color.GREEN;
-        items[2] = Color.YELLOW;
-
+        terrainSprites[2] = getImage(workingDir + "\\src\\sample\\sprites\\lava.png");
     }
 
     public void render(tile[][] map, Player p) {
         //gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-
-
 
         renderMap(map, p);
         renderGrid(map);
@@ -63,8 +68,11 @@ public class View {
 
     //Render Order: GroundType -> tileObeject -> player/enemy
     private void renderMap(tile[][] map, Player p) {
+        //Get map dimensions
         mapWidth = map.length;
         mapHeight = map[0].length;
+
+        //Draw background
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
@@ -72,10 +80,8 @@ public class View {
         for(int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[0].length; j++) {
 
-                gc.drawImage(itemSprites[1], (3*tileSize)+5+cameraX, (3*tileSize)+5+cameraY, tileSize, tileSize);
-
                 int tileID = map[i][j].getScenario();
-                if(tileID == 0) {//Empty
+                if(tileID == 0) {//Terrain
                     gc.drawImage(terrainSprites[((Terrain) map[i][j].holding.object).getTerrainType()], (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
                 } else if(tileID == 1) {//AEHealing
                     gc.setFill(Color.GREEN);
@@ -119,6 +125,7 @@ public class View {
             gc.strokeLine(i*tileSize+cameraX, 0, i*tileSize+cameraX, canvas.getHeight());
         }
     }
+
 
     public void moveCameraUp() {
         if(cameraY >= 0) {//Top edge of board already in view

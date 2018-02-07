@@ -13,6 +13,11 @@ public class Map {
         tileSet[4][3] = new tile(new Terrain(1));
         tileSet[5][2] = new tile(new Terrain(1));
         tileSet[5][3] = new tile(new Terrain(1));
+
+        tileSet[7][7] = new tile(new Terrain(2));
+        tileSet[7][6] = new tile(new Terrain(2));
+        tileSet[6][7] = new tile(new Terrain(2));
+
     }
 
     public tile[][] getMap() {
