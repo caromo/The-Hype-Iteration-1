@@ -25,12 +25,14 @@ public class View {
     Color[] items;
     private Image[] itemSprites;
     private Image[] terrainSprites;
+    private int mapWidth, mapHeight;
     private int tileSize;
     public View(GraphicsContext gc, Canvas canvas) {
 
         this.gc = gc;
         this.canvas = canvas;
         cameraX = 0; cameraY = 0;
+        mapWidth = 100; mapHeight = 100;
         tileSize = 50;
 
         workingDir = System.getProperty("user.dir");
@@ -61,6 +63,8 @@ public class View {
 
     //Render Order: GroundType -> tileObeject -> player/enemy
     private void renderMap(tile[][] map, Player p) {
+        mapWidth = map.length;
+        mapHeight = map[0].length;
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
@@ -109,7 +113,7 @@ public class View {
 
     private void renderGrid(tile[][] map) {
         gc.setStroke(Color.BLACK);
-        gc.setLineWidth(4);
+        gc.setLineWidth(2);
         for(int i = 0; i < map.length+1; i++) {
             gc.strokeLine(0, i*tileSize+cameraY, canvas.getWidth(), i*tileSize+cameraY);
             gc.strokeLine(i*tileSize+cameraX, 0, i*tileSize+cameraX, canvas.getHeight());
@@ -117,15 +121,27 @@ public class View {
     }
 
     public void moveCameraUp() {
+        if(cameraY >= 0) {//Top edge of board already in view
+            return;
+        }
         cameraY+=tileSize;
     }
     public void moveCameraDown() {
+        if(canvas.getHeight()-cameraY >= mapHeight*tileSize) {//Bottom edge of board already in view
+            return;
+        }
         cameraY-=tileSize;
     }
-    public void moveCameraLeft() {
+    public void moveCameraLeft() {//Loft edge of board already in view
+        if(cameraX >= 0) {
+            return;
+        }
         cameraX+=tileSize;
     }
     public void moveCameraRight() {
+        if(canvas.getWidth()-cameraX >= mapWidth*tileSize) {//Right edge of board already in view
+            return;
+        }
         cameraX-=tileSize;
     }
 }
