@@ -2,19 +2,12 @@ package sample;
 
 public class Item extends tileObject{
     private int itemID;
+    public int ScenarioID;
 
     public Item(int id) {
         super(4);
         itemID = id;
-
     }
-
-
-    public void printID() {
-        System.out.println(itemID);
-    }
-
-    public void use() {}
 
     //Places this item in the player's inventory
     public void giveItem() {
@@ -24,9 +17,18 @@ public class Item extends tileObject{
         holding.remove();
     }
 
+    public void useItem() {
 
+    }
 
     public int getID() {
         return itemID;
     }
+    
+    public void printID() {
+        System.out.println(itemID);
+    }
+
+    public void use() {}
+
 }
