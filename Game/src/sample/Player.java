@@ -8,7 +8,7 @@ public class Player extends GameObject{
         inventory = new Inventory();
     }
 
-    public  equip()
+    public equip()
     {
 
     }
