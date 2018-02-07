@@ -2,13 +2,11 @@ package sample;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 
 public class Main extends Application {
     private View view;
@@ -28,8 +26,7 @@ public class Main extends Application {
         Canvas canvas = new Canvas( 512, 512 );
         root.getChildren().add( canvas );
         tile t = new tile(new MapTransition());
-        Player player = new Player(100, 0);
-        player.setPosition(0,0);
+        Player player = new Player("Hypeman", 0,0);
         t.setPosition(0,0);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         view = new View(gc, canvas);

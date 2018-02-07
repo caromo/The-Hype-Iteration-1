@@ -1,5 +1,6 @@
 package sample;
 import javafx.scene.layout.TilePane;
+import java.awt.Point;
 
 
 public class tile extends GameObject{
@@ -9,11 +10,11 @@ public class tile extends GameObject{
     private float x, y, wid, hei;
     private int Scenario;
     protected Occupy occupy;
-    protected position pos;
+    protected Point pos;
 
-    public GameObject.position getPosition()
+    public Point getPosition()
     {
-        return super.getPosition();
+        return pos;
     }
 
     public tile(tileObject objType) {
