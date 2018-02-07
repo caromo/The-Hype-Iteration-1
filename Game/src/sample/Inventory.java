@@ -1,26 +1,22 @@
+package sample;
+
 /*
 Member Responsible: Daniel
 Reason for existence: To hold the player’s items and allow the player to manage and interact with those items.
  */
-import java.util.ArrayList;
-import java.util.Comparator;
 
-package sample;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class Inventory {
     private final int MAX_SIZE = 100;
-    private ArrayList<Item> items = new ArrayList<Item>(MAX_SIZE);
-    public Inventory() {};
+    private ArrayList<Item> items = new ArrayList<>(MAX_SIZE);
+    public Inventory() {}
 
-    // Made to work with default sort with Object type Item
-    private class CustomCompare implements Comparator<Item> {
-        @Override
-        public int compare(Item a, Item b) {
-            int result = 0;
-            if (a.getID() == b.getID()) return 0;
-            else if (a.getID() < b.getID()) return 1;
-            else if (a.getID() > b.getID()) return -1;
-        }
+    private int compareID(Item a, Item b) {
+        if (a.getID() < b.getID()) return 1;
+        else if (a.getID() > b.getID()) return -1;
+        else return 0;
     }
 
     // Operation addItem(itemID:int)
@@ -37,15 +33,28 @@ public class Inventory {
     }
 
     // Operation getItem()
-    // Returns an array of items for view to iterrate through
-    public Items[] getItems() {
-        Item[] arr = items.toArray();
+    // Returns an array of items for view to iterate through
+    public Item[] getItems() {
+        Item[] arr = {};
+        items.toArray(arr);
         return arr;
     }
 
+    public Item getItem(int ind) {
+        if(ind < items.size()) {
+            return items.get(ind);
+        }
+        return null;
+    }
+
+    public int getNumOfItems() {
+        return items.size();
+    }
+
+
     // Operation tossItem(index:int)
     // Removes item to inventory based off it's index in the array
-    public static void tossItem(int index) {
+    public void tossItem(int index) {
         if (index >= items.size() || index < 0) {
             // Internal notice that item does not exist
         }
@@ -57,27 +66,28 @@ public class Inventory {
 
     // Operation sort()
     // Sorts the arrayList
-    public static void sort() {
-        items.sort(CustomCompare);
+    public void sort() {
+        Collections.sort(items,this::compareID);
         return;
     }
 
     // Operation useItem(itemID:int)
     // Calls use on item based off it's index in the arraylist and indicates and removs it from invntory
-    public static void useItem(int index) {
+    public void useItem(int index) {
         if (index >= items.size() || index < 0) {
             // Internal notice that item does not exist
         }
         else {
-            items.get(index).useItem();
+            items.get(index).use();
             items.remove(index);
         }
         return;
     }
 
-    public static void printInventory() {
+    public void printInventory() {
         for(int i = 0; i < items.size(); i++) {
-                System.out.println(items.get(i).getID());
-            }
+            System.out.println(items.get(i).getID());
+        }
     }
 }
+

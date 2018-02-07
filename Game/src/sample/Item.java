@@ -51,4 +51,6 @@ public class Item extends tileObject{
         return itemID;
     }
 
+    public void use() {}
+
 }
