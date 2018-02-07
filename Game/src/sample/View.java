@@ -23,31 +23,43 @@ public class View {
     private int cameraX, cameraY;
     private String workingDir;
     Color[] items;
-    Image[] itemSprites;
+    private Image[] itemSprites;
+    private Image[] terrainSprites;
+    private Image playerImg;
+
+    private int mapWidth, mapHeight;
     private int tileSize;
     public View(GraphicsContext gc, Canvas canvas) {
 
         this.gc = gc;
         this.canvas = canvas;
         cameraX = 0; cameraY = 0;
-        tileSize = 50;
+        mapWidth = 100; mapHeight = 100;
+        tileSize = 50; //width/height of tiles in pixels
 
+        //Get working directory to load textures from
         workingDir = System.getProperty("user.dir");
+
+        initializeSprites();
+
+    }
+
+    //Load image arrays with sprite assets
+    private void initializeSprites() {
+        //Load item textures
         itemSprites = new Image[100];
         itemSprites[0] = getImage(workingDir + "\\src\\sample\\sprites\\potion2.png");
         itemSprites[1] = getImage(workingDir + "\\src\\sample\\sprites\\sword.png");
 
-        items = new Color[10];
-        items[0] = Color.BLUE;
-        items[1] = Color.GREEN;
-        items[2] = Color.YELLOW;
-
+        //Load terrain textures
+        terrainSprites = new Image[3];
+        terrainSprites[0] = getImage(workingDir + "\\src\\sample\\sprites\\grass.png");
+        terrainSprites[1] = getImage(workingDir + "\\src\\sample\\sprites\\water.png");
+        terrainSprites[2] = getImage(workingDir + "\\src\\sample\\sprites\\lava.png");
     }
 
     public void render(tile[][] map, Player p) {
         //gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-
-
 
         renderMap(map, p);
         renderGrid(map);
@@ -56,6 +68,11 @@ public class View {
 
     //Render Order: GroundType -> tileObeject -> player/enemy
     private void renderMap(tile[][] map, Player p) {
+        //Get map dimensions
+        mapWidth = map.length;
+        mapHeight = map[0].length;
+
+        //Draw background
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
@@ -63,11 +80,9 @@ public class View {
         for(int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[0].length; j++) {
 
-                gc.drawImage(itemSprites[1], (3*tileSize)+5+cameraX, (3*tileSize)+5+cameraY, tileSize, tileSize);
-
                 int tileID = map[i][j].getScenario();
-                if(tileID == 0) {//Empty
-                    gc.drawImage(getImage(workingDir + "\\src\\sample\\sprites\\grass.png"), (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
+                if(tileID == 0) {//Terrain
+                    gc.drawImage(terrainSprites[((Terrain) map[i][j].holding.object).getTerrainType()], (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
                 } else if(tileID == 1) {//AEHealing
                     gc.setFill(Color.GREEN);
                     gc.fillRect((i*tileSize)+5, (j*tileSize)+5, tileSize-5, tileSize-5);
@@ -104,23 +119,36 @@ public class View {
 
     private void renderGrid(tile[][] map) {
         gc.setStroke(Color.BLACK);
-        gc.setLineWidth(4);
+        gc.setLineWidth(2);
         for(int i = 0; i < map.length+1; i++) {
             gc.strokeLine(0, i*tileSize+cameraY, canvas.getWidth(), i*tileSize+cameraY);
             gc.strokeLine(i*tileSize+cameraX, 0, i*tileSize+cameraX, canvas.getHeight());
         }
     }
 
+
     public void moveCameraUp() {
+        if(cameraY >= 0) {//Top edge of board already in view
+            return;
+        }
         cameraY+=tileSize;
     }
     public void moveCameraDown() {
+        if(canvas.getHeight()-cameraY >= mapHeight*tileSize) {//Bottom edge of board already in view
+            return;
+        }
         cameraY-=tileSize;
     }
-    public void moveCameraLeft() {
+    public void moveCameraLeft() {//Loft edge of board already in view
+        if(cameraX >= 0) {
+            return;
+        }
         cameraX+=tileSize;
     }
     public void moveCameraRight() {
+        if(canvas.getWidth()-cameraX >= mapWidth*tileSize) {//Right edge of board already in view
+            return;
+        }
         cameraX-=tileSize;
     }
 }

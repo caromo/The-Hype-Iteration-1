@@ -44,6 +44,7 @@ public class KeyHandler implements EventHandler<KeyEvent>
                     main.getPlayer().getInventory().getItem(main.getMenuView().getInventoryView().getSelectedItemIndex()).printID();
                 }
         }
+
         //do stuff
     }
 }

@@ -87,4 +87,7 @@ public class Main extends Application {
     public Player getPlayer() {
         return player;
     }
+    public Map getMap() {
+        return map;
+    }
 }
