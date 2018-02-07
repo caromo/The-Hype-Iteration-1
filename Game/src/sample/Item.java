@@ -14,6 +14,8 @@ public class Item extends tileObject{
         System.out.println(itemID);
     }
 
+    public void use() {}
+
     //Places this item in the player's inventory
     public void giveItem() {
         //Accesses the player inventory through holding->tile->occupy->getInventory.addItem()
