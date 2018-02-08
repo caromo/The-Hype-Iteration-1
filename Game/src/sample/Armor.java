@@ -8,4 +8,8 @@ public class Armor extends Equipment{
         this.Defense = def;
     }
 
+    @Override
+    public int supplyBenefit() {
+        return Defense;
+    }
 }

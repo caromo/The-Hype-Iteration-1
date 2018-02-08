@@ -26,7 +26,7 @@ public class Player extends GameObject {
         DefensePoints = 5;
         bag = new Inventory();
         pos = new Point(x,y);
-        gear = new Equipment[]{new Armor(1, 100, 0), new Weapon(1, 200, 0), new Ring(1, 300)};
+        gear = new Equipment[]{new Armor(1, 100, 0), new Weapon(1, 200, 0), new Ring(1, 300, 0)};
     }
     public Player(){
         this.name = "H Y P E - B O Y";
@@ -78,12 +78,23 @@ public class Player extends GameObject {
         else Health -= dmg;
     }
 
-    // Slot 1 = Armor, Slot 2 = Weapon, Slot 3 = Ring
+    // Slot 0 = Armor, Slot 1 = Weapon, Slot 2 = Ring
     public void equipGear(Equipment swag) {
         int EquipSlot = swag.getEquipmentID()/100 - 1;
+        if (EquipSlot == 0) { // Meaning the player equipped an Armor Piece
+            DefensePoints -= gear[EquipSlot].supplyBenefit();
+            DefensePoints += swag.supplyBenefit();
+        }
+        else if (EquipSlot == 1) { // Meaning the player equipped a Weapon
+            AttackPoints -= gear[EquipSlot].supplyBenefit();
+            AttackPoints += swag.supplyBenefit();
+        }
+        else if (EquipSlot == 2) { // Meaning the player equipped a Ring
+            Health -= gear[EquipSlot].supplyBenefit();
+            Health += swag.supplyBenefit();
+        }
         bag.addItem(gear[EquipSlot]);
         gear[EquipSlot] = swag;
-        // Figure out how to apply gear effects effectively.
     }
 
     private void LevelUp()

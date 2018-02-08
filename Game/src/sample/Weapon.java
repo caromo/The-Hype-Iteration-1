@@ -7,4 +7,9 @@ public class Weapon extends Equipment {
         super(ItemID, EQID);
         this.Attack = attack;
     }
+
+    @Override
+    public int supplyBenefit() {
+        return Attack;
+    }
 }

@@ -1,6 +1,6 @@
 package sample;
 
-public class Equipment extends Item {
+public abstract class Equipment extends Item {
 
     private int EquipmentID;
 
@@ -19,8 +19,5 @@ public class Equipment extends Item {
         EquipmentID = equipmentID;
     }
 
-    public void applyBenefit()
-    {
-        return;
-    }
+    public abstract int supplyBenefit();
 }
