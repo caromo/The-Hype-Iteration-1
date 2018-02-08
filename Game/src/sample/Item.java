@@ -4,8 +4,8 @@ public class Item extends tileObject{
     private int itemID;
     public int ScenarioID;
 
-    public Item(int id) {
-        super(4);
+    public Item(int SN, int id) {
+        super(SN);
         itemID = id;
     }
 

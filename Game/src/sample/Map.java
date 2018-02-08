@@ -8,7 +8,7 @@ public class Map {
                 tileSet[i][j] = new tile(new Terrain(0)); //blank tiles
             }
         }
-        tileSet[1][1] = new tile(new Item(0));
+        tileSet[1][1] = new tile(new Item(4, 1));
         tileSet[4][2] = new tile(new Terrain(1));
         tileSet[4][3] = new tile(new Terrain(1));
         tileSet[5][2] = new tile(new Terrain(1));

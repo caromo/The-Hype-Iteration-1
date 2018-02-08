@@ -27,7 +27,7 @@ public class Inventory {
             return;
         }
         else {
-            items.add(new Item(id));
+            items.add(new Item(4,id));
             return;
         }
     }

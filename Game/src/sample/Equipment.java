@@ -7,7 +7,7 @@ public abstract class Equipment extends Item {
     // NOTE: ARMOR Equipment will start with ID 100, WEAPON Equipment will start with ID 200, and RING Equipment will start with ID 300
     // (eg. A sword's ID would be 201, a whip's ID would be 202, etc.)
     public Equipment(int ItemID, int equipmentID) {
-        super(ItemID);
+        super(4,ItemID);
         EquipmentID = equipmentID;
     }
 
