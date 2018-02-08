@@ -1,13 +1,15 @@
 package sample;
 
 public class Occupy {
-    Player player;
-    tile tile;
+    protected Player player;
+    protected tile tile;
 
     public Occupy(Player player, tile tile) {
         this.player = player;
+        player.occupy = this;
         this.tile = tile;
         tile.occupy = this;
-        player.occupy = this;
+
+
     }
 }
