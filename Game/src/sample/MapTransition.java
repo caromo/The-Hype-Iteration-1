@@ -7,5 +7,7 @@ public class MapTransition extends tileObject{
         destination = dest;
     }
 
-
+    public int getDestination() {
+    	return this.destination;
+    }
 }
