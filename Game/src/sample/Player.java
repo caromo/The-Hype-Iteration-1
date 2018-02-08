@@ -57,22 +57,7 @@ public class Player extends GameObject {
     public void setExperience(int experience) {
         this.Experience = experience;
     }
-
-
-    public void gainExp(int exp) {
-        if (exp >= ExpToNextLvl)
-        {
-            LevelUp();
-            exp -= ExpToNextLvl;
-            ExpToNextLvl = Level * 100;
-            this.gainExp(exp);
-        }
-        else {
-            ExpToNextLvl -= exp;
-            Experience = exp;
-        }
-    }
-
+    
     public void takeDamage(int damage) {
         int dmg = (DefensePoints - damage);
         if (dmg <= 0) { Health -= 1; }
