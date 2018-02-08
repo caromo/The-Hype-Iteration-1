@@ -20,7 +20,8 @@ public class MenuView extends ListView{
         menuItems = new ArrayList<ListView>();
         menuItems.add(new InventoryView(player, gc, canvas));
         menuItems.add(new StatusView(player, gc, canvas));
-        setNumOfEntries(2);
+        menuItems.add(new QuitGame(player, gc, canvas));
+        setNumOfEntries(menuItems.size());
         currentOpenInd = 0;
         open = false;
     }
