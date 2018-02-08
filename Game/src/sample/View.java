@@ -20,6 +20,8 @@ MapTransition
 public class View {
     private GraphicsContext gc;
     private Canvas canvas;
+    private Player player;
+
     private int cameraX, cameraY;
     private String workingDir;
     Color[] items;
@@ -29,10 +31,15 @@ public class View {
 
     private int mapWidth, mapHeight;
     private int tileSize;
-    public View(GraphicsContext gc, Canvas canvas) {
+
+    private MenuView menu;
+    public View(GraphicsContext gc, Canvas canvas, Player player) {
 
         this.gc = gc;
         this.canvas = canvas;
+        this.player = player;
+        menu = new MenuView(player, gc, canvas);
+
         cameraX = 0; cameraY = 0;
         mapWidth = 100; mapHeight = 100;
         tileSize = 50; //width/height of tiles in pixels
@@ -63,6 +70,7 @@ public class View {
 
         renderMap(map, p);
         renderGrid(map);
+        menu.render();
         gc = canvas.getGraphicsContext2D();
     }
 
@@ -126,6 +134,35 @@ public class View {
         }
     }
 
+    public void Up() {
+        if(menu.isOpen()) {
+            menu.Up();
+        } else {
+            moveCameraUp();
+        }
+    }
+    public void Down() {
+        if(menu.isOpen()) {
+            menu.Down();
+        } else {
+            moveCameraDown();
+        }
+    }
+    public void Right() {
+        if(menu.isOpen()) { return; }
+        moveCameraRight();
+    }
+    public void Left() {
+        if(menu.isOpen()) { return; }
+        moveCameraLeft();
+    }
+    public void Escape() {
+        menu.Escape();
+    }
+    public void Enter() {
+        menu.Enter();
+    }
+
 
     public void moveCameraUp() {
         if(cameraY >= 0) {//Top edge of board already in view
@@ -151,4 +188,6 @@ public class View {
         }
         cameraX-=tileSize;
     }
+
+
 }

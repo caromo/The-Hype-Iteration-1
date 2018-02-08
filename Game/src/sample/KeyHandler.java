@@ -17,32 +17,23 @@ public class KeyHandler implements EventHandler<KeyEvent>
     {
         switch(event.getCode()) {
             case UP:
-                if(main.getMenuActive()) {
-                    main.getMenuView().getInventoryView().cursorUp();
-                } else {
-                    view.moveCameraUp();
-                }
+                view.Up();
                 break;
             case RIGHT:
-                view.moveCameraRight();
+                view.Right();
                 break;
             case DOWN:
-                if(main.getMenuActive()) {
-                    main.getMenuView().getInventoryView().cursorDown();
-                } else {
-                    view.moveCameraDown();
-                }
+                view.Down();
                 break;
             case LEFT:
-                view.moveCameraLeft();
+                view.Left();
                 break;
             case ESCAPE:
-                main.toggleMenu();
+                view.Escape();
                 break;
             case ENTER:
-                if(main.getMenuActive()) {
-                    main.getPlayer().getInventory().getItem(main.getMenuView().getInventoryView().getSelectedItemIndex()).printID();
-                }
+                view.Enter();
+                break;
         }
 
         //do stuff

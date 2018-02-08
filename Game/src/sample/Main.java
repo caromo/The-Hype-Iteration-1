@@ -39,7 +39,7 @@ public class Main extends Application {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         map = new Map();
         player = new Player();
-        view = new View(gc, canvas);
+        view = new View(gc, canvas, player);
         keyHandler = new KeyHandler(view, this);
         menuView = new MenuView(player, gc, canvas);
 
@@ -63,9 +63,7 @@ public class Main extends Application {
 
 
                 view.render(map.getMap(), player);
-                if(menuActive) {
-                    menuView.render();
-                }
+                
                 
 
             }
