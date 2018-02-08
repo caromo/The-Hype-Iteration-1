@@ -21,13 +21,24 @@ public class Inventory {
 
     // Operation addItem(itemID:int)
     // Adds item to inventory based off it's ID
-    public void addItem(int id) {
+    public void addItembyID(int id) {
         if (items.size() == MAX_SIZE) {
             // Notify the user that inventory is full
             return;
         }
         else {
             items.add(new Item(id));
+            return;
+        }
+    }
+
+    public void addItem(Item i) {
+        if (items.size() == MAX_SIZE) {
+            // Notify the user that inventory is full
+            return;
+        }
+        else {
+            items.add(i);
             return;
         }
     }
@@ -72,7 +83,7 @@ public class Inventory {
     }
 
     // Operation useItem(itemID:int)
-    // Calls use on item based off it's index in the arraylist and indicates and removs it from invntory
+    // Calls use on item based off it's index in the arraylist and indicates and removes it from inventory
     public void useItem(int index) {
         if (index >= items.size() || index < 0) {
             // Internal notice that item does not exist
