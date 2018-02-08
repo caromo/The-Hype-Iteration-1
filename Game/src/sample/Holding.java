@@ -3,7 +3,7 @@
 
 package sample;
 
-public class Holding extends tileObject{
+public class Holding{
     protected tile tile;
     protected tileObject object;
 

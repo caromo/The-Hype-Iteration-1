@@ -58,6 +58,7 @@ public class Player extends GameObject {
         this.Experience = experience;
     }
 
+
     public void gainExp(int exp) {
         if (exp >= ExpToNextLvl)
         {
@@ -98,7 +99,7 @@ public class Player extends GameObject {
     public Inventory getInventory(){
         return bag;
     }
-    public Point getPosition()
+    public Point getCurPosition()
     {
         return pos;
     }
@@ -106,6 +107,19 @@ public class Player extends GameObject {
     public void setPosition(int x, int y) //for testing purposing only
     {
         pos.setLocation(x,y);
+    }
+    public void gainExp(int exp) {
+        if (exp >= ExpToNextLvl)
+        {
+            LevelUp();
+            exp -= ExpToNextLvl;
+            ExpToNextLvl = Level * 100;
+            this.gainExp(exp);
+        }
+        else {
+            ExpToNextLvl -= exp;
+            Experience = exp;
+        }
     }
 
     public int getExpToNextLvl() {
