@@ -72,6 +72,12 @@ public class Player extends GameObject {
         }
     }
 
+    public void takeDamage(int damage) {
+        int dmg = (DefensePoints - damage);
+        if (dmg <= 0) { Health -= 1; }
+        else Health -= dmg;
+    }
+
     // Slot 1 = Armor, Slot 2 = Weapon, Slot 3 = Ring
     public void equipGear(Equipment swag) {
         int EquipSlot = swag.getEquipmentID()/100 - 1;

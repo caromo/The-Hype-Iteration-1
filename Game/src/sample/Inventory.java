@@ -15,7 +15,7 @@ public class Inventory {
 
     private int compareID(Item a, Item b) {
         if (a.getID() < b.getID()) return 1;
-        else if (a.getID() > b.getID()) return -1;
+        else if (a.getID() > b.getID()) return -1; 
         else return 0;
     }
 
@@ -69,9 +69,7 @@ public class Inventory {
         if (index >= items.size() || index < 0) {
             // Internal notice that item does not exist
         }
-        else {
-            items.remove(index);
-        }
+        else { items.remove(index);  }
         return;
     }
 
