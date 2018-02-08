@@ -62,20 +62,20 @@ public class tile {
     		st.append("M");
     		
     	default:
-    		st.append(((Equipment)holding.object).getEquipmentID().toString());
+    		st.append(Integer.toString(((Equipment)holding.object).getEquipmentID()));
     		
     		if(holding.object.getEffect() < 10)
-    			st.append("0" + holding.object.getEffect().toString());
+    			st.append("0" + Integer.toString(holding.object.getEffect()));
     		
     		else{
-    			st.append(holding.object.getEffect().toString());
+    			st.append(Integer.toString(holding.object.getEffect()));
     		}
     		break;
     		
     	}
     	
     	if(Character.isLetter(st.charAt(0))) {
-    		switch(holding.getScenario()) {
+    		switch(holding.object.getScenario()) {
     		case 0:
     			st.append("0");
     		
