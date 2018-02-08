@@ -13,5 +13,5 @@ public abstract class tileObject {
     public int getScenario() {
         return scenarioNumber;
     }
-
+    public abstract int getEffect();
 }

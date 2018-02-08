@@ -9,6 +9,11 @@ public class Armor extends Equipment{
     }
 
     @Override
+    public int applyEffect() {
+        return Defense;
+    }
+
+    @Override
     public int supplyBenefit() {
         return Defense;
     }

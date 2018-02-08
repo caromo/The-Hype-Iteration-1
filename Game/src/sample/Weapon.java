@@ -9,6 +9,11 @@ public class Weapon extends Equipment {
     }
 
     @Override
+    public int applyEffect(){
+        return Attack;
+    }
+
+    @Override
     public int supplyBenefit() {
         return Attack;
     }

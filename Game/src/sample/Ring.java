@@ -10,6 +10,11 @@ public class Ring extends Equipment {
     }
 
     @Override
+    public int applyEffect() {
+        return HealthBoost;
+    }
+
+    @Override
     public int supplyBenefit() {
         return HealthBoost;
     }

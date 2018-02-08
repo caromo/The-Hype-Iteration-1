@@ -7,5 +7,12 @@ public class MapTransition extends tileObject{
         destination = dest;
     }
 
+    public int getDestination() {
+        return destination;
+    }
 
+    @Override
+    public int getEffect() {
+        return destination;
+    }
 }

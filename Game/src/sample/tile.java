@@ -12,7 +12,6 @@ public class tile {
 
     public tile() {}
 
-
     //Performs the action associated with the tileObject
     public void applyEffect() {
         if(holding == null) {
@@ -46,7 +45,7 @@ public class tile {
             }
         }
     }
-    
+
     //Provides the encrypted info of the tile as a String
    /* public String spill() {
 
@@ -55,7 +54,7 @@ public class tile {
 
 
 
-    }
+  //  }
     public int getScenario() {
         if(holding == null) {
             return -1;

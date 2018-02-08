@@ -19,5 +19,8 @@ public abstract class Equipment extends Item {
         EquipmentID = equipmentID;
     }
 
+
+    public abstract int applyEffect();
+
     public abstract int supplyBenefit();
 }

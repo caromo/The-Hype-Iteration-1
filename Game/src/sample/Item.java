@@ -31,4 +31,8 @@ public class Item extends tileObject{
 
     public void use() {}
 
+    @Override
+    public int getEffect() {
+        return itemID;
+    }
 }
