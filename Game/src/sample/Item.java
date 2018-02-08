@@ -2,6 +2,7 @@ package sample;
 
 public class Item extends tileObject{
     private int itemID;
+    private int equip;
 
     public Item(int id) {
         super(1);
@@ -9,26 +10,18 @@ public class Item extends tileObject{
 
     }
 
-    public void classify() {
+    public void isEquipment() {
         Item[] arr = holding.tile.occupy.player.getInventory().getItems();
-        Item[][] equipable = new Item[2][];
+        Item[] equipable = new Item[];
         Equipment eq = new Equipment(getID());
-        int W, A, R;
-        W = A = R = 0;
+        int W = 0;
         for(int i = 0; i < arr.length; i++)
         {
-            if(getID() == eq.isWeapon)
+            if(getID() == equip)
             {
-                equipable[0][W++] = arr[i];
+                equipable[W++] = arr[i];
             }
-            else if(getID() == eq.isArmor)
-            {
-                equipable[1][A++] = arr[i];
-            }
-            else if(getID() == eq.isRing)
-            {
-                equipable[2][R++] = arr[i];
-            }
+
         }
 
         eq.storage = equipable;
