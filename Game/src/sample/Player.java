@@ -41,6 +41,10 @@ public class Player extends GameObject {
         gear = new Equipment[EQUIPMENT_SLOTS];
     }
 
+    public Equipment[] getEquipment(){
+        return gear;
+    }
+
     public int getHealth() {
         return Health;
     }
