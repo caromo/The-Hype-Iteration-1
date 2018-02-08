@@ -47,9 +47,67 @@ public class tile {
     }
 
     //Provides the encrypted info of the tile as a String
-   /* public String spill() {
-
-    }*/
+    public String spill() {
+    	StringBuffer st = null;
+    	st.append("");
+    	
+    	switch(decal) {
+    	case 'G':
+    		st.append("G");
+    		
+    	case 'W':
+    		st.append("W");
+    		
+    	case 'M':
+    		st.append("M");
+    		
+    	default:
+    		st.append(((Equipment)holding.object).getEquipmentID().toString());
+    		
+    		if(holding.object.getEffect() < 10)
+    			st.append("0" + holding.object.getEffect().toString());
+    		
+    		else{
+    			st.append(holding.object.getEffect().toString());
+    		}
+    		break;
+    		
+    	}
+    	
+    	if(Character.isLetter(st.charAt(0))) {
+    		switch(holding.getScenario()) {
+    		case 0:
+    			st.append("0");
+    		
+    		case 1:
+    			st.append("1");
+    			st.append(Integer.toString(holding.object.getEffect()) + "00");
+    			break;
+    		
+    		case 2:
+    			st.append("2");
+    			st.append(Integer.toString(holding.object.getEffect()) + "00");
+    			break;
+    		
+    		case 3:
+    			st.append("3");
+    			st.append(Integer.toString(holding.object.getEffect()) + "00");
+    			break;
+    		
+    		case 4:
+    			st.append("4");
+    			st.append(Integer.toString(holding.object.getEffect()));
+    			break;
+    	
+    		case 5:
+    			st.append("5");
+    			st.append(Integer.toString(holding.object.getEffect()));
+    			break;
+    		}
+    	} 
+    	
+    	return st.toString();
+    }
 
 
 
