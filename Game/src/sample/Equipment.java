@@ -1,93 +1,26 @@
 package sample;
 
 public class Equipment extends Item {
-    private Weapon wea;
-    private Armor arm;
-    private ring  rin;
-    protected int type;
-    protected int isWeapon;
-    protected int isArmor;
-    protected int isRing;
-    protected Item[] storage;
-    protected Weapon[] Warr;
-    protected Armor[] Aarr;
-    protected ring[] Rarr;
 
-    public Equipment(int id) {
-        super(id);
-    }
-    public void classify() {
+    private int EquipmentID;
 
-        int W, A, R;
-        W = A = R = 0;
-        for(int i = 0; i < storage.length; i++)
-        {
-            if(getType() == isWeapon)
-            {
-                Warr[W++] = (Weapon) storage[i];
-            }
-            else if(getType() == isArmor)
-            {
-                Aarr[A++] = (Armor) storage[i];
-            }
-            else if(getType() == isRing)
-            {
-                Rarr[R++] = (ring) storage[i];
-            }
-        }
-
-
+    // NOTE: ARMOR Equipment will start with ID 100, WEAPON Equipment will start with ID 200, and RING Equipment will start with ID 300
+    // (eg. A sword's ID would be 201, a whip's ID would be 202, etc.)
+    public Equipment(int ItemID, int equipmentID) {
+        super(ItemID);
+        EquipmentID = equipmentID;
     }
 
-    public int getType() {
-        return type;
+    public int getEquipmentID() {
+        return EquipmentID;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setEquipmentID(int equipmentID) {
+        EquipmentID = equipmentID;
     }
 
-    public void equipWeapon(int pos){
-        this.wea = Warr[pos];
+    public void applyBenefit()
+    {
+        return;
     }
-    public void equipArmor(int pos){
-        this.arm = Aarr[pos];
-    }
-    public void equipRing(int pos){
-        this.rin = Rarr[pos];
-    }
-    public void returnWeapon(){
-        this.wea = null;
-    }
-    public void returnArmor(){
-        this.arm = null;
-    }
-    public void returnRing(){
-        this.rin = null;
-    }
-
-    public Armor getArm() {
-        return arm;
-    }
-
-    public void setArm(Armor arm) {
-        this.arm = arm;
-    }
-
-    public Weapon getWea() {
-        return wea;
-    }
-
-    public void setWea(Weapon wea) {
-        this.wea = wea;
-    }
-
-    public ring getRin() {
-        return rin;
-    }
-
-    public void setRin(ring rin) {
-        this.rin = rin;
-    }
-
 }

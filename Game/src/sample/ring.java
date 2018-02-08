@@ -1,10 +1,9 @@
+// TODO: Figure out how to effectively represent a rings effect on the Player.
 package sample;
 
-public class ring extends Equipment {
+public class Ring extends Equipment {
 
-    public ring(int id) {
-        super(id);
+    public Ring(int ItemID, int EQID) {
+        super(ItemID, EQID);
     }
-
-
 }
