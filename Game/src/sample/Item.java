@@ -1,8 +1,9 @@
 package sample;
 
-public class Item extends tileObject{
+public class Item extends tileObject {
     private int itemID;
     private int equip;
+    protected Holding holding;
 
     public Item(int id) {
         super(1);

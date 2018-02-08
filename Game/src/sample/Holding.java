@@ -3,11 +3,10 @@
 
 package sample;
 
-public class Holding {
-    public tile tile;
-    public tileObject object;
+public class Holding extends tileObject{
+    protected tile tile;
+    protected tileObject object;
 
-    //Creates the association, sets what tile is connected tom what tileObject
     public Holding(tile tile, tileObject object) {
         this.tile = tile;
         this.object = object;
