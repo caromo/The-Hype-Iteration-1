@@ -110,6 +110,10 @@ public class Player extends GameObject {
         // Increase other stats here as needed.
     }
 
+    public int getLevel() {
+        return Level;
+    }
+
     public Inventory getInventory(){
         return bag;
     }
