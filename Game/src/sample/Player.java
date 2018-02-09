@@ -117,15 +117,13 @@ public class Player extends GameObject {
     public Inventory getInventory(){
         return bag;
     }
+
     public Point getPosition()
     {
         return pos;
     }
 
-    public void setPosition(int x, int y) //for testing purposing only
-    {
-        pos.setLocation(x,y);
-    }
+    public void setPosition(int x, int y) { pos.setLocation(x,y); }
 
     public int getExpToNextLvl() {
         return ExpToNextLvl;

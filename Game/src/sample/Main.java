@@ -62,7 +62,7 @@ public class Main extends Application {
 
 
 
-                view.render(map.getMap(), player);
+                view.render(map.getState(), player);
                 
                 
 

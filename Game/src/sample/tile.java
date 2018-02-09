@@ -5,8 +5,10 @@ public class tile {
     public Occupy occupy;
     public Holding holding;
     public char decal;
+    private Boolean passable;
 
     public tile(tileObject objType) {
+        passable = true;
         holding = new Holding(this, objType);
     }
 
@@ -109,14 +111,21 @@ public class tile {
     	return st.toString();
     }
 
-
-
-
   //  }
+
     public int getScenario() {
         if(holding == null) {
             return -1;
         }
         return holding.object.getScenario();
     }
+
+    public boolean getPassable() {
+        return passable;
+    }
+
+    public void setPassable(Boolean passable) {
+        this.passable = passable;
+    }
+
 }
