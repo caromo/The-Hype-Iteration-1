@@ -25,7 +25,7 @@ public class Main extends Application {
 //        x.giveItem();
         ((healingEffect) damage).startH();
 //        ((Item) item).giveItem();
-        
+
         p.getInventory().printInventory();
 
         launch(args);

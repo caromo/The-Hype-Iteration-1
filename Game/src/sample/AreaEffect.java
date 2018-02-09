@@ -27,41 +27,6 @@ public class AreaEffect extends tileObject{
       return this.duration;
     }
 
-//    public void starteffect()
-//    {
-//        secondsPassed = 0;
-//        Timer timer = new Timer();
-//        timer.schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//                secondsPassed++;
-//                System.out.println("Seconds passes " + secondsPassed);
-//
-////                if(damageEffects.isOn())
-////                {
-////                    damageEffects.Ef();
-////                }
-//                if(2 <= secondsPassed)
-//                {
-//                    setEffectOn(true);
-//                    timer.cancel();
-//                }
-//                else
-//                {
-//                    setEffectOn(false);
-//                }
-////                if(1 <= secondsPassed)
-////                {
-////                    timer.cancel();
-////                }
-//
-//
-//            }
-//        }, 0 ,(long) (1000));
-//
-//    }
-
-
     public int getScenarioNumber() {
         return scenarioNumber;
     }

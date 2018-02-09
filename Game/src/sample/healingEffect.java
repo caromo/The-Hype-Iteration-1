@@ -28,8 +28,10 @@ public void starteffects()
         starteffects();
     }
     public void healing(){
-        holding.tile.occupy.player.setHealth(holding.tile.occupy.player.getHealth() + getHealingEffect());
-        System.out.format("%d", holding.tile.occupy.player.getHealth());
+        if(holding.tile.occupy.player.getHealth() < 100) {
+            holding.tile.occupy.player.setHealth(holding.tile.occupy.player.getHealth() + getHealingEffect());
+            System.out.format("%d", holding.tile.occupy.player.getHealth());
+        }
     }
     public healingEffect(int scenario, int duration, int healingEffect) {
         super(scenario, duration);
