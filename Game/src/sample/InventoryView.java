@@ -40,8 +40,7 @@ public class InventoryView extends ListView{
         if(item == null) {
             return;
         }
-        gc.setFill(Color.BLACK);
-        gc.fillText("ItemID: " + Integer.toString(player.getInventory().getItem(ind+getScrollOffset()).getID()), 50, ind*getEntryHeight()+50);
+        renderTextEntry("ItemID: " + Integer.toString(player.getInventory().getItem(ind+getScrollOffset()).getID()), ind);
 
 
 

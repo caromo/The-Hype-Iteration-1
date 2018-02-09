@@ -2,7 +2,10 @@ package sample;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+
+import java.io.File;
 
 public class ListView {
 
@@ -40,13 +43,18 @@ public class ListView {
     }
 
     public void renderTextEntry(String s, int ind) {
-        gc.setFill(Color.WHITE);
-        gc.fillRect(0, ind*getEntryHeight(), getEntryWidth(), getEntryHeight());
+        //gc.setFill(Color.WHITE);
+        //gc.fillRect(0, ind*getEntryHeight(), getEntryWidth(), getEntryHeight());
+        renderEntryBackground(ind);
         gc.setFill(Color.BLACK);
         gc.fillText(s, 50, ind*getEntryHeight()+50);
     }
 
-
+    public void renderEntryBackground(int ind) {
+        File file = new File(System.getProperty("user.dir") + "\\src\\sample\\sprites\\menuBackground2.png");
+        Image image = new Image(file.toURI().toString());
+        gc.drawImage(image, -5, ind*getEntryHeight()-5, getEntryWidth(), getEntryHeight()+10);
+    }
 
     public void cursorDown() {
         if(cursorPos < maxEntriesDisplayed-1 && cursorPos < numOfEntries-1) {
