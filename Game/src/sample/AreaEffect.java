@@ -3,8 +3,6 @@
 
 package sample;
 
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class AreaEffect extends tileObject{
     private int scenarioNumber;

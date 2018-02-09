@@ -33,7 +33,7 @@ public class expEffect extends AreaEffect{
     }
     public void expEf(){
         super.holding.tile.occupy.player.gainExp(getexpEffect());
-        System.out.format("%d", holding.tile.occupy.player.getExperience());
+        System.out.format("%d", holding.tile.occupy.player.getExpToNextLvl());
     }
 
     public void setexpEffect(int expEffect) {
