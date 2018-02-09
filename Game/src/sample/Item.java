@@ -1,28 +1,30 @@
 package sample;
 
-public class Item extends tileObject {
+public class Item extends tileObject{
     private int itemID;
-    protected Holding holding;
+    public int ScenarioID;
 
     public Item(int id) {
-        super(1);
+        super(4);
         itemID = id;
-
     }
-
-
 
     //Places this item in the player's inventory
     public void giveItem() {
         //Accesses the player inventory through holding->tile->occupy->getInventory.addItem()
 
-        holding.tile.occupy.player.getInventory().addItem(itemID);
+        holding.tile.occupy.player.getInventory().addItem(this);
         holding.remove();
     }
 
+    public void useItem() {
 
+    }
 
     public int getID() {
         return itemID;
     }
+
+    public void use() {}
+
 }

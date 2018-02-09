@@ -1,6 +1,9 @@
+//Members Responsible: Callum, Daniel, Danilo
+//Exists to create an association between a Tile and a tileObject
+
 package sample;
 
-public class Holding {
+public class Holding{
     protected tile tile;
     protected tileObject object;
 
@@ -11,6 +14,7 @@ public class Holding {
         object.holding = this;
     }
 
+    //Removes the association
     public void remove() {
         tile.holding = null;
         object.holding = null;

@@ -14,6 +14,20 @@ public class Main extends Application {
     private View view;
     private KeyHandler keyHandler;
     public static void main(String[] args) {
+        Player p = new Player();
+        tileObject item = new Item(5);
+        tileObject damage = new expEffect(2,5, 1);
+
+        tile t = new tile(damage);
+        p.occupy = new Occupy(p, t);
+        t.holding = new Holding(t, damage);
+//        Item x = new Item(2);
+//        x.giveItem();
+        ((expEffect) damage).startexp();
+//        ((Item) item).giveItem();
+
+        p.getInventory().printInventory();
+
         launch(args);
     }
 
@@ -27,10 +41,10 @@ public class Main extends Application {
         theStage.setScene( theScene );
         Canvas canvas = new Canvas( 512, 512 );
         root.getChildren().add( canvas );
-        tile t = new tile(new MapTransition());
-        Player player = new Player(100, 0);
+//        tile t = new tile(new MapTransition());
+        Player player = new Player();
         player.setPosition(0,0);
-        t.setPosition(0,0);
+//        t.setPosition(0,0);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         view = new View(gc, canvas);
         keyHandler = new KeyHandler();
@@ -48,7 +62,7 @@ public class Main extends Application {
                 double y = 232 + 128 * Math.sin(t);
 
                 view.render(keyHandler.x, keyHandler.y);
-                
+
 
             }
         }.start();
