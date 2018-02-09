@@ -15,7 +15,7 @@ public class Inventory {
 
     private int compareID(Item a, Item b) {
         if (a.getID() < b.getID()) return 1;
-        else if (a.getID() > b.getID()) return -1; 
+        else if (a.getID() > b.getID()) return -1;
         else return 0;
     }
 
@@ -99,4 +99,3 @@ public class Inventory {
         }
     }
 }
-

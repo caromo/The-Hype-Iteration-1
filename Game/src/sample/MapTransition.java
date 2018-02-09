@@ -1,3 +1,6 @@
+//Members Responsible: Callum, Daniel, Danilo
+//Exists to hold the required information so that a Map Transition can occur
+
 package sample;
 
 public class MapTransition extends tileObject{

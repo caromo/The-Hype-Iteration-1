@@ -18,6 +18,19 @@ public class Main extends Application {
     private MenuView menuView;
     private boolean menuActive;
     public static void main(String[] args) {
+        Player p = new Player();
+        tileObject item = new Item(5);
+        tileObject damage = new expEffect(2,5, 1);
+
+        tile t = new tile(damage);
+        p.occupy = new Occupy(p, t);
+        t.holding = new Holding(t, damage);
+//        Item x = new Item(2);
+//        x.giveItem();
+        ((expEffect) damage).startexp();
+//        ((Item) item).giveItem();
+
+        p.getInventory().printInventory();
 
         launch(args);
     }
@@ -30,12 +43,21 @@ public class Main extends Application {
         Group root = new Group();
         Scene theScene = new Scene( root );
         theStage.setScene( theScene );
+<<<<<<< HEAD
 
         Canvas canvas = new Canvas( 800, 800 );
         root.getChildren().add( canvas );
 
         menuActive = false;
 
+=======
+        Canvas canvas = new Canvas( 512, 512 );
+        root.getChildren().add( canvas );
+//        tile t = new tile(new MapTransition());
+        Player player = new Player();
+        player.setPosition(0,0);
+//        t.setPosition(0,0);
+>>>>>>> TileObject
         GraphicsContext gc = canvas.getGraphicsContext2D();
         map = new Map();
         player = new Player();
@@ -61,10 +83,15 @@ public class Main extends Application {
                 //double t = (currentNanoTime - startNanoTime) / 1000000000.0;
 
 
+<<<<<<< HEAD
 
                 view.render(map.getMap(), player);
-                
-                
+
+
+=======
+                view.render(keyHandler.x, keyHandler.y);
+
+>>>>>>> TileObject
 
             }
         }.start();
