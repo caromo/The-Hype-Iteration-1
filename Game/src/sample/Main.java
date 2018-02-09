@@ -16,11 +16,16 @@ public class Main extends Application {
     public static void main(String[] args) {
         Player p = new Player();
         tileObject item = new Item(5);
-        tile t = new tile(item);
-        p.occupy = new Occupy(p, t);
-        t.holding = new Holding(t, item);
+        tileObject damage = new healingEffect(2,5, 1);
 
-        t.applyEffect();
+        tile t = new tile(damage);
+        p.occupy = new Occupy(p, t);
+        t.holding = new Holding(t, damage);
+//        Item x = new Item(2);
+//        x.giveItem();
+        ((healingEffect) damage).startH();
+//        ((Item) item).giveItem();
+        
         p.getInventory().printInventory();
 
         launch(args);
@@ -36,10 +41,10 @@ public class Main extends Application {
         theStage.setScene( theScene );
         Canvas canvas = new Canvas( 512, 512 );
         root.getChildren().add( canvas );
-        tile t = new tile(new MapTransition());
-        Player player = new Player(100, 0);
+//        tile t = new tile(new MapTransition());
+        Player player = new Player();
         player.setPosition(0,0);
-        t.setPosition(0,0);
+//        t.setPosition(0,0);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         view = new View(gc, canvas);
         keyHandler = new KeyHandler();

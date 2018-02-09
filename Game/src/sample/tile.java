@@ -18,10 +18,10 @@ public class tile extends GameObject{
 
     public tile(tileObject objType) {
         holding = new Holding(this, objType);
-       if(getPosition() == occupy.player.getPosition())
-       {
-           occupy = new Occupy(occupy.player, this);
-       }
+//       if(getPosition() == occupy.player.getPosition())
+////       {
+////           occupy = new Occupy(occupy.player, this);
+////       }
 
     }
 

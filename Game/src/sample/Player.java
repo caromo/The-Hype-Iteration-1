@@ -26,7 +26,7 @@ public class Player extends GameObject {
         DefensePoints = 5;
         bag = new Inventory();
         pos = new Point(x,y);
-        gear = new Equipment[]{new Armor(1, 100, 0), new Weapon(1, 200, 0), new Ring(1, 300)};
+        gear = new Equipment[]{new Armor(1, 100, 0), new Weapon(1, 200, 0), new Ring(1, 300, 0)};
     }
     public Player(){
         this.name = "H Y P E - B O Y";
@@ -57,7 +57,7 @@ public class Player extends GameObject {
     public void setExperience(int experience) {
         this.Experience = experience;
     }
-    
+
     public void takeDamage(int damage) {
         int dmg = (DefensePoints - damage);
         if (dmg <= 0) { Health -= 1; }
