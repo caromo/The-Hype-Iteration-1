@@ -4,6 +4,8 @@ import java.awt.Point;
 
 public class Map {
     private int mapID;
+    private int mapX;
+    private int mapY;
     private tile[][] tileSet;
     private Player myPlayer;
     private Point startingPoint;
@@ -11,6 +13,9 @@ public class Map {
     //generic map constructor: makes an empty 10x10 grid
     public Map() {
         tileSet = new tile[20][20];
+        mapX = tileSet.length;
+        mapY = tileSet[0].length;
+        startingPoint = new Point(10,10);
         for(int i = 0; i < tileSet.length; i++) {
             for(int j = 0; j < tileSet.length; j++) {
                 tileSet[i][j] = new tile(new Terrain(0)); //blank tiles
@@ -29,6 +34,8 @@ public class Map {
     //map constructor: sets map to one specified by map ID and places player at the starting point
     public Map(int mapID, Player currPlayer, tile[][] map, Point start) {
         tileSet = map;
+        mapX = tileSet.length;
+        mapY = tileSet[0].length;
         startingPoint = start;
         myPlayer = currPlayer;
         moveToStart();
@@ -49,6 +56,11 @@ public class Map {
         tileSet = neoSet;
         moveToStart();
     }
+
+    public void setMyPlayer(Player myPlayer) {
+        this.myPlayer = myPlayer;
+    }
+
     public Player getPlayer() {
         return myPlayer;
     }
@@ -62,4 +74,27 @@ public class Map {
         this.mapID = mapID;
     }
 
+    public int getMapX() {
+        return mapX;
+    }
+
+    public void setMapX(int mapX) {
+        this.mapX = mapX;
+    }
+
+    public int getMapY() {
+        return mapY;
+    }
+
+    public void setMapY(int mapY) {
+        this.mapY = mapY;
+    }
+
+    public Point getStartingPoint() {
+        return startingPoint;
+    }
+
+    public void setStartingPoint(Point startingPoint) {
+        this.startingPoint = startingPoint;
+    }
 }
