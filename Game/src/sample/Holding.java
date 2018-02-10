@@ -4,18 +4,29 @@
 package sample;
 
 public class Holding {
-    public tile tile;
-    public tileObject object;
+    private tile Tile;
+    private tileObject object;
 
-    public Holding(tile tile, tileObject object) {
-        this.tile = tile;
-        this.object = object;
+    public Holding(tile tile, tileObject obj) {
+        Tile = tile;
+        object = obj;
         tile.holding = this;
-        object.holding = this;
+        obj.holding = this;
+    }
+
+    public tileObject getObject() { return object; }
+
+    public void setObject(tileObject t) {
+        object = t;
+    }
+
+    public tile getTile() { return Tile; }
+
+    public void setTile(tile t) {
+        Tile = t;
     }
 
     public void remove() {
-        tile.holding = null;
         object.holding = null;
     }
 }

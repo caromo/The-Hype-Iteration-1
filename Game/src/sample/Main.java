@@ -25,19 +25,14 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         Player p = new Player();
-        tileObject item = new Item(5);
+        tileObject item = new Item(4,5);
         tileObject damage = new expEffect(2,5, 1);
 
         tile t = new tile(damage);
         p.occupy = new Occupy(p, t);
         t.holding = new Holding(t, damage);
-//        Item x = new Item(2);
-//        x.giveItem();
         ((expEffect) damage).startexp();
-//        ((Item) item).giveItem();
-
         p.getInventory().printInventory();
-
         launch(args);
     }
 
@@ -70,17 +65,11 @@ public class Main extends Application {
         canvas.setOnKeyPressed(keyHandler);
         final long startNanoTime = System.nanoTime();
         new AnimationTimer() {
-
             public void handle(long currentNanoTime) {
                 //double t = (currentNanoTime - startNanoTime) / 1000000000.0;
-
                 view.render(map.getState(), player);
-
-
-
             }
         }.start();
-
         theStage.show();
     }
 

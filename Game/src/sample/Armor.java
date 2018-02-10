@@ -1,4 +1,3 @@
-//TODO: Implement a way to equip gear effectively
 package sample;
 
 public class Armor extends Equipment{

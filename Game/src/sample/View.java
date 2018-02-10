@@ -46,6 +46,7 @@ public class View {
 
         //Get working directory to load textures from
         workingDir = System.getProperty("user.dir");
+        System.out.println(workingDir);
 
         initializeSprites();
 
@@ -90,7 +91,7 @@ public class View {
 
                 int tileID = map[i][j].getScenario();
                 if(tileID == 0) {//Terrain
-                    gc.drawImage(terrainSprites[((Terrain) map[i][j].holding.object).getTerrainType()], (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
+                    gc.drawImage(terrainSprites[((Terrain) map[i][j].holding.getObject()).getTerrainType()], (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
                 } else if(tileID == 1) {//AEHealing
                     gc.setFill(Color.GREEN);
                     gc.fillRect((i*tileSize)+5, (j*tileSize)+5, tileSize-5, tileSize-5);
@@ -105,7 +106,7 @@ public class View {
 
                 } else if(tileID == 4) {//Item
                     gc.drawImage(getImage(workingDir + "\\src\\sample\\sprites\\grass.png"), (i*tileSize)+cameraX, (j*tileSize)+cameraY);
-                    gc.drawImage(itemSprites[((Item)map[i][j].holding.object).getID()], (i*tileSize)+5+cameraX, (j*tileSize)+5+cameraY, tileSize, tileSize);
+                    gc.drawImage(itemSprites[((Item)map[i][j].holding.getObject()).getID()], (i*tileSize)+5+cameraX, (j*tileSize)+5+cameraY, tileSize, tileSize);
                 } else {//MapTransition
 
                 }

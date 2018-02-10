@@ -4,31 +4,22 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class damageEffect extends AreaEffect{
-    private int damageEffect;
+    private int damage;
     private boolean damOn;
     private int secondsPassed;
-//    private Holding holding;
 
-    public damageEffect(int scenario, int duration, int damageEffect) {
+    public damageEffect(int scenario, int duration, int damage) {
         super(scenario, duration);
-//        setDamageEffect(damageEffect);
-//        Ef();
-
-
-
-
     }
 
     public void startEf()
     {
         setOn(true);
-        starteffects();
+        startEffect();
         Ef();
-
-
-
     }
-    public void starteffects()
+
+    public void startEffect()
     {
         secondsPassed = 0;
         Timer timer = new Timer();
@@ -36,47 +27,24 @@ public class damageEffect extends AreaEffect{
             @Override
             public void run() {
                 secondsPassed++;
-                System.out.println("Seconds passes " + secondsPassed);
+                System.out.print("Seconds passes " + secondsPassed + "\t\t");
                 Ef();
-
-
             }
         }, 0 ,(long) (1000));
-
     }
 
     public void Ef()
     {
-        int space = 0;
-//        for(int i = 0; i < super.getDuration(); i++)
-//        {
-//            super.starteffect();
-//            while(!super.isEffectOn())
-//            {
-//
-//            }
-            super.holding.tile.occupy.player.takeDamage(getDamageEffect());
-            System.out.format("%d", holding.tile.occupy.player.getHealth());
-//            System.out.println(i);
-
-//        }
-
-//        do{
-//            if(space > 10) {
-//                super.holding.tile.occupy.player.takeDamage(getDamageEffect());
-//                System.out.format("%d", holding.tile.occupy.player.getHealth());
-//                space = 0;
-//            }
-//
-//        }while(super.isEffectOn());
+        super.holding.getTile().occupy.getPlayer().takeDamage(getDamageEffect());
+        System.out.format("%d", holding.getTile().occupy.getPlayer().getHealth(),"\t");
     }
 
     public void setDamageEffect(int damageEffect) {
-        this.damageEffect = damageEffect;
+        this.damage = damageEffect;
     }
 
     public int getDamageEffect() {
-        return damageEffect;
+        return damage;
     }
 
     public void setOn(boolean on) {

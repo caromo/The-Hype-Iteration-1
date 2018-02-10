@@ -87,7 +87,7 @@ public class Inventory {
             // Internal notice that item does not exist
         }
         else {
-            items.get(index).use();
+            items.get(index).useItem();
             items.remove(index);
         }
         return;
