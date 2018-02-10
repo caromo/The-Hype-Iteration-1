@@ -5,6 +5,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Path;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -33,12 +35,12 @@ public class View {
     private int tileSize;
 
     private MenuView menu;
-    public View(GraphicsContext gc, Canvas canvas, Player player) {
+    public View(GraphicsContext gc, Canvas canvas, Player player, Stage mainStage, Scene mainScene) {
 
         this.gc = gc;
         this.canvas = canvas;
         this.player = player;
-        menu = new MenuView(player, gc, canvas);
+        menu = new MenuView(player, gc, canvas, mainStage, mainScene);
 
         cameraX = 0; cameraY = 0;
         mapWidth = 100; mapHeight = 100;
@@ -163,7 +165,7 @@ public class View {
     public void Enter() {
         menu.Enter();
     }
-
+    public void P() { menu.openGameMenu(); }
 
     public void moveCameraUp() {
         if(cameraY >= 0) {//Top edge of board already in view

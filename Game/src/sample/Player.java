@@ -157,4 +157,7 @@ public class Player extends GameObject {
         return name;
     }
 
+    public void setName(String newName) {
+        name = newName;
+    }
 }
