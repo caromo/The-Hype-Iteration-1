@@ -83,19 +83,6 @@ public class Inventory {
         return;
     }
 
-    // Operation useItem(itemID:int)
-    // Calls use on item based off it's index in the arraylist and indicates and removes it from inventory
-    public void useItem(int index) {
-        if (index >= items.size() || index < 0) {
-            // Internal notice that item does not exist
-        }
-        else {
-            items.get(index).useItem();
-            items.remove(index);
-        }
-        return;
-    }
-
     public void printInventory() {
         for(int i = 0; i < items.size(); i++) {
             System.out.println(items.get(i).getID());

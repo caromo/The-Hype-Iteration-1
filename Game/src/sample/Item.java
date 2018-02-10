@@ -24,8 +24,6 @@ public class Item extends tileObject{
         return itemID;
     }
 
-    public void use() {}
-
     public boolean isOneShot() {
         return oneShot;
     }
