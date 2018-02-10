@@ -71,7 +71,8 @@ public class View {
         terrainSprites[1] = getImage(workingDir + "\\src\\sample\\sprites\\water.png");
         terrainSprites[2] = getImage(workingDir + "\\src\\sample\\sprites\\lava.png");
 
-        playerImg = getImage(workingDir + "\\src\\sample\\sprites\\pikachu.png");
+        //playerImg = getImage(workingDir + "\\src\\sample\\sprites\\pikachu.png");
+
 
     }
 
@@ -122,7 +123,8 @@ public class View {
             }
         }
 
-        gc.drawImage(playerImg, player.getPosition().x*tileSize+cameraX, player.getPosition().y*tileSize+cameraY, tileSize, tileSize);
+        // First parameter changed from playerImg
+        gc.drawImage(player.getPlayerSprite(), player.getPosition().x*tileSize+cameraX, player.getPosition().y*tileSize+cameraY, tileSize, tileSize);
 
         //Draw player
 

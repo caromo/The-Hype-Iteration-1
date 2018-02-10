@@ -2,6 +2,7 @@ package sample;
 
 import java.lang.Math;
 import java.awt.Point;
+import javafx.scene.image.Image;
 
 public class Player extends GameObject {
     private int Health;
@@ -10,6 +11,7 @@ public class Player extends GameObject {
     private int Experience;
     private int ExpToNextLvl;
     private int Level;
+    private Image playerSprite;
     private String name;
     private Inventory bag;
     private Equipment[] gear;
@@ -164,4 +166,8 @@ public class Player extends GameObject {
     public void setName(String newName) {
         name = newName;
     }
+
+    public Image getPlayerSprite() { return playerSprite; }
+
+    public void setPlayerSprite(Image newSprite) { playerSprite = newSprite; }
 }
