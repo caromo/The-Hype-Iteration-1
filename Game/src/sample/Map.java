@@ -1,38 +1,27 @@
 package sample;
 
 import java.awt.Point;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.Scanner;
+
+import static java.lang.Character.isLetter;
 
 public class Map {
-    private int mapID;
     private tile[][] tileSet;
     private Player myPlayer;
     private Point startingPoint;
+    private int mapID;
 
-    //generic map constructor: makes an empty 20x20 grid
+    //generic map constructor: makes an empty 10x10 grid
     public Map(Player player) {
-        tileSet = new tile[20][20];
-        startingPoint = new Point(10,10);
-        for(int i = 0; i < tileSet.length; i++) {
-            for(int j = 0; j < tileSet.length; j++) {
-                tileSet[i][j] = new tile(new Terrain(0)); //blank tiles
-            }
-        }
-        tileSet[1][1] = new tile(new Item(4, 1));
-        tileSet[4][2] = new tile(new Terrain(1));
-        tileSet[4][3] = new tile(new Terrain(1));
-        tileSet[5][2] = new tile(new Terrain(1));
-        tileSet[5][3] = new tile(new Terrain(1));
-
-        tileSet[7][7] = new tile(new Terrain(2));
-        tileSet[7][6] = new tile(new Terrain(2));
-        tileSet[6][7] = new tile(new Terrain(2));
-
-        this.myPlayer = player;
+        myPlayer = player;
+        tileSet = new tile[10][10];
     }
     //map constructor: sets map to one specified by map ID and places player at the starting point
-    public Map(int mapID, Player currPlayer, tile[][] map, Point start) {
-        tileSet = map;
-        startingPoint = start;
+    public Map(int mapID, Player currPlayer) {
+        loadMapFromID(mapID);
         myPlayer = currPlayer;
         moveToStart();
     }
@@ -42,34 +31,72 @@ public class Map {
     }
 
     public void movePlayer(Point dir) {
-
-        if(dir.x < 0 || dir.y < 0 || dir.x >= getMapX() || dir.y >= getMapY()) { return; } //Make sure position is in bounds
-        //if (tileSet[dir.x][dir.y].getPassable()) {
-            myPlayer.setPosition(dir.x, dir.y);
-            tileSet[dir.x][dir.y].applyEffect();
-        //}
+        if ( tileSet[(int)dir.getX()][(int)dir.getY()].getPassable() ) {
+            myPlayer.setPosition( (int)dir.getX(), (int)dir.getY() );
+            tileSet[(int)dir.getX()][(int)dir.getY()].applyEffect();
+        }
     }
-    private void updateMap(int NewmapID, tile[][] neoSet, Point neoStart) {
-        startingPoint = neoStart;
-        tileSet = neoSet;
+    public void updateMap(int mapID) {
+        loadMapFromID(mapID);
         moveToStart();
     }
-
-    public void setMyPlayer(Player myPlayer) {
-        this.myPlayer = myPlayer;
-    }
-
     public Player getPlayer() {
         return myPlayer;
     }
-    public tile[][] getState() { return tileSet; }
+    public tile[][] getMap() {
+        return tileSet;
+    }
+
+    public void loadMapFromID(int mapID) {
+
+        try {
+            File mapFile = new File(System.getProperty("user.dir") + "/Save/Map/" + mapID + ".txt");
+            BufferedReader br_map = new BufferedReader(new FileReader(mapFile));
+            Scanner s_map = new Scanner(br_map.readLine());
+            String sMapSizeX = s_map.next();
+            String sMapSizeY = s_map.next();
+            int mapSizeX = Integer.parseInt(sMapSizeX);
+            int mapSizeY = Integer.parseInt(sMapSizeY);
+
+            s_map = new Scanner(br_map.readLine());
+            Point newStart = new Point(Integer.parseInt(s_map.next()), Integer.parseInt(s_map.next()));
+            startingPoint = newStart;
+
+            tileSet = new tile[mapSizeX][mapSizeY];
+
+            for (int i = 0; i < mapSizeX; i++) {
+                String st = br_map.readLine();
+                Scanner scanInput = new Scanner(st);
+
+                for (int j = 0; j < mapSizeY; j++) {
+                    String temp = scanInput.next();
+
+                    if (!isLetter(temp.charAt(0))) {
+                        String equid = "" + temp.charAt(0) + temp.charAt(1) + temp.charAt(2);
+                        String data = "" + temp.charAt(3) + temp.charAt(4);
+                        // System.out.println(equid + "" + data);      //testing
+                        tileSet[i][j] = new tile();
+                        tileSet[i][j].fill('g', 6, Integer.parseInt(equid), Integer.parseInt(data));
+                    } else {
+                        //System.out.println(temp.charAt(0)+ "" + temp.charAt(1) +"" + temp.charAt(2) + "" + temp.charAt(3) + "" +temp.charAt(4));    //testing
+                        tileSet[i][j] = new tile();
+                        tileSet[i][j].fill(temp.charAt(0), (int) temp.charAt(1), (int) temp.charAt(2), 0);
+                    }
+                }
+            }
+            s_map.close();
+            br_map.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 
     public int getMapID() {
         return mapID;
     }
 
-    public void setMapID(int mapID) {
-        this.mapID = mapID;
+    public void setMapID(int newID) {
+        mapID = newID;
     }
 
     public int getMapX() {
@@ -80,11 +107,5 @@ public class Map {
         return tileSet[0].length;
     }
 
-    public Point getStartingPoint() {
-        return startingPoint;
-    }
-
-    public void setStartingPoint(Point startingPoint) {
-        this.startingPoint = startingPoint;
-    }
+    public tile[][] getState() { return tileSet; }
 }
