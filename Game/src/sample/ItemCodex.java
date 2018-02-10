@@ -23,6 +23,9 @@ public class ItemCodex {
         if (itID <= 3 && itID > 0) {
             player.equipGear((Equipment)i);
         }
+        else if (i.isOneShot()){
+            player.acquireItem(i);
+        }
         else {
             player.heal(itemMap.get(itID));
         }

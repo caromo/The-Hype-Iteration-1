@@ -90,7 +90,15 @@ public class Player extends GameObject {
 
     public void heal(int hpIncrease){
         if (hpIncrease > 0) {
-            if (hpIncrease + Health <= (int)Math.log10((double)(Level*100)) + (int)1.247*(Level * 100)) {
+            if (Level == 1){
+                if (hpIncrease + Health <= 100) {
+                    Health += hpIncrease;
+                }
+                else {
+                    Health = 100;
+                }
+            }
+            else if (hpIncrease + Health <= (int)Math.log10((double)(Level*100)) + (int)1.247*(Level * 100)) {
                 Health += hpIncrease;
             }
             else {
