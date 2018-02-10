@@ -59,10 +59,11 @@ public class Main extends Application {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         map = new Map();
         player = new Player();
-        view = new View(gc, canvas, player, mainStage,mainScene);
-        keyHandler = new KeyHandler(view, this);
-        menuView = new MenuView(player, gc, canvas, mainStage, mainScene);
         mainMenu = new MainMenu(player, gc, canvas, mainStage, mainScene);
+        view = new View(gc, canvas, player, mainMenu);
+        keyHandler = new KeyHandler(view, this);
+        menuView = new MenuView(player, gc, canvas);
+
 
         for (int i = 0; i < 15; i++) {
             player.getInventory().addItembyID(i);

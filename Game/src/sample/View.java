@@ -35,12 +35,16 @@ public class View {
     private int tileSize;
 
     private MenuView menu;
-    public View(GraphicsContext gc, Canvas canvas, Player player, Stage mainStage, Scene mainScene) {
+    private MainMenu mainMenu;
+
+    public View(GraphicsContext gc, Canvas canvas, Player player, MainMenu mainMenu) {
 
         this.gc = gc;
         this.canvas = canvas;
         this.player = player;
-        menu = new MenuView(player, gc, canvas, mainStage, mainScene);
+        menu = new MenuView(player, gc, canvas);
+
+        this.mainMenu = mainMenu;
 
         cameraX = 0; cameraY = 0;
         mapWidth = 100; mapHeight = 100;
@@ -166,7 +170,7 @@ public class View {
         menu.Enter();
     }
     public void P() {
-        //menu.openGameMenu();
+        mainMenu.openGameMenu();
     }
 
     public void moveCameraUp() {

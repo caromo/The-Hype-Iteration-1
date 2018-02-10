@@ -40,7 +40,7 @@ public class MenuView extends ListView{
     private Stage mainStage;
     private Scene mainScene, startingScene, characterCreationScene, gameOverScene;
 
-    public MenuView(Player player, GraphicsContext gc, Canvas canvas, Stage mainStage, Scene mainScene) {
+    public MenuView(Player player, GraphicsContext gc, Canvas canvas) {
         super(player, gc, canvas);
         this.player = player;
 
