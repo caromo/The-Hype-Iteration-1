@@ -34,6 +34,9 @@ public class KeyHandler implements EventHandler<KeyEvent>
             case ENTER:
                 view.Enter();
                 break;
+            case P:
+                view.P();
+                break;
         }
 
         //do stuff

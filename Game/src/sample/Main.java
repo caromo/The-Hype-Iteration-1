@@ -23,7 +23,11 @@ public class Main extends Application {
     private MenuView menuView;
     private boolean menuActive;
 
+    private Stage mainStage;
+    private Scene mainScene;
+
     public static void main(String[] args) {
+
         Player p = new Player();
         tileObject item = new Item(5, 3);
         tileObject damage = new expEffect(2,5, 1);
@@ -43,11 +47,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage theStage) {
-        theStage.setTitle("The H Y P E");
+
+        mainStage = theStage;
+        mainStage.setTitle("The H Y P E");
 
         Group root = new Group();
-        Scene theScene = new Scene(root);
-        theStage.setScene(theScene);
+        mainScene = new Scene(root);
+
 
         Canvas canvas = new Canvas(800, 800);
         root.getChildren().add(canvas);
@@ -57,14 +63,15 @@ public class Main extends Application {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         map = new Map();
         player = new Player();
-        view = new View(gc, canvas, player);
+        view = new View(gc, canvas, player, mainStage,mainScene);
         keyHandler = new KeyHandler(view, this);
-        menuView = new MenuView(player, gc, canvas);
+        menuView = new MenuView(player, gc, canvas, mainStage, mainScene);
 
         for (int i = 0; i < 15; i++) {
             player.getInventory().addItembyID(i);
         }
 
+        menuView.openMainMenu();
 
         canvas.setFocusTraversable(true);
         canvas.setOnKeyPressed(keyHandler);
