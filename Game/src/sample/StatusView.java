@@ -10,8 +10,8 @@ Stats that need to be displayed: health, xp, xp to next level, attackpoints, def
 public class StatusView extends ListView{
     private Player player;
 
-    public StatusView(Player player, GraphicsContext gc, Canvas canvas) {
-        super(player, gc, canvas);
+    public StatusView(Player player, Canvas canvas) {
+        super(player, canvas);
         this.player = player;
 
     }

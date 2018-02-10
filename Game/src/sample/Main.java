@@ -52,20 +52,20 @@ public class Main extends Application {
 
         player = new Player();
         map = new Map(player);
-        mainMenu = new MainMenu(player, gc, canvas, mainStage, mainScene);
+        mainMenu = new MainMenu(player, gc, canvas, mainStage, mainScene, this);
         view = new View(gc, canvas, player, mainMenu);
         keyHandler = new KeyHandler(view, this);
         menuView = new MenuView(player, gc, canvas);
 
 
 
-        newGame("TEST");
 
+        newGame("test");
         //player.getInventory().addItembyID(100);
         //System.out.println(player.getInventory().getNumOfItems());
 
-        saveGame();
-        loadGame();
+        //saveGame();
+        //loadGame();
         mainMenu.openMainMenu();
 
         canvas.setFocusTraversable(true);
@@ -80,7 +80,7 @@ public class Main extends Application {
         theStage.show();
     }
 
-    private void loadGame() {
+    public void loadGame() {
         try {
             File playerFile = new File(System.getProperty("user.dir") + "/Save/Player.txt");
             BufferedReader br_player = new BufferedReader(new FileReader(playerFile));
@@ -305,8 +305,8 @@ public class Main extends Application {
     Creates the Save folder with default maps, player, and inventory
     Will overwrite itself every time new game is selected
      */
-    private void newGame(String name) {
-
+    public void newGame(String name) {
+        System.out.println(System.getProperty("user.dir"));
         //creates the players map folder
         Path path = Paths.get(System.getProperty("user.dir") + "/Save/");
 

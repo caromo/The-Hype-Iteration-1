@@ -7,8 +7,8 @@ import javafx.stage.WindowEvent;
 
 public class QuitGame extends ListView {
 
-    public QuitGame(Player player, GraphicsContext gc, Canvas canvas) {
-        super(player, gc, canvas);
+    public QuitGame(Player player, Canvas canvas) {
+        super(player, canvas);
     }
 
     public void render() {

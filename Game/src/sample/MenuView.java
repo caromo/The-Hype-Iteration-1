@@ -41,16 +41,16 @@ public class MenuView extends ListView{
     private Scene mainScene, startingScene, characterCreationScene, gameOverScene;
 
     public MenuView(Player player, GraphicsContext gc, Canvas canvas) {
-        super(player, gc, canvas);
+        super(player, canvas);
         this.player = player;
 
         this.mainStage = mainStage;
         this.mainScene = mainScene;
 
         menuItems = new ArrayList<ListView>();
-        menuItems.add(new InventoryView(player, gc, canvas));
-        menuItems.add(new StatusView(player, gc, canvas));
-        menuItems.add(new QuitGame(player, gc, canvas));
+        menuItems.add(new InventoryView(player, canvas));
+        menuItems.add(new StatusView(player, canvas));
+        menuItems.add(new QuitGame(player, canvas));
         setNumOfEntries(menuItems.size());
         currentOpenInd = 0;
         open = false;

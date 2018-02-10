@@ -188,5 +188,13 @@ public class Player extends GameObject {
 
     public Image getPlayerSprite() { return playerSprite; }
 
+
+    public int getMaxHealth() {
+        if (getLevel() == 1) {
+            return 100;
+        } else {
+            return (int)Math.log10((double)(Level*100)) + (int)1.247*(Level * 100);
+        }
+    }
     public void setPlayerSprite(Image newSprite) { playerSprite = newSprite; }
 }
