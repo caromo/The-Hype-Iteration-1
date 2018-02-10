@@ -29,6 +29,7 @@ public class tile {
     // Takes in a Decal D, and Scenario Number SN, the specification of that SN, and Equipment Data is applicable
     public void fill(char D, int SN, int spec, int EQdata) {
         decal = D;
+        System.out.println("Decal: " + D + " SN: " + SN + " SPEC " + spec + " EQdata " + EQdata );
         if (SN == 1) { // Area Effect
             holding = new Holding(this, new damageEffect(SN, spec));
         } else if(SN == 2){

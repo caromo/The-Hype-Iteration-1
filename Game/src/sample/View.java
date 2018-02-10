@@ -69,7 +69,7 @@ public class View {
         terrainSprites = new Image[3];
         terrainSprites[0] = getImage(workingDir + "\\src\\sample\\sprites\\grass.png");
         terrainSprites[1] = getImage(workingDir + "\\src\\sample\\sprites\\water.png");
-        terrainSprites[2] = getImage(workingDir + "\\src\\sample\\sprites\\lava.png");
+        terrainSprites[2] = getImage(workingDir + "\\src\\sample\\sprites\\mountains.png");
 
         //playerImg = getImage(workingDir + "\\src\\sample\\sprites\\pikachu.png");
 
@@ -99,10 +99,17 @@ public class View {
         for(int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[0].length; j++) {
 
+
+                if(map[i][j].decal == 'G') {
+                    gc.drawImage(terrainSprites[0], (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
+                } else if(map[i][j].decal == 'W') {
+                    gc.drawImage(terrainSprites[1], (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
+                } else {
+                    gc.drawImage(terrainSprites[2], (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
+                }
+
                 int tileID = map[i][j].getScenario();
-                if(tileID == 0) {//Terrain
-                    gc.drawImage(terrainSprites[((Terrain) map[i][j].holding.getObject()).getTerrainType()], (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
-                } else if(tileID == 1) {//AEHealing
+                if(tileID == 1) {//AEHealing
                     gc.setFill(Color.GREEN);
                     gc.fillRect((i*tileSize)+5, (j*tileSize)+5, tileSize-5, tileSize-5);
 
