@@ -10,6 +10,13 @@ public class tile {
     public tile(tileObject objType) {
         passable = true;
         holding = new Holding(this, objType);
+        if(holding.getObject().getScenario() == 0) {
+            if(((Terrain)holding.getObject()).getTerrainType() == 0) {
+                setPassable(true);
+            } else {
+                setPassable(false);
+            }
+        }
     }
 
     public tile() {}
