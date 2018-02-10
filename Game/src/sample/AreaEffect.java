@@ -4,12 +4,10 @@
 package sample;
 
 
-public class AreaEffect extends tileObject{
+public abstract class AreaEffect extends tileObject{
     private int scenarioNumber;
     private float duration;
-    private int secondsPassed;
     private boolean effectOn;
-    protected damageEffect damageEffects;
 
 
     //Sets the default values for the global variables
@@ -17,8 +15,9 @@ public class AreaEffect extends tileObject{
         super(scenario);
         setEffectOn(false);
       this.duration = duration;
-
     }
+    public abstract void setAmount(int x);//sets the amount of effect per second
+    public abstract void startEf();// starts effect
 
     //Allows for us to use durationin other classes while keeping it private
     public float getDuration(){

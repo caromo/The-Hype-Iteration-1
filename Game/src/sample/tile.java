@@ -19,9 +19,24 @@ public class tile {
         if (occupy != null && holding != null) {
             int scenario = holding.getObject().getScenario();
             tileObject temp = holding.getObject();
-            if(scenario == 1)  {    //Area effect
+            if(scenario == 1)  {    //healing effect
 
-            } else if(scenario == 4) {      //Item
+                ((AreaEffect) temp).setAmount(3);
+                ((AreaEffect) temp).startEf();
+
+
+            } else if(scenario == 2) { //damage effect
+
+                ((AreaEffect) temp).setAmount(3);
+                ((AreaEffect) temp).startEf();
+
+
+            }else if(scenario == 3) { //Experience effect
+                ((AreaEffect) temp).setAmount(3);
+                ((AreaEffect) temp).startEf();
+
+            }
+            else if(scenario == 4) {      //Item
                 occupy.getPlayer().acquireItem((Item)temp);
             }
         }
@@ -29,9 +44,15 @@ public class tile {
     // Takes in a Decal D, and Scenario Number SN, the specification of that SN, and Equipment Data is applicable
     public void fill(char D, int SN, int spec, int EQdata) {
         decal = D;
-        if (SN == 1 || SN == 2 || SN == 3) { // Area Effect
-            holding = new Holding(this, new AreaEffect(SN, spec));
-        } else if (SN == 4) { // Item
+        if (SN == 1) { // healing Effect
+            holding = new Holding(this, new healingEffect(SN, spec));
+        }
+        if (SN == 2) { // damage Effect
+                holding = new Holding(this, new damageEffect(SN, spec));
+        }
+        if (SN == 3) { // exp Effect
+                holding = new Holding(this, new expEffect(SN, spec));
+        }else if (SN == 4) { // Item
             holding = new Holding(this, new Item(SN, spec));
         } else if (SN == 5) { // Map Transition
             holding = new Holding(this, new MapTransition(SN, spec));

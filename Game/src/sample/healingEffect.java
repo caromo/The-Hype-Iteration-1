@@ -7,7 +7,7 @@ public class healingEffect extends AreaEffect{
     private int healingEffect;
     private int secondsPassed;
 //    private Holding holding;
-public void starteffects()
+public void startEf()
 {
     secondsPassed = 0;
     Timer timer = new Timer();
@@ -17,25 +17,24 @@ public void starteffects()
             secondsPassed++;
             System.out.println("Seconds passes " + secondsPassed);
             healing();
+            if(getDuration() < secondsPassed)
+            {
+                timer.cancel();
+            }
 
         }
     }, 0 ,(long) (1000));
 
 }
 
-    public void startH()
-    {
-        starteffects();
-    }
     public void healing(){
         if(holding.getTile().occupy.getPlayer().getHealth() < 100) {
             holding.getTile().occupy.getPlayer().setHealth(holding.getTile().occupy.getPlayer().getHealth() + getHealingEffect());
             System.out.format("%d", holding.getTile().occupy.getPlayer().getHealth());
         }
     }
-    public healingEffect(int scenario, int duration, int healingEffect) {
+    public healingEffect(int scenario, int duration) {
         super(scenario, duration);
-        setHealingEffect(healingEffect);
 
 
     }
@@ -44,7 +43,7 @@ public void starteffects()
         return healingEffect;
     }
 
-    public void setHealingEffect(int healingEffect) {
+    public void setAmount(int healingEffect) {
         this.healingEffect = healingEffect;
     }
 }

@@ -34,13 +34,14 @@ public class Main extends Application {
         Player p = new Player();
 
         tileObject item = new Item(4,5);
-        tileObject damage = new expEffect(2,5, 1);
+//        tileObject damage = new AreaEffect(1, 5);
 
-        tile t = new tile(damage);
+        tile t = new tile(item);
         p.occupy = new Occupy(p, t);
-        t.holding = new Holding(t, damage);
+        t.holding = new Holding(t, item);
+        t.applyEffect();
 
-        ((expEffect) damage).startexp();
+//        ((expEffect) damage).startexp();
         p.getInventory().printInventory();
         launch(args);
     }

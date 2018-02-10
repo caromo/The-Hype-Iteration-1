@@ -8,7 +8,7 @@ public class expEffect extends AreaEffect{
     private boolean On;
     private int secondsPassed;
 
-    public void startexp()
+    public void startEf() // starts timer
     {
         secondsPassed = 0;
         Timer timer = new Timer();
@@ -18,24 +18,26 @@ public class expEffect extends AreaEffect{
                 secondsPassed++;
                 System.out.println("Seconds passes " + secondsPassed);
                 expEf();
+                if(getDuration() < secondsPassed)
+                {
+                    timer.cancel();
+                }
 
 
             }
         }, 0 ,(long) (1000));
 
     }
-    public expEffect(int scenario, int duration, int expEffect) {
+    public expEffect(int scenario, int duration) {
         super(scenario, duration);
-        setexpEffect(expEffect);
-        //startexp();
     }
 
-    public void expEf(){
+    public void expEf(){ //applies effect
         super.holding.getTile().occupy.getPlayer().gainExp(getexpEffect());
         System.out.format("%d", holding.getTile().occupy.getPlayer().getExpToNextLvl());
     }
 
-    public void setexpEffect(int expEffect) {
+    public void setAmount(int expEffect) {
         this.expEffect = expEffect;
     }
 

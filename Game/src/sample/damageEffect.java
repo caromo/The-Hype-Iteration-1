@@ -5,21 +5,13 @@ import java.util.TimerTask;
 
 public class damageEffect extends AreaEffect{
     private int damage;
-    private boolean damOn;
     private int secondsPassed;
 
-    public damageEffect(int scenario, int duration, int damage) {
+    public damageEffect(int scenario, int duration) {
         super(scenario, duration);
     }
 
-    public void startEf()
-    {
-        setOn(true);
-        startEffect();
-        Ef();
-    }
-
-    public void startEffect()
+    public void startEf() // starts timer
     {
         secondsPassed = 0;
         Timer timer = new Timer();
@@ -29,17 +21,21 @@ public class damageEffect extends AreaEffect{
                 secondsPassed++;
                 System.out.print("Seconds passes " + secondsPassed + "\t\t");
                 Ef();
+                if(getDuration() < secondsPassed)
+                {
+                    timer.cancel();
+                }
             }
         }, 0 ,(long) (1000));
     }
 
-    public void Ef()
+    public void Ef()//applies effect
     {
         super.holding.getTile().occupy.getPlayer().takeDamage(getDamageEffect());
         System.out.format("%d", holding.getTile().occupy.getPlayer().getHealth(),"\t");
     }
 
-    public void setDamageEffect(int damageEffect) {
+    public void setAmount(int damageEffect) {
         this.damage = damageEffect;
     }
 
@@ -47,11 +43,4 @@ public class damageEffect extends AreaEffect{
         return damage;
     }
 
-    public void setOn(boolean on) {
-        damOn = on;
-    }
-
-    public boolean isOn() {
-        return damOn;
-    }
 }
