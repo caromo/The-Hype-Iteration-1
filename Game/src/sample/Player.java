@@ -88,6 +88,17 @@ public class Player extends GameObject {
         else Health -= dmg;
     }
 
+    public void heal(int hpIncrease){
+        if (hpIncrease > 0) {
+            if (hpIncrease + Health <= (int)Math.log10((double)(Level*100)) + (int)1.247*(Level * 100)) {
+                Health += hpIncrease;
+            }
+            else {
+                Health = (int)Math.log10((double)(Level*100)) + (int)1.247*(Level * 100);
+            }
+        }
+    }
+
     // Slot 0 = Armor, Slot 1 = Weapon, Slot 2 = Ring
     public void equipGear(Equipment swag) {
         int EquipSlot = swag.getEquipmentID()/100 - 1;

@@ -10,6 +10,13 @@ public class tile {
     public tile(tileObject objType) {
         passable = true;
         holding = new Holding(this, objType);
+        if(holding.getObject().getScenario() == 0) {
+            if(((Terrain)holding.getObject()).getTerrainType() == 0) {
+                setPassable(true);
+            } else {
+                setPassable(false);
+            }
+        }
     }
 
     public tile() {}
@@ -22,10 +29,12 @@ public class tile {
             if(scenario == 1)  {    //Area effect
 
             } else if(scenario == 4) {      //Item
-                occupy.getPlayer().acquireItem((Item)temp);
+                ItemCodex table = new ItemCodex(occupy.getPlayer());
+                table.useItem((Item)temp);
             }
         }
     }
+
     // Takes in a Decal D, and Scenario Number SN, the specification of that SN, and Equipment Data is applicable
     public void fill(char D, int SN, int spec, int EQdata) {
         decal = D;
