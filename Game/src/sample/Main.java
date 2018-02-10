@@ -40,7 +40,6 @@ public class Main extends Application {
         tile t = new tile(item);
         p.occupy = new Occupy(p, t);
         t.holding = new Holding(t, item);
-        t.applyEffect();
 
 //        ((expEffect) damage).startexp();
         p.getInventory().printInventory();
