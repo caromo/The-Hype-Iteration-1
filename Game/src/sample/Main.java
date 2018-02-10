@@ -26,14 +26,14 @@ public class Main extends Application {
     public static void main(String[] args) {
         Player p = new Player();
         tileObject item = new Item(5, 3);
-        tileObject damage = new expEffect(2,5, 1);
+        tileObject damage = new healingEffect(2,5, 1);
 
         tile t = new tile(damage);
         p.occupy = new Occupy(p, t);
         t.holding = new Holding(t, damage);
 //        Item x = new Item(2);
 //        x.giveItem();
-        ((expEffect) damage).startexp();
+        ((healingEffect) damage).startH();
 //        ((Item) item).giveItem();
 
         p.getInventory().printInventory();
