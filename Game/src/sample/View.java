@@ -70,6 +70,9 @@ public class View {
         terrainSprites[0] = getImage(workingDir + "\\src\\sample\\sprites\\grass.png");
         terrainSprites[1] = getImage(workingDir + "\\src\\sample\\sprites\\water.png");
         terrainSprites[2] = getImage(workingDir + "\\src\\sample\\sprites\\lava.png");
+
+        playerImg = getImage(workingDir + "\\src\\sample\\sprites\\pikachu.png");
+
     }
 
     public void render(tile[][] map, Player p) {
@@ -119,6 +122,7 @@ public class View {
             }
         }
 
+        gc.drawImage(playerImg, player.getPosition().x*tileSize+cameraX, player.getPosition().y*tileSize+cameraY, tileSize, tileSize);
 
         //Draw player
 
@@ -177,10 +181,16 @@ public class View {
         if(cameraY >= 0) {//Top edge of board already in view
             return;
         }
+        if((player.getPosition().y+1)*tileSize + cameraY > canvas.getHeight()/2) {//Keep player in center
+            return;
+        }
         cameraY+=tileSize;
     }
     public void moveCameraDown() {
         if(canvas.getHeight()-cameraY >= mapHeight*tileSize) {//Bottom edge of board already in view
+            return;
+        }
+        if((player.getPosition().y+1)*tileSize + cameraY < canvas.getHeight()/2) {//Keep player in center
             return;
         }
         cameraY-=tileSize;
@@ -189,10 +199,16 @@ public class View {
         if(cameraX >= 0) {
             return;
         }
+        if((player.getPosition().x+1)*tileSize + cameraX > canvas.getWidth()/2) {//Keep player in center
+            return;
+        }
         cameraX+=tileSize;
     }
     public void moveCameraRight() {
         if(canvas.getWidth()-cameraX >= mapWidth*tileSize) {//Right edge of board already in view
+            return;
+        }
+        if((player.getPosition().x+1)*tileSize + cameraX < canvas.getWidth()/2) {//Keep player in center
             return;
         }
         cameraX-=tileSize;
