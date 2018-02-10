@@ -6,6 +6,7 @@ public class tile {
     public Holding holding;
     public char decal;
     private Boolean passable;
+    public int SN;
 
     public tile(tileObject objType) {
         passable = true;
@@ -29,6 +30,7 @@ public class tile {
     // Takes in a Decal D, and Scenario Number SN, the specification of that SN, and Equipment Data is applicable
     public void fill(char D, int SN, int spec, int EQdata) {
         decal = D;
+        this.SN = SN;
         System.out.println("Decal: " + D + " SN: " + SN + " SPEC " + spec + " EQdata " + EQdata );
         if (SN == 1) { // Area Effect
             holding = new Holding(this, new damageEffect(SN, spec));

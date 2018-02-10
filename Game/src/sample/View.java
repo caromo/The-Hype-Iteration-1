@@ -108,7 +108,8 @@ public class View {
                     gc.drawImage(terrainSprites[2], (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
                 }
 
-                int tileID = map[i][j].getScenario();
+                int tileID = map[i][j].SN;
+                //System.out.println(tileID);
                 if(tileID == 1) {//AEHealing
                     gc.setFill(Color.GREEN);
                     gc.fillRect((i*tileSize)+5, (j*tileSize)+5, tileSize-5, tileSize-5);
@@ -123,7 +124,7 @@ public class View {
 
                 } else if(tileID == 4) {//Item
                     gc.drawImage(getImage(workingDir + "\\src\\sample\\sprites\\grass.png"), (i*tileSize)+cameraX, (j*tileSize)+cameraY);
-                    gc.drawImage(itemSprites[((Item)map[i][j].holding.getObject()).getID()], (i*tileSize)+5+cameraX, (j*tileSize)+5+cameraY, tileSize, tileSize);
+                    gc.drawImage(itemSprites[1], (i*tileSize)+5+cameraX, (j*tileSize)+5+cameraY, tileSize, tileSize);
                 } else {//MapTransition
 
                 }

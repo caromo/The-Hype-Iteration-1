@@ -85,7 +85,7 @@ public class Map {
                     } else {
                         //System.out.println(temp.charAt(0)+ "" + temp.charAt(1) +"" + temp.charAt(2) + "" + temp.charAt(3) + "" +temp.charAt(4));    //testing
                         tileSet[i][j] = new tile();
-                        tileSet[i][j].fill(temp.charAt(0), (int) temp.charAt(1), (int) temp.charAt(2), 0);
+                        tileSet[i][j].fill(temp.charAt(0), (int) temp.charAt(1)-48, (int) temp.charAt(2)-48, 0);
                     }
                 }
             }
