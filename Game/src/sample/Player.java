@@ -38,7 +38,7 @@ public class Player extends GameObject {
         DefensePoints = 5;
         bag = new Inventory();
         pos = new Point(0,0);
-        gear = new Equipment[EQUIPMENT_SLOTS];
+        gear = new Equipment[]{new Armor(1, 100, 0), new Weapon(1, 200, 0), new Ring(1, 300, 0)};
     }
 
     public Equipment[] getEquipment(){
@@ -116,6 +116,10 @@ public class Player extends GameObject {
 
     public int getLevel() {
         return Level;
+    }
+
+    public void setLevel(int Level){
+        this.Level = Level;
     }
 
     public Inventory getInventory(){
