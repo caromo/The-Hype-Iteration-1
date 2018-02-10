@@ -5,8 +5,8 @@ public class EmptyTile extends tileObject {
         super(0);
     }
 
-//    @Override
-//    public int getEffect() {
-//        return 0;
-//    }
+    @Override
+    public int getEffect() {
+        return 0;
+    }
 }

@@ -9,17 +9,7 @@ public class Item extends tileObject{
         itemID = id;
     }
 
-    //Places this item in the player's inventory
-    public void giveItem() {
-        //Accesses the player inventory through holding->tile->occupy->getInventory.addItem()
-
-        holding.tile.occupy.player.getInventory().addItem(this);
-        holding.remove();
-    }
-
-    public void useItem() {
-
-    }
+    public void useItem() {  }
 
     public int getID() {
         return itemID;
@@ -29,10 +19,15 @@ public class Item extends tileObject{
         System.out.println(itemID);
     }
 
+    @Override
+    public int getEffect() {
+        return itemID;
+    }
+
     public void use() {}
 
 //    @Override
 //    public int getEffect() {
 //        return itemID;
-//    }
+//
 }

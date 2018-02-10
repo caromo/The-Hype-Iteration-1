@@ -28,9 +28,9 @@ public void starteffects()
         starteffects();
     }
     public void healing(){
-        if(holding.tile.occupy.player.getHealth() < 100) {
-            holding.tile.occupy.player.setHealth(holding.tile.occupy.player.getHealth() + getHealingEffect());
-            System.out.format("%d", holding.tile.occupy.player.getHealth());
+        if(holding.getTile().occupy.getPlayer().getHealth() < 100) {
+            holding.getTile().occupy.getPlayer().setHealth(holding.getTile().occupy.getPlayer().getHealth() + getHealingEffect());
+            System.out.format("%d", holding.getTile().occupy.getPlayer().getHealth());
         }
     }
     public healingEffect(int scenario, int duration, int healingEffect) {

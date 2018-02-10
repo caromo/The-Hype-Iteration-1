@@ -16,14 +16,14 @@ public class tile {
 
     //Performs the action associated with the tileObject
     public void applyEffect() {
-        if(holding == null) {
+        if (occupy != null && holding != null) {
+            int scenario = holding.getObject().getScenario();
+            tileObject temp = holding.getObject();
+            if(scenario == 1)  {    //Area effect
 
-        }
-        int scenario = holding.object.getScenario();
-        if(scenario == 1)  {//Area effect
-
-        } else if(scenario == 4) {//Item
-            ((Item) holding.object).giveItem();
+            } else if(scenario == 4) {      //Item
+                occupy.getPlayer().acquireItem((Item)temp);
+            }
         }
     }
     // Takes in a Decal D, and Scenario Number SN, the specification of that SN, and Equipment Data is applicable
@@ -56,76 +56,53 @@ public class tile {
     	switch(decal) {
     	case 'G':
     		st.append("G");
-
     	case 'W':
     		st.append("W");
-
     	case 'M':
     		st.append("M");
-
     	default:
-    		st.append(Integer.toString(((Equipment)holding.object).getEquipmentID()));
-
-    		if(holding.object.areaEffect.getScenarioNumber() < 10)
-    			st.append("0" + Integer.toString(holding.object.areaEffect.getScenarioNumber()));
-
-    		else{
-    			st.append(Integer.toString(holding.object.areaEffect.getScenarioNumber()));
-    		}
+    		st.append(Integer.toString(((Equipment)holding.getObject()).getEquipmentID()));
+    		if(holding.getObject().getEffect() < 10) { st.append("0" + Integer.toString(holding.getObject().getEffect())); }
+    		else{ st.append(Integer.toString(holding.getObject().getEffect()));	}
     		break;
-
     	}
 
     	if(Character.isLetter(st.charAt(0))) {
-    		switch(holding.object.getScenario()) {
+    		switch(holding.getObject().getScenario()) {
     		case 0:
     			st.append("0");
-
     		case 1:
     			st.append("1");
-    			st.append(Integer.toString(holding.object.areaEffect.getScenarioNumber()) + "00");
+    			st.append(Integer.toString(holding.getObject().getEffect()) + "00");
     			break;
-
     		case 2:
     			st.append("2");
-    			st.append(Integer.toString(holding.object.areaEffect.getScenarioNumber()) + "00");
+    			st.append(Integer.toString(holding.getObject().getEffect()) + "00");
     			break;
-
     		case 3:
     			st.append("3");
-    			st.append(Integer.toString(holding.object.areaEffect.getScenarioNumber()) + "00");
+    			st.append(Integer.toString(holding.getObject().getEffect()) + "00");
     			break;
-
     		case 4:
     			st.append("4");
-    			st.append(Integer.toString(holding.object.areaEffect.getScenarioNumber()));
+    			st.append(Integer.toString(holding.getObject().getEffect()));
     			break;
-
     		case 5:
     			st.append("5");
-    			st.append(Integer.toString(holding.object.areaEffect.getScenarioNumber()));
+    			st.append(Integer.toString(holding.getObject().getEffect()));
     			break;
     		}
     	}
-
     	return st.toString();
     }
 
-  //  }
-
     public int getScenario() {
-        if(holding == null) {
-            return -1;
-        }
-        return holding.object.getScenario();
+        if(holding == null) { return -1;  }
+        return holding.getObject().getScenario();
     }
 
-    public boolean getPassable() {
-        return passable;
-    }
+    public boolean getPassable() { return passable;  }
 
-    public void setPassable(Boolean passable) {
-        this.passable = passable;
-    }
+    public void setPassable(Boolean passable) { this.passable = passable;  }
 
 }

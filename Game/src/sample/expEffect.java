@@ -7,7 +7,6 @@ public class expEffect extends AreaEffect{
     private int expEffect;
     private boolean On;
     private int secondsPassed;
-//    private Holding holding;
 
     public void startexp()
     {
@@ -28,12 +27,12 @@ public class expEffect extends AreaEffect{
     public expEffect(int scenario, int duration, int expEffect) {
         super(scenario, duration);
         setexpEffect(expEffect);
-        startexp();
-
+        //startexp();
     }
+
     public void expEf(){
-        super.holding.tile.occupy.player.gainExp(getexpEffect());
-        System.out.format("%d", holding.tile.occupy.player.getExpToNextLvl());
+        super.holding.getTile().occupy.getPlayer().gainExp(getexpEffect());
+        System.out.format("%d", holding.getTile().occupy.getPlayer().getExpToNextLvl());
     }
 
     public void setexpEffect(int expEffect) {

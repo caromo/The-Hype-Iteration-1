@@ -4,17 +4,13 @@ import java.awt.Point;
 
 public class Map {
     private int mapID;
-    private int mapX;
-    private int mapY;
     private tile[][] tileSet;
     private Player myPlayer;
     private Point startingPoint;
 
-    //generic map constructor: makes an empty 10x10 grid
+    //generic map constructor: makes an empty 20x20 grid
     public Map() {
         tileSet = new tile[20][20];
-        mapX = tileSet.length;
-        mapY = tileSet[0].length;
         startingPoint = new Point(10,10);
         for(int i = 0; i < tileSet.length; i++) {
             for(int j = 0; j < tileSet.length; j++) {
@@ -34,8 +30,6 @@ public class Map {
     //map constructor: sets map to one specified by map ID and places player at the starting point
     public Map(int mapID, Player currPlayer, tile[][] map, Point start) {
         tileSet = map;
-        mapX = tileSet.length;
-        mapY = tileSet[0].length;
         startingPoint = start;
         myPlayer = currPlayer;
         moveToStart();
@@ -75,19 +69,11 @@ public class Map {
     }
 
     public int getMapX() {
-        return mapX;
-    }
-
-    public void setMapX(int mapX) {
-        this.mapX = mapX;
+        return tileSet.length;
     }
 
     public int getMapY() {
-        return mapY;
-    }
-
-    public void setMapY(int mapY) {
-        this.mapY = mapY;
+        return tileSet[0].length;
     }
 
     public Point getStartingPoint() {

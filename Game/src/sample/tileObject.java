@@ -16,7 +16,5 @@ public abstract class tileObject {
         this.areaEffect = areaEffect;
     }
 
-    public AreaEffect getAreaEffect() {
-        return areaEffect;
-    }
+    public abstract int getEffect();
 }

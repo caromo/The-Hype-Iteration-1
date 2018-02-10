@@ -21,33 +21,37 @@ public class Main extends Application {
     private Player player;
     private Map map;
     private MenuView menuView;
+    private MainMenu mainMenu;
     private boolean menuActive;
 
+    private Stage mainStage;
+    private Scene mainScene;
+
     public static void main(String[] args) {
+
         Player p = new Player();
-        tileObject item = new Item(5, 3);
-        tileObject damage = new healingEffect(2,5, 1);
+
+        tileObject item = new Item(4,5);
+        tileObject damage = new expEffect(2,5, 1);
 
         tile t = new tile(damage);
         p.occupy = new Occupy(p, t);
         t.holding = new Holding(t, damage);
-//        Item x = new Item(2);
-//        x.giveItem();
-        ((healingEffect) damage).startH();
-//        ((Item) item).giveItem();
 
+        ((expEffect) damage).startexp();
         p.getInventory().printInventory();
-
         launch(args);
     }
 
     @Override
     public void start(Stage theStage) {
-        theStage.setTitle("The H Y P E");
+
+        mainStage = theStage;
+        mainStage.setTitle("The H Y P E");
 
         Group root = new Group();
-        Scene theScene = new Scene(root);
-        theStage.setScene(theScene);
+        mainScene = new Scene(root);
+
 
         Canvas canvas = new Canvas(800, 800);
         root.getChildren().add(canvas);
@@ -57,30 +61,27 @@ public class Main extends Application {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         map = new Map();
         player = new Player();
-        view = new View(gc, canvas, player);
+        mainMenu = new MainMenu(player, gc, canvas, mainStage, mainScene);
+        view = new View(gc, canvas, player, mainMenu);
         keyHandler = new KeyHandler(view, this);
         menuView = new MenuView(player, gc, canvas);
+
 
         for (int i = 0; i < 15; i++) {
             player.getInventory().addItembyID(i);
         }
 
+        mainMenu.openMainMenu();
 
         canvas.setFocusTraversable(true);
         canvas.setOnKeyPressed(keyHandler);
         final long startNanoTime = System.nanoTime();
         new AnimationTimer() {
-
             public void handle(long currentNanoTime) {
                 //double t = (currentNanoTime - startNanoTime) / 1000000000.0;
-
                 view.render(map.getState(), player);
-
-
-
             }
         }.start();
-
         theStage.show();
     }
 

@@ -39,4 +39,9 @@ public class AreaEffect extends tileObject{
     public boolean isEffectOn() {
         return effectOn;
     }
+
+    @Override
+    public int getEffect() {
+        return (int) duration/10;
+    }
 }

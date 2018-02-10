@@ -76,6 +76,10 @@ public class Player extends GameObject {
         }
     }
 
+    public void acquireItem(Item i) {
+        bag.addItem(i);
+    }
+
     public void takeDamage(int damage) {
         int dmg = (DefensePoints - damage);
         if (dmg <= 0) { Health -= 1; }
@@ -153,4 +157,7 @@ public class Player extends GameObject {
         return name;
     }
 
+    public void setName(String newName) {
+        name = newName;
+    }
 }

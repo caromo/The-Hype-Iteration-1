@@ -5,6 +5,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Path;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -33,12 +35,16 @@ public class View {
     private int tileSize;
 
     private MenuView menu;
-    public View(GraphicsContext gc, Canvas canvas, Player player) {
+    private MainMenu mainMenu;
+
+    public View(GraphicsContext gc, Canvas canvas, Player player, MainMenu mainMenu) {
 
         this.gc = gc;
         this.canvas = canvas;
         this.player = player;
         menu = new MenuView(player, gc, canvas);
+
+        this.mainMenu = mainMenu;
 
         cameraX = 0; cameraY = 0;
         mapWidth = 100; mapHeight = 100;
@@ -46,6 +52,7 @@ public class View {
 
         //Get working directory to load textures from
         workingDir = System.getProperty("user.dir");
+        System.out.println(workingDir);
 
         initializeSprites();
 
@@ -90,7 +97,7 @@ public class View {
 
                 int tileID = map[i][j].getScenario();
                 if(tileID == 0) {//Terrain
-                    gc.drawImage(terrainSprites[((Terrain) map[i][j].holding.object).getTerrainType()], (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
+                    gc.drawImage(terrainSprites[((Terrain) map[i][j].holding.getObject()).getTerrainType()], (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
                 } else if(tileID == 1) {//AEHealing
                     gc.setFill(Color.GREEN);
                     gc.fillRect((i*tileSize)+5, (j*tileSize)+5, tileSize-5, tileSize-5);
@@ -105,7 +112,7 @@ public class View {
 
                 } else if(tileID == 4) {//Item
                     gc.drawImage(getImage(workingDir + "\\src\\sample\\sprites\\grass.png"), (i*tileSize)+cameraX, (j*tileSize)+cameraY);
-                    gc.drawImage(itemSprites[((Item)map[i][j].holding.object).getID()], (i*tileSize)+5+cameraX, (j*tileSize)+5+cameraY, tileSize, tileSize);
+                    gc.drawImage(itemSprites[((Item)map[i][j].holding.getObject()).getID()], (i*tileSize)+5+cameraX, (j*tileSize)+5+cameraY, tileSize, tileSize);
                 } else {//MapTransition
 
                 }
@@ -162,7 +169,9 @@ public class View {
     public void Enter() {
         menu.Enter();
     }
-
+    public void P() {
+        mainMenu.openGameMenu();
+    }
 
     public void moveCameraUp() {
         if(cameraY >= 0) {//Top edge of board already in view
