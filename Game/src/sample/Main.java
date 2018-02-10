@@ -10,10 +10,12 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.awt.*;
+import java.io.*;
 import java.nio.file.*;
+import java.util.Scanner;
+
+import static java.lang.Character.isLetter;
 
 public class Main extends Application {
     private View view;
@@ -63,7 +65,7 @@ public class Main extends Application {
         view = new View(gc, canvas, player, mainMenu);
         keyHandler = new KeyHandler(view, this);
         menuView = new MenuView(player, gc, canvas);
-
+loadGame();
 
         for (int i = 0; i < 15; i++) {
             player.getInventory().addItembyID(i);
@@ -81,6 +83,122 @@ public class Main extends Application {
             }
         }.start();
         theStage.show();
+    }
+
+    private void loadGame() {
+        try {
+            File playerFile = new File(System.getProperty("user.dir") + "/Save/Player.txt");
+            BufferedReader br_player = new BufferedReader(new FileReader(playerFile));
+            String mapID = br_player.readLine();
+
+            //Second line of mapfile is the starting position of the player as a point. so read second line of code and call setstartingpoint() in map, it takes
+            //a point as argument so just create a point and set the x and y value of it
+
+            File mapFile = new File(System.getProperty("user.dir") + "/Save/Map/" + mapID +".txt");  //Sample directory
+
+
+            BufferedReader br_map = new BufferedReader(new FileReader(mapFile));        //Size of map might be different, delimeted by space. Change for loop
+            Scanner s_map = new Scanner(br_map.readLine());     //First line of map file
+            String sMapSizeX = s_map.next();
+            String sMapSizeY = s_map.next();
+            int mapSizeX = Integer.parseInt(sMapSizeX);
+            int mapSizeY = Integer.parseInt(sMapSizeY);
+
+            s_map = new Scanner(br_map.readLine());
+
+            Point tempPoint = new Point(Integer.parseInt(s_map.next()), Integer.parseInt(s_map.next()));        //Setting player position
+            map.setStartingPoint(tempPoint);
+
+
+            tile [][] tileTempArray = new tile [mapSizeX][mapSizeY];       //defining array with size mentioned on first line of map
+
+
+            for (int i = 0; i < mapSizeX; i++) {
+                String st = br_map.readLine();
+                Scanner scanInput = new Scanner(st);
+
+                for (int j = 0; j < mapSizeY; j++) {
+                    String temp = scanInput.next();
+
+                    if (!isLetter(temp.charAt(0))){
+                        String equid = "" + temp.charAt(0) + temp.charAt(1) + temp.charAt(2);
+                        String data = "" + temp.charAt(3) + temp.charAt(4);
+                        System.out.println(equid + "" + data);      //testing
+                        tileTempArray [i][j] = new tile();
+                        tileTempArray[i][j].fill('g', 6, Integer.parseInt(equid), Integer.parseInt(data) );
+                    }
+                    else {
+                        System.out.println(temp.charAt(0)+ "" + temp.charAt(1) +"" + temp.charAt(2) + "" + temp.charAt(3) + "" +temp.charAt(4));    //testing
+                        tileTempArray [i][j] = new tile();
+                        tileTempArray[i][j].fill(temp.charAt(0), (int) temp.charAt(1), (int) temp.charAt(2), 0);
+                    }
+                }
+            }
+            br_map.close();
+
+            for(int i=1; i<12;i++){
+                String playerInfo = br_player.readLine();
+                Scanner s = new Scanner(playerInfo);
+                System.out.println(playerInfo); //testing
+
+
+                if (i==1){
+                    map.setMapID(Integer.parseInt(mapID));
+                    player.setPosition(Integer.parseInt(s.next()), Integer.parseInt(s.next()));
+                }
+                if(i==2) {
+                    player.setHealth(Integer.parseInt(playerInfo));
+                }
+                if(i== 3) {
+                    player.setAttackPoints(Integer.parseInt(playerInfo));
+                }
+                if(i== 4) {
+                    player.setDefensePoints(Integer.parseInt(playerInfo));
+                }
+                if(i == 5) {
+                    player.setExperience(Integer.parseInt(playerInfo));
+                }
+                if(i == 6) {
+                    player.setExpToNextLvl(Integer.parseInt(playerInfo));
+                }
+                if (i == 7 ){
+                    player.setLevel(Integer.parseInt(playerInfo));
+                }
+                if (i == 8){
+                    //No spaces on item, first 3 numbers are item and the last two are attributes, this is the line 8,9,10 of playerfile. read it and depending if its a 100,200,300 do IF's to know whether they are armors, sword...
+                    String tempVal = "" +playerInfo.charAt(0) + playerInfo.charAt(1) +playerInfo.charAt(2);
+                    String tempVal2 = "" + playerInfo.charAt(3) + playerInfo.charAt(4);
+                    player.equipGear(new Armor(Integer.parseInt(tempVal)/100, Integer.parseInt(tempVal), Integer.parseInt(tempVal2)));
+                }
+                if (i==9){
+                    String tempVal = "" +playerInfo.charAt(0) + playerInfo.charAt(1) +playerInfo.charAt(2);
+                    String tempVal2 = "" + playerInfo.charAt(3) + playerInfo.charAt(4);
+                    player.equipGear(new Weapon(Integer.parseInt(tempVal)/100, Integer.parseInt(tempVal), Integer.parseInt(tempVal2)));
+                }
+                if (i==10){
+                    String tempVal = "" +playerInfo.charAt(0) + playerInfo.charAt(1) +playerInfo.charAt(2);
+                    String tempVal2 = "" + playerInfo.charAt(3) + playerInfo.charAt(4);
+                    player.equipGear(new Ring(Integer.parseInt(tempVal)/100, Integer.parseInt(tempVal), Integer.parseInt(tempVal2)));
+                }
+
+                if (i == 11 ){
+                    player.setName(playerInfo);
+                }
+            }
+
+            //loads player inventory
+            File inventoryFile = new File(System.getProperty("user.dir") + "/Save/inventory.txt");  //Sample directory
+            BufferedReader br_inventory = new BufferedReader(new FileReader(inventoryFile));
+            String s;
+            while ((s= br_inventory.readLine()) != null )
+            {
+                Scanner scan = new Scanner(s);
+                player.getInventory().addItembyID(Integer.parseInt(s));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void toggleMenu() {
