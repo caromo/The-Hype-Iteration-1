@@ -8,15 +8,15 @@ public class tile {
     private Boolean passable;
 
     public tile(tileObject objType) {
-        passable = true;
+        //passable = true;
         holding = new Holding(this, objType);
-        if(holding.getObject().getScenario() == 0) {
+        /*if(holding.getObject().getScenario() == 0) {
             if(((Terrain)holding.getObject()).getTerrainType() == 0) {
                 setPassable(true);
             } else {
                 setPassable(false);
             }
-        }
+        }*/
     }
 
     public tile() {}
@@ -55,6 +55,17 @@ public class tile {
                 holding = new Holding(this, new Ring(spec / 100, spec, EQdata));
             }
         }
+        
+        switch(decal) {
+        case 'G':
+        	setPassable(true);
+        	
+        case 'M':
+        	setPassable(false);
+        	
+        case 'W':
+        	setPassable(false);
+        }
     }
 
     //Provides the encrypted info of the tile as a String
@@ -65,11 +76,16 @@ public class tile {
     	switch(decal) {
     	case 'G':
     		st.append("G");
+    		break;
     	case 'W':
     		st.append("W");
+    		break;
     	case 'M':
     		st.append("M");
+    		break;
     	default:
+    		//if(holding.getObject() instanceof Terrain) break;
+    			
     		st.append(Integer.toString(((Equipment)holding.getObject()).getEquipmentID()));
     		if(holding.getObject().getEffect() < 10) { st.append("0" + Integer.toString(holding.getObject().getEffect())); }
     		else{ st.append(Integer.toString(holding.getObject().getEffect()));	}
