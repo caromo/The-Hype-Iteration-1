@@ -5,9 +5,16 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.Scanner;
-
 import static java.lang.Character.isLetter;
 
+/*
+Class Map
+Responsibilities: 
+    Keep track of player and tile location
+    Transition into newer maps
+
+Member(s) responsible: Carlo
+*/
 public class Map {
     private tile[][] tileSet;
     private Player myPlayer;
@@ -30,23 +37,21 @@ public class Map {
         myPlayer.setPosition((int)startingPoint.getX(), (int)startingPoint.getY());
     }
 
+    //moves the player and resolves tile event (If passable)
     public void movePlayer(Point dir) {
         if ( tileSet[(int)dir.getX()][(int)dir.getY()].getPassable() ) {
             myPlayer.setPosition( (int)dir.getX(), (int)dir.getY() );
             tileSet[(int)dir.getX()][(int)dir.getY()].applyEffect();
         }
     }
+
+    //loads a new tileset and places the player in the starting point
     public void updateMap(int mapID) {
         loadMapFromID(mapID);
         moveToStart();
     }
-    public Player getPlayer() {
-        return myPlayer;
-    }
-    public tile[][] getMap() {
-        return tileSet;
-    }
 
+    //given an ID, loads a map text file with tileset and starting point information
     public void loadMapFromID(int mapID) {
 
         try {
@@ -91,21 +96,24 @@ public class Map {
         }
     }
 
+    //accessors and/or mutators for Player, tileSet, and mapID
+    public Player getPlayer() {
+        return myPlayer;
+    }
+    public tile[][] getMap() {
+        return tileSet;
+    }
     public int getMapID() {
         return mapID;
     }
-
     public void setMapID(int newID) {
         mapID = newID;
     }
-
     public int getMapX() {
         return tileSet.length;
     }
-
     public int getMapY() {
         return tileSet[0].length;
     }
-
     public tile[][] getState() { return tileSet; }
 }
