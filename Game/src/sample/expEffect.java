@@ -27,7 +27,7 @@ public class expEffect extends AreaEffect{
     public expEffect(int scenario, int duration, int expEffect) {
         super(scenario, duration);
         setexpEffect(expEffect);
-        startexp();
+        //startexp();
     }
 
     public void expEf(){
