@@ -33,29 +33,24 @@ public class MenuView extends ListView{
     private Player player;
     private GraphicsContext gc;
     private Canvas canvas;
-    private Main main;
     private ArrayList<ListView> menuItems;
     private boolean open;
     private int currentOpenInd;
 
     private Stage mainStage;
-    private Scene mainScene;
+    private Scene mainScene, startingScene, characterCreationScene, gameOverScene;
 
-    public MenuView(Player player, Canvas canvas, Main main) {
-        super(player, canvas);
-        this.gc = canvas.getGraphicsContext2D();
+    public MenuView(Player player, GraphicsContext gc, Canvas canvas) {
+        super(player, gc, canvas);
         this.player = player;
-        this.main = main;
 
         this.mainStage = mainStage;
         this.mainScene = mainScene;
 
-        //Contruct menu list and add menu items
         menuItems = new ArrayList<ListView>();
-        menuItems.add(new InventoryView(player, canvas));
-        menuItems.add(new StatusView(player, canvas));
-        menuItems.add(new SaveGameView(player, canvas, main));
-        menuItems.add(new QuitGame(player, canvas));
+        menuItems.add(new InventoryView(player, gc, canvas));
+        menuItems.add(new StatusView(player, gc, canvas));
+        menuItems.add(new QuitGame(player, gc, canvas));
         setNumOfEntries(menuItems.size());
         currentOpenInd = 0;
         open = false;
@@ -97,21 +92,6 @@ public class MenuView extends ListView{
         }
 
     }
-    public void Left() {
-        if(!isOpen()) {
-            return;
-        } else if(isOpen() && !getVisible()){
-            menuItems.get(currentOpenInd).Left();
-        }
-    }
-    public void Right() {
-        if(!isOpen()) {
-            return;
-        } else if(isOpen() && !getVisible()){
-            menuItems.get(currentOpenInd).Right();
-        }
-    }
-
     public void Escape() {
 
         if(!isOpen()) {//Menu Not Open, open
@@ -126,6 +106,7 @@ public class MenuView extends ListView{
         }
         //setOpen(false);
     }
+
     public void Enter() {
         if(!isOpen()) {
             return;

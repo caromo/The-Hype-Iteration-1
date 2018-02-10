@@ -11,11 +11,11 @@ public class InventoryView extends ListView{
     private Player player;
     private Canvas canvas;
     private GraphicsContext gc;
-    public InventoryView(Player player, Canvas canvas) {
-        super(player, canvas);
+    public InventoryView(Player player, GraphicsContext gc, Canvas canvas) {
+        super(player, gc, canvas);
         this.player = player;
         this.canvas = canvas;
-        this.gc = canvas.getGraphicsContext2D();
+        this.gc = gc;
 
     }
 

@@ -28,7 +28,7 @@ public class Player extends GameObject {
         DefensePoints = 5;
         bag = new Inventory();
         pos = new Point(x,y);
-        gear = new Equipment[]{new Armor(1, 100, 0), new Weapon(1, 200, 0), new Ring(1, 300, 0)};
+        gear = new Equipment[]{new Armor(1, 100, 0), new Weapon(2, 200, 0), new Ring(3, 300, 0)};
     }
     public Player(){
         this.name = "H Y P E - B O Y";
@@ -40,7 +40,7 @@ public class Player extends GameObject {
         DefensePoints = 5;
         bag = new Inventory();
         pos = new Point(0,0);
-        gear = new Equipment[]{new Armor(1, 100, 0), new Weapon(1, 200, 0), new Ring(1, 300, 0)};
+        gear = new Equipment[]{new Armor(1, 100, 0), new Weapon(2, 200, 0), new Ring(3, 300, 0)};
     }
 
     public Equipment[] getEquipment(){
@@ -135,13 +135,6 @@ public class Player extends GameObject {
         // Increase other stats here as needed.
     }
 
-    public int getMaxHealth() {
-        if (getLevel() == 1) {
-            return 100;
-        } else {
-            return (int)Math.log10((double)(Level*100)) + (int)1.247*(Level * 100);
-        }
-    }
     public int getLevel() {
         return Level;
     }
