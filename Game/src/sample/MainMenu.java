@@ -17,7 +17,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.effect.*;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -37,15 +39,28 @@ public class MainMenu {
 
     public void openMainMenu()
     {
-        //Main Menu (first scene)
         GridPane mainMenu = new GridPane();
-        mainMenu.setAlignment(Pos.CENTER);
+        mainMenu.setAlignment(Pos.TOP_CENTER);
         mainMenu.setVgap(40);
-        startingScene = new Scene( mainMenu , 512 , 512);
+
+        GridPane titleArea = new GridPane();
+        titleArea.setAlignment(Pos.CENTER);
+        //titleArea.setVgap(40);
+
+        //Main Menu (first scene)
+        BorderPane borderPane = new BorderPane();
+        borderPane.setCenter(mainMenu);
+        titleArea.setPrefHeight(200);
+        borderPane.setTop(titleArea);
+
+
+        startingScene = new Scene( borderPane , 512 , 512);
         mainStage.setScene( startingScene );
 
+
+
         //Set Background Image
-        File file = new File(System.getProperty("user.dir") + "\\src\\sample\\sprites\\lava.png");
+        File file = new File(System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\lava.png");
         Image i = null;
         //System.out.println(System.getProperty("user.dir"));
         try {
@@ -57,17 +72,35 @@ public class MainMenu {
         BackgroundImage im = new BackgroundImage(i, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 new BackgroundSize(100, 100, false, false, false, true));
 
-        mainMenu.setBackground(new Background(im));
+        borderPane.setBackground(new Background(im));
+
+        //Main Menu title text
+        Text gameTitle = new Text("THE SEARCH FOR THE HYPE");
+        Bloom bloom = new Bloom();
+        bloom.setThreshold(0.5);
+        DropShadow titleShadow = new DropShadow();
+        titleShadow.setOffsetY(3.0f);
+        titleShadow.setColor(Color.BLACK);
+        gameTitle.setEffect(bloom);
+        gameTitle.setCache(true);
+        //gameTitle.setX(50.0f);
+        //gameTitle.setY(0.0f);
+        gameTitle.setFill(Color.WHITE);
+        gameTitle.setFont(Font.font(null, FontWeight.BOLD, 32));
+
+
 
         //Three main menu buttons
         Button newGameButton = new Button("New Game");
         newGameButton.setOnAction(e -> characterCreation());//mainStage.setScene(characterCreationScene));
 
         Button loadGameButton = new Button("Load Game");
-        //loadGameButton.setOnAction(e -> main.loadGame()); // Change to Load() later
+        loadGameButton.setOnAction(e -> mainStage.setScene(mainScene)); // Change to Load() later
 
         Button exitGameButton = new Button("Exit Game");
         exitGameButton.setOnAction(e -> mainStage.close());
+
+        titleArea.add( gameTitle,0,0);
 
         mainMenu.add( newGameButton, 0,0);
         mainMenu.add( loadGameButton, 0,1);
@@ -81,8 +114,8 @@ public class MainMenu {
         GridPane characterCreation = new GridPane();
         characterCreationScene = new Scene( characterCreation, 512, 512);
         characterCreation.setAlignment(Pos.CENTER);
-        characterCreation.setVgap(40);
-        characterCreation.setHgap(100);
+        characterCreation.setVgap(30);
+        characterCreation.setHgap(90);
         characterCreation.setBackground(new Background(new BackgroundFill(Color.ROSYBROWN, CornerRadii.EMPTY, Insets.EMPTY)));
 
         mainStage.setScene(characterCreationScene);
@@ -91,16 +124,16 @@ public class MainMenu {
         TextField nameInput = new TextField();
 
         // Labels for character creation
-        Label chooseName = new Label("Select a character name");
+        Label chooseName = new Label("Type your character's name");
         chooseName.setFont(Font.font("Verdana",14));
         Label chooseSprite = new Label("Select a character class");
         chooseSprite.setFont(Font.font("Verdana",14));
-        Label chooseColor = new Label("Select a character color");
+        Label chooseColor = new Label("Select a stat advantage");
         chooseColor.setFont(Font.font("Verdana",14));
 
         // Character Creation Choices
-        ChoiceBox characterColor = new ChoiceBox(FXCollections.observableArrayList("Blue","Green","Red"));
-        characterColor.setValue("Blue"); //Setting a default choice
+        ChoiceBox characterStatAdvantage = new ChoiceBox(FXCollections.observableArrayList("Health","Attack","Defense"));
+        characterStatAdvantage.setValue("Health"); //Setting a default choice
 
         ChoiceBox characterSprites = new ChoiceBox(FXCollections.observableArrayList("Pikachu","Sword","Potion 1"));
         characterSprites.setValue("Pikachu"); //Setting a default choice
@@ -135,12 +168,17 @@ public class MainMenu {
         // Continue Button
         Button characterCreationContinueButton = new Button("Continue");
         characterCreationContinueButton.setOnAction(e -> {
-            //player.setColor(characterClass.getValue()); // to get users choice after he clicks continue
+            if(characterStatAdvantage.getValue() == "Health")
+                player.setHealth(120);
+            else if(characterStatAdvantage.getValue() == "Attack")
+                player.setAttackPoints(8);
+            else if(characterStatAdvantage.getValue() == "Defense")
+                player.setDefensePoints(8);
             player.setName(nameInput.getText());
-            //main.newGame(nameInput.getText());
             player.setPlayerSprite(imageView.getImage());
-            //newGame(playerName,playerColor);
-            System.out.println(player.getName());
+            //TODO Apply advantage to player if we are keeping that feature
+            //newGame(playerName);
+            //System.out.println(player.getName());
             mainStage.setScene(mainScene);
         });
 
@@ -151,7 +189,7 @@ public class MainMenu {
         characterCreation.add(characterSprites,1,3);
         characterCreation.add(chooseColor,1,4);
         //characterCreation.add(label,2,3);
-        characterCreation.add(characterColor,1,5);
+        characterCreation.add(characterStatAdvantage,1,5);
         characterCreation.add(characterCreationContinueButton,2,7);
         characterCreation.add(characterCreationBackButton,0,7);
         characterCreation.add(imageView,2,3);
