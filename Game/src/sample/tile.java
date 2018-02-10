@@ -66,11 +66,11 @@ public class tile {
     	default:
     		st.append(Integer.toString(((Equipment)holding.object).getEquipmentID()));
 
-    		if(holding.object.getEffect() < 10)
-    			st.append("0" + Integer.toString(holding.object.getEffect()));
+    		if(holding.object.areaEffect.getScenarioNumber() < 10)
+    			st.append("0" + Integer.toString(holding.object.areaEffect.getScenarioNumber()));
 
     		else{
-    			st.append(Integer.toString(holding.object.getEffect()));
+    			st.append(Integer.toString(holding.object.areaEffect.getScenarioNumber()));
     		}
     		break;
 
@@ -83,27 +83,27 @@ public class tile {
 
     		case 1:
     			st.append("1");
-    			st.append(Integer.toString(holding.object.getEffect()) + "00");
+    			st.append(Integer.toString(holding.object.areaEffect.getScenarioNumber()) + "00");
     			break;
 
     		case 2:
     			st.append("2");
-    			st.append(Integer.toString(holding.object.getEffect()) + "00");
+    			st.append(Integer.toString(holding.object.areaEffect.getScenarioNumber()) + "00");
     			break;
 
     		case 3:
     			st.append("3");
-    			st.append(Integer.toString(holding.object.getEffect()) + "00");
+    			st.append(Integer.toString(holding.object.areaEffect.getScenarioNumber()) + "00");
     			break;
 
     		case 4:
     			st.append("4");
-    			st.append(Integer.toString(holding.object.getEffect()));
+    			st.append(Integer.toString(holding.object.areaEffect.getScenarioNumber()));
     			break;
 
     		case 5:
     			st.append("5");
-    			st.append(Integer.toString(holding.object.getEffect()));
+    			st.append(Integer.toString(holding.object.areaEffect.getScenarioNumber()));
     			break;
     		}
     	}
