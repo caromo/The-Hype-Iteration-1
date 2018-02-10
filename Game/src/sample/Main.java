@@ -21,6 +21,7 @@ public class Main extends Application {
     private Player player;
     private Map map;
     private MenuView menuView;
+    private MainMenu mainMenu;
     private boolean menuActive;
 
     private Stage mainStage;
@@ -61,12 +62,13 @@ public class Main extends Application {
         view = new View(gc, canvas, player, mainStage,mainScene);
         keyHandler = new KeyHandler(view, this);
         menuView = new MenuView(player, gc, canvas, mainStage, mainScene);
+        mainMenu = new MainMenu(player, gc, canvas, mainStage, mainScene);
 
         for (int i = 0; i < 15; i++) {
             player.getInventory().addItembyID(i);
         }
 
-        menuView.openMainMenu();
+        mainMenu.openMainMenu();
 
         canvas.setFocusTraversable(true);
         canvas.setOnKeyPressed(keyHandler);
