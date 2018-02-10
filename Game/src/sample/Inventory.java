@@ -11,7 +11,10 @@ import java.util.Collections;
 public class Inventory {
     private final int MAX_SIZE = 100;
     private ArrayList<Item> items = new ArrayList<>(MAX_SIZE);
-    public Inventory() {}
+    private EquipmentCodex eCodex;
+    public Inventory() {
+    	eCodex = new EquipmentCodex();
+    }
 
     private int compareID(Item a, Item b) {
         if (a.getID() < b.getID()) return 1;
