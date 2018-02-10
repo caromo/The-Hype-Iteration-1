@@ -14,8 +14,8 @@ public class MapTransition extends tileObject{
         return destination;
     }
 
-    @Override
-    public int getEffect() {
-        return destination;
-    }
+//    @Override
+//    public int getEffect() {
+//        return destination;
+//    }
 }

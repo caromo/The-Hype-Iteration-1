@@ -25,7 +25,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         Player p = new Player();
-        tileObject item = new Item(5);
+        tileObject item = new Item(5, 3);
         tileObject damage = new expEffect(2,5, 1);
 
         tile t = new tile(damage);

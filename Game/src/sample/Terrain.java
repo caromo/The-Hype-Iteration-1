@@ -7,10 +7,10 @@ public class Terrain extends tileObject {
         terrainType = type;
     }
 
-    @Override
-    public int getEffect() {
-        return 0;
-    }
+//    @Override
+//    public int getEffect() {
+//        return 0;
+//    }
 
     public int getTerrainType() {
         return terrainType;
