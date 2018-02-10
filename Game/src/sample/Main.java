@@ -74,16 +74,9 @@ public class Main extends Application {
             public void handle(long currentNanoTime) {
                 //double t = (currentNanoTime - startNanoTime) / 1000000000.0;
 
-<<<<<<< HEAD
-
                 view.render(map.getState(), player);
 
-=======
-                
 
-                view.render(map.getMap(), player);
-
->>>>>>> new_branch
 
             }
         }.start();
