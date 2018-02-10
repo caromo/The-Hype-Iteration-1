@@ -125,6 +125,12 @@ public class ListView {
     public void Down() {
 
     }
+    public void Left() {
+
+    }
+    public void Right() {
+
+    }
     public void Enter() {
 
     }

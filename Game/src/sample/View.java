@@ -23,6 +23,7 @@ public class View {
     private GraphicsContext gc;
     private Canvas canvas;
     private Player player;
+    private Main main;
 
     private int cameraX, cameraY;
     private String workingDir;
@@ -36,13 +37,16 @@ public class View {
 
     private MenuView menu;
     private MainMenu mainMenu;
+    private HUDView hud;
 
-    public View(GraphicsContext gc, Canvas canvas, Player player, MainMenu mainMenu) {
+    public View(Canvas canvas, Player player, MainMenu mainMenu, Main main) {
 
-        this.gc = gc;
+        this.gc = canvas.getGraphicsContext2D();
         this.canvas = canvas;
         this.player = player;
-        menu = new MenuView(player, gc, canvas);
+        this.main = main;
+        menu = new MenuView(player, canvas, main);
+        hud = new HUDView(canvas, player);
 
         this.mainMenu = mainMenu;
 
@@ -81,7 +85,11 @@ public class View {
 
         renderMap(map, p);
         renderGrid(map);
-        menu.render();
+        if(menu.isOpen()) {
+            menu.render();
+        } else {//Only render these views if menu is closed
+            hud.render();
+        }
         gc = canvas.getGraphicsContext2D();
     }
 
@@ -170,12 +178,18 @@ public class View {
         }
     }
     public void Right() {
-        if(menu.isOpen()) { return; }
-        moveCameraRight();
+        if(menu.isOpen()) {
+            menu.Right();
+        } else {
+            moveCameraRight();
+        }
     }
     public void Left() {
-        if(menu.isOpen()) { return; }
-        moveCameraLeft();
+        if(menu.isOpen()) {
+            menu.Left();
+        } else {
+            moveCameraLeft();
+        }
     }
     public void Escape() {
         menu.Escape();
@@ -222,6 +236,10 @@ public class View {
             return;
         }
         cameraX-=tileSize;
+    }
+
+    public boolean getMenuOpen() {
+        return menu.isOpen();
     }
 
 

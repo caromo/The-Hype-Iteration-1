@@ -18,18 +18,30 @@ public class HUDView {
 
     public void render() {
         renderHealthBar();
+        renderExpBar();
     }
 
     private void renderHealthBar() {
+        float healthPercentage = (float)player.getHealth()/(float)player.getMaxHealth();
+
         //Background
         gc.setFill(Color.GRAY);
         gc.fillRect(canvas.getWidth()-220, 15, 200, 20);
 
-        float healthPercentage = (float)player.getHealth()/(float)player.getMaxHealth();
-
         //Healthbar
         gc.setFill(Color.RED);
         gc.fillRect(canvas.getWidth()-220, 15, 200*healthPercentage, 20);
+    }
+    private void renderExpBar() {
+        float expPercentage = (float)player.getExperience()/(float)(player.getExperience()+player.getExpToNextLvl());
+
+        //Background
+        gc.setFill(Color.GRAY);
+        gc.fillRect(canvas.getWidth()-220, 35, 200, 10);
+
+        //Exp bar
+        gc.setFill(Color.BLUE);
+        gc.fillRect(canvas.getWidth()-220, 35, 200*expPercentage, 10);
     }
 
 

@@ -40,16 +40,16 @@ public class MenuView extends ListView{
     private Stage mainStage;
     private Scene mainScene, startingScene, characterCreationScene, gameOverScene;
 
-    public MenuView(Player player, GraphicsContext gc, Canvas canvas) {
+    public MenuView(Player player, Canvas canvas, Main main) {
         super(player, canvas);
         this.player = player;
 
-        this.mainStage = mainStage;
-        this.mainScene = mainScene;
+        this.gc = canvas.getGraphicsContext2D();
 
         menuItems = new ArrayList<ListView>();
         menuItems.add(new InventoryView(player, canvas));
         menuItems.add(new StatusView(player, canvas));
+        menuItems.add(new SaveGameView(player, canvas, main));
         menuItems.add(new QuitGame(player, canvas));
         setNumOfEntries(menuItems.size());
         currentOpenInd = 0;
@@ -91,6 +91,21 @@ public class MenuView extends ListView{
             cursorDown();
         }
 
+    }
+
+    public void Left() {
+        if(!isOpen()) {
+            return;
+        } else if(isOpen() && !getVisible()){
+            menuItems.get(currentOpenInd).Left();
+        }
+    }
+    public void Right() {
+        if(!isOpen()) {
+            return;
+        } else if(isOpen() && !getVisible()){
+            menuItems.get(currentOpenInd).Right();
+        }
     }
     public void Escape() {
 
