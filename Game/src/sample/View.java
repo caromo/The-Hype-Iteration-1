@@ -165,7 +165,9 @@ public class View {
     public void Enter() {
         menu.Enter();
     }
-    public void P() { menu.openGameMenu(); }
+    public void P() {
+        //menu.openGameMenu();
+    }
 
     public void moveCameraUp() {
         if(cameraY >= 0) {//Top edge of board already in view
