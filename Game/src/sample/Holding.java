@@ -1,3 +1,6 @@
+//Members Responsible: Callum, Daniel, Danilo
+//Exists to create an association between a Tile and a tileObject
+
 package sample;
 
 public class Holding {

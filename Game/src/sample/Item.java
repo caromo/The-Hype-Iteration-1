@@ -24,7 +24,7 @@ public class Item extends tileObject{
     public int getID() {
         return itemID;
     }
-    
+
     public void printID() {
         System.out.println(itemID);
     }

@@ -24,6 +24,19 @@ public class Main extends Application {
     private boolean menuActive;
 
     public static void main(String[] args) {
+        Player p = new Player();
+        tileObject item = new Item(5);
+        tileObject damage = new expEffect(2,5, 1);
+
+        tile t = new tile(damage);
+        p.occupy = new Occupy(p, t);
+        t.holding = new Holding(t, damage);
+//        Item x = new Item(2);
+//        x.giveItem();
+        ((expEffect) damage).startexp();
+//        ((Item) item).giveItem();
+
+        p.getInventory().printInventory();
 
         launch(args);
     }
@@ -61,9 +74,16 @@ public class Main extends Application {
             public void handle(long currentNanoTime) {
                 //double t = (currentNanoTime - startNanoTime) / 1000000000.0;
 
+<<<<<<< HEAD
 
                 view.render(map.getState(), player);
 
+=======
+                
+
+                view.render(map.getMap(), player);
+
+>>>>>>> new_branch
 
             }
         }.start();
