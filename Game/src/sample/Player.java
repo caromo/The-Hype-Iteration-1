@@ -2,6 +2,7 @@ package sample;
 
 import java.lang.Math;
 import java.awt.Point;
+import javafx.scene.image.Image;
 
 public class Player extends GameObject {
     private int Health;
@@ -10,6 +11,7 @@ public class Player extends GameObject {
     private int Experience;
     private int ExpToNextLvl;
     private int Level;
+    private Image playerSprite;
     private String name;
     private Inventory bag;
     private Equipment[] gear;
@@ -84,6 +86,25 @@ public class Player extends GameObject {
         int dmg = (DefensePoints - damage);
         if (dmg <= 0) { Health -= 1; }
         else Health -= dmg;
+    }
+
+    public void heal(int hpIncrease){
+        if (hpIncrease > 0) {
+            if (Level == 1){
+                if (hpIncrease + Health <= 100) {
+                    Health += hpIncrease;
+                }
+                else {
+                    Health = 100;
+                }
+            }
+            else if (hpIncrease + Health <= (int)Math.log10((double)(Level*100)) + (int)1.247*(Level * 100)) {
+                Health += hpIncrease;
+            }
+            else {
+                Health = (int)Math.log10((double)(Level*100)) + (int)1.247*(Level * 100);
+            }
+        }
     }
 
     // Slot 0 = Armor, Slot 1 = Weapon, Slot 2 = Ring
@@ -164,4 +185,8 @@ public class Player extends GameObject {
     public void setName(String newName) {
         name = newName;
     }
+
+    public Image getPlayerSprite() { return playerSprite; }
+
+    public void setPlayerSprite(Image newSprite) { playerSprite = newSprite; }
 }

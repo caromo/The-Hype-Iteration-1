@@ -11,7 +11,10 @@ import java.util.Collections;
 public class Inventory {
     private final int MAX_SIZE = 100;
     private ArrayList<Item> items = new ArrayList<>(MAX_SIZE);
-    public Inventory() {}
+    private EquipmentCodex eCodex;
+    public Inventory() {
+    	eCodex = new EquipmentCodex();
+    }
 
     private int compareID(Item a, Item b) {
         if (a.getID() < b.getID()) return 1;
@@ -77,19 +80,6 @@ public class Inventory {
     // Sorts the arrayList
     public void sort() {
         Collections.sort(items,this::compareID);
-        return;
-    }
-
-    // Operation useItem(itemID:int)
-    // Calls use on item based off it's index in the arraylist and indicates and removes it from inventory
-    public void useItem(int index) {
-        if (index >= items.size() || index < 0) {
-            // Internal notice that item does not exist
-        }
-        else {
-            items.get(index).useItem();
-            items.remove(index);
-        }
         return;
     }
 

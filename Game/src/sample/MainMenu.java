@@ -100,12 +100,13 @@ public class MainMenu {
         ChoiceBox characterColor = new ChoiceBox(FXCollections.observableArrayList("Blue","Green","Red"));
         characterColor.setValue("Blue"); //Setting a default choice
 
-        ChoiceBox characterSprites = new ChoiceBox(FXCollections.observableArrayList("Sword","Potion 1","Pikachu"));
-        characterSprites.setValue("Sword"); //Setting a default choice
+        ChoiceBox characterSprites = new ChoiceBox(FXCollections.observableArrayList("Pikachu","Sword","Potion 1"));
+        characterSprites.setValue("Pikachu"); //Setting a default choice
 
-        Image characterSprite1 = new Image("file:" + System.getProperty("user.dir") + "\\src\\sample\\sprites\\sword.png");
-        Image characterSprite2 = new Image("file:" + System.getProperty("user.dir") + "\\src\\sample\\sprites\\potion.png");
-        Image characterSprite3 = new Image("file:" + System.getProperty("user.dir") + "\\src\\sample\\sprites\\pikachu.png");
+        Image characterSprite1 = new Image("file:" + System.getProperty("user.dir") + "\\src\\sample\\sprites\\pikachu.png");
+        Image characterSprite2 = new Image("file:" + System.getProperty("user.dir") + "\\src\\sample\\sprites\\sword.png");
+        Image characterSprite3 = new Image("file:" + System.getProperty("user.dir") + "\\src\\sample\\sprites\\potion.png");
+
         ImageView imageView = new ImageView(characterSprite1);
 
         Image[] spriteChoices = {characterSprite1,characterSprite2,characterSprite3};
@@ -134,6 +135,7 @@ public class MainMenu {
         characterCreationContinueButton.setOnAction(e -> {
             //player.setColor(characterClass.getValue()); // to get users choice after he clicks continue
             player.setName(nameInput.getText());
+            player.setPlayerSprite(imageView.getImage());
             //newGame(playerName,playerColor);
             System.out.println(player.getName());
             mainStage.setScene(mainScene);

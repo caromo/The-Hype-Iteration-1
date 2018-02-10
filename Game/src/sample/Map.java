@@ -9,7 +9,7 @@ public class Map {
     private Point startingPoint;
 
     //generic map constructor: makes an empty 20x20 grid
-    public Map() {
+    public Map(Player player) {
         tileSet = new tile[20][20];
         startingPoint = new Point(10,10);
         for(int i = 0; i < tileSet.length; i++) {
@@ -26,6 +26,8 @@ public class Map {
         tileSet[7][7] = new tile(new Terrain(2));
         tileSet[7][6] = new tile(new Terrain(2));
         tileSet[6][7] = new tile(new Terrain(2));
+
+        this.myPlayer = player;
     }
     //map constructor: sets map to one specified by map ID and places player at the starting point
     public Map(int mapID, Player currPlayer, tile[][] map, Point start) {
@@ -40,6 +42,8 @@ public class Map {
     }
 
     public void movePlayer(Point dir) {
+
+        if(dir.x < 0 || dir.y < 0 || dir.x >= getMapX() || dir.y >= getMapY()) { return; } //Make sure position is in bounds
         if (tileSet[dir.x][dir.y].getPassable()) {
             myPlayer.setPosition(dir.x, dir.y);
             tileSet[dir.x][dir.y].applyEffect();

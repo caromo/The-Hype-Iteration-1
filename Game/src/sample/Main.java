@@ -24,6 +24,7 @@ public class Main extends Application {
     private Map map;
     private MenuView menuView;
     private MainMenu mainMenu;
+    private PlayerController pc;
     private boolean menuActive;
 
     private Stage mainStage;
@@ -62,13 +63,15 @@ public class Main extends Application {
         menuActive = false;
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        map = new Map();
+
         player = new Player();
+        map = new Map(player);
         mainMenu = new MainMenu(player, gc, canvas, mainStage, mainScene);
         view = new View(gc, canvas, player, mainMenu);
         keyHandler = new KeyHandler(view, this);
         menuView = new MenuView(player, gc, canvas);
-loadGame();
+        pc = new PlayerController(map);
+        loadGame();
 
         for (int i = 0; i < 15; i++) {
             player.getInventory().addItembyID(i);
@@ -78,6 +81,7 @@ loadGame();
 
         canvas.setFocusTraversable(true);
         canvas.setOnKeyPressed(keyHandler);
+        mainScene.setOnKeyPressed(pc);
         final long startNanoTime = System.nanoTime();
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
