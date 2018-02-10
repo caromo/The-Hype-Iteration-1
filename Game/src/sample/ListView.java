@@ -21,9 +21,9 @@ public class ListView {
     private int cursorPos;
     private int numOfEntries;
     private int maxEntriesDisplayed;
-    public ListView(Player player, GraphicsContext gc, Canvas canvas) {
+    public ListView(Player player, Canvas canvas) {
         this.player = player;
-        this.gc = gc;
+        this.gc = canvas.getGraphicsContext2D();
         this.canvas = canvas;
         visible = false;
         entryHeight = 100;
@@ -123,6 +123,12 @@ public class ListView {
 
     }
     public void Down() {
+
+    }
+    public void Left() {
+
+    }
+    public void Right() {
 
     }
     public void Enter() {

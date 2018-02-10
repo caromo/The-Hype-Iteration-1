@@ -23,6 +23,7 @@ public class View {
     private GraphicsContext gc;
     private Canvas canvas;
     private Player player;
+    private Main main;
 
     private int cameraX, cameraY;
     private String workingDir;
@@ -36,13 +37,16 @@ public class View {
 
     private MenuView menu;
     private MainMenu mainMenu;
+    private HUDView hud;
 
-    public View(GraphicsContext gc, Canvas canvas, Player player, MainMenu mainMenu) {
 
-        this.gc = gc;
+    public View(Canvas canvas, Player player, MainMenu mainMenu, Main main) {
+
+        this.gc = canvas.getGraphicsContext2D();
         this.canvas = canvas;
         this.player = player;
-        menu = new MenuView(player, gc, canvas);
+        menu = new MenuView(player, canvas, main);
+        hud = new HUDView(canvas, player);
 
         this.mainMenu = mainMenu;
 
@@ -71,17 +75,21 @@ public class View {
         terrainSprites[1] = getImage(workingDir + "\\src\\sample\\sprites\\water.png");
         terrainSprites[2] = getImage(workingDir + "\\src\\sample\\sprites\\lava.png");
 
-        //playerImg = getImage(workingDir + "\\src\\sample\\sprites\\pikachu.png");
+        playerImg = getImage(workingDir + "\\src\\sample\\sprites\\pikachu.png");
 
 
     }
 
     public void render(tile[][] map, Player p) {
-        //gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-        renderMap(map, p);
-        renderGrid(map);
-        menu.render();
+        renderMap(map, p); //Render map tiles
+        renderGrid(map); //Grid that separates tiles
+        if(menu.isOpen()) {
+            menu.render();
+        } else {//Only render these views if menu is closed
+            hud.render();
+        }
+
         gc = canvas.getGraphicsContext2D();
     }
 
@@ -131,7 +139,7 @@ public class View {
     }
 
 
-
+    //Make image object from filepath
     private Image getImage(String fp) {
         File file = new File(fp);
         Image image = new Image(file.toURI().toString());
@@ -162,12 +170,18 @@ public class View {
         }
     }
     public void Right() {
-        if(menu.isOpen()) { return; }
-        moveCameraRight();
+        if(menu.isOpen()) {
+            menu.Right();
+        } else {
+            moveCameraRight();
+        }
     }
     public void Left() {
-        if(menu.isOpen()) { return; }
-        moveCameraLeft();
+        if(menu.isOpen()) {
+            menu.Left();
+        } else {
+            moveCameraLeft();
+        }
     }
     public void Escape() {
         menu.Escape();
@@ -216,5 +230,8 @@ public class View {
         cameraX-=tileSize;
     }
 
+    public boolean getMenuOpen() {
+        return menu.isOpen();
+    }
 
 }

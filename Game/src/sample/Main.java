@@ -66,9 +66,9 @@ public class Main extends Application {
         player = new Player();
         map = new Map(player);
         mainMenu = new MainMenu(player, gc, canvas, mainStage, mainScene);
-        view = new View(gc, canvas, player, mainMenu);
+        view = new View(canvas, player, mainMenu, this);
         keyHandler = new KeyHandler(view, this);
-        menuView = new MenuView(player, gc, canvas);
+
         pc = new PlayerController(map);
         loadGame();
 
@@ -85,6 +85,7 @@ public class Main extends Application {
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
                 //double t = (currentNanoTime - startNanoTime) / 1000000000.0;
+                pc.setGamePaused(view.getMenuOpen());
                 view.render(map.getState(), player);
             }
         }.start();
@@ -228,7 +229,7 @@ public class Main extends Application {
     }
 
 
-    public void saveGame(Player player, Map map) {
+    public void saveGame() {
         saveMap(map.getMapID(), map, player);
         try {
             PrintWriter pw = new PrintWriter(System.getProperty("user.dir") + "/Save/Player.txt");

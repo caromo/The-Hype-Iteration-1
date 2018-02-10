@@ -135,6 +135,13 @@ public class Player extends GameObject {
         // Increase other stats here as needed.
     }
 
+    public int getMaxHealth() {
+        if (getLevel() == 1) {
+            return 100;
+        } else {
+            return (int)Math.log10((double)(Level*100)) + (int)1.247*(Level * 100);
+        }
+    }
     public int getLevel() {
         return Level;
     }

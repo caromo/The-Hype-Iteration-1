@@ -44,10 +44,10 @@ public class Map {
     public void movePlayer(Point dir) {
 
         if(dir.x < 0 || dir.y < 0 || dir.x >= getMapX() || dir.y >= getMapY()) { return; } //Make sure position is in bounds
-        if (tileSet[dir.x][dir.y].getPassable()) {
+        //if (tileSet[dir.x][dir.y].getPassable()) {
             myPlayer.setPosition(dir.x, dir.y);
             tileSet[dir.x][dir.y].applyEffect();
-        }
+        //}
     }
     private void updateMap(int NewmapID, tile[][] neoSet, Point neoStart) {
         startingPoint = neoStart;
