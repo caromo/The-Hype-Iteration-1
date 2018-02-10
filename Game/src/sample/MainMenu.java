@@ -27,10 +27,12 @@ public class MainMenu {
     private Stage mainStage;
     private Scene mainScene, startingScene, characterCreationScene, gameOverScene;
     private Player player;
-    public MainMenu(Player player, GraphicsContext gc, Canvas canvas, Stage mainStage, Scene mainScene) {
+    private Main main;
+    public MainMenu(Player player, GraphicsContext gc, Canvas canvas, Stage mainStage, Scene mainScene, Main main) {
         this.player = player;
         this.mainStage = mainStage;
         this.mainScene = mainScene;
+        this.main = main;
     }
 
     public void openMainMenu()
@@ -62,7 +64,7 @@ public class MainMenu {
         newGameButton.setOnAction(e -> characterCreation());//mainStage.setScene(characterCreationScene));
 
         Button loadGameButton = new Button("Load Game");
-        loadGameButton.setOnAction(e -> mainStage.setScene(mainScene)); // Change to Load() later
+        //loadGameButton.setOnAction(e -> main.loadGame()); // Change to Load() later
 
         Button exitGameButton = new Button("Exit Game");
         exitGameButton.setOnAction(e -> mainStage.close());
@@ -135,6 +137,7 @@ public class MainMenu {
         characterCreationContinueButton.setOnAction(e -> {
             //player.setColor(characterClass.getValue()); // to get users choice after he clicks continue
             player.setName(nameInput.getText());
+            //main.newGame(nameInput.getText());
             player.setPlayerSprite(imageView.getImage());
             //newGame(playerName,playerColor);
             System.out.println(player.getName());

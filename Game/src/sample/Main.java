@@ -14,7 +14,7 @@ import java.awt.*;
 import java.io.*;
 import java.nio.file.*;
 import java.util.Scanner;
-
+import java.lang.Double;
 import static java.lang.Character.isLetter;
 
 public class Main extends Application {
@@ -31,18 +31,6 @@ public class Main extends Application {
     private Scene mainScene;
 
     public static void main(String[] args) {
-
-        Player p = new Player();
-
-        tileObject item = new Item(4,5);
-//        tileObject damage = new AreaEffect(1, 5);
-
-        tile t = new tile(item);
-        p.occupy = new Occupy(p, t);
-        t.holding = new Holding(t, item);
-
-//        ((expEffect) damage).startexp();
-        p.getInventory().printInventory();
         launch(args);
     }
 
@@ -65,17 +53,20 @@ public class Main extends Application {
 
         player = new Player();
         map = new Map(player);
-        mainMenu = new MainMenu(player, gc, canvas, mainStage, mainScene);
-        view = new View(canvas, player, mainMenu, this);
+        mainMenu = new MainMenu(player, gc, canvas, mainStage, mainScene, this);
+        view = new View(gc, canvas, player, mainMenu);
         keyHandler = new KeyHandler(view, this);
+        menuView = new MenuView(player, gc, canvas);
+
 
         pc = new PlayerController(map);
-        loadGame();
 
-        for (int i = 0; i < 15; i++) {
-            player.getInventory().addItembyID(i);
-        }
+        newGame("test");
+        //player.getInventory().addItembyID(100);
+        //System.out.println(player.getInventory().getNumOfItems());
 
+        //saveGame();
+        //loadGame();
         mainMenu.openMainMenu();
 
         canvas.setFocusTraversable(true);
@@ -85,14 +76,13 @@ public class Main extends Application {
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
                 //double t = (currentNanoTime - startNanoTime) / 1000000000.0;
-                pc.setGamePaused(view.getMenuOpen());
                 view.render(map.getState(), player);
             }
         }.start();
         theStage.show();
     }
 
-    private void loadGame() {
+    public void loadGame() {
         try {
             File playerFile = new File(System.getProperty("user.dir") + "/Save/Player.txt");
             BufferedReader br_player = new BufferedReader(new FileReader(playerFile));
@@ -104,49 +94,12 @@ public class Main extends Application {
             File mapFile = new File(System.getProperty("user.dir") + "/Save/Map/" + mapID +".txt");  //Sample directory
 
 
-            BufferedReader br_map = new BufferedReader(new FileReader(mapFile));        //Size of map might be different, delimeted by space. Change for loop
-            Scanner s_map = new Scanner(br_map.readLine());     //First line of map file
-            String sMapSizeX = s_map.next();
-            String sMapSizeY = s_map.next();
-            int mapSizeX = Integer.parseInt(sMapSizeX);
-            int mapSizeY = Integer.parseInt(sMapSizeY);
-
-            s_map = new Scanner(br_map.readLine());
-
-            Point tempPoint = new Point(Integer.parseInt(s_map.next()), Integer.parseInt(s_map.next()));        //Setting player position
-            map.setStartingPoint(tempPoint);
-
-
-            tile [][] tileTempArray = new tile [mapSizeX][mapSizeY];       //defining array with size mentioned on first line of map
-
-
-            for (int i = 0; i < mapSizeX; i++) {
-                String st = br_map.readLine();
-                Scanner scanInput = new Scanner(st);
-
-                for (int j = 0; j < mapSizeY; j++) {
-                    String temp = scanInput.next();
-
-                    if (!isLetter(temp.charAt(0))){
-                        String equid = "" + temp.charAt(0) + temp.charAt(1) + temp.charAt(2);
-                        String data = "" + temp.charAt(3) + temp.charAt(4);
-                        System.out.println(equid + "" + data);      //testing
-                        tileTempArray [i][j] = new tile();
-                        tileTempArray[i][j].fill('g', 6, Integer.parseInt(equid), Integer.parseInt(data) );
-                    }
-                    else {
-                        System.out.println(temp.charAt(0)+ "" + temp.charAt(1) +"" + temp.charAt(2) + "" + temp.charAt(3) + "" +temp.charAt(4));    //testing
-                        tileTempArray [i][j] = new tile();
-                        tileTempArray[i][j].fill(temp.charAt(0), (int) temp.charAt(1), (int) temp.charAt(2), 0);
-                    }
-                }
-            }
-            br_map.close();
+            map.loadMapFromID(Integer.parseInt(mapID));
 
             for(int i=1; i<12;i++){
                 String playerInfo = br_player.readLine();
                 Scanner s = new Scanner(playerInfo);
-                System.out.println(playerInfo); //testing
+                // System.out.println(playerInfo); //testing
 
 
                 if (i==1){
@@ -199,7 +152,8 @@ public class Main extends Application {
             String s;
             while ((s= br_inventory.readLine()) != null )
             {
-                Scanner scan = new Scanner(s);
+              //  Scanner scan = new Scanner(s);
+                System.out.println("the line is " +s);
                 player.getInventory().addItembyID(Integer.parseInt(s));
             }
 
@@ -235,30 +189,72 @@ public class Main extends Application {
             PrintWriter pw = new PrintWriter(System.getProperty("user.dir") + "/Save/Player.txt");
             PrintWriter iw = new PrintWriter(System.getProperty("user.dir") + "/Save/Inventory.txt");
 
+            double x = player.getPosition().getX();
+            double y = player.getPosition().getY();
+            int xx = (int)x;
+            int yy = (int)y;
             //write Player.txt file, format is "Game Index" on drive
             pw.println(map.getMapID());
-            pw.println(player.getPosition().getX() + " " + player.getPosition().getY());
+            pw.println(xx + " " + yy);
             pw.println(player.getHealth());
             pw.println(player.getAttackPoints());
             pw.println(player.getDefensePoints());
             pw.println(player.getExperience());
             pw.println(player.getExpToNextLvl());
             pw.println(player.getLevel());
+
+            //Testing writing
+            /*
+            System.out.println(map.getMapID());
+            System.out.println(xx + " " + yy);
+            System.out.println(player.getHealth());
+            System.out.println(player.getAttackPoints());
+            System.out.println(player.getDefensePoints());
+            System.out.println(player.getExperience());
+            System.out.println(player.getExpToNextLvl());
+            System.out.println(player.getLevel());
+            */
+
             Equipment eq[] = player.getEquipment();
-            pw.println(eq[0].getEquipmentID() + eq[0].supplyBenefit());
-            pw.println(eq[1].getEquipmentID() + eq[1].supplyBenefit());
-            pw.println(eq[2].getEquipmentID() + eq[2].supplyBenefit());
+
+            if(eq[0].supplyBenefit() < 10){
+                pw.println(eq[0].getEquipmentID() + "0" + eq[0].supplyBenefit());
+                //System.out.println(eq[0].getEquipmentID() + "0" + eq[0].supplyBenefit());
+            }
+            if(eq[1].supplyBenefit() < 10){
+                pw.println(eq[1].getEquipmentID() + "0" + eq[1].supplyBenefit());
+                //System.out.println(eq[1].getEquipmentID() + "0" + eq[1].supplyBenefit());
+            }
+            if(eq[2].supplyBenefit() < 10){
+                pw.println(eq[2].getEquipmentID() + "0" + eq[2].supplyBenefit());
+                //System.out.println(eq[2].getEquipmentID() + "0" + eq[2].supplyBenefit());
+            }
+
+            else {
+                pw.println(eq[0].getEquipmentID() + eq[0].supplyBenefit());
+
+
+                pw.println(eq[1].getEquipmentID() + eq[1].supplyBenefit());
+
+
+                pw.println(eq[2].getEquipmentID() + eq[2].supplyBenefit());
+            }
+
             pw.println(player.getName());
 
 
             pw.close();
 
             //write Inventory.txt one itemID per line
+
+
             Item[] temp = player.getInventory().getItems();
+            System.out.println ("THE INVENTOYR LENGTH IS: " + player.getInventory().getNumOfItems());
             for (int i = 0; i < player.getInventory().getNumOfItems(); i++) {
-                iw.print(temp[i].getID());
-                iw.println();
+                //System.out.println(temp[i].getID());
+                iw.println(temp[i].getID());
             }
+            iw.close();
 
 
         } catch (Exception e) {
@@ -268,27 +264,35 @@ public class Main extends Application {
 
     //Saves the current Map
     public void saveMap(int MapID, Map map, Player player) {
-                    int mapSizeX = map.getMapX();
-                    int mapSizeY = map.getMapY();
-                    tile[][] tmp = map.getState();
+        int mapSizeX = map.getMapX();
+        int mapSizeY = map.getMapY();
+        tile[][] tmp = map.getState();
 
 
-                    try {
-                        //opens the map file based on MapID for writing
-                        PrintWriter pw = new PrintWriter(System.getProperty("user.dir") + "/Save" + "/Maps" + "/" + Integer.toString(MapID));
+        try {
+            //opens the map file based on MapID for writing
+            PrintWriter pw = new PrintWriter(System.getProperty("user.dir") + "/Save" + "/Map" + "/" + Integer.toString(MapID)
+                    + ".txt");
 
-                        //write first line map size: X Y
-                        pw.println(mapSizeX + " " + mapSizeY);
-                        //write second line with startingPosition
-                        pw.println(player.getPosition().getX() + " " + player.getPosition().getY());
+            //write first line map size: X Y
+            pw.println(mapSizeX + " " + mapSizeY);
+            //System.out.println(mapSizeX + " " + mapSizeY);
+            //write second line with startingPosition
+            pw.println((int)player.getPosition().getX() + " " + (int)player.getPosition().getY());
+            //System.out.println((int)player.getPosition().getX() + " " + (int)player.getPosition().getY());
 
-                        //Iterating through the map printing tiles in 5 digits
-                        for (int i = 0; i < mapSizeX; i++) {
-                            for (int j = 0; j < mapSizeY; j++) {
-                                pw.print(tmp[i][j].spill());
-                                pw.print(" ");
-                            }
-                            pw.println();
+           // System.out.println(tmp[0][0]);
+
+            //Iterating through the map printing tiles in 5 digits
+            for (int i = 0; i < mapSizeX; i++) {
+                for (int j = 0; j < mapSizeY; j++) {
+                    pw.print(tmp[i][j].spill());
+                    pw.print(" ");
+                    //System.out.print(tmp[i][j].spill() + " ");
+                }
+                pw.println();
+
+                //System.out.println();
 
             }
             pw.close();
@@ -303,8 +307,8 @@ public class Main extends Application {
     Creates the Save folder with default maps, player, and inventory
     Will overwrite itself every time new game is selected
      */
-    private void newGame(String name) {
-
+    public void newGame(String name) {
+        System.out.println(System.getProperty("user.dir"));
         //creates the players map folder
         Path path = Paths.get(System.getProperty("user.dir") + "/Save/");
 
@@ -321,7 +325,7 @@ public class Main extends Application {
             e.printStackTrace();
         }
 
-        // loadGame();
+        loadGame();
 
         // System.exit(0);
     }

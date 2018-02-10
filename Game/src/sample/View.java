@@ -23,7 +23,6 @@ public class View {
     private GraphicsContext gc;
     private Canvas canvas;
     private Player player;
-    private Main main;
 
     private int cameraX, cameraY;
     private String workingDir;
@@ -37,16 +36,13 @@ public class View {
 
     private MenuView menu;
     private MainMenu mainMenu;
-    private HUDView hud;
 
+    public View(GraphicsContext gc, Canvas canvas, Player player, MainMenu mainMenu) {
 
-    public View(Canvas canvas, Player player, MainMenu mainMenu, Main main) {
-
-        this.gc = canvas.getGraphicsContext2D();
+        this.gc = gc;
         this.canvas = canvas;
         this.player = player;
-        menu = new MenuView(player, canvas, main);
-        hud = new HUDView(canvas, player);
+        menu = new MenuView(player, gc, canvas);
 
         this.mainMenu = mainMenu;
 
@@ -73,23 +69,19 @@ public class View {
         terrainSprites = new Image[3];
         terrainSprites[0] = getImage(workingDir + "\\src\\sample\\sprites\\grass.png");
         terrainSprites[1] = getImage(workingDir + "\\src\\sample\\sprites\\water.png");
-        terrainSprites[2] = getImage(workingDir + "\\src\\sample\\sprites\\lava.png");
+        terrainSprites[2] = getImage(workingDir + "\\src\\sample\\sprites\\mountains.png");
 
-        playerImg = getImage(workingDir + "\\src\\sample\\sprites\\pikachu.png");
+        //playerImg = getImage(workingDir + "\\src\\sample\\sprites\\pikachu.png");
 
 
     }
 
     public void render(tile[][] map, Player p) {
+        //gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-        renderMap(map, p); //Render map tiles
-        renderGrid(map); //Grid that separates tiles
-        if(menu.isOpen()) {
-            menu.render();
-        } else {//Only render these views if menu is closed
-            hud.render();
-        }
-
+        renderMap(map, p);
+        renderGrid(map);
+        menu.render();
         gc = canvas.getGraphicsContext2D();
     }
 
@@ -107,10 +99,18 @@ public class View {
         for(int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[0].length; j++) {
 
-                int tileID = map[i][j].getScenario();
-                if(tileID == 0) {//Terrain
-                    gc.drawImage(terrainSprites[((Terrain) map[i][j].holding.getObject()).getTerrainType()], (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
-                } else if(tileID == 1) {//AEHealing
+
+                if(map[i][j].decal == 'G') {
+                    gc.drawImage(terrainSprites[0], (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
+                } else if(map[i][j].decal == 'W') {
+                    gc.drawImage(terrainSprites[1], (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
+                } else {
+                    gc.drawImage(terrainSprites[2], (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
+                }
+
+                int tileID = map[i][j].SN;
+                //System.out.println(tileID);
+                if(tileID == 1) {//AEHealing
                     gc.setFill(Color.GREEN);
                     gc.fillRect((i*tileSize)+5, (j*tileSize)+5, tileSize-5, tileSize-5);
 
@@ -124,7 +124,7 @@ public class View {
 
                 } else if(tileID == 4) {//Item
                     gc.drawImage(getImage(workingDir + "\\src\\sample\\sprites\\grass.png"), (i*tileSize)+cameraX, (j*tileSize)+cameraY);
-                    gc.drawImage(itemSprites[((Item)map[i][j].holding.getObject()).getID()], (i*tileSize)+5+cameraX, (j*tileSize)+5+cameraY, tileSize, tileSize);
+                    gc.drawImage(itemSprites[1], (i*tileSize)+5+cameraX, (j*tileSize)+5+cameraY, tileSize, tileSize);
                 } else {//MapTransition
 
                 }
@@ -139,7 +139,7 @@ public class View {
     }
 
 
-    //Make image object from filepath
+
     private Image getImage(String fp) {
         File file = new File(fp);
         Image image = new Image(file.toURI().toString());
@@ -170,18 +170,12 @@ public class View {
         }
     }
     public void Right() {
-        if(menu.isOpen()) {
-            menu.Right();
-        } else {
-            moveCameraRight();
-        }
+        if(menu.isOpen()) { return; }
+        moveCameraRight();
     }
     public void Left() {
-        if(menu.isOpen()) {
-            menu.Left();
-        } else {
-            moveCameraLeft();
-        }
+        if(menu.isOpen()) { return; }
+        moveCameraLeft();
     }
     public void Escape() {
         menu.Escape();
@@ -230,8 +224,5 @@ public class View {
         cameraX-=tileSize;
     }
 
-    public boolean getMenuOpen() {
-        return menu.isOpen();
-    }
 
 }
