@@ -8,11 +8,12 @@ import java.util.ArrayList;
 public class Sprites {
     private ArrayList<Image> itemSprites;
     private ArrayList<Image> terrainSprites;
-    private Image playerImg;
+    private Image mapTransitionSprite;
+
 
     private String workingDir;
     public Sprites() {
-        workingDir = System.getProperty("user.dir");
+        workingDir = System.getProperty("user.dir")+"\\Game"x;
         //System.out.println(workingDir);
         itemSprites = new ArrayList<Image>();
         terrainSprites = new ArrayList<Image>();
@@ -22,18 +23,36 @@ public class Sprites {
     private void initializeSprites() {
         //Load item textures
 
-        itemSprites.add(getImage(workingDir + "\\Game\\src\\sample\\sprites\\potion2.png"));
-        itemSprites.add(getImage(workingDir + "\\Game\\src\\sample\\sprites\\sword.png"));
+        itemSprites.add(getImage(workingDir + "\\src\\sample\\sprites\\potion2.png"));
+        itemSprites.add(getImage(workingDir + "\\src\\sample\\sprites\\sword.png"));
 
         //Load terrain textures
 
-        terrainSprites.add(getImage(workingDir + "\\Game\\src\\sample\\sprites\\grass.png"));
-        terrainSprites.add(getImage(workingDir + "\\Game\\src\\sample\\sprites\\water.png"));
-        terrainSprites.add(getImage(workingDir + "\\Game\\src\\sample\\sprites\\mountains.png"));
+        terrainSprites.add(getImage(workingDir + "\\src\\sample\\sprites\\grass.png"));
+        terrainSprites.add(getImage(workingDir + "\\src\\sample\\sprites\\water.png"));
+        terrainSprites.add(getImage(workingDir + "\\src\\sample\\sprites\\mountains.png"));
+
+        mapTransitionSprite = getImage(workingDir + "\\src\\sample\\sprites\\door.png");
 
         //playerImg = getImage(workingDir + "\\src\\sample\\sprites\\pikachu.png");
 
 
+    }
+
+    public Image getTileObjectSprite(int SN, int spec) {
+        return mapTransitionSprite;
+        /*
+        if(SN == 1) {//AEHealing
+            //Return AEHEaling decal
+        } else if(SN == 2) {//AEDamage
+
+        } else if(SN == 3) {//AEExperience
+
+        } else if(SN == 4) {//Item
+            return getItemImage(spec);
+        } else {//Map transition
+            return mapTransitionSprite;
+        }*/
     }
 
     public Image getItemImage(int itemID) {

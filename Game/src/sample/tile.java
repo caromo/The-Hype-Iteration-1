@@ -8,6 +8,7 @@ public class tile {
     public char decal;
     private Boolean passable;
     public int SN;
+    public int spec;
     private boolean areaEffect = false;
     protected int instantKill = 20; //idk
 
@@ -54,6 +55,7 @@ public class tile {
     public void fill(char D, int SN, int spec, int EQdata) {
         decal = D;
         this.SN = SN;
+        this.spec = spec;
         System.out.println("Decal: " + D + " SN: " + SN + " SPEC " + spec + " EQdata " + EQdata );
         if (SN == 1) { // Area Effect
             holding = new Holding(this, new damageEffect(SN, spec));
