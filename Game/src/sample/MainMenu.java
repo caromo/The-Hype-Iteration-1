@@ -21,13 +21,18 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.effect.*;
 import javafx.stage.Stage;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
+import javafx.geometry.VPos;
 
 import java.io.File;
 import java.net.MalformedURLException;
 
 public class MainMenu {
     private Stage mainStage;
-    private Scene mainScene, startingScene, characterCreationScene, gameOverScene;
+    private Scene mainScene, startingScene, characterCreationScene, gameOverScene, introScene;
     private Player player;
     private Main main;
     public MainMenu(Player player, GraphicsContext gc, Canvas canvas, Stage mainStage, Scene mainScene, Main main) {
@@ -179,7 +184,8 @@ public class MainMenu {
             //TODO Apply advantage to player if we are keeping that feature
             //newGame(playerName);
             //System.out.println(player.getName());
-            mainStage.setScene(mainScene);
+            //mainStage.setScene(mainScene);
+            openIntroMenu();
         });
 
         // Adding buttons and text to characterCreation
@@ -194,6 +200,43 @@ public class MainMenu {
         characterCreation.add(characterCreationBackButton,0,7);
         characterCreation.add(imageView,2,3);
         //characterCreation.getChildren().add(imageView);
+
+    }
+
+    private void openIntroMenu() {
+
+        Text introText = new Text("Welcome to the world of the HYPE");
+        introText.setFont(Font.font(50));
+        introText.setTextOrigin(VPos.TOP);
+        introText.setFill(Color.RED);
+        Pane introMenu = new Pane(introText);
+        //introMenu.setPrefSize(512,512);
+
+        introScene = new Scene(introMenu,512,512);
+        double sceneWidth = introScene.getWidth();
+        double msgWidth = introText.getLayoutBounds().getWidth();
+
+        mainStage.setScene(introScene);
+
+        // Sets the time frame for text scroll
+        KeyValue initialKeyValue = new KeyValue(introText.translateXProperty(), sceneWidth);
+        KeyFrame initialFrame = new KeyFrame(Duration.ZERO, initialKeyValue);
+        KeyValue endKeyValue = new KeyValue(introText.translateXProperty(), -1.0 * msgWidth);
+        KeyFrame endFrame = new KeyFrame(Duration.seconds(5), endKeyValue);
+        Timeline timeline = new Timeline(initialFrame, endFrame);
+
+        timeline.setCycleCount(Timeline.INDEFINITE); // Or change to an int value
+        timeline.play();
+
+        Button startGameButton = new Button("Start");
+        startGameButton.setAlignment(Pos.CENTER);
+        startGameButton.setLayoutX(185);
+        startGameButton.setLayoutY(200);
+        startGameButton.setMinSize(140,10);
+        startGameButton.setStyle("-fx-font-size: 4em; "); //CSS
+        startGameButton.setOnAction(e -> mainStage.setScene(mainScene)); // TODO Change to newGame()
+
+        introMenu.getChildren().add(startGameButton);
     }
 
     public void openGameMenu() {
