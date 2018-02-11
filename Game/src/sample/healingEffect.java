@@ -16,19 +16,25 @@ public void startEf()
 {
     secondsPassed = 0;
     Timer timer = new Timer();
-    timer.schedule(new TimerTask() {
-        @Override
-        public void run() {
-            if(getDuration() < secondsPassed || !healingEffect.super.isEffectOn()) {
-                timer.cancel();
+    try {
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (getDuration() < secondsPassed || !healingEffect.super.isEffectOn()) {
+                    timer.cancel();
+                }
+                secondsPassed++;
+                System.out.println("Seconds passes " + secondsPassed);
+                healing();
+
+
             }
-            secondsPassed++;
-            System.out.println("Seconds passes " + secondsPassed);
-            healing();
-
-
-        }
-    }, 0 ,(long) (1000));
+        }, 0, (long) (1000));
+    }
+    catch(Exception e)
+    {
+        e.printStackTrace();
+    }
 
 }
 
