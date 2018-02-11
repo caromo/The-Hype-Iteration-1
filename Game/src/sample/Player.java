@@ -134,33 +134,40 @@ public class Player extends GameObject {
         if (EquipSlot == 0) { // Meaning the player equipped an Armor Piece
             DefensePoints -= gear[EquipSlot].supplyBenefit();
             DefensePoints += swag.supplyBenefit();
+            if (gear[EquipSlot].getEquipmentID() > 100 && gear[EquipSlot].getEquipmentID() < 200){
+                gear[EquipSlot] = swag;
+            }
         }
         else if (EquipSlot == 1) { // Meaning the player equipped a Weapon
             AttackPoints -= gear[EquipSlot].supplyBenefit();
             AttackPoints += swag.supplyBenefit();
+            if (gear[EquipSlot].getEquipmentID() > 200 && gear[EquipSlot].getEquipmentID() < 300){
+                gear[EquipSlot] = swag;
+            }
         }
         else if (EquipSlot == 2) { // Meaning the player equipped a Ring
             Health -= gear[EquipSlot].supplyBenefit();
             Health += swag.supplyBenefit();
+            if (gear[EquipSlot].getEquipmentID() > 300 && gear[EquipSlot].getEquipmentID() < 400){
+                gear[EquipSlot] = swag;
+            }
         }
-        if (gear[EquipSlot].getEquipmentID()!=000) {
-            bag.addItem(gear[EquipSlot]);
-        }
-        gear[EquipSlot] = swag;
     }
 
     public void unequipGear(int EquipSlot){
         if (EquipSlot == 0) { // Meaning the player wants to unequip an Armor Piece
             DefensePoints -= gear[EquipSlot].supplyBenefit();
+            gear[EquipSlot] = new Armor(1, 100, 0);
         }
         else if (EquipSlot == 1) { // Meaning the player wants to unequip a Weapon
             AttackPoints -= gear[EquipSlot].supplyBenefit();
+            gear[EquipSlot] = new Weapon(2, 200, 0);
         }
         else if (EquipSlot == 2) { // Meaning the player wants to unequip a Ring
             Health -= gear[EquipSlot].supplyBenefit();
+            gear[EquipSlot] = new Ring(3, 300, 0);
         }
         bag.addItem(gear[EquipSlot]);
-        gear[EquipSlot] = new Ring(0,000,0);
     }
 
     private void LevelUp()
