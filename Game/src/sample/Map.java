@@ -57,6 +57,9 @@ public class Map {
     }
 
     public void saveMap() {
+        if(tileSet[0][0] == null){
+            return;
+        }
         int currID = mapID;
         int mapSizeX = tileSet.length;
         int mapSizeY = tileSet[0].length;
