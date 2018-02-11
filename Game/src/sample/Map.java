@@ -39,6 +39,9 @@ public class Map {
 
     //moves the player and resolves tile event (If passable)
     public void movePlayer(Point dir) {
+        if ((int)dir.getX() < 0 || (int)dir.getY() < 0 || (int)dir.getX() > tileset.length || (int)dir.getY() > tileset[0].length()){
+            return;
+        }
         if ( tileSet[(int)dir.getX()][(int)dir.getY()].getPassable() ) {
             myPlayer.setPosition( (int)dir.getX(), (int)dir.getY() );
             tileSet[(int)dir.getX()][(int)dir.getY()].applyEffect();
