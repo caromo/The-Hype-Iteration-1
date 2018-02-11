@@ -27,7 +27,7 @@ public class tile {
     public tile() {}
 
     //Performs the action associated with the tileObject
-    public void applyEffect() {
+    public int applyEffect() {
 
         if (occupy != null && holding != null) {
             System.out.println("APPLY2");
@@ -35,22 +35,24 @@ public class tile {
             tileObject temp = holding.getObject();
             if(scenario == 1 || scenario == 2 || scenario == 3)  {    //Area effect
                 System.out.println("APPLY");
-                ((AreaEffect) temp).setEffectOn(true);
                 ((AreaEffect) temp).setDuration(20);
                 ((AreaEffect) temp).setAmount(3);
                 ((AreaEffect) temp).startEf();
-                setAreaEffect(true);
+
+                return -1;
             }
             else if(scenario == 4) {      //Item
                 occupy.getPlayer().acquireItem((Item)temp);
+                return -1;
             }
-            else if(scenario == instantKill) {
-                ((AreaEffect) temp).fatality();
+            else if (scenario == 5) {
+                return ((MapTransition) temp).getDestination();
             }
         }
+        return -1;
     }
     // Takes in a Decal D, and Scenario Number SN, the specification of that SN, and Equipment Data is applicable
-    public void fill(char D, int SN, int spec, int EQdata) {
+    public void fill(char D, int SN, int spec, int EQdata, int oneShot) {
         decal = D;
         this.SN = SN;
         this.spec = spec;
@@ -63,6 +65,11 @@ public class tile {
             holding = new Holding(this, new expEffect(SN, spec));
         } else if (SN == 4) { // Item
             holding = new Holding(this, new Item(SN, spec));
+            
+            if(oneShot == 1)
+                ((Item)holding.getObject()).setOneShot(true);
+            else
+                ((Item)holding.getObject()).setOneShot(false);
         } else if (SN == 5) { // Map Transition
             holding = new Holding(this, new MapTransition(SN, spec));
         } else if (SN == 6) { // Equipment
@@ -138,11 +145,17 @@ public class tile {
                     break;
                 case 4:
                     st.append("4");
-                    st.append(Integer.toString(holding.getObject().getEffect()));
+                    st.append(Integer.toString(holding.getObject().getEffect())); //Gets item ID
+                    st.append("0");
+                    if(((Item)holding.getObject()).isOneShot())
+                        st.append("1");
+                    else
+                        st.append("0");
                     break;
                 case 5:
                     st.append("5");
                     st.append(Integer.toString(holding.getObject().getEffect()));
+                    st.append("00");
                     break;
             }
         }

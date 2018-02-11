@@ -164,7 +164,8 @@ public class Main extends Application {
                 System.out.println("the line is " +s);
                 player.getInventory().addItembyID(Integer.parseInt(s));
             }
-
+            br_player.close();
+            br_inventory.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -192,7 +193,7 @@ public class Main extends Application {
 
 
     public void saveGame() {
-        saveMap(map.getMapID(), map, player);
+        map.saveMap();
         try {
             PrintWriter pw = new PrintWriter(System.getProperty("user.dir") + "/Save/Player.txt");
             PrintWriter iw = new PrintWriter(System.getProperty("user.dir") + "/Save/Inventory.txt");
@@ -248,7 +249,7 @@ public class Main extends Application {
                 pw.println(eq[2].getEquipmentID() + eq[2].supplyBenefit());
             }
 
-            pw.println(player.getName());
+            pw.print(player.getName());
 
 
             pw.close();
@@ -270,46 +271,6 @@ public class Main extends Application {
         }
     }
 
-    //Saves the current Map
-    public void saveMap(int MapID, Map map, Player player) {
-        int mapSizeX = map.getMapX();
-        int mapSizeY = map.getMapY();
-        tile[][] tmp = map.getState();
-
-
-        try {
-            //opens the map file based on MapID for writing
-            PrintWriter pw = new PrintWriter(System.getProperty("user.dir") + "/Save" + "/Map" + "/" + Integer.toString(MapID)
-                    + ".txt");
-
-            //write first line map size: X Y
-            pw.println(mapSizeX + " " + mapSizeY);
-            //System.out.println(mapSizeX + " " + mapSizeY);
-            //write second line with startingPosition
-            pw.println((int)player.getPosition().getX() + " " + (int)player.getPosition().getY());
-            //System.out.println((int)player.getPosition().getX() + " " + (int)player.getPosition().getY());
-
-           // System.out.println(tmp[0][0]);
-
-            //Iterating through the map printing tiles in 5 digits
-            for (int i = 0; i < mapSizeX; i++) {
-                for (int j = 0; j < mapSizeY; j++) {
-                    pw.print(tmp[i][j].spill());
-                    pw.print(" ");
-                    //System.out.print(tmp[i][j].spill() + " ");
-                }
-                pw.println();
-
-                //System.out.println();
-
-            }
-            pw.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
 
     /*
     Creates the Save folder with default maps, player, and inventory
@@ -324,6 +285,7 @@ public class Main extends Application {
         File destinationMapFolder = new File(path.toString());
 
         //copys contents of default folder to player map folder
+
         copyFolder(sourceMapFolder, destinationMapFolder);
 
         //writes the players name to the last line of the file

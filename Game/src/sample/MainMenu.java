@@ -66,7 +66,7 @@ public class MainMenu {
 
 
         //Set Background Image
-        File file = new File(System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\lava.png");
+        File file = new File(System.getProperty("user.dir") + "/Game/src/sample/sprites/lava.png");
         Image i = null;
         //System.out.println(System.getProperty("user.dir"));
         try {
@@ -149,10 +149,10 @@ public class MainMenu {
         ChoiceBox characterSprites = new ChoiceBox(FXCollections.observableArrayList("Guy","Girl","Adventurer","Soldier"));
         characterSprites.setValue("Guy"); //Setting a default choice
 
-        Image characterSprite1 = new Image("file:" + System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\characterGuy.png");
-        Image characterSprite2 = new Image("file:" + System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\characterGirl.png");
-        Image characterSprite3 = new Image("file:" + System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\characterAdventurer.png");
-        Image characterSprite4 = new Image("file:" + System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\characterSoldier.png");
+        Image characterSprite1 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterGuy.png");
+        Image characterSprite2 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterGirl.png");
+        Image characterSprite3 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterAdventurer.png");
+        Image characterSprite4 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterSoldier.png");
 
 
         ImageView imageView = new ImageView(characterSprite1);
@@ -305,7 +305,7 @@ public class MainMenu {
         gameOverText.setFont(Font.font("Verdana",FontWeight.BOLD,60));
         gameOverText.setFill(Color.DARKRED);
 
-        //Image sadCatFace = new Image("file:" + System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\crying-cat-face.png");
+        //Image sadCatFace = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/crying-cat-face.png");
         //ImageView catView = new ImageView(sadCatFace);
 
         Button goToMainMenuButtonFromGameOver = new Button("  Exit  ");
@@ -313,7 +313,7 @@ public class MainMenu {
 
 
         //Set Background Image
-        File file = new File(System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\crying-cat-face.png");
+        File file = new File(System.getProperty("user.dir") + "/Game/src/sample/sprites/crying-cat-face.png");
         Image i = null;
         //System.out.println(System.getProperty("user.dir"));
         try {
