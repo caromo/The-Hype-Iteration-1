@@ -2,6 +2,7 @@ package sample;
 
 
 public class tile {
+    private boolean explored;
     public Occupy occupy;
     public Holding holding;
     public char decal;
@@ -12,6 +13,7 @@ public class tile {
 
     public tile(tileObject objType) {
         passable = true;
+        explored = true;
         holding = new Holding(this, objType);
     }
 
@@ -164,6 +166,13 @@ public class tile {
             ((AreaEffect) temp).setEffectOn(false);
             setAreaEffect(false);
         }
+    }
 
+    public boolean isExplored() {
+        return explored;
+    }
+
+    public void setExplored(boolean explored) {
+        this.explored = explored;
     }
 }
