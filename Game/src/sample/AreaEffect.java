@@ -17,6 +17,9 @@ public abstract class AreaEffect extends tileObject{
       this.duration = duration;
     }
     public abstract void setAmount(int x);//sets the amount of effect per second
+
+    public abstract void fatality();
+
     public abstract void startEf();// starts effect
 
     //Allows for us to use durationin other classes while keeping it private

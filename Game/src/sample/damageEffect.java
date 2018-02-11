@@ -25,11 +25,10 @@ public class damageEffect extends AreaEffect{
             public void run() {
                 secondsPassed++;
                 System.out.print("Seconds passes " + secondsPassed + "\t\t");
-                Ef();
-                if((getDuration() < secondsPassed) || !damageEffect.super.isEffectOn())
-                {
+                if((getDuration() < secondsPassed) || !damageEffect.super.isEffectOn()) {
                     timer.cancel();
                 }
+                Ef();
             }
         }, 0 ,(long) (1000));
     }

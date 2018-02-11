@@ -7,6 +7,7 @@ public class healingEffect extends AreaEffect{
     private int healingEffect;
     private int secondsPassed;
 //    private Holding holding;
+
 @Override
 public void fatality() {
 
@@ -18,13 +19,13 @@ public void startEf()
     timer.schedule(new TimerTask() {
         @Override
         public void run() {
+            if(getDuration() < secondsPassed || !healingEffect.super.isEffectOn()) {
+                timer.cancel();
+            }
             secondsPassed++;
             System.out.println("Seconds passes " + secondsPassed);
             healing();
-            if(getDuration() < secondsPassed || !healingEffect.super.isEffectOn())
-            {
-                timer.cancel();
-            }
+
 
         }
     }, 0 ,(long) (1000));

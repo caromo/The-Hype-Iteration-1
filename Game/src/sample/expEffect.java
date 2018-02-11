@@ -19,16 +19,12 @@ public class expEffect extends AreaEffect{
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                secondsPassed++;
-                System.out.println("Seconds passes " + secondsPassed);
-                if(getDuration() < secondsPassed || !expEffect.super.isEffectOn())
-                {
+                if(getDuration() < secondsPassed || !expEffect.super.isEffectOn()) {
                     timer.cancel();
                 }
+                secondsPassed++;
+                System.out.println("Seconds passes " + secondsPassed);
                 expEf();
-
-
-
             }
         }, 0 ,(long) (1000));
 
