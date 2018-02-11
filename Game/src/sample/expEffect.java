@@ -20,7 +20,7 @@ public class expEffect extends AreaEffect{
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    if (getDuration() < secondsPassed || !expEffect.super.isEffectOn()) {
+                    if (getDuration() < secondsPassed || (expEffect.super.holding.getTile().occupy == null)) {
                         timer.cancel();
                     }
                     secondsPassed++;
@@ -43,7 +43,7 @@ public class expEffect extends AreaEffect{
     }
 
     public void expEf(){ //applies effect
-        if(super.holding.getTile().occupy.getPlayer() != null) {
+        if(super.holding.getTile().occupy != null) {
             super.holding.getTile().occupy.getPlayer().gainExp(getexpEffect());
 
         System.out.format("%d", holding.getTile().occupy.getPlayer().getExpToNextLvl());
