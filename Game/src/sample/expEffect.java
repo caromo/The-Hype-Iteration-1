@@ -18,7 +18,7 @@ public class expEffect extends AreaEffect{
                 secondsPassed++;
                 System.out.println("Seconds passes " + secondsPassed);
                 expEf();
-                if(getDuration() < secondsPassed)
+                if(getDuration() < secondsPassed || !expEffect.super.isEffectOn())
                 {
                     timer.cancel();
                 }

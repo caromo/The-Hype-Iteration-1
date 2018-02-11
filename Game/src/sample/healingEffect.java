@@ -17,7 +17,7 @@ public void startEf()
             secondsPassed++;
             System.out.println("Seconds passes " + secondsPassed);
             healing();
-            if(getDuration() < secondsPassed)
+            if(getDuration() < secondsPassed || !healingEffect.super.isEffectOn())
             {
                 timer.cancel();
             }

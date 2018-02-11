@@ -21,7 +21,7 @@ public class damageEffect extends AreaEffect{
                 secondsPassed++;
                 System.out.print("Seconds passes " + secondsPassed + "\t\t");
                 Ef();
-                if(getDuration() < secondsPassed)
+                if((getDuration() < secondsPassed) || !damageEffect.super.isEffectOn())
                 {
                     timer.cancel();
                 }

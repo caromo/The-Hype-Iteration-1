@@ -7,10 +7,19 @@ public class tile {
     public char decal;
     private Boolean passable;
     public int SN;
+    private boolean areaEffect = false;
 
     public tile(tileObject objType) {
         passable = true;
         holding = new Holding(this, objType);
+    }
+
+    public boolean isAreaEffect() {
+        return areaEffect;
+    }
+
+    public void setAreaEffect(boolean areaEffect) {
+        this.areaEffect = areaEffect;
     }
 
     public tile() {}
@@ -24,9 +33,11 @@ public class tile {
             tileObject temp = holding.getObject();
             if(scenario == 1 || scenario == 2 || scenario == 3)  {    //Area effect
                 System.out.println("APPLY");
+                ((AreaEffect) temp).setEffectOn(true);
                 ((AreaEffect) temp).setDuration(20);
                 ((AreaEffect) temp).setAmount(3);
                 ((AreaEffect) temp).startEf();
+                setAreaEffect(true);
             }
             else if(scenario == 4) {      //Item
                 occupy.getPlayer().acquireItem((Item)temp);
@@ -140,4 +151,13 @@ public class tile {
 
     public void setPassable(Boolean passable) { this.passable = passable;  }
 
+    public void cancelEffect() {
+        if(isAreaEffect())
+        {
+            tileObject temp = holding.getObject();
+            ((AreaEffect) temp).setEffectOn(false);
+            setAreaEffect(false);
+        }
+
+    }
 }
