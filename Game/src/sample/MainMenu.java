@@ -170,6 +170,10 @@ public class MainMenu {
                 }
         );
 
+        Text noNameCatch = new Text("PLEASE ENTER A NAME");
+        noNameCatch.setFont(Font.font("Verdana",FontWeight.BOLD,16));
+        noNameCatch.setFill(Color.RED);
+
         // Back Button
         Button characterCreationBackButton = new Button("Back");
         characterCreationBackButton.setOnAction(e -> mainStage.setScene(startingScene));
@@ -195,8 +199,10 @@ public class MainMenu {
                 //mainStage.setScene(mainScene);
                 openIntroMenu();
             }
-            else
+            else {
                 System.out.println("Enter a character name!");
+                characterCreation.add(noNameCatch,1,7);
+            }
         });
 
         // Adding buttons and text to characterCreation
@@ -242,7 +248,7 @@ public class MainMenu {
         startGameButton.setLayoutY(200);
         startGameButton.setMinSize(140,10);
         startGameButton.setStyle("-fx-font-size: 4em; "); //CSS
-        startGameButton.setOnAction(e -> mainStage.setScene(mainScene)); // TODO Change to newGame()
+        startGameButton.setOnAction(e -> mainStage.setScene(mainScene));
 
         introMenu.getChildren().add(startGameButton);
     }
