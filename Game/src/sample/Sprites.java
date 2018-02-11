@@ -16,7 +16,7 @@ public class Sprites {
     public Sprites() {
 
         workingDir = System.getProperty("user.dir")+"\\Game";
-        
+
         //System.out.println(workingDir);
         itemSprites = new ArrayList<Image>();
         terrainSprites = new ArrayList<Image>();

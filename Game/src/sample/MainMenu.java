@@ -177,6 +177,7 @@ public class MainMenu {
         Text noNameCatch = new Text("PLEASE ENTER A NAME");
         noNameCatch.setFont(Font.font("Verdana",FontWeight.BOLD,16));
         noNameCatch.setFill(Color.RED);
+        noNameCatch.setVisible(false);
 
         // Back Button
         Button characterCreationBackButton = new Button("Back");
