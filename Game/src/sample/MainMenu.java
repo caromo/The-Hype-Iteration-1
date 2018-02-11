@@ -36,6 +36,7 @@ public class MainMenu {
     private Player player;
     private Main main;
     private boolean isMenuOpen = true;
+    private int spriteNumber;
     public MainMenu(Player player, GraphicsContext gc, Canvas canvas, Stage mainStage, Scene mainScene, Main main) {
         this.player = player;
         this.mainStage = mainStage;
@@ -171,7 +172,7 @@ public class MainMenu {
                     public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                         //label.setText(spriteChoices[newValue.intValue()]);
                         imageView.setImage(spriteChoices[newValue.intValue()]);
-                        player.setPlayerSpriteNumber(newValue.intValue()+1);
+                        spriteNumber = (newValue.intValue()+1);
                     }
                 }
         );
@@ -200,7 +201,7 @@ public class MainMenu {
                     player.setDefensePoints(8);
                 player.setName(nameInput.getText());
                 player.setPlayerSprite(imageView.getImage());
-                main.newGame(player.getName());
+                main.newGame(player.getName(), spriteNumber);
                 isMenuOpen = false;
                 //System.out.println(player.getName());
                 //mainStage.setScene(mainScene);
