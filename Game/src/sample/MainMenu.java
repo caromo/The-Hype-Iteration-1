@@ -102,6 +102,8 @@ public class MainMenu {
 
         Button loadGameButton = new Button("Load Game");
         loadGameButton.setOnAction(e -> {
+            //workingDir = System.getProperty("user.dir");
+            // if workingDir.save.exists TODO implement this
             main.loadGame();
             mainStage.setScene(mainScene);
         }); // Change to Load() later
@@ -203,7 +205,7 @@ public class MainMenu {
             }
             else {
                 System.out.println("Enter a character name!");
-                characterCreation.add(noNameCatch,1,7);
+                noNameCatch.setVisible(true);
             }
         });
 
@@ -217,7 +219,7 @@ public class MainMenu {
         characterCreation.add(characterCreationContinueButton,2,7);
         characterCreation.add(characterCreationBackButton,0,7);
         characterCreation.add(imageView,2,3);
-
+        characterCreation.add(noNameCatch,1,7);
     }
 
     private void openIntroMenu() {
