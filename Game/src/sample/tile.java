@@ -140,8 +140,12 @@ public class tile {
                     break;
                 case 4:
                     st.append("4");
-                    st.append(Integer.toString(holding.getObject().getEffect()));
-                    st.append("00");
+                    st.append(Integer.toString(holding.getObject().getEffect())); //Gets item ID
+                    st.append("0");
+                    if(((Item)holding.getObject()).isOneShot())
+                        st.append("1");
+                    else
+                        st.append("0");
                     break;
                 case 5:
                     st.append("5");
