@@ -4,11 +4,20 @@ public class Item extends tileObject{
     private int itemID;
     private boolean oneShot;
     public int ScenarioID;
+    private int requiredLevel;
 
     public Item(int SN, int id) {
         super(SN);
         itemID = id;
         oneShot = false;
+    }
+
+    public int getRequiredLevel() {
+        return requiredLevel;
+    }
+
+    public void setRequiredLevel(int requiredLevel) {
+        this.requiredLevel = requiredLevel;
     }
 
     public int getID() {
@@ -31,6 +40,8 @@ public class Item extends tileObject{
     public void setOneShot(boolean oneShot) {
         this.oneShot = oneShot;
     }
+
+
 
 //    @Override
 //    public int getEffect() {

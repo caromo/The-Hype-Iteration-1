@@ -10,6 +10,8 @@ public class tile {
     public int spec;
     private boolean areaEffect = false;
     protected int instantKill = 20; //idk
+    protected int obstacleItem = 44; //idk
+    protected int interactiveItem = 44; //idk
 
     public tile(tileObject objType) {
         passable = true;
@@ -46,6 +48,17 @@ public class tile {
             }
             else if(scenario == instantKill) {
                 ((AreaEffect) temp).fatality();
+            }
+            else if(scenario == obstacleItem)
+            {
+                setPassable(false);
+            }
+            else if(scenario == interactiveItem)
+            {
+                if(occupy.getPlayer().getLevel() > ((Item)temp).getRequiredLevel())
+                {
+                    occupy.getPlayer().acquireItem((Item)temp);
+                }
             }
         }
     }
