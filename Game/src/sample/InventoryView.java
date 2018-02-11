@@ -11,12 +11,13 @@ public class InventoryView extends ListView{
     private Player player;
     private Canvas canvas;
     private GraphicsContext gc;
+    private Sprites sprites;
     public InventoryView(Player player, Canvas canvas) {
         super(player, canvas);
         this.player = player;
         this.canvas = canvas;
         this.gc = canvas.getGraphicsContext2D();
-
+        sprites = new Sprites();
     }
 
     @Override
@@ -40,10 +41,12 @@ public class InventoryView extends ListView{
             return;
         }
         renderTextEntry("ItemID: " + Integer.toString(player.getInventory().getItem(ind+getScrollOffset()).getID()), ind);
-
-
+        gc.drawImage(sprites.getItemImage(item.getID()), 50, ind*getEntryHeight(), 50, 50);
+        //sprites.getItemImage(item.getID());
 
     }
+
+
 
     public void renderScrollBar() {
         //Calculate how large the scroll bar should be

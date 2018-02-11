@@ -9,6 +9,7 @@ public class Sprites {
     private ArrayList<Image> itemSprites;
     private ArrayList<Image> terrainSprites;
     private ArrayList<Image> AESprites;
+    private ArrayList<Image> playerSprites;
     private Image mapTransitionSprite;
 
 
@@ -21,7 +22,7 @@ public class Sprites {
         itemSprites = new ArrayList<Image>();
         terrainSprites = new ArrayList<Image>();
         AESprites = new ArrayList<Image>();
-
+        playerSprites = new ArrayList<Image>();
         initializeSprites();
     }
 
@@ -40,6 +41,11 @@ public class Sprites {
         AESprites.add(getImage(workingDir + "/src/sample/sprites/crying-cat-face.png"));
         AESprites.add(getImage(workingDir + "/src/sample/sprites/health.png"));
         AESprites.add(getImage(workingDir + "/src/sample/sprites/star.png"));
+
+        playerSprites.add(getImage(System.getProperty("user.dir") + "/src/sample/sprites/characterGuy.png"));
+        playerSprites.add(getImage(System.getProperty("user.dir") + "/Game/src/sample/sprites/characterGirl.png"));
+        playerSprites.add(getImage(System.getProperty("user.dir") + "/Game/src/sample/sprites/characterAdventurer.png"));
+        playerSprites.add(getImage(System.getProperty("user.dir") + "/Game/src/sample/sprites/characterSoldier.png"));
 
         mapTransitionSprite = getImage(workingDir + "/src/sample/sprites/door.png");
 
@@ -79,6 +85,10 @@ public class Sprites {
         } else {
             return terrainSprites.get(2);
         }
+    }
+
+    public Image getPlayerSprite(int ind) {
+        return playerSprites.get(ind);
     }
 
     private Image getImage(String fp) {

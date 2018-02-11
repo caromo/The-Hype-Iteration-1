@@ -106,7 +106,7 @@ public class View {
         }
 
         // First parameter changed from playerImg
-        gc.drawImage(player.getPlayerSprite(), player.getPosition().x*tileSize+cameraX, player.getPosition().y*tileSize+cameraY, tileSize, tileSize);
+        gc.drawImage(sprites.getPlayerSprite(player.getPlayerSprite()), player.getPosition().x*tileSize+cameraX, player.getPosition().y*tileSize+cameraY, tileSize, tileSize);
 
         //Draw player
 
