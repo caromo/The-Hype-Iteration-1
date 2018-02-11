@@ -13,6 +13,7 @@ public class Player extends GameObject {
     private int Level;
     private boolean isDead;
     private Image playerSprite;
+    private int playerSpriteNumber; // Can be ints 1,2,3,4 currently
     private String name;
     private Inventory bag;
     private Equipment[] gear;
@@ -245,4 +246,8 @@ public class Player extends GameObject {
     public void setIsDead(boolean bool) { isDead = bool;}
 
     public boolean getIsDead() { return isDead; }
+
+    public void setPlayerSpriteNumber(int playerSpriteNumber) { this.playerSpriteNumber = playerSpriteNumber; }
+
+    public int getPlayerSpriteNumber() { return playerSpriteNumber; }
 }

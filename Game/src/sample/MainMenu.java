@@ -154,6 +154,7 @@ public class MainMenu {
         Image characterSprite3 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterAdventurer.png");
         Image characterSprite4 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterSoldier.png");
 
+        player.setPlayerSpriteNumber(1);
 
         ImageView imageView = new ImageView(characterSprite1);
 
@@ -170,6 +171,7 @@ public class MainMenu {
                     public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                         //label.setText(spriteChoices[newValue.intValue()]);
                         imageView.setImage(spriteChoices[newValue.intValue()]);
+                        player.setPlayerSpriteNumber(newValue.intValue()+1);
                     }
                 }
         );
@@ -202,6 +204,7 @@ public class MainMenu {
                 isMenuOpen = false;
                 //System.out.println(player.getName());
                 //mainStage.setScene(mainScene);
+                //System.out.println(player.getPlayerSpriteNumber());
                 openIntroMenu();
             }
             else {
