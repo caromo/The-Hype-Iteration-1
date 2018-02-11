@@ -238,8 +238,8 @@ public class MainMenu {
         gameOverScene = new Scene( gameOver, 800, 800);
 
         Text gameOverText = new Text("Game Over");
-        gameOverText.setFont(Font.font("Verdana",40));
-        gameOverText.setFill(Color.RED);
+        gameOverText.setFont(Font.font("Verdana",FontWeight.BOLD,60));
+        gameOverText.setFill(Color.DARKRED);
 
         Button goToMainMenuButtonFromGameOver = new Button("  Exit  ");
         goToMainMenuButtonFromGameOver.setOnAction(e -> openMainMenu());//mainStage.setScene(startingScene));

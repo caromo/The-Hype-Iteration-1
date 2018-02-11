@@ -11,6 +11,7 @@ public class Player extends GameObject {
     private int Experience;
     private int ExpToNextLvl;
     private int Level;
+    private boolean isDead;
     private Image playerSprite;
     private String name;
     private Inventory bag;
@@ -197,4 +198,8 @@ public class Player extends GameObject {
         }
     }
     public void setPlayerSprite(Image newSprite) { playerSprite = newSprite; }
+
+    public void setIsDead(boolean bool) { isDead = bool;}
+
+    public boolean getIsDead() { return isDead; }
 }

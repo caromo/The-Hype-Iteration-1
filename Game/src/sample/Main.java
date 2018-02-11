@@ -78,6 +78,7 @@ public class Main extends Application {
                 //double t = (currentNanoTime - startNanoTime) / 1000000000.0;
                 pc.setGamePaused(view.getMenuOpen());
                 view.render(map.getState(), player);
+                checkForGameOver();
             }
         }.start();
         theStage.show();
@@ -85,6 +86,8 @@ public class Main extends Application {
 
     public void loadGame() {
         try {
+            player.setIsDead(false); // If player previously died this makes sure he is now alive
+
             File playerFile = new File(System.getProperty("user.dir") + "/Save/Player.txt");
             BufferedReader br_player = new BufferedReader(new FileReader(playerFile));
             String mapID = br_player.readLine();
@@ -361,4 +364,10 @@ public class Main extends Application {
         }
     }
 
+    private void checkForGameOver(){
+        if(player.getHealth() <= 0 && !player.getIsDead()) {
+            mainMenu.gameOver();
+            player.setIsDead(true);
+        }
+    }
 }
