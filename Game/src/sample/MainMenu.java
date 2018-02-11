@@ -229,7 +229,7 @@ public class MainMenu {
 
     private void openIntroMenu() {
 
-        Text introText = new Text("Welcome to the world of the HYPE");
+        Text introText = new Text("Welcome to this RPG. Insert story here.");
         introText.setFont(Font.font(50));
         introText.setTextOrigin(VPos.TOP);
         introText.setFill(Color.RED);
@@ -245,17 +245,17 @@ public class MainMenu {
         KeyValue initialKeyValue = new KeyValue(introText.translateXProperty(), sceneWidth);
         KeyFrame initialFrame = new KeyFrame(Duration.ZERO, initialKeyValue);
         KeyValue endKeyValue = new KeyValue(introText.translateXProperty(), -1.0 * msgWidth);
-        KeyFrame endFrame = new KeyFrame(Duration.seconds(5), endKeyValue);
+        KeyFrame endFrame = new KeyFrame(Duration.seconds(8), endKeyValue);
         Timeline timeline = new Timeline(initialFrame, endFrame);
 
         timeline.setCycleCount(Timeline.INDEFINITE); // Or change to an int value
         timeline.play();
 
-        Button startGameButton = new Button("Start");
+        Button startGameButton = new Button("Enter World");
         startGameButton.setAlignment(Pos.CENTER);
-        startGameButton.setLayoutX(185);
+        startGameButton.setLayoutX(130);
         startGameButton.setLayoutY(200);
-        startGameButton.setMinSize(140,10);
+        startGameButton.setMinSize(120,50);
         startGameButton.setStyle("-fx-font-size: 4em; "); //CSS
         startGameButton.setOnAction(e -> mainStage.setScene(mainScene));
 
