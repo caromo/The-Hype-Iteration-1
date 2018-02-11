@@ -12,7 +12,8 @@ public class Player extends GameObject {
     private int ExpToNextLvl;
     private int Level;
     private boolean isDead;
-    private Image playerSprite;
+    private int playerSprite;
+    private int playerSpriteNumber; // Can be ints 1,2,3,4 currently
     private String name;
     private Inventory bag;
     private Equipment[] gear;
@@ -230,7 +231,7 @@ public class Player extends GameObject {
         name = newName;
     }
 
-    public Image getPlayerSprite() { return playerSprite; }
+    public int getPlayerSprite() { return playerSprite; }
 
 
     public int getMaxHealth() {
@@ -240,9 +241,13 @@ public class Player extends GameObject {
             return (int)Math.log10((double)(Level*100)) + (int)1.247*(Level * 100);
         }
     }
-    public void setPlayerSprite(Image newSprite) { playerSprite = newSprite; }
+    public void setPlayerSprite(int newSprite) { playerSprite = newSprite; }
 
     public void setIsDead(boolean bool) { isDead = bool;}
 
     public boolean getIsDead() { return isDead; }
+
+    public void setPlayerSpriteNumber(int playerSpriteNumber) { this.playerSpriteNumber = playerSpriteNumber; }
+
+    public int getPlayerSpriteNumber() { return playerSpriteNumber; }
 }

@@ -14,7 +14,9 @@ public class Sprites {
 
     private String workingDir;
     public Sprites() {
+
         workingDir = System.getProperty("user.dir");
+
         //System.out.println(workingDir);
         itemSprites = new ArrayList<Image>();
         terrainSprites = new ArrayList<Image>();
@@ -26,22 +28,22 @@ public class Sprites {
     private void initializeSprites() {
         //Load item textures
 
-        itemSprites.add(getImage(workingDir + "\\src\\sample\\sprites\\potion2.png"));
-        itemSprites.add(getImage(workingDir + "\\src\\sample\\sprites\\sword.png"));
+        itemSprites.add(getImage(workingDir + "/src/sample/sprites/potion2.png"));
+        itemSprites.add(getImage(workingDir + "/src/sample/sprites/sword.png"));
 
         //Load terrain textures
 
-        terrainSprites.add(getImage(workingDir + "\\src\\sample\\sprites\\grass.png"));
-        terrainSprites.add(getImage(workingDir + "\\src\\sample\\sprites\\water.png"));
-        terrainSprites.add(getImage(workingDir + "\\src\\sample\\sprites\\mountains.png"));
+        terrainSprites.add(getImage(workingDir + "/src/sample/sprites/grass.png"));
+        terrainSprites.add(getImage(workingDir + "/src/sample/sprites/water.png"));
+        terrainSprites.add(getImage(workingDir + "/src/sample/sprites/mountains.png"));
 
-        AESprites.add(getImage(workingDir + "\\src\\sample\\sprites\\health.png"));
-        AESprites.add(getImage(workingDir + "\\src\\sample\\sprites\\crying-cat-face.png"));
-        AESprites.add(getImage(workingDir + "\\src\\sample\\sprites\\star.png"));
+        AESprites.add(getImage(workingDir + "/src/sample/sprites/crying-cat-face.png"));
+        AESprites.add(getImage(workingDir + "/src/sample/sprites/health.png"));
+        AESprites.add(getImage(workingDir + "/src/sample/sprites/star.png"));
 
-        mapTransitionSprite = getImage(workingDir + "\\src\\sample\\sprites\\door.png");
+        mapTransitionSprite = getImage(workingDir + "/src/sample/sprites/door.png");
 
-        //playerImg = getImage(workingDir + "\\src\\sample\\sprites\\pikachu.png");
+        //playerImg = getImage(workingDir + "/src/sample/sprites/pikachu.png");
 
 
     }

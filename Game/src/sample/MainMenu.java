@@ -36,6 +36,7 @@ public class MainMenu {
     private Player player;
     private Main main;
     private boolean isMenuOpen = true;
+    private int spriteNumber;
     public MainMenu(Player player, GraphicsContext gc, Canvas canvas, Stage mainStage, Scene mainScene, Main main) {
         this.player = player;
         this.mainStage = mainStage;
@@ -66,7 +67,7 @@ public class MainMenu {
 
 
         //Set Background Image
-        File file = new File(System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\lava.png");
+        File file = new File(System.getProperty("user.dir") + "/Game/src/sample/sprites/lava.png");
         Image i = null;
         //System.out.println(System.getProperty("user.dir"));
         try {
@@ -102,6 +103,8 @@ public class MainMenu {
 
         Button loadGameButton = new Button("Load Game");
         loadGameButton.setOnAction(e -> {
+            //workingDir = System.getProperty("user.dir");
+            // if workingDir.save.exists TODO implement this
             main.loadGame();
             mainStage.setScene(mainScene);
         }); // Change to Load() later
@@ -147,11 +150,12 @@ public class MainMenu {
         ChoiceBox characterSprites = new ChoiceBox(FXCollections.observableArrayList("Guy","Girl","Adventurer","Soldier"));
         characterSprites.setValue("Guy"); //Setting a default choice
 
-        Image characterSprite1 = new Image("file:" + System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\characterGuy.png");
-        Image characterSprite2 = new Image("file:" + System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\characterGirl.png");
-        Image characterSprite3 = new Image("file:" + System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\characterAdventurer.png");
-        Image characterSprite4 = new Image("file:" + System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\characterSoldier.png");
+        Image characterSprite1 = new Image("file:" + System.getProperty("user.dir") + "/src/sample/sprites/characterGuy.png");
+        Image characterSprite2 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterGirl.png");
+        Image characterSprite3 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterAdventurer.png");
+        Image characterSprite4 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterSoldier.png");
 
+        player.setPlayerSpriteNumber(1);
 
         ImageView imageView = new ImageView(characterSprite1);
 
@@ -168,6 +172,7 @@ public class MainMenu {
                     public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                         //label.setText(spriteChoices[newValue.intValue()]);
                         imageView.setImage(spriteChoices[newValue.intValue()]);
+                        spriteNumber = (newValue.intValue()+1);
                     }
                 }
         );
@@ -175,6 +180,7 @@ public class MainMenu {
         Text noNameCatch = new Text("PLEASE ENTER A NAME");
         noNameCatch.setFont(Font.font("Verdana",FontWeight.BOLD,16));
         noNameCatch.setFill(Color.RED);
+        noNameCatch.setVisible(false);
 
         // Back Button
         Button characterCreationBackButton = new Button("Back");
@@ -193,17 +199,18 @@ public class MainMenu {
                     player.setAttackPoints(8);
                 else if (characterStatAdvantage.getValue() == "Defense")
                     player.setDefensePoints(8);
-                player.setName(nameInput.getText());
-                player.setPlayerSprite(imageView.getImage());
-                main.newGame(player.getName());
+                //player.setName(nameInput.getText());
+                //player.setPlayerSprite(imageView.getImage());
+                main.newGame(player.getName(), spriteNumber);
                 isMenuOpen = false;
                 //System.out.println(player.getName());
                 //mainStage.setScene(mainScene);
+                //System.out.println(player.getPlayerSpriteNumber());
                 openIntroMenu();
             }
             else {
                 System.out.println("Enter a character name!");
-                characterCreation.add(noNameCatch,1,7);
+                noNameCatch.setVisible(true);
             }
         });
 
@@ -217,7 +224,7 @@ public class MainMenu {
         characterCreation.add(characterCreationContinueButton,2,7);
         characterCreation.add(characterCreationBackButton,0,7);
         characterCreation.add(imageView,2,3);
-
+        characterCreation.add(noNameCatch,1,7);
     }
 
     private void openIntroMenu() {
@@ -303,7 +310,7 @@ public class MainMenu {
         gameOverText.setFont(Font.font("Verdana",FontWeight.BOLD,60));
         gameOverText.setFill(Color.DARKRED);
 
-        //Image sadCatFace = new Image("file:" + System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\crying-cat-face.png");
+        //Image sadCatFace = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/crying-cat-face.png");
         //ImageView catView = new ImageView(sadCatFace);
 
         Button goToMainMenuButtonFromGameOver = new Button("  Exit  ");
@@ -311,7 +318,7 @@ public class MainMenu {
 
 
         //Set Background Image
-        File file = new File(System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\crying-cat-face.png");
+        File file = new File(System.getProperty("user.dir") + "/Game/src/sample/sprites/crying-cat-face.png");
         Image i = null;
         //System.out.println(System.getProperty("user.dir"));
         try {

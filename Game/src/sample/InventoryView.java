@@ -28,14 +28,13 @@ public class InventoryView extends ListView{
         for(int i = 0; i < getMaxEntriesDisplayed(); i++) {
             renderEntry(i);
         }
+        if(getNumOfEntries() == 0) { return; }
         renderCursor();
         renderScrollBar();
     }
 
 
     private void renderEntry(int ind) {
-        gc.setFill(Color.WHITE);
-        gc.fillRect(0, ind*getEntryHeight(), getEntryWidth(), getEntryHeight());
         Item item = player.getInventory().getItem(ind);
         if(item == null) {
             return;

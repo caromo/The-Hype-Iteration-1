@@ -19,14 +19,14 @@ public class EquipmentCodex {
 		setEquip(300, 10);
 		setDescription(300, "A mysterious ring");
 		
-		setEquip(101, 10);
-		setDescription(101, "An old piece of armor");
+		setEquip(110, 10);
+		setDescription(110, "A piece of armor that has seen many battles");
 		
-		setEquip(201, 10);
-		setDescription(201, "A rusty Sword");
+		setEquip(210, 10);
+		setDescription(210, "A sword that has clearly seen better days");
 		
-		setEquip(301, 15);
-		setDescription(301, "A ring from an old Witch");
+		setEquip(310, 10);
+		setDescription(310, "A simple Pendant");
 	}
 	
 	public int getEquipment(int key) {
