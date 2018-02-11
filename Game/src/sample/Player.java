@@ -123,8 +123,24 @@ public class Player extends GameObject {
             Health -= gear[EquipSlot].supplyBenefit();
             Health += swag.supplyBenefit();
         }
-        bag.addItem(gear[EquipSlot]);
+        if (gear[EquipSlot].getEquipmentID()!=000) {
+            bag.addItem(gear[EquipSlot]);
+        }
         gear[EquipSlot] = swag;
+    }
+
+    public void unequipGear(int EquipSlot){
+        if (EquipSlot == 0) { // Meaning the player wants to unequip an Armor Piece
+            DefensePoints -= gear[EquipSlot].supplyBenefit();
+        }
+        else if (EquipSlot == 1) { // Meaning the player wants to unequip a Weapon
+            AttackPoints -= gear[EquipSlot].supplyBenefit();
+        }
+        else if (EquipSlot == 2) { // Meaning the player wants to unequip a Ring
+            Health -= gear[EquipSlot].supplyBenefit();
+        }
+        bag.addItem(gear[EquipSlot]);
+        gear[EquipSlot] = new Ring(0,000,0);
     }
 
     private void LevelUp()

@@ -55,19 +55,19 @@ public class PlayerController implements EventHandler<KeyEvent> {
                 map.movePlayer(p);
                 break;
             case NUMPAD7: //NW
-                p.x--; p.y++;
+                p.x--; p.y--;
                 map.movePlayer(p);
                 break;
             case NUMPAD9: //NE
-                p.x++; p.y++;
-                map.movePlayer(p);
-                break;
-            case NUMPAD3: //SE
                 p.x++; p.y--;
                 map.movePlayer(p);
                 break;
+            case NUMPAD3: //SE
+                p.x++; p.y++;
+                map.movePlayer(p);
+                break;
             case NUMPAD1: //SW
-                p.x--; p.y--;
+                p.x--; p.y++;
                 map.movePlayer(p);
                 break;
             case D:
