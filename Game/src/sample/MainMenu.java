@@ -35,6 +35,7 @@ public class MainMenu {
     private Scene mainScene, startingScene, characterCreationScene, gameOverScene, introScene;
     private Player player;
     private Main main;
+    private boolean isMenuOpen = true;
     public MainMenu(Player player, GraphicsContext gc, Canvas canvas, Stage mainStage, Scene mainScene, Main main) {
         this.player = player;
         this.mainStage = mainStage;
@@ -176,6 +177,8 @@ public class MainMenu {
         // Continue Button
         Button characterCreationContinueButton = new Button("Continue");
         characterCreationContinueButton.setOnAction(e -> {
+            
+
             // Applies advantage to player
             if(characterStatAdvantage.getValue() == "Health")
                 player.setHealth(110);
@@ -186,6 +189,7 @@ public class MainMenu {
             player.setName(nameInput.getText());
             player.setPlayerSprite(imageView.getImage());
             main.newGame(player.getName());
+            isMenuOpen = false;
             //System.out.println(player.getName());
             //mainStage.setScene(mainScene);
             openIntroMenu();
@@ -315,6 +319,9 @@ public class MainMenu {
         mainStage.setScene(gameOverScene);
     }
 
-
+    public boolean getIsMenuOpen()
+    {
+        return isMenuOpen;
+    }
 
 }
