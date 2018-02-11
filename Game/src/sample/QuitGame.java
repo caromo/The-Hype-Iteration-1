@@ -9,14 +9,14 @@ public class QuitGame extends ListView {
     private ConfirmationPopup cp;
     public QuitGame(Player player, Canvas canvas) {
         super(player, canvas);
-        cp = new ConfirmationPopup(canvas, "Are you sure");
+        cp = new ConfirmationPopup(canvas, "Are you sure you want to quit the game?");
     }
 
     public void render() {
         renderTextEntry("Do you want to Exit Game?", 0);
-        if(cp.getActive()) {
-            cp.render();
-        }
+
+        cp.render();
+
     }
     public void Enter() {
         if(!cp.getActive()) {

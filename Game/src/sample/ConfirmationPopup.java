@@ -31,6 +31,7 @@ public class ConfirmationPopup {
     }
 
     public void render() {
+        if(!getActive()) { return; }
         gc.drawImage(background, x, y, width, height);
         gc.setFill(Color.BLACK);
         gc.fillText(confirmationString, x+95, y+50);
