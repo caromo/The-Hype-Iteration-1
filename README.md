@@ -31,3 +31,5 @@ Uhh..
   Carlo, Lorenzo, and Ryan - Player, gameObject, Tile, Occupy
   
   Callum, Daniel, and Danilo - Holding, Area Effect, Item, MapTransition, tileObject, Inventory
+  
+super.holding.getTile().occupy.getPlayer() != null
