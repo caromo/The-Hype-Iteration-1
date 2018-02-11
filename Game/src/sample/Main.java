@@ -61,7 +61,7 @@ public class Main extends Application {
 
         pc = new PlayerController(map);
 
-        newGame("test");
+        //newGame("test");
         //player.getInventory().addItembyID(100);
         //System.out.println(player.getInventory().getNumOfItems());
 

@@ -100,7 +100,10 @@ public class MainMenu {
         newGameButton.setOnAction(e -> characterCreation());//mainStage.setScene(characterCreationScene));
 
         Button loadGameButton = new Button("Load Game");
-        loadGameButton.setOnAction(e -> mainStage.setScene(mainScene)); // Change to Load() later
+        loadGameButton.setOnAction(e -> {
+            main.loadGame();
+            mainStage.setScene(mainScene);
+        }); // Change to Load() later
 
         Button exitGameButton = new Button("Exit Game");
         exitGameButton.setOnAction(e -> mainStage.close());
@@ -173,6 +176,7 @@ public class MainMenu {
         // Continue Button
         Button characterCreationContinueButton = new Button("Continue");
         characterCreationContinueButton.setOnAction(e -> {
+            // Applies advantage to player
             if(characterStatAdvantage.getValue() == "Health")
                 player.setHealth(110);
             else if(characterStatAdvantage.getValue() == "Attack")
@@ -181,8 +185,7 @@ public class MainMenu {
                 player.setDefensePoints(8);
             player.setName(nameInput.getText());
             player.setPlayerSprite(imageView.getImage());
-            //TODO Apply advantage to player if we are keeping that feature
-            //newGame(playerName);
+            main.newGame(player.getName());
             //System.out.println(player.getName());
             //mainStage.setScene(mainScene);
             openIntroMenu();
@@ -194,12 +197,10 @@ public class MainMenu {
         characterCreation.add(chooseSprite,1,2);
         characterCreation.add(characterSprites,1,3);
         characterCreation.add(chooseColor,1,4);
-        //characterCreation.add(label,2,3);
         characterCreation.add(characterStatAdvantage,1,5);
         characterCreation.add(characterCreationContinueButton,2,7);
         characterCreation.add(characterCreationBackButton,0,7);
         characterCreation.add(imageView,2,3);
-        //characterCreation.getChildren().add(imageView);
 
     }
 
@@ -210,7 +211,6 @@ public class MainMenu {
         introText.setTextOrigin(VPos.TOP);
         introText.setFill(Color.RED);
         Pane introMenu = new Pane(introText);
-        //introMenu.setPrefSize(512,512);
 
         introScene = new Scene(introMenu,512,512);
         double sceneWidth = introScene.getWidth();
@@ -250,7 +250,10 @@ public class MainMenu {
         continueGameButton.setOnAction(e -> mainStage.setScene(mainScene));
 
         Button saveGameButton = new Button("Save");
-        saveGameButton.setOnAction(e -> System.out.println("Save has been pressed")); //SaveGame()
+        saveGameButton.setOnAction(e -> {
+            System.out.println("Save has been pressed");
+            main.saveGame();
+        }); //SaveGame()
 
         Button goToMainMenuButton = new Button("Exit to main menu");
         goToMainMenuButton.setOnAction(e -> openMainMenu()); //mainStage.setScene(startingScene));
