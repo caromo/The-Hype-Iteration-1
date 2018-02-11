@@ -97,7 +97,7 @@ public class View {
 
                 gc.drawImage(sprites.getTerrainImage(map[i][j].decal), (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
 
-                int tileID = map[i][j].SN;
+                int tileID = map[i][j].getScenario();
                 //System.out.println(tileID);
                 if(tileID == 1) {//AEHealing
                     gc.setFill(Color.GREEN);
