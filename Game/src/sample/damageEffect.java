@@ -20,18 +20,23 @@ public class damageEffect extends AreaEffect{
     {
         secondsPassed = 0;
         Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                secondsPassed++;
-                System.out.print("Seconds passes " + secondsPassed + "\t\t");
-                Ef();
-                if((getDuration() < secondsPassed) || !damageEffect.super.isEffectOn())
-                {
-                    timer.cancel();
+        try {
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    if ((getDuration() < secondsPassed) || !damageEffect.super.isEffectOn()) {
+                        timer.cancel();
+                    }
+                    secondsPassed++;
+                    System.out.print("Seconds passes " + secondsPassed + "\t\t");
+                    Ef();
                 }
-            }
-        }, 0 ,(long) (1000));
+            }, 0, (long) (1000));
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public void Ef()//applies effect
