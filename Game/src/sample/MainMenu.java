@@ -241,10 +241,30 @@ public class MainMenu {
         gameOverText.setFont(Font.font("Verdana",FontWeight.BOLD,60));
         gameOverText.setFill(Color.DARKRED);
 
+        //Image sadCatFace = new Image("file:" + System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\crying-cat-face.png");
+        //ImageView catView = new ImageView(sadCatFace);
+
         Button goToMainMenuButtonFromGameOver = new Button("  Exit  ");
         goToMainMenuButtonFromGameOver.setOnAction(e -> openMainMenu());//mainStage.setScene(startingScene));
 
+
+        //Set Background Image
+        File file = new File(System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\crying-cat-face.png");
+        Image i = null;
+        //System.out.println(System.getProperty("user.dir"));
+        try {
+            i = new Image(file.toURI().toURL().toString(), gameOver.getWidth(), gameOver.getHeight(), false, false);
+        } catch (MalformedURLException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        BackgroundImage im = new BackgroundImage(i, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                new BackgroundSize(100, 100, false, false, false, true));
+
+        gameOver.setBackground(new Background(im));
+
         gameOver.add(gameOverText,1,0);
+        //gameOver.add(catView,1,3);
         gameOver.add(goToMainMenuButtonFromGameOver,2,6);
         mainStage.setScene(gameOverScene);
     }
