@@ -139,10 +139,12 @@ public class tile {
                 case 4:
                     st.append("4");
                     st.append(Integer.toString(holding.getObject().getEffect()));
+                    st.append("00");
                     break;
                 case 5:
                     st.append("5");
                     st.append(Integer.toString(holding.getObject().getEffect()));
+                    st.append("00");
                     break;
             }
         }

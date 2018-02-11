@@ -164,7 +164,8 @@ public class Main extends Application {
                 System.out.println("the line is " +s);
                 player.getInventory().addItembyID(Integer.parseInt(s));
             }
-
+            br_player.close();
+            br_inventory.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -248,7 +249,7 @@ public class Main extends Application {
                 pw.println(eq[2].getEquipmentID() + eq[2].supplyBenefit());
             }
 
-            pw.println(player.getName());
+            pw.print(player.getName());
 
 
             pw.close();
@@ -324,6 +325,7 @@ public class Main extends Application {
         File destinationMapFolder = new File(path.toString());
 
         //copys contents of default folder to player map folder
+
         copyFolder(sourceMapFolder, destinationMapFolder);
 
         //writes the players name to the last line of the file
