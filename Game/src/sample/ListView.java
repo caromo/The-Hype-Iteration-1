@@ -101,7 +101,7 @@ public class ListView {
         numOfEntries = num;
     }
     public int getMaxEntriesDisplayed() {
-        return maxEntriesDisplayed;
+        return Math.min(maxEntriesDisplayed, getNumOfEntries());
     }
     public int getEntryHeight() {
         return entryHeight;
