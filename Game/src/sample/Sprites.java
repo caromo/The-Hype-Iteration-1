@@ -22,16 +22,16 @@ public class Sprites {
     private void initializeSprites() {
         //Load item textures
 
-        itemSprites.add(getImage(workingDir + "\\Game\\src\\sample\\sprites\\potion2.png"));
-        itemSprites.add(getImage(workingDir + "\\Game\\src\\sample\\sprites\\sword.png"));
+        itemSprites.add(getImage(workingDir + "/Game/src/sample/sprites/potion2.png"));
+        itemSprites.add(getImage(workingDir + "/Game/src/sample/sprites/sword.png"));
 
         //Load terrain textures
 
-        terrainSprites.add(getImage(workingDir + "\\Game\\src\\sample\\sprites\\grass.png"));
-        terrainSprites.add(getImage(workingDir + "\\Game\\src\\sample\\sprites\\water.png"));
-        terrainSprites.add(getImage(workingDir + "\\Game\\src\\sample\\sprites\\mountains.png"));
+        terrainSprites.add(getImage(workingDir + "/Game/src/sample/sprites/grass.png"));
+        terrainSprites.add(getImage(workingDir + "/Game/src/sample/sprites/water.png"));
+        terrainSprites.add(getImage(workingDir + "/Game/src/sample/sprites/mountains.png"));
 
-        //playerImg = getImage(workingDir + "\\src\\sample\\sprites\\pikachu.png");
+        //playerImg = getImage(workingDir + "/src/sample/sprites/pikachu.png");
 
 
     }

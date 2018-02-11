@@ -35,6 +35,7 @@ public class Map {
     //function to place player at the beginning point of a specific map
     private void moveToStart() {
         myPlayer.setPosition((int)startingPoint.getX(), (int)startingPoint.getY());
+        tileSet[(int)startingPoint.getX()][(int)startingPoint.getY()].occupy = new Occupy(myPlayer, tileSet[(int)startingPoint.getX()][(int)startingPoint.getY()]);
     }
 
     //moves the player and resolves tile event (If passable)
@@ -42,12 +43,13 @@ public class Map {
         if ( tileSet[(int)dir.getX()][(int)dir.getY()].getPassable() ) {
             tileSet[(int)dir.getX()][(int)dir.getY()].occupy = new Occupy(myPlayer, tileSet[(int)dir.getX()][(int)dir.getY()]);
             myPlayer.setPosition( (int)dir.getX(), (int)dir.getY() );
-            tileSet[(int)dir.getX()][(int)dir.getY()].applyEffect();
+            updateMap(tileSet[(int)dir.getX()][(int)dir.getY()].applyEffect());
         }
     }
 
     //loads a new tileset and places the player in the starting point
     public void updateMap(int mapID) {
+        if (mapID == -1) return;
         loadMapFromID(mapID);
         moveToStart();
     }

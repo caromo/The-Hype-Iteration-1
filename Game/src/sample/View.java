@@ -57,7 +57,7 @@ public class View {
         tileSize = 50; //width/height of tiles in pixels
 
         //Get working directory to load textures from
-        workingDir = System.getProperty("user.dir");
+        workingDir = System.getProperty("user.dir")+"/Game";
 
         System.out.println(workingDir);
 
@@ -112,7 +112,7 @@ public class View {
                     gc.fillRect((i*tileSize)+5, (j*tileSize)+5, tileSize-5, tileSize-5);
 
                 } else if(tileID == 4) {//Item
-                    gc.drawImage(getImage(workingDir + "\\src\\sample\\sprites\\grass.png"), (i*tileSize)+cameraX, (j*tileSize)+cameraY);
+                    gc.drawImage(getImage(workingDir + "/src/sample/sprites/grass.png"), (i*tileSize)+cameraX, (j*tileSize)+cameraY);
                     gc.drawImage(sprites.getItemImage(1), (i*tileSize)+5+cameraX, (j*tileSize)+5+cameraY, tileSize, tileSize);
                 } else {//MapTransition
 

@@ -60,7 +60,7 @@ public class MainMenu {
 
 
         //Set Background Image
-        File file = new File(System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\lava.png");
+        File file = new File(System.getProperty("user.dir") + "/Game/src/sample/sprites/lava.png");
         Image i = null;
         //System.out.println(System.getProperty("user.dir"));
         try {
@@ -138,9 +138,9 @@ public class MainMenu {
         ChoiceBox characterSprites = new ChoiceBox(FXCollections.observableArrayList("Pikachu","Sword","Potion 1"));
         characterSprites.setValue("Pikachu"); //Setting a default choice
 
-        Image characterSprite1 = new Image("file:" + System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\pikachu.png");
-        Image characterSprite2 = new Image("file:" + System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\sword.png");
-        Image characterSprite3 = new Image("file:" + System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\potion.png");
+        Image characterSprite1 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/pikachu.png");
+        Image characterSprite2 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/sword.png");
+        Image characterSprite3 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/potion.png");
 
         ImageView imageView = new ImageView(characterSprite1);
 
