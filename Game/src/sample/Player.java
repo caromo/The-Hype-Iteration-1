@@ -17,6 +17,7 @@ public class Player extends GameObject {
     private Inventory bag;
     private Equipment[] gear;
     private final int EQUIPMENT_SLOTS = 3;
+    private OneShot boost;
     private Point pos;
     public Occupy occupy;
     public Player(String name, int x, int y){
@@ -104,6 +105,25 @@ public class Player extends GameObject {
             }
             else {
                 Health = (int)Math.log10((double)(Level*100)) + (int)1.247*(Level * 100);
+            }
+        }
+    }
+    public void OneShotBoost(OneShot boost){
+        int check = boost.getOneShotID()/100 - 1;
+        if(boost.active()) {
+            if (check == 0) //Defense
+            {
+                DefensePoints += boost.supplyBenefit();
+            } else if (check == 1) {
+                AttackPoints += boost.supplyBenefit();
+            }
+        }
+        else {
+            if (check == 0) //Defense
+            {
+                DefensePoints -= boost.supplyBenefit();
+            } else if (check == 1) {
+                AttackPoints -= boost.supplyBenefit();
             }
         }
     }
