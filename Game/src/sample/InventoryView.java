@@ -13,6 +13,7 @@ public class InventoryView extends ListView{
     private GraphicsContext gc;
     private ItemCodex i;
     private EquipmentCodex e;
+    private Sprites sprites;
     public InventoryView(Player player, Canvas canvas) {
         super(player, canvas);
         this.player = player;
@@ -20,7 +21,7 @@ public class InventoryView extends ListView{
         this.gc = canvas.getGraphicsContext2D();
         this.i = new ItemCodex();
         this.e = new EquipmentCodex();
-
+        sprites = new Sprites();
     }
 
     @Override
@@ -32,14 +33,13 @@ public class InventoryView extends ListView{
         for(int i = 0; i < getMaxEntriesDisplayed(); i++) {
             renderEntry(i);
         }
+        if(getNumOfEntries() == 0) { return; }
         renderCursor();
         renderScrollBar();
     }
 
 
     private void renderEntry(int ind) {
-        gc.setFill(Color.WHITE);
-        gc.fillRect(0, ind*getEntryHeight(), getEntryWidth(), getEntryHeight());
         Item item = player.getInventory().getItem(ind);
         if(item == null) {
             return;
@@ -50,10 +50,12 @@ public class InventoryView extends ListView{
         else{
             renderTextEntry(i.getName(player.getInventory().getItem(ind).getID()), ind);
         }
-
-
+        gc.drawImage(sprites.getItemImage(item.getID()), 50, ind*getEntryHeight(), 50, 50);
+        //sprites.getItemImage(item.getID());
 
     }
+
+
 
     public void renderScrollBar() {
         //Calculate how large the scroll bar should be

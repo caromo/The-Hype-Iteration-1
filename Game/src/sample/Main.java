@@ -87,7 +87,6 @@ public class Main extends Application {
 
         theStage.show();
     }
-
     public void loadGame() {
         try {
             player.setIsDead(false); // If player previously died this makes sure he is now alive
@@ -102,9 +101,8 @@ public class Main extends Application {
             File mapFile = new File(System.getProperty("user.dir") + "/Save/Map/" + mapID +".txt");  //Sample directory
 
 
-            map.loadMapFromID(Integer.parseInt(mapID));
 
-            for(int i=1; i<12;i++){
+            for(int i=1; i<13;i++){
                 String playerInfo = br_player.readLine();
                 Scanner s = new Scanner(playerInfo);
                 // System.out.println(playerInfo); //testing
@@ -149,10 +147,15 @@ public class Main extends Application {
                     player.equipGear(new Ring(Integer.parseInt(tempVal)/100, Integer.parseInt(tempVal), Integer.parseInt(tempVal2)));
                 }
 
-                if (i == 11 ){
+                if(i==11){
+                    player.setPlayerSprite(Integer.parseInt(playerInfo));
+                }
+
+                if (i == 12 ){
                     player.setName(playerInfo);
                 }
             }
+            map.loadMapFromID(Integer.parseInt(mapID));
 
             //loads player inventory
             File inventoryFile = new File(System.getProperty("user.dir") + "/Save/inventory.txt");  //Sample directory
@@ -160,7 +163,7 @@ public class Main extends Application {
             String s;
             while ((s= br_inventory.readLine()) != null )
             {
-              //  Scanner scan = new Scanner(s);
+                //  Scanner scan = new Scanner(s);
                 System.out.println("the line is " +s);
                 player.getInventory().addItembyID(Integer.parseInt(s));
             }
@@ -170,6 +173,7 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+
 
     public void toggleMenu() {
         menuActive = !menuActive;
@@ -276,7 +280,7 @@ public class Main extends Application {
     Creates the Save folder with default maps, player, and inventory
     Will overwrite itself every time new game is selected
      */
-    public void newGame(String name) {
+    public void newGame(String name, int sprite) {
         System.out.println(System.getProperty("user.dir"));
         //creates the players map folder
         Path path = Paths.get(System.getProperty("user.dir") + "/Save/");
@@ -290,6 +294,8 @@ public class Main extends Application {
 
         //writes the players name to the last line of the file
         try {
+            Files.write(Paths.get(System.getProperty("user.dir") + "/Save/Player.txt"), String.valueOf(sprite).getBytes(), StandardOpenOption.APPEND);
+            Files.write(Paths.get(System.getProperty("user.dir") + "/Save/Player.txt"), "\n".getBytes(), StandardOpenOption.APPEND);
             Files.write(Paths.get(System.getProperty("user.dir") + "/Save/Player.txt"), name.getBytes(), StandardOpenOption.APPEND);
         } catch (IOException e) {
             e.printStackTrace();

@@ -36,6 +36,7 @@ public class MainMenu {
     private Player player;
     private Main main;
     private boolean isMenuOpen = true;
+    private int spriteNumber;
     public MainMenu(Player player, GraphicsContext gc, Canvas canvas, Stage mainStage, Scene mainScene, Main main) {
         this.player = player;
         this.mainStage = mainStage;
@@ -149,7 +150,7 @@ public class MainMenu {
         ChoiceBox characterSprites = new ChoiceBox(FXCollections.observableArrayList("Guy","Girl","Adventurer","Soldier"));
         characterSprites.setValue("Guy"); //Setting a default choice
 
-        Image characterSprite1 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterGuy.png");
+        Image characterSprite1 = new Image("file:" + System.getProperty("user.dir") + "/src/sample/sprites/characterGuy.png");
         Image characterSprite2 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterGirl.png");
         Image characterSprite3 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterAdventurer.png");
         Image characterSprite4 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterSoldier.png");
@@ -171,7 +172,7 @@ public class MainMenu {
                     public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                         //label.setText(spriteChoices[newValue.intValue()]);
                         imageView.setImage(spriteChoices[newValue.intValue()]);
-                        player.setPlayerSpriteNumber(newValue.intValue()+1);
+                        spriteNumber = (newValue.intValue()+1);
                     }
                 }
         );
@@ -198,9 +199,9 @@ public class MainMenu {
                     player.setAttackPoints(8);
                 else if (characterStatAdvantage.getValue() == "Defense")
                     player.setDefensePoints(8);
-                player.setName(nameInput.getText());
-                player.setPlayerSprite(imageView.getImage());
-                main.newGame(player.getName());
+                //player.setName(nameInput.getText());
+                //player.setPlayerSprite(imageView.getImage());
+                main.newGame(player.getName(), spriteNumber);
                 isMenuOpen = false;
                 //System.out.println(player.getName());
                 //mainStage.setScene(mainScene);

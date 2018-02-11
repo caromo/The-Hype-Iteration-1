@@ -10,6 +10,8 @@ public class tile {
     public int spec;
     private boolean areaEffect = false;
     protected int instantKill = 20; //idk
+    protected int obstacleItem = 44; //idk
+    protected int interactiveItem = 44; //idk
 
     public tile(tileObject objType) {
         passable = true;
@@ -48,6 +50,17 @@ public class tile {
             else if (scenario == 5) {
                 return ((MapTransition) temp).getDestination();
             }
+            else if(scenario == obstacleItem)
+            {
+                setPassable(false);
+            }
+            else if(scenario == interactiveItem)
+            {
+                if(occupy.getPlayer().getLevel() > ((Item)temp).getRequiredLevel())
+                {
+                    occupy.getPlayer().acquireItem((Item)temp);
+                }
+            }
         }
         return -1;
     }
@@ -56,7 +69,7 @@ public class tile {
         decal = D;
         this.SN = SN;
         this.spec = spec;
-        System.out.println("Decal: " + D + " SN: " + SN + " SPEC " + spec + " EQdata " + EQdata );
+
         if (SN == 1) { // Area Effect
             holding = new Holding(this, new damageEffect(SN, spec));
         } else if(SN == 2){
