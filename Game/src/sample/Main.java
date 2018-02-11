@@ -188,7 +188,7 @@ public class Main extends Application {
 
 
     public void saveGame() {
-        saveMap(map.getMapID(), map, player);
+        map.saveMap();
         try {
             PrintWriter pw = new PrintWriter(System.getProperty("user.dir") + "/Save/Player.txt");
             PrintWriter iw = new PrintWriter(System.getProperty("user.dir") + "/Save/Inventory.txt");
@@ -266,45 +266,45 @@ public class Main extends Application {
         }
     }
 
-    //Saves the current Map
-    public void saveMap(int MapID, Map map, Player player) {
-        int mapSizeX = map.getMapX();
-        int mapSizeY = map.getMapY();
-        tile[][] tmp = map.getState();
+    // //Saves the current Map
+    // public void saveMap(int MapID, Map map, Player player) {
+    //     int mapSizeX = map.getMapX();
+    //     int mapSizeY = map.getMapY();
+    //     tile[][] tmp = map.getState();
 
 
-        try {
-            //opens the map file based on MapID for writing
-            PrintWriter pw = new PrintWriter(System.getProperty("user.dir") + "/Save" + "/Map" + "/" + Integer.toString(MapID)
-                    + ".txt");
+    //     try {
+    //         //opens the map file based on MapID for writing
+    //         PrintWriter pw = new PrintWriter(System.getProperty("user.dir") + "/Save" + "/Map" + "/" + Integer.toString(MapID)
+    //                 + ".txt");
 
-            //write first line map size: X Y
-            pw.println(mapSizeX + " " + mapSizeY);
-            //System.out.println(mapSizeX + " " + mapSizeY);
-            //write second line with startingPosition
-            pw.println((int)player.getPosition().getX() + " " + (int)player.getPosition().getY());
-            //System.out.println((int)player.getPosition().getX() + " " + (int)player.getPosition().getY());
+    //         //write first line map size: X Y
+    //         pw.println(mapSizeX + " " + mapSizeY);
+    //         //System.out.println(mapSizeX + " " + mapSizeY);
+    //         //write second line with startingPosition
+    //         pw.println((int)player.getPosition().getX() + " " + (int)player.getPosition().getY());
+    //         //System.out.println((int)player.getPosition().getX() + " " + (int)player.getPosition().getY());
 
-           // System.out.println(tmp[0][0]);
+    //        // System.out.println(tmp[0][0]);
 
-            //Iterating through the map printing tiles in 5 digits
-            for (int i = 0; i < mapSizeX; i++) {
-                for (int j = 0; j < mapSizeY; j++) {
-                    pw.print(tmp[i][j].spill());
-                    pw.print(" ");
-                    //System.out.print(tmp[i][j].spill() + " ");
-                }
-                pw.println();
+    //         //Iterating through the map printing tiles in 5 digits
+    //         for (int i = 0; i < mapSizeX; i++) {
+    //             for (int j = 0; j < mapSizeY; j++) {
+    //                 pw.print(tmp[i][j].spill());
+    //                 pw.print(" ");
+    //                 //System.out.print(tmp[i][j].spill() + " ");
+    //             }
+    //             pw.println();
 
-                //System.out.println();
+    //             //System.out.println();
 
-            }
-            pw.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    //         }
+    //         pw.close();
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //     }
 
-    }
+    // }
 
 
     /*
