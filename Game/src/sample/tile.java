@@ -73,6 +73,8 @@ public class tile {
             if (spec / 100 == 3) {
                 holding = new Holding(this, new Ring(spec / 100, spec, EQdata));
             }
+        }else if(SN == instantKill){ //instant death
+            holding = new Holding(this, new Fatality(SN, spec));
         }
 
         switch(decal){
