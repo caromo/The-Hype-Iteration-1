@@ -16,7 +16,7 @@ public class Sprites {
     private String workingDir;
     public Sprites() {
 
-        workingDir = System.getProperty("user.dir");
+        workingDir = System.getProperty("user.dir")+"/Game";
 
         //System.out.println(workingDir);
         itemSprites = new ArrayList<Image>();
@@ -38,11 +38,11 @@ public class Sprites {
         terrainSprites.add(getImage(workingDir + "/src/sample/sprites/water.png"));
         terrainSprites.add(getImage(workingDir + "/src/sample/sprites/mountains.png"));
 
-        AESprites.add(getImage(workingDir + "/src/sample/sprites/crying-cat-face.png"));
-        AESprites.add(getImage(workingDir + "/src/sample/sprites/health.png"));
+        AESprites.add(getImage(workingDir + "/src/sample/sprites/skull.png"));
+        AESprites.add(getImage(workingDir + "/src/sample/sprites/health2.png"));
         AESprites.add(getImage(workingDir + "/src/sample/sprites/star.png"));
 
-        playerSprites.add(getImage(System.getProperty("user.dir") + "/src/sample/sprites/characterGuy.png"));
+        playerSprites.add(getImage(System.getProperty("user.dir") + "/Game/src/sample/sprites/characterGuy.png"));
         playerSprites.add(getImage(System.getProperty("user.dir") + "/Game/src/sample/sprites/characterGirl.png"));
         playerSprites.add(getImage(System.getProperty("user.dir") + "/Game/src/sample/sprites/characterAdventurer.png"));
         playerSprites.add(getImage(System.getProperty("user.dir") + "/Game/src/sample/sprites/characterSoldier.png"));
