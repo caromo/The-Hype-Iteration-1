@@ -26,7 +26,15 @@ public class PlayerController implements EventHandler<KeyEvent> {
                 p.y--;
                 map.movePlayer(p);
                 break;
+            case NUMPAD8:
+                p.y--;
+                map.movePlayer(p);
+                break;
             case RIGHT:
+                p.x++;
+                map.movePlayer(p);
+                break;
+            case NUMPAD6:
                 p.x++;
                 map.movePlayer(p);
                 break;
@@ -34,8 +42,32 @@ public class PlayerController implements EventHandler<KeyEvent> {
                 p.y++;
                 map.movePlayer(p);
                 break;
+            case NUMPAD2:
+                p.y++;
+                map.movePlayer(p);
+                break;
             case LEFT:
                 p.x--;
+                map.movePlayer(p);
+                break;
+            case NUMPAD4:
+                p.x--;
+                map.movePlayer(p);
+                break;
+            case NUMPAD7: //NW
+                p.x--; p.y++;
+                map.movePlayer(p);
+                break;
+            case NUMPAD9: //NE
+                p.x++; p.y++;
+                map.movePlayer(p);
+                break;
+            case NUMPAD3: //SE
+                p.x++; p.y--;
+                map.movePlayer(p);
+                break;
+            case NUMPAD1: //SW
+                p.x--; p.y--;
                 map.movePlayer(p);
                 break;
             case D:
@@ -47,6 +79,7 @@ public class PlayerController implements EventHandler<KeyEvent> {
             case E:
                 player.gainExp(5);
                 break;
+
         }
     }
 
