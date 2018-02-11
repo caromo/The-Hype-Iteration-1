@@ -177,22 +177,26 @@ public class MainMenu {
         // Continue Button
         Button characterCreationContinueButton = new Button("Continue");
         characterCreationContinueButton.setOnAction(e -> {
-            
 
-            // Applies advantage to player
-            if(characterStatAdvantage.getValue() == "Health")
-                player.setHealth(110);
-            else if(characterStatAdvantage.getValue() == "Attack")
-                player.setAttackPoints(8);
-            else if(characterStatAdvantage.getValue() == "Defense")
-                player.setDefensePoints(8);
-            player.setName(nameInput.getText());
-            player.setPlayerSprite(imageView.getImage());
-            main.newGame(player.getName());
-            isMenuOpen = false;
-            //System.out.println(player.getName());
-            //mainStage.setScene(mainScene);
-            openIntroMenu();
+            if(nameInput.getText().isEmpty() == false)
+            {
+                // Applies advantage to player
+                if (characterStatAdvantage.getValue() == "Health")
+                    player.setHealth(110);
+                else if (characterStatAdvantage.getValue() == "Attack")
+                    player.setAttackPoints(8);
+                else if (characterStatAdvantage.getValue() == "Defense")
+                    player.setDefensePoints(8);
+                player.setName(nameInput.getText());
+                player.setPlayerSprite(imageView.getImage());
+                main.newGame(player.getName());
+                isMenuOpen = false;
+                //System.out.println(player.getName());
+                //mainStage.setScene(mainScene);
+                openIntroMenu();
+            }
+            else
+                System.out.println("Enter a character name!");
         });
 
         // Adding buttons and text to characterCreation
