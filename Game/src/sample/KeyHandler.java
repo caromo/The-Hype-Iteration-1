@@ -5,31 +5,40 @@ import javafx.scene.input.KeyEvent;
 
 public class KeyHandler implements EventHandler<KeyEvent>
 {
+    private View view;
+    private Main main;
     public int x, y;
-    public KeyHandler() {
+    public KeyHandler(View view, Main main) {
+        this.view = view;
+        this.main = main;
         x = 0; y = 0;
     }
     public void handle(KeyEvent event)
     {
-        System.out.println("KeyPressed");
         switch(event.getCode()) {
             case UP:
-                y = -1;
-                x = 0;
+                view.Up();
                 break;
             case RIGHT:
-                x = 1;
-                y = 0;
+                view.Right();
                 break;
             case DOWN:
-                y = 1;
-                x = 0;
+                view.Down();
                 break;
             case LEFT:
-                x = -1;
-                y = 0;
+                view.Left();
+                break;
+            case ESCAPE:
+                view.Escape();
+                break;
+            case ENTER:
+                view.Enter();
+                break;
+            case P:
+                view.P();
                 break;
         }
+
         //do stuff
     }
 }

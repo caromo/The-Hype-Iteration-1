@@ -11,7 +11,10 @@ import java.util.Collections;
 public class Inventory {
     private final int MAX_SIZE = 100;
     private ArrayList<Item> items = new ArrayList<>(MAX_SIZE);
-    public Inventory() {}
+    private EquipmentCodex eCodex;
+    public Inventory() {
+    	eCodex = new EquipmentCodex();
+    }
 
     private int compareID(Item a, Item b) {
         if (a.getID() < b.getID()) return 1;
@@ -21,13 +24,26 @@ public class Inventory {
 
     // Operation addItem(itemID:int)
     // Adds item to inventory based off it's ID
-    public void addItem(int id) {
+    public void addItembyID(int id) {
         if (items.size() == MAX_SIZE) {
             // Notify the user that inventory is full
             return;
         }
         else {
-            items.add(new Item(id));
+            System.out.println(items.size());
+            items.add(new Item(4,id));
+            System.out.println(items.size());
+            return;
+        }
+    }
+
+    public void addItem(Item i) {
+        if (items.size() == MAX_SIZE) {
+            // Notify the user that inventory is full
+            return;
+        }
+        else {
+            items.add(i);
             return;
         }
     }
@@ -36,7 +52,7 @@ public class Inventory {
     // Returns an array of items for view to iterate through
     public Item[] getItems() {
         Item[] arr = {};
-        items.toArray(arr);
+        arr = items.toArray(arr);
         return arr;
     }
 
@@ -58,9 +74,7 @@ public class Inventory {
         if (index >= items.size() || index < 0) {
             // Internal notice that item does not exist
         }
-        else {
-            items.remove(index);
-        }
+        else { items.remove(index);  }
         return;
     }
 
@@ -71,23 +85,9 @@ public class Inventory {
         return;
     }
 
-    // Operation useItem(itemID:int)
-    // Calls use on item based off it's index in the arraylist and indicates and removs it from invntory
-    public void useItem(int index) {
-        if (index >= items.size() || index < 0) {
-            // Internal notice that item does not exist
-        }
-        else {
-            items.get(index).use();
-            items.remove(index);
-        }
-        return;
-    }
-
     public void printInventory() {
         for(int i = 0; i < items.size(); i++) {
             System.out.println(items.get(i).getID());
         }
     }
 }
-
