@@ -45,14 +45,14 @@ public class tile {
             }
             else if(temp instanceof Item) {      //Item
                 if (((Item) temp).isOneShot()) {
-                   ItemCodex i = new ItemCodex();
-                   i.useItem(occupy.getPlayer(),(Item)temp);
-                   holding = null;
-                   SN = 0;
+                    ItemCodex i = new ItemCodex();
+                    i.useItem(occupy.getPlayer(), (Item) temp);
                 }
                 else {
-                    occupy.getPlayer().acquireItem((Item) temp);
+                    occupy.getPlayer().acquireItem((Item)temp);
                 }
+                holding = null;
+                SN = 0;
                 return -1;
             }
             else if (scenario == 5) {
@@ -84,17 +84,7 @@ public class tile {
             holding = new Holding(this, new healingEffect(SN, spec));
         } else if(SN == 3){
             holding = new Holding(this, new expEffect(SN, spec));
-        } else if (SN == 4) { // Item
-            holding = new Holding(this, new Item(SN, spec));
-            if(oneShot == 1) {
-                ((Item) holding.getObject()).setOneShot(true);
-            }
-            else{
-                ((Item)holding.getObject()).setOneShot(false);
-            }
-        } else if (SN == 5) { // Map Transition
-            holding = new Holding(this, new MapTransition(SN, spec));
-        } else if (SN == 6) { // Equipment
+        } else if (SN == 4 && EQdata != 0) {
             if (spec / 100 == 1) {
                 holding = new Holding(this, new Armor(spec / 100, spec, EQdata));
             }
@@ -104,7 +94,18 @@ public class tile {
             if (spec / 100 == 3) {
                 holding = new Holding(this, new Ring(spec / 100, spec, EQdata));
             }
-        }else if(SN == instantKill){ //instant death
+        }
+        else if (SN == 4) { // Item
+            holding = new Holding(this, new Item(SN, spec));
+            if(oneShot == 1) {
+                ((Item) holding.getObject()).setOneShot(true);
+            }
+            else{
+                ((Item)holding.getObject()).setOneShot(false);
+            }
+        } else if (SN == 5) { // Map Transition
+            holding = new Holding(this, new MapTransition(SN, spec));
+        } else if(SN == instantKill){ //instant death
             holding = new Holding(this, new Fatality(SN, spec));
         }
 

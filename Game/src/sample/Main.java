@@ -295,7 +295,7 @@ public class Main extends Application {
         //writes the players name to the last line of the file
         try {
             Files.write(Paths.get(System.getProperty("user.dir") + "/Save/Player.txt"), String.valueOf(sprite).getBytes(), StandardOpenOption.APPEND);
-            Files.write(Paths.get(System.getProperty("user.dir") + "/Save/Player.txt"), "\n".getBytes(), StandardOpenOption.APPEND);
+            Files.write(Paths.get(System.getProperty("user.dir") + "/Save/Player.txt"), System.getProperty("line.separator").getBytes(), StandardOpenOption.APPEND);
             Files.write(Paths.get(System.getProperty("user.dir") + "/Save/Player.txt"), name.getBytes(), StandardOpenOption.APPEND);
         } catch (IOException e) {
             e.printStackTrace();

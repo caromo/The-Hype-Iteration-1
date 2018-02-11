@@ -74,6 +74,7 @@ public class InventoryView extends ListView{
 
     public void Enter() {
         i.useItem(player,player.getInventory().getItem(getSelectedItemIndex()));
+        player.getInventory().tossItem(player.getInventory().getItem(getSelectedItemIndex()));
     }
     public void Up() {
         cursorUp();

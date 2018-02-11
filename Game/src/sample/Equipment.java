@@ -8,6 +8,7 @@ public abstract class Equipment extends Item {
     // (eg. A sword's ID would be 201, a whip's ID would be 202, etc.)
     public Equipment(int ItemID, int equipmentID) {
         super(4,ItemID);
+        super.setOneShot(false);
         EquipmentID = equipmentID;
     }
 
