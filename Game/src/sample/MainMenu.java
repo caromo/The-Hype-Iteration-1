@@ -128,7 +128,7 @@ public class MainMenu {
         chooseName.setFont(Font.font("Verdana",14));
         Label chooseSprite = new Label("Select a character class");
         chooseSprite.setFont(Font.font("Verdana",14));
-        Label chooseColor = new Label("Select a stat advantage");
+        Label chooseColor = new Label("Select a stat to boost");
         chooseColor.setFont(Font.font("Verdana",14));
 
         // Character Creation Choices
@@ -138,9 +138,9 @@ public class MainMenu {
         ChoiceBox characterSprites = new ChoiceBox(FXCollections.observableArrayList("Pikachu","Sword","Potion 1"));
         characterSprites.setValue("Pikachu"); //Setting a default choice
 
-        Image characterSprite1 = new Image("file:" + System.getProperty("user.dir") + "\\src\\sample\\sprites\\pikachu.png");
-        Image characterSprite2 = new Image("file:" + System.getProperty("user.dir") + "\\src\\sample\\sprites\\sword.png");
-        Image characterSprite3 = new Image("file:" + System.getProperty("user.dir") + "\\src\\sample\\sprites\\potion.png");
+        Image characterSprite1 = new Image("file:" + System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\pikachu.png");
+        Image characterSprite2 = new Image("file:" + System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\sword.png");
+        Image characterSprite3 = new Image("file:" + System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\potion.png");
 
         ImageView imageView = new ImageView(characterSprite1);
 
@@ -169,7 +169,7 @@ public class MainMenu {
         Button characterCreationContinueButton = new Button("Continue");
         characterCreationContinueButton.setOnAction(e -> {
             if(characterStatAdvantage.getValue() == "Health")
-                player.setHealth(120);
+                player.setHealth(110);
             else if(characterStatAdvantage.getValue() == "Attack")
                 player.setAttackPoints(8);
             else if(characterStatAdvantage.getValue() == "Defense")

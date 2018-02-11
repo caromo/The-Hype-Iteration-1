@@ -66,14 +66,14 @@ public class View {
     private void initializeSprites() {
         //Load item textures
         itemSprites = new Image[100];
-        itemSprites[0] = getImage(workingDir + "\\src\\sample\\sprites\\potion2.png");
-        itemSprites[1] = getImage(workingDir + "\\src\\sample\\sprites\\sword.png");
+        itemSprites[0] = getImage(workingDir + "\\Game\\src\\sample\\sprites\\potion2.png");
+        itemSprites[1] = getImage(workingDir + "\\Game\\src\\sample\\sprites\\sword.png");
 
         //Load terrain textures
         terrainSprites = new Image[3];
-        terrainSprites[0] = getImage(workingDir + "\\src\\sample\\sprites\\grass.png");
-        terrainSprites[1] = getImage(workingDir + "\\src\\sample\\sprites\\water.png");
-        terrainSprites[2] = getImage(workingDir + "\\src\\sample\\sprites\\mountains.png");
+        terrainSprites[0] = getImage(workingDir + "\\Game\\src\\sample\\sprites\\grass.png");
+        terrainSprites[1] = getImage(workingDir + "\\Game\\src\\sample\\sprites\\water.png");
+        terrainSprites[2] = getImage(workingDir + "\\Game\\src\\sample\\sprites\\mountains.png");
 
         //playerImg = getImage(workingDir + "\\src\\sample\\sprites\\pikachu.png");
 
@@ -131,7 +131,7 @@ public class View {
                     gc.fillRect((i*tileSize)+5, (j*tileSize)+5, tileSize-5, tileSize-5);
 
                 } else if(tileID == 4) {//Item
-                    gc.drawImage(getImage(workingDir + "\\src\\sample\\sprites\\grass.png"), (i*tileSize)+cameraX, (j*tileSize)+cameraY);
+                    gc.drawImage(getImage(workingDir + "\\Game\\src\\sample\\sprites\\grass.png"), (i*tileSize)+cameraX, (j*tileSize)+cameraY);
                     gc.drawImage(itemSprites[1], (i*tileSize)+5+cameraX, (j*tileSize)+5+cameraY, tileSize, tileSize);
                 } else {//MapTransition
 
