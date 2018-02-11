@@ -61,7 +61,7 @@ public class Main extends Application {
 
         pc = new PlayerController(map);
 
-        newGame("test");
+        //newGame("test");
         //player.getInventory().addItembyID(100);
         //System.out.println(player.getInventory().getNumOfItems());
 
@@ -73,14 +73,18 @@ public class Main extends Application {
         canvas.setOnKeyPressed(keyHandler);
         mainScene.setOnKeyPressed(pc);
         final long startNanoTime = System.nanoTime();
+
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
                 //double t = (currentNanoTime - startNanoTime) / 1000000000.0;
                 pc.setGamePaused(view.getMenuOpen());
-                view.render(map.getState(), player);
+                if (!mainMenu.getIsMenuOpen()) {
+                    view.render(map.getState(), player);
+                }
                 checkForGameOver();
             }
         }.start();
+
         theStage.show();
     }
 

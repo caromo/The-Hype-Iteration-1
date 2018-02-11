@@ -46,11 +46,14 @@ public class MenuView extends ListView{
 
         this.gc = canvas.getGraphicsContext2D();
 
+        //Adds menu options to list
         menuItems = new ArrayList<ListView>();
         menuItems.add(new InventoryView(player, canvas));
+        menuItems.add(new EquipmentView(player, canvas));
         menuItems.add(new StatusView(player, canvas));
         menuItems.add(new SaveGameView(player, canvas, main));
         menuItems.add(new QuitGame(player, canvas));
+
         setNumOfEntries(menuItems.size());
         currentOpenInd = 0;
         open = false;
