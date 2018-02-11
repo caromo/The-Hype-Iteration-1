@@ -17,12 +17,17 @@ public class tile {
 
     //Performs the action associated with the tileObject
     public void applyEffect() {
+
         if (occupy != null && holding != null) {
+            System.out.println("APPLY2");
             int scenario = holding.getObject().getScenario();
             tileObject temp = holding.getObject();
-            if(scenario == 1)  {    //Area effect
-
-            } else if(scenario == 4) {      //Item
+            if(scenario == 1 || scenario == 2 || scenario == 3)  {    //Area effect
+                System.out.println("APPLY");
+                ((AreaEffect) temp).setAmount(3);
+                ((AreaEffect) temp).startEf();
+            }
+            else if(scenario == 4) {      //Item
                 occupy.getPlayer().acquireItem((Item)temp);
             }
         }

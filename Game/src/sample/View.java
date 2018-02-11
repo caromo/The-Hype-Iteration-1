@@ -28,9 +28,7 @@ public class View {
     private int cameraX, cameraY;
     private String workingDir;
     Color[] items;
-    private Image[] itemSprites;
-    private Image[] terrainSprites;
-    private Image playerImg;
+
 
     private int mapWidth, mapHeight;
     private int tileSize;
@@ -38,6 +36,8 @@ public class View {
     private MenuView menu;
     private MainMenu mainMenu;
     private HUDView hud;
+
+    private Sprites sprites;
 
     public View(Canvas canvas, Player player, MainMenu mainMenu, Main main) {
 
@@ -50,35 +50,23 @@ public class View {
 
         this.mainMenu = mainMenu;
 
+        sprites = new Sprites();
+
         cameraX = 0; cameraY = 0;
         mapWidth = 100; mapHeight = 100;
         tileSize = 50; //width/height of tiles in pixels
 
         //Get working directory to load textures from
         workingDir = System.getProperty("user.dir");
+
         System.out.println(workingDir);
 
-        initializeSprites();
+
 
     }
 
     //Load image arrays with sprite assets
-    private void initializeSprites() {
-        //Load item textures
-        itemSprites = new Image[100];
-        itemSprites[0] = getImage(workingDir + "\\Game\\src\\sample\\sprites\\potion2.png");
-        itemSprites[1] = getImage(workingDir + "\\Game\\src\\sample\\sprites\\sword.png");
 
-        //Load terrain textures
-        terrainSprites = new Image[3];
-        terrainSprites[0] = getImage(workingDir + "\\Game\\src\\sample\\sprites\\grass.png");
-        terrainSprites[1] = getImage(workingDir + "\\Game\\src\\sample\\sprites\\water.png");
-        terrainSprites[2] = getImage(workingDir + "\\Game\\src\\sample\\sprites\\mountains.png");
-
-        //playerImg = getImage(workingDir + "\\src\\sample\\sprites\\pikachu.png");
-
-
-    }
 
     public void render(tile[][] map, Player p) {
         //gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -107,14 +95,7 @@ public class View {
         for(int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[0].length; j++) {
 
-
-                if(map[i][j].decal == 'G') {
-                    gc.drawImage(terrainSprites[0], (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
-                } else if(map[i][j].decal == 'W') {
-                    gc.drawImage(terrainSprites[1], (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
-                } else {
-                    gc.drawImage(terrainSprites[2], (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
-                }
+                gc.drawImage(sprites.getTerrainImage(map[i][j].decal), (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
 
                 int tileID = map[i][j].SN;
                 //System.out.println(tileID);
@@ -131,8 +112,8 @@ public class View {
                     gc.fillRect((i*tileSize)+5, (j*tileSize)+5, tileSize-5, tileSize-5);
 
                 } else if(tileID == 4) {//Item
-                    gc.drawImage(getImage(workingDir + "\\Game\\src\\sample\\sprites\\grass.png"), (i*tileSize)+cameraX, (j*tileSize)+cameraY);
-                    gc.drawImage(itemSprites[1], (i*tileSize)+5+cameraX, (j*tileSize)+5+cameraY, tileSize, tileSize);
+                    gc.drawImage(getImage(workingDir + "\\src\\sample\\sprites\\grass.png"), (i*tileSize)+cameraX, (j*tileSize)+cameraY);
+                    gc.drawImage(sprites.getItemImage(1), (i*tileSize)+5+cameraX, (j*tileSize)+5+cameraY, tileSize, tileSize);
                 } else {//MapTransition
 
                 }
