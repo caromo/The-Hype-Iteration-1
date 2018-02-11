@@ -40,13 +40,12 @@ public class EquipmentView extends ListView {
         if(eq == null) {
             return;
         }
-        renderTextEntry(eqc.getDescription(eq.getEquipmentID()), ind);
+        renderTextEntry(eqc.getName(eq.getEquipmentID()), ind);
 
     }
 
     //Tells player to remove selected gear
     public void Enter() {
-
         player.unequipGear(getCursorPos());
         System.out.println(player.getEquipment()[getCursorPos()].getEquipmentID());
     }

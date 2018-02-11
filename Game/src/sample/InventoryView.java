@@ -11,11 +11,15 @@ public class InventoryView extends ListView{
     private Player player;
     private Canvas canvas;
     private GraphicsContext gc;
+    private ItemCodex i;
+    private EquipmentCodex e;
     public InventoryView(Player player, Canvas canvas) {
         super(player, canvas);
         this.player = player;
         this.canvas = canvas;
         this.gc = canvas.getGraphicsContext2D();
+        this.i = new ItemCodex();
+        this.e = new EquipmentCodex();
 
     }
 
@@ -40,7 +44,12 @@ public class InventoryView extends ListView{
         if(item == null) {
             return;
         }
-        renderTextEntry("ItemID: " + Integer.toString(player.getInventory().getItem(ind+getScrollOffset()).getID()), ind);
+        if (player.getInventory().getItem(ind) instanceof Equipment) {
+            renderTextEntry(e.getName(((Equipment) player.getInventory().getItem(ind)).getEquipmentID()), ind);
+        }
+        else{
+            renderTextEntry(i.getName(player.getInventory().getItem(ind).getID()), ind);
+        }
 
 
 
@@ -62,7 +71,7 @@ public class InventoryView extends ListView{
     }
 
     public void Enter() {
-        System.out.println(player.getInventory().getItem(getSelectedItemIndex()).getID());
+        i.useItem(player,player.getInventory().getItem(getSelectedItemIndex()));
     }
     public void Up() {
         cursorUp();
