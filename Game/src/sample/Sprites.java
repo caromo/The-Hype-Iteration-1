@@ -8,15 +8,18 @@ import java.util.ArrayList;
 public class Sprites {
     private ArrayList<Image> itemSprites;
     private ArrayList<Image> terrainSprites;
+    private ArrayList<Image> AESprites;
     private Image mapTransitionSprite;
 
 
     private String workingDir;
     public Sprites() {
-        workingDir = System.getProperty("user.dir")+"\\Game"x;
+        workingDir = System.getProperty("user.dir")+"\\Game";
         //System.out.println(workingDir);
         itemSprites = new ArrayList<Image>();
         terrainSprites = new ArrayList<Image>();
+        AESprites = new ArrayList<Image>();
+
         initializeSprites();
     }
 
@@ -32,6 +35,10 @@ public class Sprites {
         terrainSprites.add(getImage(workingDir + "\\src\\sample\\sprites\\water.png"));
         terrainSprites.add(getImage(workingDir + "\\src\\sample\\sprites\\mountains.png"));
 
+        AESprites.add(getImage(workingDir + "\\src\\sample\\sprites\\health.png"));
+        AESprites.add(getImage(workingDir + "\\src\\sample\\sprites\\crying-cat-face.png"));
+        AESprites.add(getImage(workingDir + "\\src\\sample\\sprites\\star.png"));
+
         mapTransitionSprite = getImage(workingDir + "\\src\\sample\\sprites\\door.png");
 
         //playerImg = getImage(workingDir + "\\src\\sample\\sprites\\pikachu.png");
@@ -40,19 +47,19 @@ public class Sprites {
     }
 
     public Image getTileObjectSprite(int SN, int spec) {
-        return mapTransitionSprite;
-        /*
+
+
         if(SN == 1) {//AEHealing
-            //Return AEHEaling decal
+            return AESprites.get(0);
         } else if(SN == 2) {//AEDamage
-
+            return AESprites.get(1);
         } else if(SN == 3) {//AEExperience
-
+            return AESprites.get(2);
         } else if(SN == 4) {//Item
             return getItemImage(spec);
         } else {//Map transition
             return mapTransitionSprite;
-        }*/
+        }
     }
 
     public Image getItemImage(int itemID) {
