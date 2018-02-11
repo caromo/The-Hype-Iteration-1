@@ -50,7 +50,7 @@ public class InventoryView extends ListView{
         else{
             renderTextEntry(i.getName(player.getInventory().getItem(ind).getID()), ind);
         }
-        gc.drawImage(sprites.getItemImage(item.getID()), 50, ind*getEntryHeight(), 50, 50);
+        gc.drawImage(sprites.getItemImage(item.getID()), 20, ind*getEntryHeight()+25, 50, 50);
         //sprites.getItemImage(item.getID());
 
     }

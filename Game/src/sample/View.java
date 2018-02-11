@@ -100,7 +100,7 @@ public class View {
 
                 //System.out.println(tileID);
                 if(map[i][j].SN > 0) {
-                    gc.drawImage(sprites.getTileObjectSprite(map[i][j].SN, map[i][j].spec), (i * tileSize) + 5 + cameraX, (j * tileSize) + 5 + cameraY, tileSize, tileSize);
+                    gc.drawImage(sprites.getTileObjectSprite(map[i][j].SN, map[i][j].spec), (i * tileSize) + cameraX, (j * tileSize) + cameraY, tileSize, tileSize);
                 }
             }
         }
