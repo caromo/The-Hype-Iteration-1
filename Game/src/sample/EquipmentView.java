@@ -35,8 +35,7 @@ public class EquipmentView extends ListView {
     }
 
     private void renderEntry(int ind) {
-        gc.setFill(Color.WHITE);
-        gc.fillRect(0, ind*getEntryHeight(), getEntryWidth(), getEntryHeight());
+
         Equipment eq = player.getEquipment()[ind];
         if(eq == null) {
             return;

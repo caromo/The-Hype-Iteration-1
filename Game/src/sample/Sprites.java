@@ -37,8 +37,8 @@ public class Sprites {
         terrainSprites.add(getImage(workingDir + "/src/sample/sprites/water.png"));
         terrainSprites.add(getImage(workingDir + "/src/sample/sprites/mountains.png"));
 
-        AESprites.add(getImage(workingDir + "/src/sample/sprites/health.png"));
         AESprites.add(getImage(workingDir + "/src/sample/sprites/crying-cat-face.png"));
+        AESprites.add(getImage(workingDir + "/src/sample/sprites/health.png"));
         AESprites.add(getImage(workingDir + "/src/sample/sprites/star.png"));
 
         mapTransitionSprite = getImage(workingDir + "/src/sample/sprites/door.png");

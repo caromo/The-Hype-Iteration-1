@@ -21,6 +21,9 @@ public class ListView {
     private int cursorPos;
     private int numOfEntries;
     private int maxEntriesDisplayed;
+
+    private Image cursorImg;
+    private Image arrow;
     public ListView(Player player, Canvas canvas) {
         this.player = player;
         this.gc = canvas.getGraphicsContext2D();
@@ -31,27 +34,34 @@ public class ListView {
         cursorPos = 0;
         scrollOffset = 0;
         maxEntriesDisplayed = 8;
+
+        File file = new File(System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\cursor2.png");
+        cursorImg = new Image(file.toURI().toString());
+        file = new File(System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\arrow.png");
+        arrow = new Image(file.toURI().toString());
     }
 
     public void renderCursor() {
-        gc.setLineWidth(10);
-        gc.setStroke(Color.BLUE);
-        gc.strokeLine(0, cursorPos*entryHeight, entryWidth-10, cursorPos*entryHeight);
-        gc.strokeLine(0, (cursorPos+1)*entryHeight, entryWidth-10, (cursorPos+1)*entryHeight);
-        gc.strokeLine(0, cursorPos*entryHeight, 0, (cursorPos+1)*entryHeight);
-        gc.strokeLine(entryWidth-10, cursorPos*entryHeight, entryWidth-10, (cursorPos+1)*entryHeight);
+
+
+        gc.drawImage(cursorImg, -5, cursorPos*getEntryHeight()-5, getEntryWidth(), getEntryHeight()+10);
+        gc.drawImage(arrow, getEntryWidth(), cursorPos*getEntryHeight()+20, 100, 60);
+
+
     }
 
+
+
     public void renderTextEntry(String s, int ind) {
-        //gc.setFill(Color.WHITE);
-        //gc.fillRect(0, ind*getEntryHeight(), getEntryWidth(), getEntryHeight());
+        gc.setFill(Color.BLACK);
+        gc.fillRect(0, ind*getEntryHeight()+5, getEntryWidth()-5, getEntryHeight());
         renderEntryBackground(ind);
         gc.setFill(Color.BLACK);
         gc.fillText(s, 50, ind*getEntryHeight()+50);
     }
 
     public void renderEntryBackground(int ind) {
-        File file = new File(System.getProperty("user.dir") + "/Game/src/sample/sprites/menuBackground2.png");
+        File file = new File(System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\menuBackground4.png");
         Image image = new Image(file.toURI().toString());
         gc.drawImage(image, -5, ind*getEntryHeight()-5, getEntryWidth(), getEntryHeight()+10);
     }
@@ -100,6 +110,8 @@ public class ListView {
     public void setNumOfEntries(int num) {
         numOfEntries = num;
     }
+
+    //Returns number of entries that should be displayed
     public int getMaxEntriesDisplayed() {
         return Math.min(maxEntriesDisplayed, getNumOfEntries());
     }
