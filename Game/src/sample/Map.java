@@ -52,7 +52,6 @@ public class Map {
     //loads a new tileset and places the player in the starting point
     public void updateMap(int mapID) {
         if (mapID == -1) return;
-
         loadMapFromID(mapID);
         moveToStart();
     }
@@ -121,7 +120,7 @@ public class Map {
                         tileSet[i][j].fill('g', 6, Integer.parseInt(equid), Integer.parseInt(data), 0);
                     } else {
                         tileSet[i][j] = new tile();
-                        tileSet[i][j].fill(temp.charAt(0), (int) temp.charAt(1)-48, (int) temp.charAt(2)-48, 0, temp.charAt(4));
+                        tileSet[i][j].fill(temp.charAt(0), (int) temp.charAt(1)-48, (int) temp.charAt(2)-48, 0, temp.charAt(4)-'0');
                     }
                 }
             }

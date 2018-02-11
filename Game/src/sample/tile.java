@@ -43,8 +43,16 @@ public class tile {
 
                 return -1;
             }
-            else if(scenario == 4) {      //Item
-                occupy.getPlayer().acquireItem((Item)temp);
+            else if(temp instanceof Item) {      //Item
+                if (((Item) temp).isOneShot()) {
+                   ItemCodex i = new ItemCodex();
+                   i.useItem(occupy.getPlayer(),(Item)temp);
+                   holding = null;
+                   SN = 0;
+                }
+                else {
+                    occupy.getPlayer().acquireItem((Item) temp);
+                }
                 return -1;
             }
             else if (scenario == 5) {
@@ -78,11 +86,12 @@ public class tile {
             holding = new Holding(this, new expEffect(SN, spec));
         } else if (SN == 4) { // Item
             holding = new Holding(this, new Item(SN, spec));
-            
-            if(oneShot == 1)
-                ((Item)holding.getObject()).setOneShot(true);
-            else
+            if(oneShot == 1) {
+                ((Item) holding.getObject()).setOneShot(true);
+            }
+            else{
                 ((Item)holding.getObject()).setOneShot(false);
+            }
         } else if (SN == 5) { // Map Transition
             holding = new Holding(this, new MapTransition(SN, spec));
         } else if (SN == 6) { // Equipment

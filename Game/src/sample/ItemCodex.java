@@ -30,14 +30,15 @@ public class ItemCodex {
 
     public void useItem(Player player, Item i){
         int itID = i.getID();
-        if (i instanceof Equipment) {
-            player.equipGear((Equipment)i);
-        }
-        else if (i.isOneShot()){
+        if (!i.isOneShot()){
             player.acquireItem(i);
+        }
+        else if (i instanceof Equipment) {
+            player.equipGear((Equipment)i);
         }
         else {
             player.heal(itemMap.get(itID));
+            player.getInventory().tossItem(i);
         }
     }
 
