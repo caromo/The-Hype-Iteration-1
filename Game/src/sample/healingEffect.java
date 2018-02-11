@@ -28,7 +28,7 @@ public void startEf()
 }
 
     public void healing(){
-        if(holding.getTile().occupy.getPlayer().getHealth() < 100) {
+        if((holding.getTile().occupy.getPlayer().getHealth() < 100) && (super.holding.getTile().occupy.getPlayer() != null)) {
             holding.getTile().occupy.getPlayer().setHealth(holding.getTile().occupy.getPlayer().getHealth() + getHealingEffect());
             System.out.format("%d", holding.getTile().occupy.getPlayer().getHealth());
         }

@@ -31,8 +31,10 @@ public class damageEffect extends AreaEffect{
 
     public void Ef()//applies effect
     {
-        super.holding.getTile().occupy.getPlayer().takeDamage(getDamageEffect());
-        System.out.format("%d", holding.getTile().occupy.getPlayer().getHealth(),"\t");
+        if(super.holding.getTile().occupy.getPlayer() != null) {
+            super.holding.getTile().occupy.getPlayer().takeDamage(getDamageEffect());
+            System.out.format("%d", holding.getTile().occupy.getPlayer().getHealth(), "\t");
+        }
     }
 
     public void setAmount(int damageEffect) {

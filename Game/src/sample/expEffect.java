@@ -17,11 +17,12 @@ public class expEffect extends AreaEffect{
             public void run() {
                 secondsPassed++;
                 System.out.println("Seconds passes " + secondsPassed);
-                expEf();
                 if(getDuration() < secondsPassed || !expEffect.super.isEffectOn())
                 {
                     timer.cancel();
                 }
+                expEf();
+
 
 
             }
@@ -33,8 +34,11 @@ public class expEffect extends AreaEffect{
     }
 
     public void expEf(){ //applies effect
-        super.holding.getTile().occupy.getPlayer().gainExp(getexpEffect());
+        if(super.holding.getTile().occupy.getPlayer() != null) {
+            super.holding.getTile().occupy.getPlayer().gainExp(getexpEffect());
+
         System.out.format("%d", holding.getTile().occupy.getPlayer().getExpToNextLvl());
+        }
     }
 
     public void setAmount(int expEffect) {
