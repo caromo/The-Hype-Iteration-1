@@ -67,9 +67,9 @@ public class tile {
             holding = new Holding(this, new Item(SN, spec));
             
             if(oneShot == 1)
-                ((Item)holding.getObject()).setOneShoth(true);
+                ((Item)holding.getObject()).setOneShot(true);
             else
-                ((Item)holding.getObject()).setOneShoth(false);
+                ((Item)holding.getObject()).setOneShot(false);
         } else if (SN == 5) { // Map Transition
             holding = new Holding(this, new MapTransition(SN, spec));
         } else if (SN == 6) { // Equipment
