@@ -43,4 +43,7 @@ public abstract class AreaEffect extends tileObject{
     public int getEffect() {
         return (int) duration/10;
     }
+    public void setDuration(float duration) {
+        this.duration = duration;
+    }
 }

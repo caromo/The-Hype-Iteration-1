@@ -24,6 +24,7 @@ public class tile {
             tileObject temp = holding.getObject();
             if(scenario == 1 || scenario == 2 || scenario == 3)  {    //Area effect
                 System.out.println("APPLY");
+                ((AreaEffect) temp).setDuration(20);
                 ((AreaEffect) temp).setAmount(3);
                 ((AreaEffect) temp).startEf();
             }
