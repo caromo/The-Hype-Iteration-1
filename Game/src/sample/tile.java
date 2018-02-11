@@ -52,7 +52,7 @@ public class tile {
         return -1;
     }
     // Takes in a Decal D, and Scenario Number SN, the specification of that SN, and Equipment Data is applicable
-    public void fill(char D, int SN, int spec, int EQdata) {
+    public void fill(char D, int SN, int spec, int EQdata, int oneShot) {
         decal = D;
         this.SN = SN;
         this.spec = spec;
@@ -65,6 +65,11 @@ public class tile {
             holding = new Holding(this, new expEffect(SN, spec));
         } else if (SN == 4) { // Item
             holding = new Holding(this, new Item(SN, spec));
+            
+            if(oneShot == 1)
+                ((Item)holding.getObject()).setOneShoth(true);
+            else
+                ((Item)holding.getObject()).setOneShoth(false);
         } else if (SN == 5) { // Map Transition
             holding = new Holding(this, new MapTransition(SN, spec));
         } else if (SN == 6) { // Equipment
