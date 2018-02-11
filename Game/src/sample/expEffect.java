@@ -7,6 +7,10 @@ public class expEffect extends AreaEffect{
     private int expEffect;
     private boolean On;
     private int secondsPassed;
+    @Override
+    public void fatality() {
+
+    }
 
     public void startEf() // starts timer
     {

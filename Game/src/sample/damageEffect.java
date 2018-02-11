@@ -7,6 +7,11 @@ public class damageEffect extends AreaEffect{
     private int damage;
     private int secondsPassed;
 
+    @Override
+    public void fatality() {
+
+    }
+
     public damageEffect(int scenario, int duration) {
         super(scenario, duration);
     }

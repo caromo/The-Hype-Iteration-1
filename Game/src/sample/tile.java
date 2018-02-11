@@ -8,6 +8,7 @@ public class tile {
     private Boolean passable;
     public int SN;
     private boolean areaEffect = false;
+    protected int instantKill = 20; //idk
 
     public tile(tileObject objType) {
         passable = true;
@@ -41,6 +42,9 @@ public class tile {
             }
             else if(scenario == 4) {      //Item
                 occupy.getPlayer().acquireItem((Item)temp);
+            }
+            else if(scenario == instantKill) {
+                ((AreaEffect) temp).fatality();
             }
         }
     }

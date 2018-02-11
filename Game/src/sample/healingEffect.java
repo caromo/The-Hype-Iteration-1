@@ -7,6 +7,10 @@ public class healingEffect extends AreaEffect{
     private int healingEffect;
     private int secondsPassed;
 //    private Holding holding;
+@Override
+public void fatality() {
+
+}
 public void startEf()
 {
     secondsPassed = 0;
