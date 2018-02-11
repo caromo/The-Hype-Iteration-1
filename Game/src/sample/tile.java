@@ -27,7 +27,7 @@ public class tile {
     public tile() {}
 
     //Performs the action associated with the tileObject
-    public void applyEffect() {
+    public int applyEffect() {
 
         if (occupy != null && holding != null) {
             System.out.println("APPLY2");
@@ -35,19 +35,21 @@ public class tile {
             tileObject temp = holding.getObject();
             if(scenario == 1 || scenario == 2 || scenario == 3)  {    //Area effect
                 System.out.println("APPLY");
-                ((AreaEffect) temp).setEffectOn(true);
                 ((AreaEffect) temp).setDuration(20);
                 ((AreaEffect) temp).setAmount(3);
                 ((AreaEffect) temp).startEf();
-                setAreaEffect(true);
+
+                return -1;
             }
             else if(scenario == 4) {      //Item
                 occupy.getPlayer().acquireItem((Item)temp);
+                return -1;
             }
-            else if(scenario == instantKill) {
-                ((AreaEffect) temp).fatality();
+            else if (scenario == 5) {
+                return ((MapTransition) temp).getDestination();
             }
         }
+        return -1;
     }
     // Takes in a Decal D, and Scenario Number SN, the specification of that SN, and Equipment Data is applicable
     public void fill(char D, int SN, int spec, int EQdata) {

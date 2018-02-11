@@ -20,7 +20,7 @@ public void startEf()
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                if (getDuration() < secondsPassed || !healingEffect.super.isEffectOn()) {
+                if (getDuration() < secondsPassed || (healingEffect.super.holding.getTile().occupy == null)) {
                     timer.cancel();
                 }
                 secondsPassed++;
@@ -39,9 +39,11 @@ public void startEf()
 }
 
     public void healing(){
-        if((holding.getTile().occupy.getPlayer().getHealth() < 100) && (super.holding.getTile().occupy.getPlayer() != null)) {
-            holding.getTile().occupy.getPlayer().setHealth(holding.getTile().occupy.getPlayer().getHealth() + getHealingEffect());
-            System.out.format("%d", holding.getTile().occupy.getPlayer().getHealth());
+        if(super.holding.getTile().occupy != null) {
+            if (holding.getTile().occupy.getPlayer().getHealth() < 100) {
+                holding.getTile().occupy.getPlayer().setHealth(holding.getTile().occupy.getPlayer().getHealth() + getHealingEffect());
+                System.out.format("%d", holding.getTile().occupy.getPlayer().getHealth());
+            }
         }
     }
     public healingEffect(int scenario, int duration) {

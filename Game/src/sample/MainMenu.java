@@ -66,7 +66,7 @@ public class MainMenu {
 
 
         //Set Background Image
-        File file = new File(System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\lava.png");
+        File file = new File(System.getProperty("user.dir") + "/Game/src/sample/sprites/lava.png");
         Image i = null;
         //System.out.println(System.getProperty("user.dir"));
         try {
@@ -144,16 +144,18 @@ public class MainMenu {
         ChoiceBox characterStatAdvantage = new ChoiceBox(FXCollections.observableArrayList("Health","Attack","Defense"));
         characterStatAdvantage.setValue("Health"); //Setting a default choice
 
-        ChoiceBox characterSprites = new ChoiceBox(FXCollections.observableArrayList("Pikachu","Sword","Potion 1"));
-        characterSprites.setValue("Pikachu"); //Setting a default choice
+        ChoiceBox characterSprites = new ChoiceBox(FXCollections.observableArrayList("Guy","Girl","Adventurer","Soldier"));
+        characterSprites.setValue("Guy"); //Setting a default choice
 
-        Image characterSprite1 = new Image("file:" + System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\pikachu.png");
-        Image characterSprite2 = new Image("file:" + System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\sword.png");
-        Image characterSprite3 = new Image("file:" + System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\potion.png");
+        Image characterSprite1 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterGuy.png");
+        Image characterSprite2 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterGirl.png");
+        Image characterSprite3 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterAdventurer.png");
+        Image characterSprite4 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterSoldier.png");
+
 
         ImageView imageView = new ImageView(characterSprite1);
 
-        Image[] spriteChoices = {characterSprite1,characterSprite2,characterSprite3};
+        Image[] spriteChoices = {characterSprite1,characterSprite2,characterSprite3,characterSprite4};
 
         // Sets size of sprite choice
         imageView.setFitHeight(75);
@@ -170,6 +172,10 @@ public class MainMenu {
                 }
         );
 
+        Text noNameCatch = new Text("PLEASE ENTER A NAME");
+        noNameCatch.setFont(Font.font("Verdana",FontWeight.BOLD,16));
+        noNameCatch.setFill(Color.RED);
+
         // Back Button
         Button characterCreationBackButton = new Button("Back");
         characterCreationBackButton.setOnAction(e -> mainStage.setScene(startingScene));
@@ -177,22 +183,28 @@ public class MainMenu {
         // Continue Button
         Button characterCreationContinueButton = new Button("Continue");
         characterCreationContinueButton.setOnAction(e -> {
-            
 
-            // Applies advantage to player
-            if(characterStatAdvantage.getValue() == "Health")
-                player.setHealth(110);
-            else if(characterStatAdvantage.getValue() == "Attack")
-                player.setAttackPoints(8);
-            else if(characterStatAdvantage.getValue() == "Defense")
-                player.setDefensePoints(8);
-            player.setName(nameInput.getText());
-            player.setPlayerSprite(imageView.getImage());
-            main.newGame(player.getName());
-            isMenuOpen = false;
-            //System.out.println(player.getName());
-            //mainStage.setScene(mainScene);
-            openIntroMenu();
+            if(nameInput.getText().isEmpty() == false)
+            {
+                // Applies advantage to player
+                if (characterStatAdvantage.getValue() == "Health")
+                    player.setHealth(110);
+                else if (characterStatAdvantage.getValue() == "Attack")
+                    player.setAttackPoints(8);
+                else if (characterStatAdvantage.getValue() == "Defense")
+                    player.setDefensePoints(8);
+                player.setName(nameInput.getText());
+                player.setPlayerSprite(imageView.getImage());
+                main.newGame(player.getName());
+                isMenuOpen = false;
+                //System.out.println(player.getName());
+                //mainStage.setScene(mainScene);
+                openIntroMenu();
+            }
+            else {
+                System.out.println("Enter a character name!");
+                characterCreation.add(noNameCatch,1,7);
+            }
         });
 
         // Adding buttons and text to characterCreation
@@ -238,7 +250,7 @@ public class MainMenu {
         startGameButton.setLayoutY(200);
         startGameButton.setMinSize(140,10);
         startGameButton.setStyle("-fx-font-size: 4em; "); //CSS
-        startGameButton.setOnAction(e -> mainStage.setScene(mainScene)); // TODO Change to newGame()
+        startGameButton.setOnAction(e -> mainStage.setScene(mainScene));
 
         introMenu.getChildren().add(startGameButton);
     }
@@ -291,7 +303,7 @@ public class MainMenu {
         gameOverText.setFont(Font.font("Verdana",FontWeight.BOLD,60));
         gameOverText.setFill(Color.DARKRED);
 
-        //Image sadCatFace = new Image("file:" + System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\crying-cat-face.png");
+        //Image sadCatFace = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/crying-cat-face.png");
         //ImageView catView = new ImageView(sadCatFace);
 
         Button goToMainMenuButtonFromGameOver = new Button("  Exit  ");
@@ -299,7 +311,7 @@ public class MainMenu {
 
 
         //Set Background Image
-        File file = new File(System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\crying-cat-face.png");
+        File file = new File(System.getProperty("user.dir") + "/Game/src/sample/sprites/crying-cat-face.png");
         Image i = null;
         //System.out.println(System.getProperty("user.dir"));
         try {
