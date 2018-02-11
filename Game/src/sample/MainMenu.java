@@ -199,8 +199,8 @@ public class MainMenu {
                     player.setAttackPoints(8);
                 else if (characterStatAdvantage.getValue() == "Defense")
                     player.setDefensePoints(8);
-                player.setName(nameInput.getText());
-                player.setPlayerSprite(imageView.getImage());
+                //player.setName(nameInput.getText());
+                //player.setPlayerSprite(imageView.getImage());
                 main.newGame(player.getName(), spriteNumber);
                 isMenuOpen = false;
                 //System.out.println(player.getName());
