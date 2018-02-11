@@ -23,28 +23,34 @@ public class View {
     private GraphicsContext gc;
     private Canvas canvas;
     private Player player;
+    private Main main;
 
     private int cameraX, cameraY;
     private String workingDir;
     Color[] items;
-    private Image[] itemSprites;
-    private Image[] terrainSprites;
-    private Image playerImg;
+
 
     private int mapWidth, mapHeight;
     private int tileSize;
 
     private MenuView menu;
     private MainMenu mainMenu;
+    private HUDView hud;
 
-    public View(GraphicsContext gc, Canvas canvas, Player player, MainMenu mainMenu) {
+    private Sprites sprites;
 
-        this.gc = gc;
+    public View(Canvas canvas, Player player, MainMenu mainMenu, Main main) {
+
+        this.gc = canvas.getGraphicsContext2D();
         this.canvas = canvas;
         this.player = player;
-        menu = new MenuView(player, gc, canvas);
+        this.main = main;
+        menu = new MenuView(player, canvas, main);
+        hud = new HUDView(canvas, player);
 
         this.mainMenu = mainMenu;
+
+        sprites = new Sprites();
 
         cameraX = 0; cameraY = 0;
         mapWidth = 100; mapHeight = 100;
@@ -52,36 +58,26 @@ public class View {
 
         //Get working directory to load textures from
         workingDir = System.getProperty("user.dir");
+
         System.out.println(workingDir);
 
-        initializeSprites();
+
 
     }
 
     //Load image arrays with sprite assets
-    private void initializeSprites() {
-        //Load item textures
-        itemSprites = new Image[100];
-        itemSprites[0] = getImage(workingDir + "\\src\\sample\\sprites\\potion2.png");
-        itemSprites[1] = getImage(workingDir + "\\src\\sample\\sprites\\sword.png");
 
-        //Load terrain textures
-        terrainSprites = new Image[3];
-        terrainSprites[0] = getImage(workingDir + "\\src\\sample\\sprites\\grass.png");
-        terrainSprites[1] = getImage(workingDir + "\\src\\sample\\sprites\\water.png");
-        terrainSprites[2] = getImage(workingDir + "\\src\\sample\\sprites\\mountains.png");
-
-        //playerImg = getImage(workingDir + "\\src\\sample\\sprites\\pikachu.png");
-
-
-    }
 
     public void render(tile[][] map, Player p) {
         //gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         renderMap(map, p);
         renderGrid(map);
-        menu.render();
+        if(menu.isOpen()) {
+            menu.render();
+        } else {//Only render these views if menu is closed
+            hud.render();
+        }
         gc = canvas.getGraphicsContext2D();
     }
 
@@ -99,14 +95,7 @@ public class View {
         for(int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[0].length; j++) {
 
-
-                if(map[i][j].decal == 'G') {
-                    gc.drawImage(terrainSprites[0], (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
-                } else if(map[i][j].decal == 'W') {
-                    gc.drawImage(terrainSprites[1], (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
-                } else {
-                    gc.drawImage(terrainSprites[2], (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
-                }
+                gc.drawImage(sprites.getTerrainImage(map[i][j].decal), (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
 
                 int tileID = map[i][j].SN;
                 //System.out.println(tileID);
@@ -124,7 +113,7 @@ public class View {
 
                 } else if(tileID == 4) {//Item
                     gc.drawImage(getImage(workingDir + "\\src\\sample\\sprites\\grass.png"), (i*tileSize)+cameraX, (j*tileSize)+cameraY);
-                    gc.drawImage(itemSprites[1], (i*tileSize)+5+cameraX, (j*tileSize)+5+cameraY, tileSize, tileSize);
+                    gc.drawImage(sprites.getItemImage(1), (i*tileSize)+5+cameraX, (j*tileSize)+5+cameraY, tileSize, tileSize);
                 } else {//MapTransition
 
                 }
@@ -170,12 +159,18 @@ public class View {
         }
     }
     public void Right() {
-        if(menu.isOpen()) { return; }
-        moveCameraRight();
+        if(menu.isOpen()) {
+            menu.Right();
+        } else {
+            moveCameraRight();
+        }
     }
     public void Left() {
-        if(menu.isOpen()) { return; }
-        moveCameraLeft();
+        if(menu.isOpen()) {
+            menu.Left();
+        } else {
+            moveCameraLeft();
+        }
     }
     public void Escape() {
         menu.Escape();
@@ -222,6 +217,10 @@ public class View {
             return;
         }
         cameraX-=tileSize;
+    }
+
+    public boolean getMenuOpen() {
+        return menu.isOpen();
     }
 
 

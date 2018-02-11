@@ -54,9 +54,9 @@ public class Main extends Application {
         player = new Player();
         map = new Map(player);
         mainMenu = new MainMenu(player, gc, canvas, mainStage, mainScene, this);
-        view = new View(gc, canvas, player, mainMenu);
+        view = new View(canvas, player, mainMenu, this);
         keyHandler = new KeyHandler(view, this);
-        menuView = new MenuView(player, gc, canvas);
+
 
 
         pc = new PlayerController(map);
@@ -76,6 +76,7 @@ public class Main extends Application {
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
                 //double t = (currentNanoTime - startNanoTime) / 1000000000.0;
+                pc.setGamePaused(view.getMenuOpen());
                 view.render(map.getState(), player);
             }
         }.start();

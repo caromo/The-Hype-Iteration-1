@@ -51,7 +51,7 @@ public class ListView {
     }
 
     public void renderEntryBackground(int ind) {
-        File file = new File(System.getProperty("user.dir") + "\\src\\sample\\sprites\\menuBackground2.png");
+        File file = new File(System.getProperty("user.dir") + "\\Game\\src\\sample\\sprites\\menuBackground2.png");
         Image image = new Image(file.toURI().toString());
         gc.drawImage(image, -5, ind*getEntryHeight()-5, getEntryWidth(), getEntryHeight()+10);
     }
@@ -123,6 +123,12 @@ public class ListView {
 
     }
     public void Down() {
+
+    }
+    public void Left() {
+
+    }
+    public void Right() {
 
     }
     public void Enter() {
