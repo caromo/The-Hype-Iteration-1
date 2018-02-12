@@ -66,7 +66,7 @@ public class Sprites {
             return AESprites.get(1);
         } else if(SN == 3) {//AEExperience
             return AESprites.get(2);
-        } else if(SN == 4) {//Item
+        } else if(SN == 4 || SN == 7) {//Item
             return getItemImage(spec);
         } else if(SN == 5){//Map transition
             return mapTransitionSprite;
