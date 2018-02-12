@@ -59,7 +59,7 @@ public class Main extends Application {
 
 
 
-        pc = new PlayerController(map);
+        pc = new PlayerController(map, view);
 
         //newGame("test");
         //player.getInventory().addItembyID(100);

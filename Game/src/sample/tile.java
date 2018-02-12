@@ -1,6 +1,9 @@
 package sample;
 
 
+import javax.swing.plaf.SliderUI;
+import java.util.ServiceLoader;
+
 public class tile {
     public Occupy occupy;
     public Holding holding;
@@ -9,8 +12,6 @@ public class tile {
     public int SN;
     public int spec;
     private boolean areaEffect = false;
-    protected int instantKill = 6; //idk
-    protected int interactiveItem = 7; //idk
 
     public tile(tileObject objType) {
         passable = true;
@@ -41,7 +42,7 @@ public class tile {
 
                 return -1;
             }
-            else if(temp instanceof Item) {      //Item
+            else if((temp instanceof Item) && !(scenario == 7)) {      //Item
                 if (((Item) temp).isOneShot()) {
                     ItemCodex i = new ItemCodex();
                     i.useItem(occupy.getPlayer(), (Item) temp);
@@ -63,8 +64,13 @@ public class tile {
             }
             else if(scenario == 7) /*Interactive Item*/
             {
+                System.out.println("say");
                 if(occupy.getPlayer().getLevel() >= ((Item)temp).getRequiredLevel()) {
+                    System.out.println("what");
                     occupy.getPlayer().acquireItem((Item)temp);
+                    holding = null;
+                    SN = 0;
+                    return -1;
                 }
             }
         }
@@ -75,6 +81,24 @@ public class tile {
         decal = D;
         this.SN = SN;
         this.spec = spec;
+
+<<<<<<< HEAD
+=======
+        switch(decal){
+            case 'G':
+                setPassable(true);
+                break;
+            case 'M':
+                setPassable(false);
+                break;
+            case 'W':
+                setPassable(false);
+                break;
+            case 'D': // For Insta-death tiles
+                setPassable(true);
+                break;
+        }
+>>>>>>> a41183f49a6f067d6948faac535244d604574543
 
         if (SN == 1) { // Area Effect
             holding = new Holding(this, new damageEffect(SN, spec));
@@ -103,34 +127,25 @@ public class tile {
             }
         } else if (SN == 5) { // Map Transition
             holding = new Holding(this, new MapTransition(SN, spec));
-        } else if(SN == 6){ //instant death
+        } else if(SN == instantKill){ //instant death
             holding = new Holding(this, new Fatality(SN, spec));
+        }else if(SN == interactiveItem){ //instant death
+            holding = new Holding(this, new Item(SN, spec));
+            ((Item)holding.getObject()).setRequiredLevel(2);
+
+        }
+        else if(SN == 8) /*Obstacle Item*/ {
+            holding = new Holding(this, new Item(SN, 0));
+            setPassable(false);
         }
 
-        switch(decal){
-            case 'G':
-                setPassable(true);
-                break;
-            case 'M':
-                setPassable(false);
-                break;
-            case 'W':
-                setPassable(false);
-                break;
-            case 'X': //For obstacle items
-                setPassable(false);
-                break;
-            case 'D': // For Insta-death tiles
-                setPassable(true);
-                break;
-        }
+
     }
 
     //Provides the encrypted info of the tile as a String
     public String spill() {
         StringBuffer st = new StringBuffer();
         st.append("");
-
         switch(decal) {
             case 'G':
                 st.append("G");
@@ -141,16 +156,15 @@ public class tile {
             case 'M':
                 st.append("M");
                 break;
-            case 'X': //For obstacle items
-                st.append("X");
-                break;
             case 'D': // For Insta-death tiles
                 st.append("D");
                 break;
             default:
-                st.append(Integer.toString(((Equipment)holding.getObject()).getEquipmentID()));
-                if(holding.getObject().getEffect() < 10) { st.append("0" + Integer.toString(holding.getObject().getEffect())); }
-                else{ st.append(Integer.toString(holding.getObject().getEffect()));	}
+                if (holding.getObject() instanceof Equipment){
+                    st.append(Integer.toString(((Equipment)holding.getObject()).getEquipmentID()));
+                    if(holding.getObject().getEffect() < 10) { st.append("0" + Integer.toString(holding.getObject().getEffect())); }
+                    else{ st.append(Integer.toString(holding.getObject().getEffect()));	}
+                }
                 break;
         }
 
@@ -192,6 +206,10 @@ public class tile {
                     break;
                 case 6:
                     st.append("6");
+                    st.append("000");
+                    break;
+                case 8:
+                    st.append("8");
                     st.append("000");
             }
         }
