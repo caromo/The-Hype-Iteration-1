@@ -19,6 +19,7 @@ public class MusicPlayer {
 
     public void playMainMenuMusic() {
         mainMenuMusicPlayer.setStartTime(new javafx.util.Duration(22000));
+        mainMenuMusicPlayer.setCycleCount(100);
         mainMenuMusicPlayer.play();
     }
 

@@ -264,7 +264,7 @@ public class MainMenu {
         startGameButton.setMinSize(120,50);
         startGameButton.setStyle("-fx-font-size: 4em; "); //CSS
         startGameButton.setOnAction(e -> {
-            menuMusic.stopMainMenuMusic();
+            //menuMusic.stopMainMenuMusic();
             mainStage.setScene(mainScene);
         });
 
