@@ -16,7 +16,7 @@ public class Sprites {
     private String workingDir;
     public Sprites() {
 
-        workingDir = System.getProperty("user.dir");
+        workingDir = System.getProperty("user.dir")+"/Game";
 
         //System.out.println(workingDir);
         itemSprites = new ArrayList<Image>();
@@ -38,9 +38,10 @@ public class Sprites {
         terrainSprites.add(getImage(workingDir + "/src/sample/sprites/water.png"));
         terrainSprites.add(getImage(workingDir + "/src/sample/sprites/mountains.png"));
 
-        AESprites.add(getImage(workingDir + "/src/sample/sprites/skull.png"));
+        AESprites.add(getImage(workingDir + "/src/sample/sprites/lava.png"));
         AESprites.add(getImage(workingDir + "/src/sample/sprites/health2.png"));
         AESprites.add(getImage(workingDir + "/src/sample/sprites/star.png"));
+        AESprites.add(getImage(workingDir + "/src/sample/sprites/skull.png"));
 
         playerSprites.add(getImage(System.getProperty("user.dir") + "/src/sample/sprites/characterGuy.png"));
         playerSprites.add(getImage(System.getProperty("user.dir") + "/Game/src/sample/sprites/characterGirl.png"));
@@ -65,8 +66,10 @@ public class Sprites {
             return AESprites.get(2);
         } else if(SN == 4) {//Item
             return getItemImage(spec);
-        } else {//Map transition
+        } else if(SN == 5){//Map transition
             return mapTransitionSprite;
+        } else {//Instadeath
+            return AESprites.get(3);
         }
     }
 
