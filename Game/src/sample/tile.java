@@ -29,7 +29,6 @@ public class tile {
 
     //Performs the action associated with the tileObject
     public int applyEffect() {
-
         if (occupy != null && holding != null) {
             System.out.println("APPLY2");
             int scenario = holding.getObject().getScenario();
@@ -55,6 +54,7 @@ public class tile {
                 return -1;
             }
             else if (scenario == 5) {
+                System.out.println("return destination " + ((MapTransition) temp).getDestination());
                 return ((MapTransition) temp).getDestination();
             }
             else if(scenario == 6) /*Insta-Death */{
@@ -63,8 +63,7 @@ public class tile {
             }
             else if(scenario == 7) /*Interactive Item*/
             {
-                if(occupy.getPlayer().getLevel() >= ((Item)temp).getRequiredLevel())
-                {
+                if(occupy.getPlayer().getLevel() >= ((Item)temp).getRequiredLevel()) {
                     occupy.getPlayer().acquireItem((Item)temp);
                 }
             }

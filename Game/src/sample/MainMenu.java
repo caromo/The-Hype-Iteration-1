@@ -37,6 +37,8 @@ public class MainMenu {
     private Main main;
     private boolean isMenuOpen = true;
     private int spriteNumber;
+    MusicPlayer menuMusic = new MusicPlayer();
+
     public MainMenu(Player player, GraphicsContext gc, Canvas canvas, Stage mainStage, Scene mainScene, Main main) {
         this.player = player;
         this.mainStage = mainStage;
@@ -46,6 +48,8 @@ public class MainMenu {
 
     public void openMainMenu()
     {
+        menuMusic.playMainMenuMusic();
+
         GridPane mainMenu = new GridPane();
         mainMenu.setAlignment(Pos.TOP_CENTER);
         mainMenu.setVgap(40);
@@ -155,7 +159,7 @@ public class MainMenu {
         Image characterSprite3 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterAdventurer.png");
         Image characterSprite4 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterSoldier.png");
 
-        player.setPlayerSpriteNumber(1);
+        //player.setPlayerSpriteNumber(1);
 
         ImageView imageView = new ImageView(characterSprite1);
 
@@ -229,11 +233,13 @@ public class MainMenu {
 
     private void openIntroMenu() {
 
-        Text introText = new Text("Welcome to this RPG. Insert story here.");
+        Text introText = new Text("Welcome to this RPG. Insert epic story here.");
         introText.setFont(Font.font(50));
         introText.setTextOrigin(VPos.TOP);
-        introText.setFill(Color.RED);
+        introText.setFill(Color.BLACK);
         Pane introMenu = new Pane(introText);
+
+        introMenu.setBackground(new Background(new BackgroundFill(Color.ROSYBROWN, CornerRadii.EMPTY, Insets.EMPTY)));
 
         introScene = new Scene(introMenu,512,512);
         double sceneWidth = introScene.getWidth();
@@ -257,7 +263,10 @@ public class MainMenu {
         startGameButton.setLayoutY(200);
         startGameButton.setMinSize(120,50);
         startGameButton.setStyle("-fx-font-size: 4em; "); //CSS
-        startGameButton.setOnAction(e -> mainStage.setScene(mainScene));
+        startGameButton.setOnAction(e -> {
+            menuMusic.stopMainMenuMusic();
+            mainStage.setScene(mainScene);
+        });
 
         introMenu.getChildren().add(startGameButton);
     }
