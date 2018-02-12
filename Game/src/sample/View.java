@@ -57,7 +57,7 @@ public class View {
         tileSize = 50; //width/height of tiles in pixels
 
         //Get working directory to load textures from
-        workingDir = System.getProperty("user.dir");
+        workingDir = System.getProperty("user.dir") + "\\Game";
 
         System.out.println(workingDir);
 
