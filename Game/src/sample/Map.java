@@ -52,6 +52,7 @@ public class Map {
     //loads a new tileset and places the player in the starting point
     public void updateMap(int mapID) {
         if (mapID == -1) return;
+        System.out.println("Destination MAP ID: " + mapID);
 
         loadMapFromID(mapID);
         moveToStart();
@@ -90,8 +91,9 @@ public class Map {
 
     //given an ID, loads a map text file with tileset and starting point information
     public void loadMapFromID(int mapID) {
-
         try {
+            saveMap();
+            this.mapID = mapID;
             File mapFile = new File(System.getProperty("user.dir") + "/Save/Map/" + mapID + ".txt");
             BufferedReader br_map = new BufferedReader(new FileReader(mapFile));
             Scanner s_map = new Scanner(br_map.readLine());
@@ -100,7 +102,7 @@ public class Map {
             int mapSizeX = Integer.parseInt(sMapSizeX);
             int mapSizeY = Integer.parseInt(sMapSizeY);
 
-            saveMap();
+
             s_map = new Scanner(br_map.readLine());
             Point newStart = new Point(Integer.parseInt(s_map.next()), Integer.parseInt(s_map.next()));
             startingPoint = newStart;
@@ -127,9 +129,16 @@ public class Map {
             }
             s_map.close();
             br_map.close();
+
         }catch(Exception e){
             e.printStackTrace();
         }
+
+    }
+
+    public void resetMap() {
+        tileSet = new tile[10][10];
+        mapID = 0;
     }
 
     //accessors and/or mutators for Player, tileSet, and mapID

@@ -34,7 +34,7 @@ public class Player extends GameObject {
         gear = new Equipment[]{new Armor(1, 100, 0), new Weapon(2, 200, 0), new Ring(3, 300, 0)};
     }
     public Player(){
-        this.name = "H Y P E - B O Y";
+       // this.name = "H Y P E - B O Y";
         Level = 1;
         ExpToNextLvl = 100;
         Experience = 0;

@@ -155,7 +155,7 @@ public class MainMenu {
         Image characterSprite3 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterAdventurer.png");
         Image characterSprite4 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterSoldier.png");
 
-        player.setPlayerSpriteNumber(1);
+        //player.setPlayerSpriteNumber(1);
 
         ImageView imageView = new ImageView(characterSprite1);
 
@@ -201,7 +201,7 @@ public class MainMenu {
                     player.setDefensePoints(8);
                 //player.setName(nameInput.getText());
                 //player.setPlayerSprite(imageView.getImage());
-                main.newGame(player.getName(), spriteNumber);
+                main.newGame(nameInput.getText(), spriteNumber);
                 isMenuOpen = false;
                 //System.out.println(player.getName());
                 //mainStage.setScene(mainScene);
