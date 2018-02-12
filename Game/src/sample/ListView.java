@@ -35,9 +35,9 @@ public class ListView {
         scrollOffset = 0;
         maxEntriesDisplayed = 8;
 
-        File file = new File(System.getProperty("user.dir") + "\\src\\sample\\sprites\\cursor2.png");
+        File file = new File(System.getProperty("user.dir") + "/src/sample/sprites/cursor2.png");
         cursorImg = new Image(file.toURI().toString());
-        file = new File(System.getProperty("user.dir") + "\\src\\sample\\sprites\\arrow.png");
+        file = new File(System.getProperty("user.dir") + "/src/sample/sprites/arrow.png");
         arrow = new Image(file.toURI().toString());
     }
 
@@ -61,7 +61,7 @@ public class ListView {
     }
 
     public void renderEntryBackground(int ind) {
-        File file = new File(System.getProperty("user.dir") + "\\src\\sample\\sprites\\menuBackground4.png");
+        File file = new File(System.getProperty("user.dir") + "/src/sample/sprites/menuBackground4.png");
         Image image = new Image(file.toURI().toString());
         gc.drawImage(image, -5, ind*getEntryHeight()-5, getEntryWidth(), getEntryHeight()+10);
     }
