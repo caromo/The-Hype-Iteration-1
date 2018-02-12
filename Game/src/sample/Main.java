@@ -197,7 +197,7 @@ public class Main extends Application {
 
 
     public void saveGame() {
-        map.saveMap();
+
         try {
             PrintWriter pw = new PrintWriter(System.getProperty("user.dir") + "/Save/Player.txt");
             PrintWriter iw = new PrintWriter(System.getProperty("user.dir") + "/Save/Inventory.txt");
@@ -215,6 +215,7 @@ public class Main extends Application {
             pw.println(player.getExperience());
             pw.println(player.getExpToNextLvl());
             pw.println(player.getLevel());
+            map.saveMap();
 
             //Testing writing
             /*
@@ -252,7 +253,7 @@ public class Main extends Application {
 
                 pw.println(eq[2].getEquipmentID() + eq[2].supplyBenefit());
             }
-
+            pw.println(player.getPlayerSprite());
             pw.print(player.getName());
 
 
@@ -300,6 +301,7 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        map.resetMap();
 
         loadGame();
 

@@ -56,19 +56,20 @@ public class tile {
                 return -1;
             }
             else if (scenario == 5) {
+                System.out.println("return destination " + ((MapTransition) temp).getDestination());
                 return ((MapTransition) temp).getDestination();
             }
-            else if(scenario == obstacleItem)
-            {
-                setPassable(false);
-            }
-            else if(scenario == interactiveItem)
-            {
-                if(occupy.getPlayer().getLevel() > ((Item)temp).getRequiredLevel())
-                {
-                    occupy.getPlayer().acquireItem((Item)temp);
-                }
-            }
+//            else if(scenario == obstacleItem)
+//            {
+//                setPassable(false);
+//            }
+//            else if(scenario == interactiveItem)
+//            {
+//                if(occupy.getPlayer().getLevel() > ((Item)temp).getRequiredLevel())
+//                {
+//                    occupy.getPlayer().acquireItem((Item)temp);
+//                }
+//            }
         }
         return -1;
     }
