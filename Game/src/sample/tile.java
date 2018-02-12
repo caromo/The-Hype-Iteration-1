@@ -82,8 +82,7 @@ public class tile {
         this.SN = SN;
         this.spec = spec;
 
-<<<<<<< HEAD
-=======
+
         switch(decal){
             case 'G':
                 setPassable(true);
@@ -98,7 +97,7 @@ public class tile {
                 setPassable(true);
                 break;
         }
->>>>>>> a41183f49a6f067d6948faac535244d604574543
+
 
         if (SN == 1) { // Area Effect
             holding = new Holding(this, new damageEffect(SN, spec));
@@ -127,9 +126,9 @@ public class tile {
             }
         } else if (SN == 5) { // Map Transition
             holding = new Holding(this, new MapTransition(SN, spec));
-        } else if(SN == instantKill){ //instant death
+        } else if(SN == 6){ //instant death
             holding = new Holding(this, new Fatality(SN, spec));
-        }else if(SN == interactiveItem){ //instant death
+        }else if(SN == 7){ //instant death
             holding = new Holding(this, new Item(SN, spec));
             ((Item)holding.getObject()).setRequiredLevel(2);
 
