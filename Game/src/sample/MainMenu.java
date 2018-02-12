@@ -169,7 +169,7 @@ public class MainMenu {
                     public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                         //label.setText(spriteChoices[newValue.intValue()]);
                         imageView.setImage(spriteChoices[newValue.intValue()]);
-                       // spriteNumber = (newValue.intValue()+1);
+                       spriteNumber = (newValue.intValue());
                     }
                 }
         );
