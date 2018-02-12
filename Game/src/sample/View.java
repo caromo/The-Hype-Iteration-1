@@ -118,6 +118,7 @@ public class View {
                     gc.drawImage(getImage(workingDir + "/src/sample/sprites/grass.png"), (i*tileSize)+cameraX, (j*tileSize)+cameraY);
                     gc.drawImage(sprites.getItemImage(2), (i*tileSize)+5+cameraX, (j*tileSize)+5+cameraY, tileSize, tileSize);
                 } else {//MapTransition
+
                 }
             }
         }

@@ -311,8 +311,6 @@ public class Main extends Application {
         if(player.getHealth() <= 0 && !player.getIsDead()) {
             mainMenu.gameOver();
             player.setIsDead(true);
-            player.setHealth(100);
-            saveGame();
         }
     }
 }
