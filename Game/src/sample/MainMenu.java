@@ -109,6 +109,7 @@ public class MainMenu {
         loadGameButton.setOnAction(e -> {
             File teststart = new File(System.getProperty("user.dir") + "/Save/Player.txt");
             if(teststart.exists()) {
+                System.out.println("Sh");
                 main.loadGame();
                 mainStage.setScene(mainScene);
             }

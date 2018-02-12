@@ -27,6 +27,7 @@ public class Main extends Application {
     private PlayerController pc;
     private boolean menuActive;
 
+
     private Stage mainStage;
     private Scene mainScene;
 

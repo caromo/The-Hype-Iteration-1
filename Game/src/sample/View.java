@@ -32,6 +32,7 @@ public class View {
 
     private int mapWidth, mapHeight;
     private int tileSize;
+    private int currentMapID;
 
     private MenuView menu;
     private MainMenu mainMenu;
@@ -61,7 +62,7 @@ public class View {
 
         System.out.println(workingDir);
 
-
+        currentMapID = 0;
 
     }
 
@@ -70,7 +71,11 @@ public class View {
 
     public void render(tile[][] map, Player p) {
         //gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-
+        if(main.getMap().getMapID() != currentMapID) {
+            System.out.println("Differet");
+            centerOnPlayer();
+        }
+        currentMapID = main.getMap().getMapID();
         renderMap(map, p);
         renderGrid(map);
         if(menu.isOpen()) {
@@ -97,28 +102,10 @@ public class View {
 
                 gc.drawImage(sprites.getTerrainImage(map[i][j].decal), (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
 
-                int tileID = map[i][j].getScenario();
+
                 //System.out.println(tileID);
-                if(tileID == 1) {//AEHealing
-                    gc.setFill(Color.GREEN);
-                    gc.fillRect((i*tileSize)+5, (j*tileSize)+5, tileSize-5, tileSize-5);
-
-                } else if(tileID == 2) {//AEDamage
-                    gc.setFill(Color.GREEN);
-                    gc.fillRect((i*tileSize)+5, (j*tileSize)+5, tileSize-5, tileSize-5);
-
-                } else if(tileID == 3) {//AEExperience
-                    gc.setFill(Color.GREEN);
-                    gc.fillRect((i*tileSize)+5, (j*tileSize)+5, tileSize-5, tileSize-5);
-
-                } else if(tileID == 4) {//Item
-                    gc.drawImage(getImage(workingDir + "/src/sample/sprites/grass.png"), (i*tileSize)+cameraX, (j*tileSize)+cameraY);
-                    gc.drawImage(sprites.getItemImage(1), (i*tileSize)+5+cameraX, (j*tileSize)+5+cameraY, tileSize, tileSize);
-                }else if(tileID == 7) {//Item
-                    gc.drawImage(getImage(workingDir + "/src/sample/sprites/grass.png"), (i*tileSize)+cameraX, (j*tileSize)+cameraY);
-                    gc.drawImage(sprites.getItemImage(2), (i*tileSize)+5+cameraX, (j*tileSize)+5+cameraY, tileSize, tileSize);
-                } else {//MapTransition
-
+                if(map[i][j].SN > 0) {
+                    gc.drawImage(sprites.getTileObjectSprite(map[i][j].SN, map[i][j].spec), (i * tileSize) + cameraX, (j * tileSize) + cameraY, tileSize, tileSize);
                 }
             }
         }
@@ -126,6 +113,7 @@ public class View {
         // First parameter changed from playerImg
         gc.drawImage(sprites.getPlayerSprite(player.getPlayerSprite()), player.getPosition().x*tileSize+cameraX, player.getPosition().y*tileSize+cameraY, tileSize, tileSize);
 
+        //Draw player
         //Draw player
 
     }
@@ -174,6 +162,12 @@ public class View {
         } else {
             moveCameraLeft();
         }
+    }
+
+    public void centerOnPlayer() {
+
+        cameraX = (int)(canvas.getWidth()/2) - (player.getPosition().x+1)*tileSize;
+        cameraY =  (int)(canvas.getHeight()/2) - (player.getPosition().y+1)*tileSize;
     }
     public void Escape() {
         menu.Escape();
