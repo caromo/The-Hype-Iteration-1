@@ -11,7 +11,6 @@ public class Sprites {
     private ArrayList<Image> AESprites;
     private ArrayList<Image> playerSprites;
     private Image mapTransitionSprite;
-    private Image obsticleItem;
 
 
     private String workingDir;
@@ -50,7 +49,6 @@ public class Sprites {
         playerSprites.add(getImage(System.getProperty("user.dir") + "/src/sample/sprites/characterSoldier.png"));
 
         mapTransitionSprite = getImage(workingDir + "/src/sample/sprites/door.png");
-        obsticleItem = getImage(workingDir + "/src/sample/sprites/rock.png");
 
         //playerImg = getImage(workingDir + "/src/sample/sprites/pikachu.png");
 
@@ -70,10 +68,8 @@ public class Sprites {
             return getItemImage(spec);
         } else if(SN == 5){//Map transition
             return mapTransitionSprite;
-        } else if(SN == 6){//Instadeath
+        } else {//Instadeath
             return AESprites.get(3);
-        } else {
-            return obsticleItem;
         }
     }
 
