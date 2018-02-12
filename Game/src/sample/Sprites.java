@@ -16,7 +16,7 @@ public class Sprites {
     private String workingDir;
     public Sprites() {
 
-        workingDir = System.getProperty("user.dir");
+        workingDir = System.getProperty("user.dir")+"/Game";
 
         //System.out.println(workingDir);
         itemSprites = new ArrayList<Image>();
@@ -64,7 +64,7 @@ public class Sprites {
             return AESprites.get(1);
         } else if(SN == 3) {//AEExperience
             return AESprites.get(2);
-        } else if(SN == 4 || SN == 7) {//Item
+        } else if(SN == 4) {//Item
             return getItemImage(spec);
         } else if(SN == 5){//Map transition
             return mapTransitionSprite;

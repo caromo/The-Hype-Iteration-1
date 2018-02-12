@@ -97,28 +97,10 @@ public class View {
 
                 gc.drawImage(sprites.getTerrainImage(map[i][j].decal), (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
 
-                int tileID = map[i][j].getScenario();
+
                 //System.out.println(tileID);
-                if(tileID == 1) {//AEHealing
-                    gc.setFill(Color.GREEN);
-                    gc.fillRect((i*tileSize)+5, (j*tileSize)+5, tileSize-5, tileSize-5);
-
-                } else if(tileID == 2) {//AEDamage
-                    gc.setFill(Color.GREEN);
-                    gc.fillRect((i*tileSize)+5, (j*tileSize)+5, tileSize-5, tileSize-5);
-
-                } else if(tileID == 3) {//AEExperience
-                    gc.setFill(Color.GREEN);
-                    gc.fillRect((i*tileSize)+5, (j*tileSize)+5, tileSize-5, tileSize-5);
-
-                } else if(tileID == 4) {//Item
-                    gc.drawImage(getImage(workingDir + "/src/sample/sprites/grass.png"), (i*tileSize)+cameraX, (j*tileSize)+cameraY);
-                    gc.drawImage(sprites.getItemImage(1), (i*tileSize)+5+cameraX, (j*tileSize)+5+cameraY, tileSize, tileSize);
-                }else if(tileID == 7) {//Item
-                    gc.drawImage(getImage(workingDir + "/src/sample/sprites/grass.png"), (i*tileSize)+cameraX, (j*tileSize)+cameraY);
-                    gc.drawImage(sprites.getItemImage(2), (i*tileSize)+5+cameraX, (j*tileSize)+5+cameraY, tileSize, tileSize);
-                } else {//MapTransition
-
+                if(map[i][j].SN > 0) {
+                    gc.drawImage(sprites.getTileObjectSprite(map[i][j].SN, map[i][j].spec), (i * tileSize) + cameraX, (j * tileSize) + cameraY, tileSize, tileSize);
                 }
             }
         }
