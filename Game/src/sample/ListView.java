@@ -57,7 +57,7 @@ public class ListView {
         gc.fillRect(0, ind*getEntryHeight()+5, getEntryWidth()-5, getEntryHeight());
         renderEntryBackground(ind);
         gc.setFill(Color.BLACK);
-        gc.fillText(s, 70, ind*getEntryHeight()+55);
+        gc.fillText(s, 50, ind*getEntryHeight()+50);
     }
 
     public void renderEntryBackground(int ind) {
