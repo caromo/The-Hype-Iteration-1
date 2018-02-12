@@ -9,9 +9,8 @@ public class tile {
     public int SN;
     public int spec;
     private boolean areaEffect = false;
-    protected int instantKill = 20; //idk
-    protected int obstacleItem = 44; //idk
-    protected int interactiveItem = 44; //idk
+    protected int instantKill = 6; //idk
+    protected int interactiveItem = 7; //idk
 
     public tile(tileObject objType) {
         passable = true;
@@ -58,13 +57,13 @@ public class tile {
             else if (scenario == 5) {
                 return ((MapTransition) temp).getDestination();
             }
-            else if(scenario == obstacleItem)
-            {
-                setPassable(false);
+            else if(scenario == 6) /*Insta-Death */{
+                occupy.getPlayer().setHealth(0);
+               // occupy.getPlayer().setIsDead(true);
             }
-            else if(scenario == interactiveItem)
+            else if(scenario == 7) /*Interactive Item*/
             {
-                if(occupy.getPlayer().getLevel() > ((Item)temp).getRequiredLevel())
+                if(occupy.getPlayer().getLevel() >= ((Item)temp).getRequiredLevel())
                 {
                     occupy.getPlayer().acquireItem((Item)temp);
                 }
@@ -105,7 +104,7 @@ public class tile {
             }
         } else if (SN == 5) { // Map Transition
             holding = new Holding(this, new MapTransition(SN, spec));
-        } else if(SN == instantKill){ //instant death
+        } else if(SN == 6){ //instant death
             holding = new Holding(this, new Fatality(SN, spec));
         }
 
@@ -118,6 +117,12 @@ public class tile {
                 break;
             case 'W':
                 setPassable(false);
+                break;
+            case 'X': //For obstacle items
+                setPassable(false);
+                break;
+            case 'D': // For Insta-death tiles
+                setPassable(true);
                 break;
         }
     }
@@ -136,6 +141,12 @@ public class tile {
                 break;
             case 'M':
                 st.append("M");
+                break;
+            case 'X': //For obstacle items
+                st.append("X");
+                break;
+            case 'D': // For Insta-death tiles
+                st.append("D");
                 break;
             default:
                 st.append(Integer.toString(((Equipment)holding.getObject()).getEquipmentID()));
@@ -180,6 +191,9 @@ public class tile {
                     st.append(Integer.toString(holding.getObject().getEffect()));
                     st.append("00");
                     break;
+                case 6:
+                    st.append("6");
+                    st.append("000");
             }
         }
 
