@@ -80,6 +80,7 @@ public class RunGame extends Application {
     public void loadGame() {
         mainMenu.setIsMenuOpen(false);
         map.resetMap();
+        player.getInventory().reset();
         try {
             player.setIsDead(false); // If player previously died this makes sure he is now alive
 
@@ -145,7 +146,20 @@ public class RunGame extends Application {
             BufferedReader br_inventory = new BufferedReader(new FileReader(inventoryFile));
             String s;
             while ((s= br_inventory.readLine()) != null ) {
-                player.getInventory().addItembyID(Integer.parseInt(s));
+                if (s.length() == 5) {
+                    String eq = s.substring(0,3);
+                    String spec = s.substring(3);
+                    if (s.charAt(0) == '1'){
+                        player.getInventory().addItem(new Armor(1, Integer.parseInt(eq), Integer.parseInt(spec)));
+                    } else if (s.charAt(0) == '2') {
+                        player.getInventory().addItem(new Weapon(2, Integer.parseInt(eq), Integer.parseInt(spec)));
+                    } else if (s.charAt(0) == '3') {
+                        player.getInventory().addItem(new Ring(3, Integer.parseInt(eq), Integer.parseInt(spec)));
+                    }
+                } else {
+                    player.getInventory().addItembyID(Integer.parseInt(s));
+                }
+
             }
             br_player.close();
             br_inventory.close();
@@ -227,7 +241,13 @@ public class RunGame extends Application {
 
             Item[] temp = player.getInventory().getItems();
             for (int i = 0; i < player.getInventory().getNumOfItems(); i++) {
-                iw.println(temp[i].getID());
+                if (temp[i] instanceof Equipment) {
+                    iw.print(((Equipment) temp[i]).getEquipmentID());
+                    iw.println(((Equipment) temp[i]).supplyBenefit());
+                } else {
+                    iw.println(temp[i].getID());
+                }
+
             }
             iw.close();
 

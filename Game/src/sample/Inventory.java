@@ -86,4 +86,8 @@ public class Inventory {
             System.out.println(items.get(i).getID());
         }
     }
+
+    public void reset() {
+        items.clear();
+    }
 }
