@@ -64,9 +64,7 @@ public class tile {
             }
             else if(scenario == 7) /*Interactive Item*/
             {
-                System.out.println("say");
                 if(occupy.getPlayer().getLevel() >= ((Item)temp).getRequiredLevel()) {
-                    System.out.println("what");
                     occupy.getPlayer().acquireItem((Item)temp);
                     holding = null;
                     SN = 0;
@@ -101,10 +99,13 @@ public class tile {
 
         if (SN == 1) { // Area Effect
             holding = new Holding(this, new damageEffect(SN, spec));
+            ((AreaEffect) holding.getObject()).setDuration(spec);
         } else if(SN == 2){
             holding = new Holding(this, new healingEffect(SN, spec));
+            ((AreaEffect) holding.getObject()).setDuration(spec);
         } else if(SN == 3){
             holding = new Holding(this, new expEffect(SN, spec));
+            ((AreaEffect) holding.getObject()).setDuration(spec);
         } else if (SN == 4 && EQdata != 0) {
             if (spec / 100 == 1) {
                 holding = new Holding(this, new Armor(spec / 100, spec, EQdata));
@@ -128,10 +129,10 @@ public class tile {
             holding = new Holding(this, new MapTransition(SN, spec));
         } else if(SN == 6){ //instant death
             holding = new Holding(this, new Fatality(SN, spec));
-        }else if(SN == 7){ //instant death
+        }
+        else if(SN == 7){ //instant death
             holding = new Holding(this, new Item(SN, spec));
-            ((Item)holding.getObject()).setRequiredLevel(2);
-
+            ((Item)holding.getObject()).setRequiredLevel(spec);
         }
         else if(SN == 8) /*Obstacle Item*/ {
             holding = new Holding(this, new Item(SN, 0));
@@ -206,6 +207,11 @@ public class tile {
                 case 6:
                     st.append("6");
                     st.append("000");
+                    break;
+                case 7:
+                    st.append("7");
+                    st.append(Integer.toString(holding.getObject().getEffect())); //Gets item ID
+                    st.append("00");
                     break;
                 case 8:
                     st.append("8");
