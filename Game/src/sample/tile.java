@@ -9,8 +9,8 @@ public class tile {
     public Holding holding;
     public char decal;
     private Boolean passable;
-    public int SN;
-    public int spec;
+    private int SN;
+    private int spec;
     private boolean areaEffect = false;
 
     public tile(tileObject objType) {
@@ -224,6 +224,13 @@ public class tile {
     public boolean getPassable() { return passable;  }
 
     public void setPassable(Boolean passable) { this.passable = passable;  }
+
+    public int getSN() {
+        return SN;
+    }
+    public int getSpec() {
+        return spec;
+    }
 
     public void cancelEffect() {
         if(isAreaEffect())
