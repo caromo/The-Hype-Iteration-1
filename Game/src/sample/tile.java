@@ -12,6 +12,8 @@ public class tile {
     private int SN;
     private int spec;
     private boolean areaEffect = false;
+    private int instantKill = 6;
+    private int interactiveItem = 7;
 
     public tile(tileObject objType) {
         passable = true;
@@ -36,7 +38,6 @@ public class tile {
             tileObject temp = holding.getObject();
             if(scenario == 1 || scenario == 2 || scenario == 3)  {    //Area effect
                 System.out.println("APPLY");
-                ((AreaEffect) temp).setDuration(20);
                 ((AreaEffect) temp).setAmount(3);
                 ((AreaEffect) temp).startEf();
 
@@ -80,7 +81,6 @@ public class tile {
         this.SN = SN;
         this.spec = spec;
 
-
         switch(decal){
             case 'G':
                 setPassable(true);
@@ -95,7 +95,6 @@ public class tile {
                 setPassable(true);
                 break;
         }
-
 
         if (SN == 1) { // Area Effect
             holding = new Holding(this, new damageEffect(SN, spec));

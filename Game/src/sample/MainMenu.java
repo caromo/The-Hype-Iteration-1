@@ -107,16 +107,11 @@ public class MainMenu {
 
         Button loadGameButton = new Button("Load Game");
         loadGameButton.setOnAction(e -> {
-            //workingDir = System.getProperty("user.dir");
-            // if workingDir.save.exists TODO implement this
-
             File teststart = new File(System.getProperty("user.dir") + "/Save/Player.txt");
             if(teststart.exists()) {
                 main.loadGame();
                 mainStage.setScene(mainScene);
             }
-
-
         }); // Change to Load() later
 
         Button exitGameButton = new Button("Exit Game");
@@ -308,9 +303,6 @@ public class MainMenu {
 
     }
 
-
-
-
     // Opens gameOver screen
     public void gameOver()
     {
@@ -325,9 +317,6 @@ public class MainMenu {
         gameOverText.setFont(Font.font("Verdana",FontWeight.BOLD,60));
         gameOverText.setFill(Color.DARKRED);
 
-        //Image sadCatFace = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/crying-cat-face.png");
-        //ImageView catView = new ImageView(sadCatFace);
-
         Button goToMainMenuButtonFromGameOver = new Button("  Exit  ");
         goToMainMenuButtonFromGameOver.setOnAction(e -> openMainMenu());//mainStage.setScene(startingScene));
 
@@ -335,11 +324,9 @@ public class MainMenu {
         //Set Background Image
         File file = new File(System.getProperty("user.dir") + "/Game/src/sample/sprites/crying-cat-face.png");
         Image i = null;
-        //System.out.println(System.getProperty("user.dir"));
         try {
             i = new Image(file.toURI().toURL().toString(), gameOver.getWidth(), gameOver.getHeight(), false, false);
         } catch (MalformedURLException e1) {
-            // TODO Auto-generated catch block
             e1.printStackTrace();
         }
         BackgroundImage im = new BackgroundImage(i, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
@@ -358,4 +345,7 @@ public class MainMenu {
         return isMenuOpen;
     }
 
+    public void setIsMenuOpen(boolean isMenuOpen) {
+        this.isMenuOpen = isMenuOpen;
+    }
 }
