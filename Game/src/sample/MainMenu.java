@@ -37,7 +37,7 @@ public class MainMenu {
     private Main main;
     private boolean isMenuOpen = true;
     private int spriteNumber;
-    MusicPlayer menuMusic = new MusicPlayer();
+//    MusicPlayer menuMusic = new MusicPlayer();
 
     public MainMenu(Player player, GraphicsContext gc, Canvas canvas, Stage mainStage, Scene mainScene, Main main) {
         this.player = player;
@@ -48,7 +48,7 @@ public class MainMenu {
 
     public void openMainMenu()
     {
-        menuMusic.playMainMenuMusic();
+//        menuMusic.playMainMenuMusic();
 
         GridPane mainMenu = new GridPane();
         mainMenu.setAlignment(Pos.TOP_CENTER);

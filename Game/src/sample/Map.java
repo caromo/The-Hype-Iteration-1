@@ -36,14 +36,16 @@ public class Map {
     //function to place player at the beginning point of a specific map
     private void moveToStart() {
         myPlayer.setPosition((int)startingPoint.getX(), (int)startingPoint.getY());
-        tileSet[(int)startingPoint.getX()][(int)startingPoint.getY()].occupy = new Occupy(myPlayer, tileSet[(int)startingPoint.getX()][(int)startingPoint.getY()]);
+        tileSet[(int)startingPoint.getX()][(int)startingPoint.getY()].occupy =
+                new Occupy(myPlayer, tileSet[(int)startingPoint.getX()][(int)startingPoint.getY()]);
     }
 
     //moves the player and resolves tile event (If passable)
     public void movePlayer(Point dir) {
         if ( tileSet[(int)dir.getX()][(int)dir.getY()].getPassable() ) {
             tileSet[(int) myPlayer.getPosition().getX()][(int)myPlayer.getPosition().getY()].occupy = null;
-            tileSet[(int)dir.getX()][(int)dir.getY()].occupy = new Occupy(myPlayer, tileSet[(int)dir.getX()][(int)dir.getY()]);
+            tileSet[(int)dir.getX()][(int)dir.getY()].occupy =
+                    new Occupy(myPlayer, tileSet[(int)dir.getX()][(int)dir.getY()]);
             myPlayer.setPosition( (int)dir.getX(), (int)dir.getY() );
             updateMap(tileSet[(int)dir.getX()][(int)dir.getY()].applyEffect());
         }
@@ -58,6 +60,7 @@ public class Map {
         moveToStart();
     }
 
+    //writes the current map's state into its corresponding map file
     public void saveMap() {
         if(tileSet[0][0] == null){
             return;
@@ -68,8 +71,8 @@ public class Map {
 
         try {
             //opens the map file based on MapID for writing
-            PrintWriter pw = new PrintWriter(System.getProperty("user.dir") + "/Save" + "/Map" + "/" + Integer.toString(mapID)
-                    + ".txt");
+            PrintWriter pw = new PrintWriter(System.getProperty("user.dir") + "/Save" + "/Map" + "/" +
+                    Integer.toString(mapID) + ".txt");
             //write first line map size: X Y
             pw.println(mapSizeX + " " + mapSizeY);
             //write second line with startingPosition
@@ -123,7 +126,8 @@ public class Map {
                         tileSet[i][j].fill('G', 4, Integer.parseInt(equid), Integer.parseInt(data), 0);
                     } else {
                         tileSet[i][j] = new tile();
-                        tileSet[i][j].fill(temp.charAt(0), (int) temp.charAt(1)-48, (int) temp.charAt(2)-48, 0, temp.charAt(4)-'0');
+                        tileSet[i][j].fill(temp.charAt(0), (int) temp.charAt(1)-48, (int) temp.charAt(2)-48,
+                                0, temp.charAt(4)-'0');
                     }
                 }
             }
@@ -136,6 +140,7 @@ public class Map {
 
     }
 
+    //initializes the map object for a new game
     public void resetMap() {
         tileSet = new tile[10][10];
         mapID = 0;
