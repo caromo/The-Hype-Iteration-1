@@ -197,6 +197,11 @@ public class tile {
                     st.append("6");
                     st.append("000");
                     break;
+                case 7:
+                    st.append("7");
+                    st.append(Integer.toString(holding.getObject().getEffect()));
+                    st.append("00");
+                    break;
                 case 8:
                     st.append("8");
                     st.append("000");

@@ -4,12 +4,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Path;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 import java.io.File;
-import java.nio.file.Paths;
 
 /*Decals needed for view:
 Grass, Water, Mountains
@@ -23,7 +19,7 @@ public class View {
     private GraphicsContext gc;
     private Canvas canvas;
     private Player player;
-    private Main main;
+    private RunGame main;
 
     private int cameraX, cameraY;
     private String workingDir;
@@ -40,7 +36,7 @@ public class View {
 
     private Sprites sprites;
 
-    public View(Canvas canvas, Player player, MainMenu mainMenu, Main main) {
+    public View(Canvas canvas, Player player, MainMenu mainMenu, RunGame main) {
         this.gc = canvas.getGraphicsContext2D();
         this.canvas = canvas;
         this.player = player;

@@ -17,7 +17,7 @@ public class Sprites {
     private String workingDir;
     public Sprites() {
 
-        workingDir = System.getProperty("user.dir")+"/Game";
+        workingDir = System.getProperty("user.dir");
         itemSprites = new ArrayList<Image>();
         terrainSprites = new ArrayList<Image>();
         AESprites = new ArrayList<Image>();
@@ -28,27 +28,27 @@ public class Sprites {
     private void initializeSprites() {
         //Load item textures
 
-        itemSprites.add(getImage(workingDir + "/src/sample/sprites/potion2.png"));
-        itemSprites.add(getImage(workingDir + "/src/sample/sprites/sword.png"));
+        itemSprites.add(getImage(workingDir + "/sprites/potion2.png"));
+        itemSprites.add(getImage(workingDir + "/sprites/sword.png"));
 
         //Load terrain textures
 
-        terrainSprites.add(getImage(workingDir + "/src/sample/sprites/grass.png"));
-        terrainSprites.add(getImage(workingDir + "/src/sample/sprites/water.png"));
-        terrainSprites.add(getImage(workingDir + "/src/sample/sprites/mountains.png"));
+        terrainSprites.add(getImage(workingDir + "/sprites/grass.png"));
+        terrainSprites.add(getImage(workingDir + "/sprites/water.png"));
+        terrainSprites.add(getImage(workingDir + "/sprites/mountains.png"));
 
-        AESprites.add(getImage(workingDir + "/src/sample/sprites/lava.png"));
-        AESprites.add(getImage(workingDir + "/src/sample/sprites/health2.png"));
-        AESprites.add(getImage(workingDir + "/src/sample/sprites/star.png"));
-        AESprites.add(getImage(workingDir + "/src/sample/sprites/skull.png"));
+        AESprites.add(getImage(workingDir + "/sprites/lava.png"));
+        AESprites.add(getImage(workingDir + "/sprites/health2.png"));
+        AESprites.add(getImage(workingDir + "/sprites/star.png"));
+        AESprites.add(getImage(workingDir + "/sprites/skull.png"));
 
-        playerSprites.add(getImage(workingDir + "/src/sample/sprites/characterGuy.png"));
-        playerSprites.add(getImage(workingDir + "/src/sample/sprites/characterGirl.png"));
-        playerSprites.add(getImage(workingDir + "/src/sample/sprites/characterAdventurer.png"));
-        playerSprites.add(getImage(workingDir + "/src/sample/sprites/characterSoldier.png"));
+        playerSprites.add(getImage(workingDir + "/sprites/characterGuy.png"));
+        playerSprites.add(getImage(workingDir + "/sprites/characterGirl.png"));
+        playerSprites.add(getImage(workingDir + "/sprites/characterAdventurer.png"));
+        playerSprites.add(getImage(workingDir + "/sprites/characterSoldier.png"));
 
-        mapTransitionSprite = getImage(workingDir + "/src/sample/sprites/door.png");
-        obsticleItem = getImage(workingDir + "/src/sample/sprites/rock.png");
+        mapTransitionSprite = getImage(workingDir + "/sprites/door.png");
+        obsticleItem = getImage(workingDir + "/sprites/rock.png");
 
         //playerImg = getImage(workingDir + "/src/sample/sprites/pikachu.png");
 

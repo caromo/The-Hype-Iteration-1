@@ -25,7 +25,7 @@ public class ConfirmationPopup {
         yesSelected = true;
         active = false;
 
-        File file = new File(System.getProperty("user.dir") + "/Game/src/sample/sprites/popupBackground.png");
+        File file = new File(System.getProperty("user.dir") + "/sprites/popupBackground.png");
         background = new Image(file.toURI().toString());
 
     }

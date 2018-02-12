@@ -34,12 +34,12 @@ public class MainMenu {
     private Stage mainStage;
     private Scene mainScene, startingScene, characterCreationScene, gameOverScene, introScene;
     private Player player;
-    private Main main;
+    private RunGame main;
     private boolean isMenuOpen = true;
     private int spriteNumber;
     MusicPlayer menuMusic = new MusicPlayer();
 
-    public MainMenu(Player player, GraphicsContext gc, Canvas canvas, Stage mainStage, Scene mainScene, Main main) {
+    public MainMenu(Player player, GraphicsContext gc, Canvas canvas, Stage mainStage, Scene mainScene, RunGame main) {
         this.player = player;
         this.mainStage = mainStage;
         this.mainScene = mainScene;
@@ -67,7 +67,7 @@ public class MainMenu {
         mainStage.setScene( startingScene );
 
         //Set Background Image
-        File file = new File(System.getProperty("user.dir") + "/Game/src/sample/sprites/lava.png");
+        File file = new File(System.getProperty("user.dir") + "/sprites/lava.png");
         Image i = null;
 
         try {
@@ -149,10 +149,10 @@ public class MainMenu {
         ChoiceBox characterSprites = new ChoiceBox(FXCollections.observableArrayList("Guy","Girl","Adventurer","Soldier"));
         characterSprites.setValue("Guy"); //Setting a default choice
 
-        Image characterSprite1 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterGuy.png");
-        Image characterSprite2 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterGirl.png");
-        Image characterSprite3 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterAdventurer.png");
-        Image characterSprite4 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterSoldier.png");
+        Image characterSprite1 = new Image("file:" + System.getProperty("user.dir") + "/sprites/characterGuy.png");
+        Image characterSprite2 = new Image("file:" + System.getProperty("user.dir") + "/sprites/characterGirl.png");
+        Image characterSprite3 = new Image("file:" + System.getProperty("user.dir") + "/sprites/characterAdventurer.png");
+        Image characterSprite4 = new Image("file:" + System.getProperty("user.dir") + "/sprites/characterSoldier.png");
 
         ImageView imageView = new ImageView(characterSprite1);
 
@@ -306,7 +306,7 @@ public class MainMenu {
         goToMainMenuButtonFromGameOver.setOnAction(e -> openMainMenu());//mainStage.setScene(startingScene));
 
         //Set Background Image
-        File file = new File(System.getProperty("user.dir") + "/Game/src/sample/sprites/crying-cat-face.png");
+        File file = new File(System.getProperty("user.dir") + "/sprites/crying-cat-face.png");
         Image i = null;
         try {
             i = new Image(file.toURI().toURL().toString(), gameOver.getWidth(), gameOver.getHeight(), false, false);

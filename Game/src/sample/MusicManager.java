@@ -3,7 +3,6 @@ package sample;
 //import javax.sound.sampled.AudioInputStream;
 import java.util.ArrayList;
 //import javax.sound.sampled.AudioSystem;
-import java.io.InputStream;
 import javax.sound.sampled.*;
 
 
@@ -32,7 +31,7 @@ public class MusicManager implements LineListener  {
             Line line = AudioSystem.getLine(linfo);
             setClip((Clip) line);
             getClip().addLineListener(this);
-            setStream(AudioSystem.getAudioInputStream(Main.class.getResourceAsStream("AudioFiles/" + fileName)));
+            setStream(AudioSystem.getAudioInputStream(RunGame.class.getResourceAsStream("AudioFiles/" + fileName)));
             getClip().open(getStream());
             getClip().start();
 

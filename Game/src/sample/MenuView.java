@@ -4,28 +4,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.layout.*;
-import javafx.geometry.Insets;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 public class MenuView extends ListView{
@@ -40,7 +20,7 @@ public class MenuView extends ListView{
     private Stage mainStage;
     private Scene mainScene, startingScene, characterCreationScene, gameOverScene;
 
-    public MenuView(Player player, Canvas canvas, Main main) {
+    public MenuView(Player player, Canvas canvas, RunGame main) {
         super(player, canvas);
         this.player = player;
 

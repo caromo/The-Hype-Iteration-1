@@ -6,9 +6,9 @@ import javafx.scene.input.KeyEvent;
 public class KeyHandler implements EventHandler<KeyEvent>
 {
     private View view;
-    private Main main;
+    private RunGame main;
     public int x, y;
-    public KeyHandler(View view, Main main) {
+    public KeyHandler(View view, RunGame main) {
         this.view = view;
         this.main = main;
         x = 0; y = 0;

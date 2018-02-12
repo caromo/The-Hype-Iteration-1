@@ -9,7 +9,7 @@ import javafx.scene.media.MediaPlayer;
 
 public class MusicPlayer {
 
-    String path = System.getProperty("user.dir") + "/Game/src/sample/music/mainMenuMusic.mp3";
+    String path = System.getProperty("user.dir") + "/music/mainMenuMusic.mp3";
 
     Media mainMenuMusic = new Media(new File(path).toURI().toString());
     MediaPlayer mainMenuMusicPlayer = new MediaPlayer(mainMenuMusic);

@@ -9,9 +9,9 @@ public class SaveGameView extends ListView {
     private Player player;
     private GraphicsContext gc;
     private Canvas canvas;
-    private Main main;
+    private RunGame main;
     private ConfirmationPopup cp;
-    public SaveGameView(Player player, Canvas canvas, Main main) {
+    public SaveGameView(Player player, Canvas canvas, RunGame main) {
         super(player, canvas);
         this.player = player;
         this.gc = canvas.getGraphicsContext2D();
