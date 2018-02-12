@@ -19,9 +19,6 @@ public class PlayerController implements EventHandler<KeyEvent> {
 
     public void handle(KeyEvent event) {
         Point p = new Point(player.getPosition());
-
-        //p.x = player.getPosition().x;
-        //p.y = player.getPosition().y;
         if(paused) { return; }
         switch(event.getCode()) {
             case UP:
@@ -93,7 +90,6 @@ public class PlayerController implements EventHandler<KeyEvent> {
             case E:
                 player.gainExp(5);
                 break;
-
         }
     }
 

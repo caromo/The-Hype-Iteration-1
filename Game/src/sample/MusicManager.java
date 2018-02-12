@@ -49,11 +49,6 @@ public class MusicManager implements LineListener  {
         MusicManager.stream = stream;
     }
 
-//    @Override
-//    public void run() {
-//
-//    }
-
     public ArrayList<String> getFiles() {
         return files;
     }

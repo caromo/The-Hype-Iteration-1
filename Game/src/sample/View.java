@@ -41,7 +41,6 @@ public class View {
     private Sprites sprites;
 
     public View(Canvas canvas, Player player, MainMenu mainMenu, Main main) {
-
         this.gc = canvas.getGraphicsContext2D();
         this.canvas = canvas;
         this.player = player;
@@ -59,20 +58,13 @@ public class View {
 
         //Get working directory to load textures from
         workingDir = System.getProperty("user.dir") + "\\Game";
-
-        System.out.println(workingDir);
-
         currentMapID = 0;
 
     }
 
     //Load image arrays with sprite assets
-
-
     public void render(tile[][] map, Player p) {
-        //gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         if(main.getMap().getMapID() != currentMapID) {
-            System.out.println("Differet");
             centerOnPlayer();
         }
         currentMapID = main.getMap().getMapID();
@@ -99,11 +91,7 @@ public class View {
         //Iterate through map, setting appropriate color for each tile, then draw rect
         for(int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[0].length; j++) {
-
                 gc.drawImage(sprites.getTerrainImage(map[i][j].decal), (i*tileSize)+cameraX, (j*tileSize)+cameraY, tileSize, tileSize);
-
-
-                //System.out.println(tileID);
                 if(map[i][j].SN > 0) {
                     gc.drawImage(sprites.getTileObjectSprite(map[i][j].SN, map[i][j].spec), (i * tileSize) + cameraX, (j * tileSize) + cameraY, tileSize, tileSize);
                 }
@@ -112,10 +100,6 @@ public class View {
 
         // First parameter changed from playerImg
         gc.drawImage(sprites.getPlayerSprite(player.getPlayerSprite()), player.getPosition().x*tileSize+cameraX, player.getPosition().y*tileSize+cameraY, tileSize, tileSize);
-
-        //Draw player
-        //Draw player
-
     }
 
 
@@ -142,6 +126,7 @@ public class View {
             moveCameraUp();
         }
     }
+
     public void Down() {
         if(menu.isOpen()) {
             menu.Down();
@@ -149,6 +134,7 @@ public class View {
             moveCameraDown();
         }
     }
+
     public void Right() {
         if(menu.isOpen()) {
             menu.Right();
@@ -156,6 +142,7 @@ public class View {
             moveCameraRight();
         }
     }
+
     public void Left() {
         if(menu.isOpen()) {
             menu.Left();
@@ -165,10 +152,10 @@ public class View {
     }
 
     public void centerOnPlayer() {
-
         cameraX = (int)(canvas.getWidth()/2) - (player.getPosition().x+1)*tileSize;
         cameraY =  (int)(canvas.getHeight()/2) - (player.getPosition().y+1)*tileSize;
     }
+
     public void Escape() {
         menu.Escape();
     }
@@ -188,6 +175,7 @@ public class View {
         }
         cameraY+=tileSize;
     }
+
     public void moveCameraDown() {
         if(canvas.getHeight()-cameraY >= mapHeight*tileSize) {//Bottom edge of board already in view
             return;
@@ -197,6 +185,7 @@ public class View {
         }
         cameraY-=tileSize;
     }
+
     public void moveCameraLeft() {//Loft edge of board already in view
         if(cameraX >= 0) {
             return;
@@ -206,6 +195,7 @@ public class View {
         }
         cameraX+=tileSize;
     }
+
     public void moveCameraRight() {
         if(canvas.getWidth()-cameraX >= mapWidth*tileSize) {//Right edge of board already in view
             return;

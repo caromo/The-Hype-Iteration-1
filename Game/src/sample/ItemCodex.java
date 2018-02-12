@@ -31,7 +31,6 @@ public class ItemCodex {
     public void useItem(Player player, Item i){
         int itID = i.getID();
         if (i instanceof Equipment) {
-            System.out.println("Here");
             player.equipGear((Equipment)i);
         }
         else {

@@ -30,9 +30,7 @@ public class Inventory {
             return;
         }
         else {
-            System.out.println(items.size());
             items.add(new Item(4,id));
-            System.out.println(items.size());
             return;
         }
     }

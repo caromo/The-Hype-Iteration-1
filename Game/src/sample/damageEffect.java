@@ -28,7 +28,6 @@ public class damageEffect extends AreaEffect{
                                 timer.cancel();
                             }
                             secondsPassed++;
-                            System.out.print("Seconds passes " + secondsPassed + "\t\t");
                             Ef();
                         }
                     }, 0, (long) (1000));
@@ -41,7 +40,6 @@ public class damageEffect extends AreaEffect{
     {
         if(super.holding.getTile().occupy != null) {
             super.holding.getTile().occupy.getPlayer().takeDamage(getDamageEffect());
-            System.out.format("%d", holding.getTile().occupy.getPlayer().getHealth(), "\t");
         }
     }
 

@@ -42,15 +42,9 @@ public class ListView {
     }
 
     public void renderCursor() {
-
-
         gc.drawImage(cursorImg, -5, cursorPos*getEntryHeight()-5, getEntryWidth(), getEntryHeight()+10);
         gc.drawImage(arrow, getEntryWidth(), cursorPos*getEntryHeight()+20, 100, 60);
-
-
     }
-
-
 
     public void renderTextEntry(String s, int ind) {
         gc.setFill(Color.BLACK);
@@ -74,8 +68,8 @@ public class ListView {
         if(cursorPos+scrollOffset < numOfEntries-1) {
             scrollOffset++;
         }
-
     }
+
     public void cursorUp() {
         if(cursorPos > 0) {
             cursorPos--;

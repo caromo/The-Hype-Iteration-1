@@ -31,11 +31,9 @@ public class tile {
     //Performs the action associated with the tileObject
     public int applyEffect() {
         if (occupy != null && holding != null) {
-            System.out.println("APPLY2");
             int scenario = holding.getObject().getScenario();
             tileObject temp = holding.getObject();
             if(scenario == 1 || scenario == 2 || scenario == 3)  {    //Area effect
-                System.out.println("APPLY");
                 ((AreaEffect) temp).setDuration(20);
                 ((AreaEffect) temp).setAmount(3);
                 ((AreaEffect) temp).startEf();
@@ -55,18 +53,14 @@ public class tile {
                 return -1;
             }
             else if (scenario == 5) {
-                System.out.println("return destination " + ((MapTransition) temp).getDestination());
                 return ((MapTransition) temp).getDestination();
             }
             else if(scenario == 6) /*Insta-Death */{
                 occupy.getPlayer().setHealth(0);
-               // occupy.getPlayer().setIsDead(true);
             }
             else if(scenario == 7) /*Interactive Item*/
             {
-                System.out.println("say");
                 if(occupy.getPlayer().getLevel() >= ((Item)temp).getRequiredLevel()) {
-                    System.out.println("what");
                     occupy.getPlayer().acquireItem((Item)temp);
                     holding = null;
                     SN = 0;
@@ -82,7 +76,6 @@ public class tile {
         this.SN = SN;
         this.spec = spec;
 
-
         switch(decal){
             case 'G':
                 setPassable(true);
@@ -97,7 +90,6 @@ public class tile {
                 setPassable(true);
                 break;
         }
-
 
         if (SN == 1) { // Area Effect
             holding = new Holding(this, new damageEffect(SN, spec));
@@ -136,8 +128,6 @@ public class tile {
             holding = new Holding(this, new Item(SN, 0));
             setPassable(false);
         }
-
-
     }
 
     //Provides the encrypted info of the tile as a String
@@ -171,7 +161,7 @@ public class tile {
                 st.append("0000");
                 return st.toString();
             }
-
+            
             switch(holding.getObject().getScenario()) {
                 case 0:
                     st.append("0");

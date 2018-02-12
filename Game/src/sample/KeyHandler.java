@@ -38,7 +38,5 @@ public class KeyHandler implements EventHandler<KeyEvent>
                 view.P();
                 break;
         }
-
-        //do stuff
     }
 }

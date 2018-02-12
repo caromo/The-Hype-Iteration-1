@@ -14,7 +14,6 @@ public class QuitGame extends ListView {
 
     public void render() {
         renderTextEntry("Do you want to Exit Game?", 0);
-
         cp.render();
 
     }
@@ -36,6 +35,7 @@ public class QuitGame extends ListView {
             cp.Left();
         }
     }
+
     public void Right() {
         if(cp.getActive()) {
             cp.Right();
