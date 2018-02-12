@@ -6,8 +6,8 @@ public class tile {
     public Holding holding;
     public char decal;
     private Boolean passable;
-    public int SN;
-    public int spec;
+    private int SN;
+    private int spec;
     private boolean areaEffect = false;
 
     public tile(tileObject objType) {
@@ -74,6 +74,21 @@ public class tile {
         this.SN = SN;
         this.spec = spec;
 
+        switch(decal){
+            case 'G':
+                setPassable(true);
+                break;
+            case 'M':
+                setPassable(false);
+                break;
+            case 'W':
+                setPassable(false);
+                break;
+            case 'D': // For Insta-death tiles
+                setPassable(true);
+                break;
+        }
+
         if (SN == 1) { // Area Effect
             holding = new Holding(this, new damageEffect(SN, spec));
         } else if(SN == 2){
@@ -106,22 +121,10 @@ public class tile {
         }
         else if(SN == 8) /*Obstacle Item*/ {
             holding = new Holding(this, new Item(SN, 0));
+            setPassable(false);
         }
 
-        switch(decal){
-            case 'G':
-                setPassable(true);
-                break;
-            case 'M':
-                setPassable(false);
-                break;
-            case 'W':
-                setPassable(false);
-                break;
-            case 'D': // For Insta-death tiles
-                setPassable(true);
-                break;
-        }
+
     }
 
     //Provides the encrypted info of the tile as a String
