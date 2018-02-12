@@ -95,6 +95,7 @@ public class Player extends GameObject {
         if (hpIncrease > 0) {
             if (Level == 1){
                 if (hpIncrease + Health <= 100) {
+                    System.out.println("HEre");
                     Health += hpIncrease;
                 }
                 else {
@@ -135,27 +136,32 @@ public class Player extends GameObject {
         if (EquipSlot == 0) { // Meaning the player equipped an Armor Piece
             DefensePoints -= gear[EquipSlot].supplyBenefit();
             DefensePoints += swag.supplyBenefit();
-            if (gear[EquipSlot].getEquipmentID() > 100 && gear[EquipSlot].getEquipmentID() < 200){
+            if (swag.getEquipmentID() > 100 && swag.getEquipmentID() < 200){
                 gear[EquipSlot] = swag;
             }
         }
         else if (EquipSlot == 1) { // Meaning the player equipped a Weapon
             AttackPoints -= gear[EquipSlot].supplyBenefit();
             AttackPoints += swag.supplyBenefit();
-            if (gear[EquipSlot].getEquipmentID() > 200 && gear[EquipSlot].getEquipmentID() < 300){
+            if (swag.getEquipmentID() > 200 && swag.getEquipmentID() < 300){
+                System.out.println("!!!");
                 gear[EquipSlot] = swag;
             }
         }
         else if (EquipSlot == 2) { // Meaning the player equipped a Ring
             Health -= gear[EquipSlot].supplyBenefit();
             Health += swag.supplyBenefit();
-            if (gear[EquipSlot].getEquipmentID() > 300 && gear[EquipSlot].getEquipmentID() < 400){
+            if (swag.getEquipmentID() > 300 && swag.getEquipmentID() < 400){
                 gear[EquipSlot] = swag;
             }
         }
     }
 
     public void unequipGear(int EquipSlot){
+        if (gear[EquipSlot].getEquipmentID() == 100 ||gear[EquipSlot].getEquipmentID() == 200 ||gear[EquipSlot].getEquipmentID() == 300) {
+            return;
+        }
+        bag.addItem(gear[EquipSlot]);
         if (EquipSlot == 0) { // Meaning the player wants to unequip an Armor Piece
             DefensePoints -= gear[EquipSlot].supplyBenefit();
             gear[EquipSlot] = new Armor(1, 100, 0);
@@ -168,7 +174,7 @@ public class Player extends GameObject {
             Health -= gear[EquipSlot].supplyBenefit();
             gear[EquipSlot] = new Ring(3, 300, 0);
         }
-        bag.addItem(gear[EquipSlot]);
+
     }
 
     private void LevelUp()

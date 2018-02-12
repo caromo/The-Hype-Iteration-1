@@ -35,11 +35,11 @@ public class EquipmentView extends ListView {
     }
 
     private void renderEntry(int ind) {
-
         Equipment eq = player.getEquipment()[ind];
         if(eq == null) {
             return;
         }
+        System.out.println(eqc.getName(eq.getEquipmentID()));
         renderTextEntry(eqc.getName(eq.getEquipmentID()), ind);
 
     }

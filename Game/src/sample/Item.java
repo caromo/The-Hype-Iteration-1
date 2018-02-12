@@ -9,7 +9,7 @@ public class Item extends tileObject{
     public Item(int SN, int id) {
         super(SN);
         itemID = id;
-        oneShot = false;
+        oneShot = true;
     }
 
     public int getRequiredLevel() {
