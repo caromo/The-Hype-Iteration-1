@@ -12,6 +12,8 @@ public class tile {
     public int SN;
     public int spec;
     private boolean areaEffect = false;
+    private int instantKill = 6;
+    private int interactiveItem = 7;
 
     public tile(tileObject objType) {
         passable = true;
@@ -36,7 +38,6 @@ public class tile {
             tileObject temp = holding.getObject();
             if(scenario == 1 || scenario == 2 || scenario == 3)  {    //Area effect
                 System.out.println("APPLY");
-                ((AreaEffect) temp).setDuration(20);
                 ((AreaEffect) temp).setAmount(3);
                 ((AreaEffect) temp).startEf();
 
@@ -82,7 +83,6 @@ public class tile {
         this.SN = SN;
         this.spec = spec;
 
-
         switch(decal){
             case 'G':
                 setPassable(true);
@@ -98,13 +98,15 @@ public class tile {
                 break;
         }
 
-
         if (SN == 1) { // Area Effect
             holding = new Holding(this, new damageEffect(SN, spec));
+            ((AreaEffect) holding.getObject()).setDuration(spec);
         } else if(SN == 2){
             holding = new Holding(this, new healingEffect(SN, spec));
+            ((AreaEffect) holding.getObject()).setDuration(spec);
         } else if(SN == 3){
             holding = new Holding(this, new expEffect(SN, spec));
+            ((AreaEffect) holding.getObject()).setDuration(spec);
         } else if (SN == 4 && EQdata != 0) {
             if (spec / 100 == 1) {
                 holding = new Holding(this, new Armor(spec / 100, spec, EQdata));
@@ -130,7 +132,7 @@ public class tile {
             holding = new Holding(this, new Fatality(SN, spec));
         }else if(SN == 7){ //instant death
             holding = new Holding(this, new Item(SN, spec));
-            ((Item)holding.getObject()).setRequiredLevel(2);
+            ((Item)holding.getObject()).setRequiredLevel(spec);
         }
         else if(SN == 8) /*Obstacle Item*/ {
             holding = new Holding(this, new Item(SN, 0));

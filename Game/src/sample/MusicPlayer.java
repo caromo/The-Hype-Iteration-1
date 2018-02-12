@@ -13,6 +13,7 @@ public class MusicPlayer {
 
     String path = System.getProperty("user.dir") + "/Game/src/sample/music/mainMenuMusic.mp3";
 
+
     Media mainMenuMusic = new Media(new File(path).toURI().toString());
     MediaPlayer mainMenuMusicPlayer = new MediaPlayer(mainMenuMusic);
 
