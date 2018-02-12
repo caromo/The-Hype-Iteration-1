@@ -12,8 +12,6 @@ public class tile {
     private int SN;
     private int spec;
     private boolean areaEffect = false;
-    private int instantKill = 6;
-    private int interactiveItem = 7;
 
     public tile(tileObject objType) {
         passable = true;
@@ -84,6 +82,8 @@ public class tile {
         this.SN = SN;
         this.spec = spec;
 
+<<<<<<< HEAD
+=======
         switch(decal){
             case 'G':
                 setPassable(true);
@@ -98,6 +98,7 @@ public class tile {
                 setPassable(true);
                 break;
         }
+>>>>>>> a41183f49a6f067d6948faac535244d604574543
 
         if (SN == 1) { // Area Effect
             holding = new Holding(this, new damageEffect(SN, spec));
@@ -130,7 +131,7 @@ public class tile {
             holding = new Holding(this, new Fatality(SN, spec));
         }else if(SN == interactiveItem){ //instant death
             holding = new Holding(this, new Item(SN, spec));
-            ((Item)holding.getObject()).setRequiredLevel(spec);
+            ((Item)holding.getObject()).setRequiredLevel(2);
 
         }
         else if(SN == 8) /*Obstacle Item*/ {
