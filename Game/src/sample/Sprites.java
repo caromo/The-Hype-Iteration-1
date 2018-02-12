@@ -38,8 +38,8 @@ public class Sprites {
         terrainSprites.add(getImage(workingDir + "/src/sample/sprites/water.png"));
         terrainSprites.add(getImage(workingDir + "/src/sample/sprites/mountains.png"));
 
-        AESprites.add(getImage(workingDir + "/src/sample/sprites/crying-cat-face.png"));
-        AESprites.add(getImage(workingDir + "/src/sample/sprites/health.png"));
+        AESprites.add(getImage(workingDir + "/src/sample/sprites/skull.png"));
+        AESprites.add(getImage(workingDir + "/src/sample/sprites/health2.png"));
         AESprites.add(getImage(workingDir + "/src/sample/sprites/star.png"));
 
         playerSprites.add(getImage(System.getProperty("user.dir") + "/src/sample/sprites/characterGuy.png"));

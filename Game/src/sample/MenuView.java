@@ -61,10 +61,13 @@ public class MenuView extends ListView{
 
     public void render() {
         if(!isOpen()) { return; }
-        if(getVisible()) {
+
+        if(!anySubMenuOpen()) {
+            setVisible(true);
             renderMenu();
             renderCursor();
-        } else {
+        }
+        else {
             menuItems.get(currentOpenInd).render();
         }
     }
@@ -135,6 +138,15 @@ public class MenuView extends ListView{
             currentOpenInd = getSelectedItemIndex();
             setVisible(false);
         }
+    }
+
+    public boolean anySubMenuOpen() {
+        for(int i = 0; i < menuItems.size(); i++) {
+            if(menuItems.get(i).getVisible()) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

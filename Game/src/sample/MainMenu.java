@@ -37,6 +37,8 @@ public class MainMenu {
     private Main main;
     private boolean isMenuOpen = true;
     private int spriteNumber;
+    MusicPlayer menuMusic = new MusicPlayer();
+
     public MainMenu(Player player, GraphicsContext gc, Canvas canvas, Stage mainStage, Scene mainScene, Main main) {
         this.player = player;
         this.mainStage = mainStage;
@@ -46,6 +48,8 @@ public class MainMenu {
 
     public void openMainMenu()
     {
+        menuMusic.playMainMenuMusic();
+
         GridPane mainMenu = new GridPane();
         mainMenu.setAlignment(Pos.TOP_CENTER);
         mainMenu.setVgap(40);
@@ -150,7 +154,7 @@ public class MainMenu {
         ChoiceBox characterSprites = new ChoiceBox(FXCollections.observableArrayList("Guy","Girl","Adventurer","Soldier"));
         characterSprites.setValue("Guy"); //Setting a default choice
 
-        Image characterSprite1 = new Image("file:" + System.getProperty("user.dir") + "/src/sample/sprites/characterGuy.png");
+        Image characterSprite1 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterGuy.png");
         Image characterSprite2 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterGirl.png");
         Image characterSprite3 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterAdventurer.png");
         Image characterSprite4 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterSoldier.png");
@@ -172,7 +176,7 @@ public class MainMenu {
                     public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                         //label.setText(spriteChoices[newValue.intValue()]);
                         imageView.setImage(spriteChoices[newValue.intValue()]);
-                        spriteNumber = (newValue.intValue()+1);
+                       // spriteNumber = (newValue.intValue()+1);
                     }
                 }
         );
@@ -229,7 +233,7 @@ public class MainMenu {
 
     private void openIntroMenu() {
 
-        Text introText = new Text("Welcome to the world of the HYPE");
+        Text introText = new Text("Welcome to this RPG. Insert story here.");
         introText.setFont(Font.font(50));
         introText.setTextOrigin(VPos.TOP);
         introText.setFill(Color.RED);
@@ -245,19 +249,22 @@ public class MainMenu {
         KeyValue initialKeyValue = new KeyValue(introText.translateXProperty(), sceneWidth);
         KeyFrame initialFrame = new KeyFrame(Duration.ZERO, initialKeyValue);
         KeyValue endKeyValue = new KeyValue(introText.translateXProperty(), -1.0 * msgWidth);
-        KeyFrame endFrame = new KeyFrame(Duration.seconds(5), endKeyValue);
+        KeyFrame endFrame = new KeyFrame(Duration.seconds(8), endKeyValue);
         Timeline timeline = new Timeline(initialFrame, endFrame);
 
         timeline.setCycleCount(Timeline.INDEFINITE); // Or change to an int value
         timeline.play();
 
-        Button startGameButton = new Button("Start");
+        Button startGameButton = new Button("Enter World");
         startGameButton.setAlignment(Pos.CENTER);
-        startGameButton.setLayoutX(185);
+        startGameButton.setLayoutX(130);
         startGameButton.setLayoutY(200);
-        startGameButton.setMinSize(140,10);
+        startGameButton.setMinSize(120,50);
         startGameButton.setStyle("-fx-font-size: 4em; "); //CSS
-        startGameButton.setOnAction(e -> mainStage.setScene(mainScene));
+        startGameButton.setOnAction(e -> {
+            menuMusic.stopMainMenuMusic();
+            mainStage.setScene(mainScene);
+        });
 
         introMenu.getChildren().add(startGameButton);
     }

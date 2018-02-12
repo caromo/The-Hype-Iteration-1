@@ -31,13 +31,12 @@ public class ItemCodex {
     public void useItem(Player player, Item i){
         int itID = i.getID();
         if (i instanceof Equipment) {
+            System.out.println("Here");
             player.equipGear((Equipment)i);
-        }
-        else if (i.isOneShot()){
-            player.acquireItem(i);
         }
         else {
             player.heal(itemMap.get(itID));
+            player.getInventory().tossItem(i);
         }
     }
 

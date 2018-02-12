@@ -26,7 +26,14 @@ public class InventoryView extends ListView{
 
     @Override
     public void render() {
+
         setNumOfEntries(player.getInventory().getNumOfItems());
+
+
+        if(getNumOfEntries() == 0) {
+            System.out.println("Empty");
+            this.setVisible(false);
+        }
         if(!getVisible()) {
             return;
         }
@@ -40,6 +47,8 @@ public class InventoryView extends ListView{
 
 
     private void renderEntry(int ind) {
+
+
         Item item = player.getInventory().getItem(ind);
         if(item == null) {
             return;
@@ -50,7 +59,7 @@ public class InventoryView extends ListView{
         else{
             renderTextEntry(i.getName(player.getInventory().getItem(ind).getID()), ind);
         }
-        gc.drawImage(sprites.getItemImage(item.getID()), 50, ind*getEntryHeight(), 50, 50);
+        gc.drawImage(sprites.getItemImage(item.getID()), 20, ind*getEntryHeight()+25, 50, 50);
         //sprites.getItemImage(item.getID());
 
     }
@@ -74,6 +83,11 @@ public class InventoryView extends ListView{
 
     public void Enter() {
         i.useItem(player,player.getInventory().getItem(getSelectedItemIndex()));
+        player.getInventory().tossItem(player.getInventory().getItem(getSelectedItemIndex()));
+        setNumOfEntries(player.getInventory().getNumOfItems());
+        if(getCursorPos() >= getNumOfEntries()) {
+            Up();
+        }
     }
     public void Up() {
         cursorUp();

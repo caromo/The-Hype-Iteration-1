@@ -70,12 +70,10 @@ public class Inventory {
 
     // Operation tossItem(index:int)
     // Removes item to inventory based off it's index in the array
-    public void tossItem(int index) {
-        if (index >= items.size() || index < 0) {
-            // Internal notice that item does not exist
+    public void tossItem(Item temp) {
+        if (items.contains(temp)){
+            items.remove(temp);
         }
-        else { items.remove(index);  }
-        return;
     }
 
     // Operation sort()

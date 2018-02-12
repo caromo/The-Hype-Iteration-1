@@ -33,6 +33,7 @@ public class SaveGameView extends ListView {
         }else {
             if(cp.currentSelection()) {
                 main.saveGame();
+                this.setVisible(false);
             } else {
                 cp.setActive(false);
             }
