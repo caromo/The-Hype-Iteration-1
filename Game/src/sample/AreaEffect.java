@@ -27,19 +27,8 @@ public abstract class AreaEffect extends tileObject{
       return this.duration;
     }
 
-    public int getScenarioNumber() {
-        return scenarioNumber;
-    }
-
-    public void setScenarioNumber(int scenarioNumber) {
-        this.scenarioNumber = scenarioNumber;
-    }
-
     public void setEffectOn(boolean effectOn) {
         this.effectOn = effectOn;
-    }
-    public boolean isEffectOn() {
-        return effectOn;
     }
 
     @Override

@@ -24,8 +24,6 @@ public class damageEffect extends AreaEffect{
                 timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
-
-
                             if ((getDuration() < secondsPassed) || (damageEffect.super.holding.getTile().occupy == null)) {
                                 timer.cancel();
                             }

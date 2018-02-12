@@ -26,6 +26,7 @@ public class Map {
     public Map(Player player) {
         myPlayer = player;
         tileSet = new tile[10][10];
+        tileSet[0][0] = null;
     }
     //map constructor: sets map to one specified by map ID and places player at the starting point
     public Map(int mapID, Player currPlayer) {
@@ -60,6 +61,7 @@ public class Map {
 
     public void saveMap() {
         if(tileSet[0][0] == null){
+            System.out.println("FUCK");
             return;
         }
         int currID = mapID;
@@ -94,6 +96,7 @@ public class Map {
         try {
             saveMap();
             this.mapID = mapID;
+
             File mapFile = new File(System.getProperty("user.dir") + "/Save/Map/" + mapID + ".txt");
             BufferedReader br_map = new BufferedReader(new FileReader(mapFile));
             Scanner s_map = new Scanner(br_map.readLine());
@@ -123,7 +126,7 @@ public class Map {
                         tileSet[i][j].fill('G', 4, Integer.parseInt(equid), Integer.parseInt(data), 0);
                     } else {
                         tileSet[i][j] = new tile();
-                        tileSet[i][j].fill(temp.charAt(0), (int) temp.charAt(1)-48, (int) temp.charAt(2)-48, 0, temp.charAt(4)-'0');
+                        tileSet[i][j].fill(temp.charAt(0), (int) temp.charAt(1)-'0', (int) temp.charAt(2)-'0', 0, temp.charAt(4)-'0');
                     }
                 }
             }

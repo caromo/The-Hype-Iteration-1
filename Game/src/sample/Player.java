@@ -4,7 +4,7 @@ import java.lang.Math;
 import java.awt.Point;
 import javafx.scene.image.Image;
 
-public class Player extends GameObject {
+public class Player {
     private int Health;
     private int AttackPoints;
     private int DefensePoints;
@@ -18,7 +18,6 @@ public class Player extends GameObject {
     private Inventory bag;
     private Equipment[] gear;
     private final int EQUIPMENT_SLOTS = 3;
-    private OneShot boost;
     private Point pos;
     public Occupy occupy;
     public Player(String name, int x, int y){
