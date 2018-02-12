@@ -233,11 +233,13 @@ public class MainMenu {
 
     private void openIntroMenu() {
 
-        Text introText = new Text("Welcome to this RPG. Insert story here.");
+        Text introText = new Text("Welcome to this RPG. Insert epic story here.");
         introText.setFont(Font.font(50));
         introText.setTextOrigin(VPos.TOP);
-        introText.setFill(Color.RED);
+        introText.setFill(Color.BLACK);
         Pane introMenu = new Pane(introText);
+
+        introMenu.setBackground(new Background(new BackgroundFill(Color.ROSYBROWN, CornerRadii.EMPTY, Insets.EMPTY)));
 
         introScene = new Scene(introMenu,512,512);
         double sceneWidth = introScene.getWidth();
