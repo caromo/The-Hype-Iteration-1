@@ -159,7 +159,7 @@ public class MainMenu {
         Image characterSprite3 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterAdventurer.png");
         Image characterSprite4 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterSoldier.png");
 
-        player.setPlayerSpriteNumber(1);
+        //player.setPlayerSpriteNumber(1);
 
         ImageView imageView = new ImageView(characterSprite1);
 
