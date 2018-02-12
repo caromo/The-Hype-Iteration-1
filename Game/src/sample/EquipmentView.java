@@ -39,7 +39,7 @@ public class EquipmentView extends ListView {
         if(eq == null) {
             return;
         }
-        System.out.println(eqc.getName(eq.getEquipmentID()));
+
         renderTextEntry(eqc.getName(eq.getEquipmentID()), ind);
 
     }
