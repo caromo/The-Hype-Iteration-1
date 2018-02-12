@@ -16,10 +16,7 @@ public class EquipmentView extends ListView {
         this.player = player;
         this.canvas = canvas;
         this.gc = canvas.getGraphicsContext2D();
-
         eqc = new EquipmentCodex();
-
-
     }
 
     public void render() {
@@ -31,7 +28,6 @@ public class EquipmentView extends ListView {
             renderEntry(i);
         }
         renderCursor();
-
     }
 
     private void renderEntry(int ind) {
@@ -39,9 +35,7 @@ public class EquipmentView extends ListView {
         if(eq == null) {
             return;
         }
-
         renderTextEntry(eqc.getName(eq.getEquipmentID()), ind);
-
     }
 
     //Tells player to remove selected gear

@@ -133,7 +133,6 @@ public class tile {
         }else if(SN == 7){ //instant death
             holding = new Holding(this, new Item(SN, spec));
             ((Item)holding.getObject()).setRequiredLevel(spec);
-
         }
         else if(SN == 8) /*Obstacle Item*/ {
             holding = new Holding(this, new Item(SN, 0));

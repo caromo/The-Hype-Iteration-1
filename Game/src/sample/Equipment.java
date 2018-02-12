@@ -16,11 +16,6 @@ public abstract class Equipment extends Item {
         return EquipmentID;
     }
 
-    public void setEquipmentID(int equipmentID) {
-        EquipmentID = equipmentID;
-    }
-
-
     public abstract int applyEffect();
 
     public abstract int supplyBenefit();

@@ -36,13 +36,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage theStage) {
-
         mainStage = theStage;
         mainStage.setTitle("The H Y P E");
 
         Group root = new Group();
         mainScene = new Scene(root);
-
 
         Canvas canvas = new Canvas(800, 800);
         root.getChildren().add(canvas);
@@ -57,16 +55,8 @@ public class Main extends Application {
         view = new View(canvas, player, mainMenu, this);
         keyHandler = new KeyHandler(view, this);
 
+        pc = new PlayerController(map, view);
 
-
-        pc = new PlayerController(map);
-
-        //newGame("test");
-        //player.getInventory().addItembyID(100);
-        //System.out.println(player.getInventory().getNumOfItems());
-
-        //saveGame();
-        //loadGame();
         mainMenu.openMainMenu();
 
         canvas.setFocusTraversable(true);
@@ -84,10 +74,12 @@ public class Main extends Application {
                 checkForGameOver();
             }
         }.start();
-
         theStage.show();
     }
+
     public void loadGame() {
+        mainMenu.setIsMenuOpen(false);
+        map.resetMap();
         try {
             player.setIsDead(false); // If player previously died this makes sure he is now alive
 
@@ -98,16 +90,11 @@ public class Main extends Application {
             //Second line of mapfile is the starting position of the player as a point. so read second line of code and call setstartingpoint() in map, it takes
             //a point as argument so just create a point and set the x and y value of it
 
-            File mapFile = new File(System.getProperty("user.dir") + "/Save/Map/" + mapID +".txt");  //Sample directory
-
-
+            //File mapFile = new File(System.getProperty("user.dir") + "/Save/Map/" + mapID +".txt");  //Sample directory
 
             for(int i=1; i<13;i++){
                 String playerInfo = br_player.readLine();
                 Scanner s = new Scanner(playerInfo);
-                // System.out.println(playerInfo); //testing
-
-
                 if (i==1){
                     map.setMapID(Integer.parseInt(mapID));
                     player.setPosition(Integer.parseInt(s.next()), Integer.parseInt(s.next()));
@@ -146,11 +133,9 @@ public class Main extends Application {
                     String tempVal2 = "" + playerInfo.charAt(3) + playerInfo.charAt(4);
                     player.equipGear(new Ring(Integer.parseInt(tempVal)/100, Integer.parseInt(tempVal), Integer.parseInt(tempVal2)));
                 }
-
                 if(i==11){
                     player.setPlayerSprite(Integer.parseInt(playerInfo));
                 }
-
                 if (i == 12 ){
                     player.setName(playerInfo);
                 }
@@ -158,13 +143,10 @@ public class Main extends Application {
             map.loadMapFromID(Integer.parseInt(mapID));
 
             //loads player inventory
-            File inventoryFile = new File(System.getProperty("user.dir") + "/Save/inventory.txt");  //Sample directory
+            File inventoryFile = new File(System.getProperty("user.dir") + "/Save/Inventory.txt");  //Sample directory
             BufferedReader br_inventory = new BufferedReader(new FileReader(inventoryFile));
             String s;
-            while ((s= br_inventory.readLine()) != null )
-            {
-                //  Scanner scan = new Scanner(s);
-                System.out.println("the line is " +s);
+            while ((s= br_inventory.readLine()) != null ) {
                 player.getInventory().addItembyID(Integer.parseInt(s));
             }
             br_player.close();
@@ -173,7 +155,6 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-
 
     public void toggleMenu() {
         menuActive = !menuActive;
@@ -195,9 +176,7 @@ public class Main extends Application {
         return map;
     }
 
-
     public void saveGame() {
-
         try {
             PrintWriter pw = new PrintWriter(System.getProperty("user.dir") + "/Save/Player.txt");
             PrintWriter iw = new PrintWriter(System.getProperty("user.dir") + "/Save/Inventory.txt");
@@ -218,7 +197,7 @@ public class Main extends Application {
             map.saveMap();
 
             //Testing writing
-            /*
+
             System.out.println(map.getMapID());
             System.out.println(xx + " " + yy);
             System.out.println(player.getHealth());
@@ -227,55 +206,49 @@ public class Main extends Application {
             System.out.println(player.getExperience());
             System.out.println(player.getExpToNextLvl());
             System.out.println(player.getLevel());
-            */
 
             Equipment eq[] = player.getEquipment();
 
             if(eq[0].supplyBenefit() < 10){
                 pw.println(eq[0].getEquipmentID() + "0" + eq[0].supplyBenefit());
-                //System.out.println(eq[0].getEquipmentID() + "0" + eq[0].supplyBenefit());
             }
+            else {
+                pw.print(eq[0].getEquipmentID());
+                pw.println(eq[0].supplyBenefit());
+            }
+
             if(eq[1].supplyBenefit() < 10){
                 pw.println(eq[1].getEquipmentID() + "0" + eq[1].supplyBenefit());
-                //System.out.println(eq[1].getEquipmentID() + "0" + eq[1].supplyBenefit());
             }
+            else {
+                pw.print(eq[1].getEquipmentID());
+                pw.println(eq[1].supplyBenefit());
+            }
+
             if(eq[2].supplyBenefit() < 10){
                 pw.println(eq[2].getEquipmentID() + "0" + eq[2].supplyBenefit());
-                //System.out.println(eq[2].getEquipmentID() + "0" + eq[2].supplyBenefit());
             }
-
             else {
-                pw.println(eq[0].getEquipmentID() + eq[0].supplyBenefit());
-
-
-                pw.println(eq[1].getEquipmentID() + eq[1].supplyBenefit());
-
-
-                pw.println(eq[2].getEquipmentID() + eq[2].supplyBenefit());
+                pw.print(eq[2].getEquipmentID());
+                pw.println(eq[2].supplyBenefit());
             }
+
             pw.println(player.getPlayerSprite());
             pw.print(player.getName());
 
-
             pw.close();
-
-            //write Inventory.txt one itemID per line
-
 
             Item[] temp = player.getInventory().getItems();
             System.out.println ("THE INVENTOYR LENGTH IS: " + player.getInventory().getNumOfItems());
             for (int i = 0; i < player.getInventory().getNumOfItems(); i++) {
-                //System.out.println(temp[i].getID());
                 iw.println(temp[i].getID());
             }
             iw.close();
-
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 
     /*
     Creates the Save folder with default maps, player, and inventory
@@ -301,11 +274,7 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        map.resetMap();
-
         loadGame();
-
-        // System.exit(0);
     }
 
     private static void copyFolder(File sourceFolder, File destinationFolder) {
