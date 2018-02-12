@@ -9,8 +9,8 @@ public class tile {
     public Holding holding;
     public char decal;
     private Boolean passable;
-    public int SN;
-    public int spec;
+    private int SN;
+    private int spec;
     private boolean areaEffect = false;
     private int instantKill = 6;
     private int interactiveItem = 7;
@@ -65,9 +65,7 @@ public class tile {
             }
             else if(scenario == 7) /*Interactive Item*/
             {
-                System.out.println("say");
                 if(occupy.getPlayer().getLevel() >= ((Item)temp).getRequiredLevel()) {
-                    System.out.println("what");
                     occupy.getPlayer().acquireItem((Item)temp);
                     holding = null;
                     SN = 0;
@@ -130,7 +128,8 @@ public class tile {
             holding = new Holding(this, new MapTransition(SN, spec));
         } else if(SN == 6){ //instant death
             holding = new Holding(this, new Fatality(SN, spec));
-        }else if(SN == 7){ //instant death
+        }
+        else if(SN == 7){ //instant death
             holding = new Holding(this, new Item(SN, spec));
             ((Item)holding.getObject()).setRequiredLevel(spec);
         }
@@ -208,6 +207,11 @@ public class tile {
                     st.append("6");
                     st.append("000");
                     break;
+                case 7:
+                    st.append("7");
+                    st.append(Integer.toString(holding.getObject().getEffect())); //Gets item ID
+                    st.append("00");
+                    break;
                 case 8:
                     st.append("8");
                     st.append("000");
@@ -225,6 +229,13 @@ public class tile {
     public boolean getPassable() { return passable;  }
 
     public void setPassable(Boolean passable) { this.passable = passable;  }
+
+    public int getSN() {
+        return SN;
+    }
+    public int getSpec() {
+        return spec;
+    }
 
     public void cancelEffect() {
         if(isAreaEffect())

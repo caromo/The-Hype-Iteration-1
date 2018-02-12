@@ -127,6 +127,7 @@ public class Map {
                     } else {
                         tileSet[i][j] = new tile();
                         tileSet[i][j].fill(temp.charAt(0), (int) temp.charAt(1)-'0', (int) temp.charAt(2)-'0', 0, temp.charAt(4)-'0');
+
                     }
                     System.out.println(tileSet[i][j].getScenario());
                 }
