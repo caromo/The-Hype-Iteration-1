@@ -37,13 +37,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage theStage) {
-
         mainStage = theStage;
         mainStage.setTitle("The H Y P E");
 
         Group root = new Group();
         mainScene = new Scene(root);
-
 
         Canvas canvas = new Canvas(800, 800);
         root.getChildren().add(canvas);
@@ -57,8 +55,6 @@ public class Main extends Application {
         mainMenu = new MainMenu(player, gc, canvas, mainStage, mainScene, this);
         view = new View(canvas, player, mainMenu, this);
         keyHandler = new KeyHandler(view, this);
-
-
 
         pc = new PlayerController(map, view);
 
@@ -79,10 +75,12 @@ public class Main extends Application {
                 checkForGameOver();
             }
         }.start();
-
         theStage.show();
     }
+
     public void loadGame() {
+        mainMenu.setIsMenuOpen(false);
+        map.resetMap();
         try {
             player.setIsDead(false); // If player previously died this makes sure he is now alive
 
@@ -277,8 +275,6 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        map.resetMap();
-
         loadGame();
     }
 
