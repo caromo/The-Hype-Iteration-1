@@ -261,6 +261,7 @@ public class Main extends Application {
 
             //write Inventory.txt one itemID per line
 
+            player.getInventory().addItembyID(10);
 
             Item[] temp = player.getInventory().getItems();
             System.out.println ("THE INVENTOYR LENGTH IS: " + player.getInventory().getNumOfItems());

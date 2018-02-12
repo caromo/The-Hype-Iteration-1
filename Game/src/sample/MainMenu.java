@@ -109,8 +109,14 @@ public class MainMenu {
         loadGameButton.setOnAction(e -> {
             //workingDir = System.getProperty("user.dir");
             // if workingDir.save.exists TODO implement this
-            main.loadGame();
-            mainStage.setScene(mainScene);
+
+            File teststart = new File(System.getProperty("user.dir") + "/Save/Player.txt");
+            if(teststart.exists()) {
+                main.loadGame();
+                mainStage.setScene(mainScene);
+            }
+
+
         }); // Change to Load() later
 
         Button exitGameButton = new Button("Exit Game");
