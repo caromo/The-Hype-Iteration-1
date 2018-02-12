@@ -6,12 +6,10 @@ import java.util.TimerTask;
 public class healingEffect extends AreaEffect{
     private int healingEffect;
     private int secondsPassed;
-//    private Holding holding;
 
 @Override
-public void fatality() {
+public void fatality() {}
 
-}
 public void startEf()
 {
     secondsPassed = 0;
@@ -24,15 +22,13 @@ public void startEf()
                     timer.cancel();
                 }
                 secondsPassed++;
-                System.out.println("Seconds passes " + secondsPassed);
                 healing();
 
 
             }
         }, 0, (long) (1000));
     }
-    catch(Exception e)
-    {
+    catch(Exception e) {
         e.printStackTrace();
     }
 
@@ -42,14 +38,11 @@ public void startEf()
         if(super.holding.getTile().occupy != null) {
             if (holding.getTile().occupy.getPlayer().getHealth() < 100) {
                 holding.getTile().occupy.getPlayer().setHealth(holding.getTile().occupy.getPlayer().getHealth() + getHealingEffect());
-                System.out.format("%d", holding.getTile().occupy.getPlayer().getHealth());
             }
         }
     }
     public healingEffect(int scenario, int duration) {
         super(scenario, duration);
-
-
     }
 
     public int getHealingEffect() {

@@ -32,8 +32,9 @@ public class Player {
         pos = new Point(x,y);
         gear = new Equipment[]{new Armor(1, 100, 0), new Weapon(2, 200, 0), new Ring(3, 300, 0)};
     }
+
     public Player(){
-       // this.name = "H Y P E - B O Y";
+        this.name = "H Y P E - B O Y";
         Level = 1;
         ExpToNextLvl = 100;
         Experience = 0;
@@ -94,7 +95,6 @@ public class Player {
         if (hpIncrease > 0) {
             if (Level == 1){
                 if (hpIncrease + Health <= 100) {
-                    System.out.println("HEre");
                     Health += hpIncrease;
                 }
                 else {
@@ -106,25 +106,6 @@ public class Player {
             }
             else {
                 Health = (int)Math.log10((double)(Level*100)) + (int)1.247*(Level * 100);
-            }
-        }
-    }
-    public void OneShotBoost(OneShot boost){
-        int check = boost.getOneShotID()/100 - 1;
-        if(boost.active()) {
-            if (check == 0) //Defense
-            {
-                DefensePoints += boost.supplyBenefit();
-            } else if (check == 1) {
-                AttackPoints += boost.supplyBenefit();
-            }
-        }
-        else {
-            if (check == 0) //Defense
-            {
-                DefensePoints -= boost.supplyBenefit();
-            } else if (check == 1) {
-                AttackPoints -= boost.supplyBenefit();
             }
         }
     }
@@ -143,7 +124,6 @@ public class Player {
             AttackPoints -= gear[EquipSlot].supplyBenefit();
             AttackPoints += swag.supplyBenefit();
             if (swag.getEquipmentID() > 200 && swag.getEquipmentID() < 300){
-                System.out.println("!!!");
                 gear[EquipSlot] = swag;
             }
         }

@@ -56,7 +56,6 @@ public class MainMenu {
 
         GridPane titleArea = new GridPane();
         titleArea.setAlignment(Pos.CENTER);
-        //titleArea.setVgap(40);
 
         //Main Menu (first scene)
         BorderPane borderPane = new BorderPane();
@@ -64,22 +63,19 @@ public class MainMenu {
         titleArea.setPrefHeight(200);
         borderPane.setTop(titleArea);
 
-
         startingScene = new Scene( borderPane , 512 , 512);
         mainStage.setScene( startingScene );
-
-
 
         //Set Background Image
         File file = new File(System.getProperty("user.dir") + "/Game/src/sample/sprites/lava.png");
         Image i = null;
-        //System.out.println(System.getProperty("user.dir"));
+
         try {
             i = new Image(file.toURI().toURL().toString(), mainMenu.getWidth(), mainMenu.getHeight(), false, false);
         } catch (MalformedURLException e1) {
-            // TODO Auto-generated catch block
             e1.printStackTrace();
         }
+
         BackgroundImage im = new BackgroundImage(i, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 new BackgroundSize(100, 100, false, false, false, true));
 
@@ -94,8 +90,6 @@ public class MainMenu {
         titleShadow.setColor(Color.BLACK);
         gameTitle.setEffect(bloom);
         gameTitle.setCache(true);
-        //gameTitle.setX(50.0f);
-        //gameTitle.setY(0.0f);
         gameTitle.setFill(Color.WHITE);
         gameTitle.setFont(Font.font(null, FontWeight.BOLD, 32));
 
@@ -112,7 +106,7 @@ public class MainMenu {
                 main.loadGame();
                 mainStage.setScene(mainScene);
             }
-        }); // Change to Load() later
+        });
 
         Button exitGameButton = new Button("Exit Game");
         exitGameButton.setOnAction(e -> mainStage.close());
@@ -160,8 +154,6 @@ public class MainMenu {
         Image characterSprite3 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterAdventurer.png");
         Image characterSprite4 = new Image("file:" + System.getProperty("user.dir") + "/Game/src/sample/sprites/characterSoldier.png");
 
-        //player.setPlayerSpriteNumber(1);
-
         ImageView imageView = new ImageView(characterSprite1);
 
         Image[] spriteChoices = {characterSprite1,characterSprite2,characterSprite3,characterSprite4};
@@ -204,13 +196,8 @@ public class MainMenu {
                     player.setAttackPoints(8);
                 else if (characterStatAdvantage.getValue() == "Defense")
                     player.setDefensePoints(8);
-                //player.setName(nameInput.getText());
-                //player.setPlayerSprite(imageView.getImage());
                 main.newGame(nameInput.getText(), spriteNumber);
                 isMenuOpen = false;
-                //System.out.println(player.getName());
-                //mainStage.setScene(mainScene);
-                //System.out.println(player.getPlayerSpriteNumber());
                 openIntroMenu();
             }
             else {
@@ -284,7 +271,6 @@ public class MainMenu {
 
         Button saveGameButton = new Button("Save");
         saveGameButton.setOnAction(e -> {
-            System.out.println("Save has been pressed");
             main.saveGame();
         }); //SaveGame()
 
@@ -300,7 +286,6 @@ public class MainMenu {
         gameMenu.add( exitGameButton, 0,3);
 
         mainStage.setScene(gameMenuScene);
-
     }
 
     // Opens gameOver screen
@@ -319,7 +304,6 @@ public class MainMenu {
 
         Button goToMainMenuButtonFromGameOver = new Button("  Exit  ");
         goToMainMenuButtonFromGameOver.setOnAction(e -> openMainMenu());//mainStage.setScene(startingScene));
-
 
         //Set Background Image
         File file = new File(System.getProperty("user.dir") + "/Game/src/sample/sprites/crying-cat-face.png");

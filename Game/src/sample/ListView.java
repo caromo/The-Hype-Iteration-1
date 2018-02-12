@@ -35,22 +35,16 @@ public class ListView {
         scrollOffset = 0;
         maxEntriesDisplayed = 8;
 
-        File file = new File(System.getProperty("user.dir") + "/src/sample/sprites/cursor2.png");
+        File file = new File(System.getProperty("user.dir") + "/Game/src/sample/sprites/cursor2.png");
         cursorImg = new Image(file.toURI().toString());
-        file = new File(System.getProperty("user.dir") + "/src/sample/sprites/arrow.png");
+        file = new File(System.getProperty("user.dir") + "/Game/src/sample/sprites/arrow.png");
         arrow = new Image(file.toURI().toString());
     }
 
     public void renderCursor() {
-
-
         gc.drawImage(cursorImg, -5, cursorPos*getEntryHeight()-5, getEntryWidth(), getEntryHeight()+10);
         gc.drawImage(arrow, getEntryWidth(), cursorPos*getEntryHeight()+20, 100, 60);
-
-
     }
-
-
 
     public void renderTextEntry(String s, int ind) {
         gc.setFill(Color.BLACK);
@@ -61,7 +55,7 @@ public class ListView {
     }
 
     public void renderEntryBackground(int ind) {
-        File file = new File(System.getProperty("user.dir") + "/src/sample/sprites/menuBackground4.png");
+        File file = new File(System.getProperty("user.dir") + "/Game/src/sample/sprites/menuBackground4.png");
         Image image = new Image(file.toURI().toString());
         gc.drawImage(image, -5, ind*getEntryHeight()-5, getEntryWidth(), getEntryHeight()+10);
     }
@@ -74,8 +68,8 @@ public class ListView {
         if(cursorPos+scrollOffset < numOfEntries-1) {
             scrollOffset++;
         }
-
     }
+
     public void cursorUp() {
         if(cursorPos > 0) {
             cursorPos--;

@@ -106,6 +106,7 @@ public class MenuView extends ListView{
             menuItems.get(currentOpenInd).Left();
         }
     }
+
     public void Right() {
         if(!isOpen()) {
             return;
@@ -113,19 +114,18 @@ public class MenuView extends ListView{
             menuItems.get(currentOpenInd).Right();
         }
     }
-    public void Escape() {
 
-        if(!isOpen()) {//Menu Not Open, open
+    public void Escape() {
+        if(!isOpen()) { //Menu Not Open, open
             setOpen(true);
             setVisible(true);
-        } else if(isOpen() && !getVisible()){//Sub Menu Open, close sub menu
+        } else if(isOpen() && !getVisible()){ //Sub Menu Open, close sub menu
             menuItems.get(currentOpenInd).setVisible(false);
             setVisible(true);
-        } else {//Menu currently focus
+        } else { //Menu currently focus
             setOpen(false);
             setVisible(false);
         }
-        //setOpen(false);
     }
 
     public void Enter() {

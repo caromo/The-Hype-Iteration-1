@@ -17,9 +17,7 @@ public class Sprites {
     private String workingDir;
     public Sprites() {
 
-        workingDir = System.getProperty("user.dir");
-
-        //System.out.println(workingDir);
+        workingDir = System.getProperty("user.dir")+"/Game";
         itemSprites = new ArrayList<Image>();
         terrainSprites = new ArrayList<Image>();
         AESprites = new ArrayList<Image>();
@@ -32,8 +30,6 @@ public class Sprites {
 
         itemSprites.add(getImage(workingDir + "/src/sample/sprites/potion2.png"));
         itemSprites.add(getImage(workingDir + "/src/sample/sprites/sword.png"));
-        itemSprites.add(getImage(workingDir + "/src/sample/sprites/pikachu.png"));
-
 
         //Load terrain textures
 

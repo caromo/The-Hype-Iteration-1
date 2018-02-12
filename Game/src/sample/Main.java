@@ -27,6 +27,7 @@ public class Main extends Application {
     private PlayerController pc;
     private boolean menuActive;
 
+
     private Stage mainStage;
     private Scene mainScene;
 
@@ -63,7 +64,6 @@ public class Main extends Application {
         canvas.setOnKeyPressed(keyHandler);
         mainScene.setOnKeyPressed(pc);
         final long startNanoTime = System.nanoTime();
-
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
                 //double t = (currentNanoTime - startNanoTime) / 1000000000.0;
@@ -89,8 +89,6 @@ public class Main extends Application {
 
             //Second line of mapfile is the starting position of the player as a point. so read second line of code and call setstartingpoint() in map, it takes
             //a point as argument so just create a point and set the x and y value of it
-
-            //File mapFile = new File(System.getProperty("user.dir") + "/Save/Map/" + mapID +".txt");  //Sample directory
 
             for(int i=1; i<13;i++){
                 String playerInfo = br_player.readLine();
@@ -196,17 +194,6 @@ public class Main extends Application {
             pw.println(player.getLevel());
             map.saveMap();
 
-            //Testing writing
-
-            System.out.println(map.getMapID());
-            System.out.println(xx + " " + yy);
-            System.out.println(player.getHealth());
-            System.out.println(player.getAttackPoints());
-            System.out.println(player.getDefensePoints());
-            System.out.println(player.getExperience());
-            System.out.println(player.getExpToNextLvl());
-            System.out.println(player.getLevel());
-
             Equipment eq[] = player.getEquipment();
 
             if(eq[0].supplyBenefit() < 10){
@@ -239,7 +226,6 @@ public class Main extends Application {
             pw.close();
 
             Item[] temp = player.getInventory().getItems();
-            System.out.println ("THE INVENTOYR LENGTH IS: " + player.getInventory().getNumOfItems());
             for (int i = 0; i < player.getInventory().getNumOfItems(); i++) {
                 iw.println(temp[i].getID());
             }
@@ -255,7 +241,6 @@ public class Main extends Application {
     Will overwrite itself every time new game is selected
      */
     public void newGame(String name, int sprite) {
-        System.out.println(System.getProperty("user.dir"));
         //creates the players map folder
         Path path = Paths.get(System.getProperty("user.dir") + "/Save/");
 
@@ -311,8 +296,6 @@ public class Main extends Application {
         if(player.getHealth() <= 0 && !player.getIsDead()) {
             mainMenu.gameOver();
             player.setIsDead(true);
-            player.setHealth(100);
-            saveGame();
         }
     }
 }

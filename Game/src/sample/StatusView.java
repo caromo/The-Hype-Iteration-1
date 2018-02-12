@@ -13,7 +13,6 @@ public class StatusView extends ListView{
     public StatusView(Player player, Canvas canvas) {
         super(player, canvas);
         this.player = player;
-
     }
 
     public void render() {
@@ -23,7 +22,6 @@ public class StatusView extends ListView{
         renderTextEntry("Health: " + Integer.toString(player.getHealth()), 3);
         renderTextEntry("Attack: " + Integer.toString(player.getAttackPoints()), 4);
         renderTextEntry("Defense: " + Integer.toString(player.getDefensePoints()), 5);
-
     }
 
     public String toString() {

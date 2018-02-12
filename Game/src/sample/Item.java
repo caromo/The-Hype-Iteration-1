@@ -40,11 +40,4 @@ public class Item extends tileObject{
     public void setOneShot(boolean oneShot) {
         this.oneShot = oneShot;
     }
-
-
-
-//    @Override
-//    public int getEffect() {
-//        return itemID;
-//
 }

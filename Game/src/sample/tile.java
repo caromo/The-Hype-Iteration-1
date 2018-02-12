@@ -9,11 +9,9 @@ public class tile {
     public Holding holding;
     public char decal;
     private Boolean passable;
-    private int SN;
-    private int spec;
+    public int SN;
+    public int spec;
     private boolean areaEffect = false;
-    private int instantKill = 6;
-    private int interactiveItem = 7;
 
     public tile(tileObject objType) {
         passable = true;
@@ -33,11 +31,10 @@ public class tile {
     //Performs the action associated with the tileObject
     public int applyEffect() {
         if (occupy != null && holding != null) {
-            System.out.println("APPLY2");
             int scenario = holding.getObject().getScenario();
             tileObject temp = holding.getObject();
             if(scenario == 1 || scenario == 2 || scenario == 3)  {    //Area effect
-                System.out.println("APPLY");
+                ((AreaEffect) temp).setDuration(20);
                 ((AreaEffect) temp).setAmount(3);
                 ((AreaEffect) temp).startEf();
 
@@ -56,12 +53,10 @@ public class tile {
                 return -1;
             }
             else if (scenario == 5) {
-                System.out.println("return destination " + ((MapTransition) temp).getDestination());
                 return ((MapTransition) temp).getDestination();
             }
             else if(scenario == 6) /*Insta-Death */{
                 occupy.getPlayer().setHealth(0);
-               // occupy.getPlayer().setIsDead(true);
             }
             else if(scenario == 7) /*Interactive Item*/
             {
@@ -98,13 +93,10 @@ public class tile {
 
         if (SN == 1) { // Area Effect
             holding = new Holding(this, new damageEffect(SN, spec));
-            ((AreaEffect) holding.getObject()).setDuration(spec);
         } else if(SN == 2){
             holding = new Holding(this, new healingEffect(SN, spec));
-            ((AreaEffect) holding.getObject()).setDuration(spec);
         } else if(SN == 3){
             holding = new Holding(this, new expEffect(SN, spec));
-            ((AreaEffect) holding.getObject()).setDuration(spec);
         } else if (SN == 4 && EQdata != 0) {
             if (spec / 100 == 1) {
                 holding = new Holding(this, new Armor(spec / 100, spec, EQdata));
@@ -128,17 +120,14 @@ public class tile {
             holding = new Holding(this, new MapTransition(SN, spec));
         } else if(SN == 6){ //instant death
             holding = new Holding(this, new Fatality(SN, spec));
-        }
-        else if(SN == 7){ //instant death
+        }else if(SN == 7){ //instant death
             holding = new Holding(this, new Item(SN, spec));
-            ((Item)holding.getObject()).setRequiredLevel(spec);
+            ((Item)holding.getObject()).setRequiredLevel(2);
         }
         else if(SN == 8) /*Obstacle Item*/ {
             holding = new Holding(this, new Item(SN, 0));
             setPassable(false);
         }
-
-
     }
 
     //Provides the encrypted info of the tile as a String
@@ -172,7 +161,7 @@ public class tile {
                 st.append("0000");
                 return st.toString();
             }
-
+            
             switch(holding.getObject().getScenario()) {
                 case 0:
                     st.append("0");
@@ -207,11 +196,6 @@ public class tile {
                     st.append("6");
                     st.append("000");
                     break;
-                case 7:
-                    st.append("7");
-                    st.append(Integer.toString(holding.getObject().getEffect())); //Gets item ID
-                    st.append("00");
-                    break;
                 case 8:
                     st.append("8");
                     st.append("000");
@@ -229,13 +213,6 @@ public class tile {
     public boolean getPassable() { return passable;  }
 
     public void setPassable(Boolean passable) { this.passable = passable;  }
-
-    public int getSN() {
-        return SN;
-    }
-    public int getSpec() {
-        return spec;
-    }
 
     public void cancelEffect() {
         if(isAreaEffect())
