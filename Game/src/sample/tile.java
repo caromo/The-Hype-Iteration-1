@@ -6,8 +6,8 @@ public class tile {
     public Holding holding;
     public char decal;
     private Boolean passable;
-    private int SN;
-    private int spec;
+    public int SN;
+    public int spec;
     private boolean areaEffect = false;
 
     public tile(tileObject objType) {
