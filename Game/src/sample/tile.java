@@ -67,7 +67,7 @@ public class tile {
             else if(scenario == 7) /*Interactive Item*/
             {
                 if(occupy.getPlayer().getLevel() >= ((Item)temp).getRequiredLevel()) {
-                    occupy.getPlayer().acquireItem((Item)temp);
+                    //occupy.getPlayer().acquireItem((Item)temp);
                     holding = null;
                     SN = 0;
                     return -1;
@@ -123,9 +123,9 @@ public class tile {
             holding = new Holding(this, new MapTransition(SN, spec));
         } else if(SN == 6){ //instant death
             holding = new Holding(this, new Fatality(SN, spec));
-        }else if(SN == 7){ //instant death
+        }else if(SN == 7){ //interactive item
             holding = new Holding(this, new Item(SN, spec));
-            ((Item)holding.getObject()).setRequiredLevel(2);
+            ((Item)holding.getObject()).setRequiredLevel(spec);
         }
         else if(SN == 8) /*Obstacle Item*/ {
             holding = new Holding(this, new Item(SN, 0));
