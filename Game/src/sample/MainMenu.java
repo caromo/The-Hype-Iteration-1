@@ -37,6 +37,8 @@ public class MainMenu {
     private Main main;
     private boolean isMenuOpen = true;
     private int spriteNumber;
+    MusicPlayer menuMusic = new MusicPlayer();
+
     public MainMenu(Player player, GraphicsContext gc, Canvas canvas, Stage mainStage, Scene mainScene, Main main) {
         this.player = player;
         this.mainStage = mainStage;
@@ -46,6 +48,8 @@ public class MainMenu {
 
     public void openMainMenu()
     {
+        menuMusic.playMainMenuMusic();
+
         GridPane mainMenu = new GridPane();
         mainMenu.setAlignment(Pos.TOP_CENTER);
         mainMenu.setVgap(40);
@@ -257,7 +261,10 @@ public class MainMenu {
         startGameButton.setLayoutY(200);
         startGameButton.setMinSize(120,50);
         startGameButton.setStyle("-fx-font-size: 4em; "); //CSS
-        startGameButton.setOnAction(e -> mainStage.setScene(mainScene));
+        startGameButton.setOnAction(e -> {
+            menuMusic.stopMainMenuMusic();
+            mainStage.setScene(mainScene);
+        });
 
         introMenu.getChildren().add(startGameButton);
     }
