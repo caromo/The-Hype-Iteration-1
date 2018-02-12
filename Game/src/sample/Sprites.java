@@ -32,8 +32,6 @@ public class Sprites {
 
         itemSprites.add(getImage(workingDir + "/src/sample/sprites/potion2.png"));
         itemSprites.add(getImage(workingDir + "/src/sample/sprites/sword.png"));
-        itemSprites.add(getImage(workingDir + "/src/sample/sprites/pikachu.png"));
-
 
         //Load terrain textures
 
