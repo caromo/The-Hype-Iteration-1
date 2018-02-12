@@ -1,6 +1,9 @@
 package sample;
 
 
+import javax.swing.plaf.SliderUI;
+import java.util.ServiceLoader;
+
 public class tile {
     public Occupy occupy;
     public Holding holding;
@@ -41,7 +44,7 @@ public class tile {
 
                 return -1;
             }
-            else if(temp instanceof Item) {      //Item
+            else if((temp instanceof Item) && !(scenario == 7)) {      //Item
                 if (((Item) temp).isOneShot()) {
                     ItemCodex i = new ItemCodex();
                     i.useItem(occupy.getPlayer(), (Item) temp);
@@ -63,8 +66,13 @@ public class tile {
             }
             else if(scenario == 7) /*Interactive Item*/
             {
+                System.out.println("say");
                 if(occupy.getPlayer().getLevel() >= ((Item)temp).getRequiredLevel()) {
+                    System.out.println("what");
                     occupy.getPlayer().acquireItem((Item)temp);
+                    holding = null;
+                    SN = 0;
+                    return -1;
                 }
             }
         }
@@ -75,6 +83,7 @@ public class tile {
         decal = D;
         this.SN = SN;
         this.spec = spec;
+
 
         if (SN == 1) { // Area Effect
             holding = new Holding(this, new damageEffect(SN, spec));
@@ -103,8 +112,12 @@ public class tile {
             }
         } else if (SN == 5) { // Map Transition
             holding = new Holding(this, new MapTransition(SN, spec));
-        } else if(SN == 6){ //instant death
+        } else if(SN == instantKill){ //instant death
             holding = new Holding(this, new Fatality(SN, spec));
+        }else if(SN == interactiveItem){ //instant death
+            holding = new Holding(this, new Item(SN, spec));
+            ((Item)holding.getObject()).setRequiredLevel(2);
+
         }
 
         switch(decal){
