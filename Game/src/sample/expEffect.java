@@ -11,35 +11,12 @@ public class expEffect extends AreaEffect{
     public void fatality() {
     }
 
-    public void startEf() // starts timer
-    {
-        secondsPassed = 0;
-        try {
-            Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    if (getDuration() < secondsPassed || (expEffect.super.holding.getTile().occupy == null)) {
-                        timer.cancel();
-                    }
-                    secondsPassed++;
-                    expEf();
-                }
-            }, 0, (long) (1000));
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }
+    public void startEf() {
+        super.holding.getTile().occupy.getPlayer().gainExp(expEffect);
     }
 
     public expEffect(int scenario, int duration) {
-        super(scenario, duration);
-    }
-
-    public void expEf(){ //applies effect
-        if(super.holding.getTile().occupy != null) {
-            super.holding.getTile().occupy.getPlayer().gainExp(getexpEffect());
-        }
+        super(scenario, duration*10);
     }
 
     public void setAmount(int expEffect) {
@@ -47,6 +24,6 @@ public class expEffect extends AreaEffect{
     }
 
     public int getexpEffect() {
-        return expEffect;
+        return expEffect/10;
     }
 }

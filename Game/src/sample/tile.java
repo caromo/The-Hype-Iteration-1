@@ -33,11 +33,17 @@ public class tile {
         if (occupy != null && holding != null) {
             int scenario = holding.getObject().getScenario();
             tileObject temp = holding.getObject();
-            if(scenario == 1 || scenario == 2 || scenario == 3)  {    //Area effect
+            if(scenario == 1 || scenario == 2)  {    //Area effect
                 ((AreaEffect) temp).setDuration(20);
-                ((AreaEffect) temp).setAmount(3);
+                ((AreaEffect) temp).setAmount(10);
                 ((AreaEffect) temp).startEf();
-
+                return -1;
+            }
+            else if (temp instanceof expEffect){
+                ((AreaEffect) temp).setAmount(100);
+                ((AreaEffect) temp).startEf();
+                holding = null;
+                SN = 0;
                 return -1;
             }
             else if((temp instanceof Item) && !(scenario == 7)) {      //Item
@@ -85,9 +91,6 @@ public class tile {
                 break;
             case 'W':
                 setPassable(false);
-                break;
-            case 'D': // For Insta-death tiles
-                setPassable(true);
                 break;
         }
 
@@ -144,9 +147,7 @@ public class tile {
             case 'M':
                 st.append("M");
                 break;
-            case 'D': // For Insta-death tiles
-                st.append("D");
-                break;
+
             default:
                 if (holding.getObject() instanceof Equipment){
                     st.append(Integer.toString(((Equipment)holding.getObject()).getEquipmentID()));

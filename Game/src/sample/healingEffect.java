@@ -36,13 +36,11 @@ public void startEf()
 
     public void healing(){
         if(super.holding.getTile().occupy != null) {
-            if (holding.getTile().occupy.getPlayer().getHealth() < 100) {
-                holding.getTile().occupy.getPlayer().setHealth(holding.getTile().occupy.getPlayer().getHealth() + getHealingEffect());
-            }
+            holding.getTile().occupy.getPlayer().heal(healingEffect);
         }
     }
     public healingEffect(int scenario, int duration) {
-        super(scenario, duration);
+        super(scenario, duration*10);
     }
 
     public int getHealingEffect() {

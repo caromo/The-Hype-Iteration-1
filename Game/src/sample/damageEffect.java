@@ -13,7 +13,7 @@ public class damageEffect extends AreaEffect{
     }
 
     public damageEffect(int scenario, int duration) {
-        super(scenario, duration);
+        super(scenario, duration*10);
     }
 
     public void startEf() // starts timer
@@ -39,7 +39,7 @@ public class damageEffect extends AreaEffect{
     public void Ef()//applies effect
     {
         if(super.holding.getTile().occupy != null) {
-            super.holding.getTile().occupy.getPlayer().takeDamage(getDamageEffect());
+            super.holding.getTile().occupy.getPlayer().takeDamage(damage);
         }
     }
 
@@ -48,7 +48,7 @@ public class damageEffect extends AreaEffect{
     }
 
     public int getDamageEffect() {
-        return damage;
+        return damage/10;
     }
 
 }
